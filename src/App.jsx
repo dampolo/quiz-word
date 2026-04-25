@@ -2,26 +2,25 @@ import { Routes, Route } from "react-router-dom";
 import LoginQuiz from "./quiz/login-quiz";
 import CreateAccount from "./quiz/create-account";
 import ForgotPassword from "./quiz/forgot-password";
-
-function Home() {
-  return <h1>Home Page</h1>;
-}
-
-function About() {
-  return <h1>About Page</h1>;
-}
+import Privacy from "./components/privacy";
+import Legal from "./components/legal";
+import PublicLayout from "./layouts/PublicLayout";
+import Website from "./website/website";
 
 function App() {
   return (
+    // Auth
     <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/about" element={<About />} />
-      <Route path="/login-quiz" element={<LoginQuiz />} />
-      <Route path="/create-account" element={<CreateAccount />} />
-      <Route path="/forgot-password" element={<ForgotPassword />} />
-
+      <Route element={<PublicLayout />}>
+        <Route path="/" element={<Website/>}/>
+        <Route path="/impressum" element={<Privacy />} />
+        <Route path="/datenschutz" element={<Legal />} />
+        <Route path="/login-quiz" element={<LoginQuiz />} />
+        <Route path="/create-account" element={<CreateAccount />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+      </Route>
     </Routes>
   );
 }
 
-export default App
+export default App;
