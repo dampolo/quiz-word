@@ -6,6 +6,8 @@ import Privacy from "./components/privacy";
 import Legal from "./components/legal";
 import PublicLayout from "./layouts/PublicLayout";
 import Website from "./website/website";
+import Login from "./quiz/login-quiz";
+
 
 function App() {
   return (
@@ -13,6 +15,7 @@ function App() {
     <Routes>
       <Route element={<PublicLayout />}>
         <Route path="/" element={<Website/>}/>
+        <Route path="/login" element={<Login/>}/>
         <Route path="/impressum" element={<Privacy />} />
         <Route path="/datenschutz" element={<Legal />} />
         <Route path="/login-quiz" element={<LoginQuiz />} />
