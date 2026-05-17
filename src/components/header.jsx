@@ -4,8 +4,10 @@ import { useState } from "react";
 
 function Header() {
   const [active, setActive] = useState("how-it-works");
-
+  
   return (
+
+
     <header className="navbar">
       <div className="navbar__container">
         {/* Logo */}
@@ -15,41 +17,41 @@ function Header() {
 
         {/* Navigation */}
         <nav className="navbar__menu">
-          <a
-            href="#how-it-works"
-            className={
-              active === "how-it-works"
-                ? "navbar__link navbar__link--active"
-                : "navbar__link"
-            }
-            onClick={() => setActive("how-it-works")}
-          >
-            How it works
-          </a>
+      <a
+        href="#how-it-works"
+        className={
+          active === "how-it-works"
+            ? "navbar__link navbar__link--active"
+            : "navbar__link"
+        }
+        onClick={() => setActive("how-it-works")}
+      >
+        How it works
+      </a>
 
-          <a
-            href="#features"
-            className={
-              active === "features"
-                ? "navbar__link navbar__link--active"
-                : "navbar__link"
-            }
-            onClick={() => setActive("features")}
-          >
-            Features
-          </a>
+      <a
+        href="#features"
+        className={
+          active === "features"
+            ? "navbar__link navbar__link--active"
+            : "navbar__link"
+        }
+        onClick={() => setActive("features")}
+      >
+        Features
+      </a>
 
-          <a
-            href="#success-stories"
-            className={
-              active === "success-stories"
-                ? "navbar__link navbar__link--active"
-                : "navbar__link"
-            }
-            onClick={() => setActive("success-stories")}
-          >
-            Success Stories
-          </a>
+      <a
+        href="#success-stories"
+        className={
+          active === "success-stories"
+            ? "navbar__link navbar__link--active"
+            : "navbar__link"
+        }
+        onClick={() => setActive("success-stories")}
+      >
+        Success Stories
+      </a>
           <a href="#" className="navbar__link">
             Pricing
           </a>
