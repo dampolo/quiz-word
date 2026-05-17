@@ -1,0 +1,315 @@
+@use "./../basic.scss";
+
+
+// ========================================
+// Hero Section
+// ========================================
+
+.hero {
+  width: 100%;
+  min-height: 100vh;
+  background: basic.$color-background-main;
+
+  display: flex;
+  align-items: center;
+
+  padding: 80px 0;
+
+  &__container {
+    width: 100%;
+    max-width: 1280px;
+
+    margin: 0 auto;
+    padding: 0 32px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 80px;
+  }
+
+  // ========================================
+  // Left Content
+  // ========================================
+
+  &__content {
+    max-width: 540px;
+  }
+
+  &__badge {
+    display: inline-flex;
+    align-items: center;
+
+    padding: 12px 22px;
+
+    background: rgba(79, 70, 229, 0.08);
+    border-radius: 999px;
+
+    color: basic.$color-primary-indigo;
+    font-size: 0.95rem;
+    font-weight: 600;
+
+    margin-bottom: 32px;
+  }
+
+  &__title {
+    font-size: 4.5rem;
+    line-height: 1.1;
+    font-weight: 800;
+
+    color: basic.$color-heading;
+
+    margin-bottom: 28px;
+    letter-spacing: -2px;
+
+    span {
+      color: basic.$color-primary-indigo;
+    }
+  }
+
+  &__description {
+    font-size: 1.35rem;
+    line-height: 1.9;
+
+    color: basic.$color-body-text;
+
+    margin-bottom: 48px;
+  }
+
+  // ========================================
+  // Buttons
+  // ========================================
+
+  &__buttons {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  &__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
+    text-decoration: none;
+
+    font-size: 1.1rem;
+    font-weight: 700;
+
+    padding: 18px 34px;
+    border-radius: 18px;
+
+    transition: all 0.25s ease;
+
+    &--primary {
+      background: basic.$color-primary-indigo;
+      color: white;
+
+      box-shadow: 0 14px 30px rgba(79, 70, 229, 0.22);
+
+      &:hover {
+        transform: translateY(-2px);
+      }
+
+      span {
+        font-size: 1.3rem;
+      }
+    }
+
+    &--secondary {
+      background: rgba(79, 70, 229, 0.08);
+      color: basic.$color-primary-indigo;
+      border: 1px solid rgba(79, 70, 229, 0.12);
+
+      &:hover {
+        background: rgba(79, 70, 229, 0.14);
+      }
+    }
+  }
+
+  // ========================================
+  // Right Image
+  // ========================================
+
+  &__image-wrapper {
+    display: flex;
+    justify-content: center;
+    height: 31.25rem;
+    transform: rotate(3deg);
+  }
+
+  &__image-card {
+    position: relative;
+
+    width: 100%;
+    max-width: 560px;
+
+    border-radius: 42px;
+
+    background: white;
+    padding: 18px;
+
+    box-shadow: 0 40px 80px rgba(15, 23, 42, 0.12);
+  }
+
+  &__image {
+    width: 100%;
+    display: block;
+
+    border-radius: 34px;
+    object-fit: cover;
+  }
+
+  // ========================================
+  // Floating Card
+  // ========================================
+
+  &__floating-card {
+    position: absolute;
+
+    left: 50%;
+    bottom: 50px;
+
+    transform: translateX(-50%);
+
+    width: calc(100% - 110px);
+
+    background: rgba(255, 255, 255, 0.95);
+
+    backdrop-filter: blur(12px);
+
+    border-radius: 22px;
+
+    padding: 22px 24px;
+
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+  }
+
+  &__floating-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 18px;
+
+    p {
+      font-size: 1rem;
+      font-weight: 700;
+      color: basic.$color-heading;
+    }
+  }
+
+  // Avatars
+  &__avatars {
+    display: flex;
+    align-items: center;
+
+    span {
+      width: 34px;
+      height: 34px;
+
+      border-radius: 50%;
+      border: 2px solid white;
+
+      margin-left: -10px;
+
+      &:nth-child(1) {
+        background: #dbeafe;
+      }
+
+      &:nth-child(2) {
+        background: #c7f9cc;
+      }
+
+      &:nth-child(3) {
+        background: #fef3c7;
+      }
+
+      &:first-child {
+        margin-left: 0;
+      }
+    }
+  }
+
+  // Progress
+  &__progress {
+    width: 100%;
+    height: 8px;
+
+    background: #eeeeee;
+    border-radius: 999px;
+
+    overflow: hidden;
+  }
+
+  &__progress-bar {
+    width: 74%;
+    height: 100%;
+
+    background: basic.$color-primary-indigo;
+    border-radius: 999px;
+  }
+}
+
+
+// ========================================
+// Responsive
+// ========================================
+
+@media (max-width: 992px) {
+
+  .hero {
+
+    &__container {
+      grid-template-columns: 1fr;
+      gap: 60px;
+    }
+
+    &__content {
+      max-width: 100%;
+      text-align: center;
+    }
+
+    &__buttons {
+      justify-content: center;
+    }
+
+    &__title {
+      font-size: 3.5rem;
+    }
+  }
+}
+
+
+@media (max-width: 600px) {
+
+  .hero {
+
+    padding: 60px 0;
+
+    &__container {
+      padding: 0 20px;
+    }
+
+    &__title {
+      font-size: 2.7rem;
+    }
+
+    &__description {
+      font-size: 1.05rem;
+    }
+
+    &__buttons {
+      flex-direction: column;
+    }
+
+    &__button {
+      width: 100%;
+    }
+
+    &__floating-card {
+      width: calc(100% - 30px);
+    }
+  }
+}
