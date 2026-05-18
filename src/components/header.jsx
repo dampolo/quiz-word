@@ -3,7 +3,7 @@ import "./header.scss";
 import { useState } from "react";
 
 function Header() {
-  const [active, setActive] = useState("how-it-works");
+  const [active, setActive] = useState("");
   
   return (
 

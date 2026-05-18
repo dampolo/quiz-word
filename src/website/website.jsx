@@ -55,7 +55,7 @@ function Website() {
         </div>
       </section>
       {/* HOW TO USE IT */}
-      <section className="steps">
+      <section className="steps" id="how-it-works">
         <div className="steps__container">
           {/* Heading */}
           <div className="steps__heading">
