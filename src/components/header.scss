@@ -115,3 +115,14 @@
     }
   }
 }
+
+@media (max-width: 992px) {
+  .navbar {
+    &__menu {
+      display: none;
+    }
+    &__button {
+      display: none;
+    }
+  }
+}
