@@ -34,11 +34,6 @@ function Website() {
         {/* Right Image */}
         <div className="hero__image-wrapper">
           <div className="hero__image-card">
-            <img
-              src="./assets/learning-board.png"
-              alt="Learning Board"
-              className="hero__image"
-            />
 
             {/* Floating Card */}
             <div className="hero__floating-card">

@@ -1,6 +1,5 @@
 @use "./../basic.scss";
 
-
 // ========================================
 // Hero Section
 // ========================================
@@ -21,9 +20,7 @@
 
     margin: 0 auto;
     padding: 0 32px;
-
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
     align-items: center;
     gap: 80px;
   }
@@ -137,28 +134,20 @@
     justify-content: center;
     height: 31.25rem;
     transform: rotate(3deg);
+    width: 600px;
   }
 
   &__image-card {
     position: relative;
-
     width: 100%;
-    max-width: 560px;
-
+    max-width: 600px;
     border-radius: 42px;
-
+    border: 15px solid white;
     background: white;
     padding: 18px;
-
     box-shadow: 0 40px 80px rgba(15, 23, 42, 0.12);
-  }
-
-  &__image {
-    width: 100%;
-    display: block;
-
-    border-radius: 34px;
-    object-fit: cover;
+    background-image: url(./assets/learning-board.png);
+    background-size: cover;
   }
 
   // ========================================
@@ -252,18 +241,14 @@
   }
 }
 
-
 // ========================================
 // Responsive
 // ========================================
 
 @media (max-width: 992px) {
-
   .hero {
-
-    &__container {
-      grid-template-columns: 1fr;
-      gap: 60px;
+    &__image-wrapper {
+      display: none;
     }
 
     &__content {
@@ -281,11 +266,8 @@
   }
 }
 
-
 @media (max-width: 600px) {
-
   .hero {
-
     padding: 60px 0;
 
     &__container {
