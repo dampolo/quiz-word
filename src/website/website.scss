@@ -8,16 +8,13 @@
   width: 100%;
   min-height: 100vh;
   background: basic.$color-background-main;
-
   display: flex;
   align-items: center;
-
   padding: 80px 0;
 
   &__container {
     width: 100%;
     max-width: 1280px;
-
     margin: 0 auto;
     padding: 0 32px;
     display: flex;
@@ -36,16 +33,12 @@
   &__badge {
     display: inline-flex;
     align-items: center;
-
     padding: 12px 22px;
-
     background: rgba(79, 70, 229, 0.08);
     border-radius: 999px;
-
     color: basic.$color-primary-indigo;
     font-size: 0.95rem;
     font-weight: 600;
-
     margin-bottom: 32px;
   }
 
@@ -53,9 +46,7 @@
     font-size: 4.5rem;
     line-height: 1.1;
     font-weight: 800;
-
     color: basic.$color-heading;
-
     margin-bottom: 28px;
     letter-spacing: -2px;
 
@@ -67,9 +58,7 @@
   &__description {
     font-size: 1.35rem;
     line-height: 1.9;
-
     color: basic.$color-body-text;
-
     margin-bottom: 48px;
   }
 
@@ -89,21 +78,16 @@
     align-items: center;
     justify-content: center;
     gap: 12px;
-
     text-decoration: none;
-
     font-size: 1.1rem;
     font-weight: 700;
-
     padding: 18px 34px;
     border-radius: 18px;
-
     transition: all 0.25s ease;
 
     &--primary {
       background: basic.$color-primary-indigo;
       color: basic.$color-surface-container;
-
       box-shadow: 0 14px 30px rgba(79, 70, 229, 0.22);
 
       &:hover {
@@ -158,22 +142,14 @@
 
   &__floating-card {
     position: absolute;
-
     left: 50%;
     bottom: 50px;
-
     transform: translateX(-50%);
-
     width: calc(100% - 110px);
-
     background: rgba(255, 255, 255, 0.95);
-
     backdrop-filter: blur(12px);
-
     border-radius: 22px;
-
     padding: 22px 24px;
-
     box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
   }
 
@@ -181,9 +157,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-
     margin-bottom: 18px;
-
+    
     p {
       font-size: 1rem;
       font-weight: 700;
@@ -199,12 +174,10 @@
     span {
       width: 34px;
       height: 34px;
-
       border-radius: 50%;
       border: 2px solid basic.$color-surface-container;
-
       margin-left: -10px;
-
+      
       &:nth-child(1) {
         background: #dbeafe;
       }
@@ -227,17 +200,14 @@
   &__progress {
     width: 100%;
     height: 8px;
-
     background: #eeeeee;
     border-radius: 999px;
-
     overflow: hidden;
   }
 
   &__progress-bar {
     width: 74%;
     height: 100%;
-
     background: basic.$color-primary-indigo;
     border-radius: 999px;
   }
@@ -250,12 +220,10 @@
 .steps {
   width: 100%;
   background: basic.$color-surface-subtle;
-
   padding: 120px 0;
 
   &__container {
     max-width: 1280px;
-
     margin: 0 auto;
     padding: 0 32px;
   }
@@ -272,21 +240,16 @@
   &__title {
     font-size: 3rem;
     font-weight: 800;
-
     color: basic.$color-heading;
-
     margin-bottom: 18px;
     letter-spacing: -1px;
   }
 
   &__subtitle {
     max-width: 700px;
-
     margin: 0 auto;
-
     font-size: 1.1rem;
     line-height: 1.8;
-
     color: basic.$color-body-text;
   }
 
@@ -369,13 +332,11 @@
 .workflow {
   width: 100%;
   background: basic.$color-background-main;
-
   padding: 120px 0;
 
   &__container {
     display: flex;
     max-width: 1280px;
-
     margin: 0 auto;
     padding: 0 32px;
     gap: 80px;
@@ -388,7 +349,6 @@
 
   &__video {
     position: relative;
-
     border-radius: 28px;
     overflow: hidden;
     flex: 1;
@@ -412,26 +372,18 @@
   // Play Button
   &__play {
     position: absolute;
-
     top: 50%;
     left: 50%;
-
     transform: translate(-50%, -50%);
-
     width: 82px;
     height: 82px;
-
     border: none;
     border-radius: 50%;
-
     background: basic.$color-primary-indigo;
     color: basic.$color-surface-container;
-
     font-size: 1.6rem;
     cursor: pointer;
-
     box-shadow: 0 14px 30px rgba(79, 70, 229, 0.3);
-
     transition: all 0.25s ease;
 
     &:hover {
@@ -442,23 +394,16 @@
   // Bottom Footer
   &__video-footer {
     position: absolute;
-
     left: 0;
     bottom: 0;
-
     width: 100%;
-
     display: flex;
     align-items: center;
     justify-content: space-between;
-
     padding: 18px 20px;
-
     color: basic.$color-surface-container;
-
     font-size: 0.95rem;
     font-weight: 600;
-
     background: linear-gradient(to top, rgba(0, 0, 0, 0.55), transparent);
   }
 
@@ -469,9 +414,7 @@
   &__title {
     font-size: 3rem;
     font-weight: 800;
-
     color: basic.$color-heading;
-
     margin-bottom: 48px;
   }
 
@@ -479,9 +422,7 @@
   &__step {
     display: flex;
     align-items: flex-start;
-
     gap: 20px;
-
     margin-bottom: 36px;
   }
 
@@ -489,16 +430,12 @@
   &__number {
     min-width: 54px;
     height: 54px;
-
     border-radius: 50%;
-
     background: basic.$color-primary-indigo;
     color: basic.$color-surface-container;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     font-size: 1rem;
     font-weight: 700;
   }
@@ -508,18 +445,14 @@
     h3 {
       font-size: 1.5rem;
       font-weight: 700;
-
       color: basic.$color-heading;
-
       margin-bottom: 10px;
     }
 
     p {
       font-size: 1rem;
       line-height: 1.8;
-
       color: basic.$color-body-text;
-
       max-width: 420px;
     }
   }
@@ -543,11 +476,8 @@
     margin: 0 1rem;
     padding: 90px 40px;
     border-radius: 42px;
-
     overflow: hidden;
-
     text-align: center;
-
     background: linear-gradient(
       135deg,
       basic.$color-brand-background 0%,
@@ -561,16 +491,11 @@
 
   &__shape {
     position: absolute;
-
     top: 35px;
     right: 55px;
-
     font-size: 8rem;
-
     opacity: 0.07;
-
     color: basic.$color-surface-container;
-
     pointer-events: none;
   }
 
@@ -581,22 +506,16 @@
   &__title {
     font-size: 3.2rem;
     font-weight: 800;
-
     color: basic.$color-surface-container;
-
     margin-bottom: 22px;
-
     letter-spacing: -1px;
   }
 
   &__text {
     max-width: 650px;
-
     margin: 0 auto 42px auto;
-
     font-size: 1.15rem;
     line-height: 1.8;
-
     color: rgba(255, 255, 255, 0.82);
   }
 
@@ -608,24 +527,17 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-
     padding: 18px 42px;
-
     border-radius: 16px;
-
     background: basic.$color-surface-container;
     color: basic.$color-primary-indigo;
-
     text-decoration: none;
-
     font-size: 1rem;
     font-weight: 700;
-
     transition: all 0.25s ease;
 
     &:hover {
       transform: translateY(-2px);
-
       box-shadow: 0 14px 35px rgba(0, 0, 0, 0.12);
     }
   }
@@ -659,6 +571,7 @@
     &__grid {
       grid-template-columns: 1fr;
     }
+
     &__title {
       font-size: 2.5rem;
     }
