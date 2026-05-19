@@ -10,7 +10,7 @@ function Website() {
             <div className="hero__badge">✦ Progress Focused Learning</div>
 
             <h1 className="hero__title">
-              Welcome on <span>quiz word</span>
+              Welcome on <span>Quiz Word</span>
             </h1>
 
             <p className="hero__description">
@@ -55,7 +55,6 @@ function Website() {
         </div>
       </section>
 
-      
       {/* HOW TO USE IT */}
       <section className="steps" id="how-it-works">
         <div className="steps__container">
@@ -107,6 +106,96 @@ function Website() {
               </p>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* HOW DOES IT WORK */}
+
+      <section className="workflow">
+        <div className="workflow__container">
+          {/* Left Side */}
+          <div className="workflow__video">
+            <img
+              src="/images/tutorial.png"
+              alt="Tutorial"
+              className="workflow__image"
+            />
+
+            {/* Play Button */}
+            <button className="workflow__play">▶</button>
+
+            {/* Bottom Info */}
+            <div className="workflow__video-footer">
+              <span>Watch Tutorial</span>
+              <span>2:45</span>
+            </div>
+          </div>
+
+          {/* Right Side */}
+          <div className="workflow__content">
+            <h2 className="workflow__title">How does it work</h2>
+
+            {/* Step 1 */}
+            <div className="workflow__step">
+              <div className="workflow__number">1</div>
+
+              <div className="workflow__text">
+                <h3>Pick Your Words</h3>
+
+                <p>
+                  Choose words from your personal list. Our placement quiz makes
+                  sure you start exactly at the right level for you.
+                </p>
+              </div>
+            </div>
+
+            {/* Step 2 */}
+            <div className="workflow__step">
+              <div className="workflow__number">2</div>
+
+              <div className="workflow__text">
+                <h3>Create Your Quiz</h3>
+
+                <p>
+                  Click the button to generate your quiz instantly. You can
+                  start right away or create another quiz anytime.
+                </p>
+              </div>
+            </div>
+
+            {/* Step 3 */}
+            <div className="workflow__step">
+              <div className="workflow__number">3</div>
+
+              <div className="workflow__text">
+                <h3>Unlock Your Quiz</h3>
+
+                <p>
+                  Go through your quiz as often as you like and practice at your
+                  own pace.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="journey">
+        <div className="journey__container">
+          {/* Background Icon */}
+          <div className="journey__shape">🎓</div>
+
+          {/* Content */}
+          <h2 className="journey__title">Start Your Journey Today</h2>
+
+          <p className="journey__text">
+            Join thousands of learners who are already breaking language
+            barriers with QuizWord.
+          </p>
+
+          <a href="#" className="journey__button">
+            Create Free Account
+          </a>
         </div>
       </section>
     </main>
