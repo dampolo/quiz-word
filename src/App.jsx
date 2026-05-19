@@ -7,8 +7,6 @@ import Legal from "./components/legal";
 import PublicLayout from "./layouts/PublicLayout";
 import Website from "./website/website";
 import Login from "./quiz/login-quiz";
-import "./index.scss"
-
 
 function App() {
   return (
