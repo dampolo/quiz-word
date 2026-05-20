@@ -72,7 +72,9 @@ function Website() {
           <div className="steps__card">
             {/* Card 1 */}
             <div className="steps__single-card">
-              <div className="steps__icon steps__icon--purple">🌐</div>
+              <div className="steps__icon steps__icon--purple">
+                <img width="24" height="24" src="./assets/world.svg" alt="" />
+              </div>
 
               <h3 className="steps__card-title">Choose Anywhere</h3>
 
@@ -84,7 +86,9 @@ function Website() {
 
             {/* Card 2 */}
             <div className="steps__single-card">
-              <div className="steps__icon steps__icon--green">🧠</div>
+              <div className="steps__icon steps__icon--green">
+                <img src="./assets/progress.svg" alt="" />
+              </div>
 
               <h3 className="steps__card-title">Smart Quizzes</h3>
 
@@ -96,7 +100,9 @@ function Website() {
 
             {/* Card 3 */}
             <div className="steps__single-card">
-              <div className="steps__icon steps__icon--orange">📈</div>
+              <div className="steps__icon steps__icon--orange">
+                <img src="./assets/progress.svg" alt="" />
+              </div>
 
               <h3 className="steps__card-title">Track Progress</h3>
 
