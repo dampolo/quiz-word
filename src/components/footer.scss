@@ -59,10 +59,12 @@
     font-size: 0.95rem;
     font-weight: 500;
     color: basic.$color-body-text;
-    transition: color 0.2s ease;
+    transition: text-decoration 0.5s ease;
 
     &:hover {
       color: basic.$color-primary-indigo;
+      text-decoration: underline;
+      text-underline-offset: .5rem;
     }
   }
 
@@ -91,8 +93,6 @@
     transition: all 0.25s ease;
 
     &:hover {
-      background: basic.$color-primary-indigo;
-      color: white;
       transform: translateY(-2px);
     }
   }

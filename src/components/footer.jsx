@@ -36,11 +36,11 @@ function Footer() {
         {/* Right Icons */}
         <div className="footer__socials">
           <a href="#" className="footer__social">
-            ↗
+            <img width="24" height="24" src="./assets/share.svg" alt="Share"/>
           </a>
 
           <a href="#" className="footer__social">
-            ✉
+            <img width="24" height="24" src="./assets/mail.svg" alt="E-Mail" />
           </a>
         </div>
       </div>
