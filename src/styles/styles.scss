@@ -32,14 +32,10 @@ body {
   transition: all 0.2s ease-in-out;
   outline: none;
   cursor: pointer;
-  &:hover {
-    border: solid 1px basic.$color-primary-indigo;
-    background-color: basic.$color-background-main;
-    color: basic.$color-primary-indigo;
-  }
+  &:hover,
   &:focus-visible {
     border: solid 1px basic.$color-primary-indigo;
     background-color: basic.$color-background-main;
-    color: basic.$color-surface-container;
+    color: basic.$color-primary-indigo;
   }
 }

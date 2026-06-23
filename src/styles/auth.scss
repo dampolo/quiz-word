@@ -82,7 +82,7 @@
         border: 0.0625rem solid transparent;
         outline: none;
         &:focus-visible {
-          border: 0.0625rem solid basic.$color-background-main;
+          border: 0.0625rem solid basic.$color-primary-indigo;
           background-color: basic.$color-background-main;
           color: basic.$color-background-main;
         }
@@ -160,8 +160,8 @@
         background: basic.$color-surface-container;
       }
       &:focus {
-        color: basic.$color-background-main;
-        background: basic.$color-background-main;
+        color: basic.$color-primary-indigo;
+        background: basic.$color-surface-container;
         border: solid 0.0625rem basic.$color-background-main;
         outline: basic.$color-background-main;
       }
