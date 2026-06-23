@@ -1,4 +1,4 @@
-@use './resets';
+@use './resets.scss';
 
 // ========================================
 // Color Variables
@@ -17,3 +17,9 @@ $color-surface-subtle: #eff4ff;
 $color-heading: #111827;
 $color-body-text: #4b5563;
 $color-border: #e5e7eb;
+$border-radius: 0.625rem;
+$box-shadow: 0 2px 10px 0 rgb(0 0 0 / 20%);
+$letter-color: #000;
+$first-transition: all 200ms ease-in-out;
+$required: #ff0000;
+$focus: 2px dotted $color-primary-indigo;
