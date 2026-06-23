@@ -32,7 +32,7 @@ function LoginQuiz() {
       </p>
       <p className="description">
         Hast du kein konto?
-        <Link className="new-user-link" to="/kurse/create-account">
+        <Link className="new-user-link" to="/create-account">
           Konto erstellen
         </Link>
       </p>
@@ -150,7 +150,7 @@ function LoginQuiz() {
           </button>
         </div>
 
-        <Link className="btn-password" to="/kurse/forgot-password">
+        <Link className="btn-password" to="/forgot-password">
           Passwort vergessen?
         </Link>
         {/* 
