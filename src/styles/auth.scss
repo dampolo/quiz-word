@@ -21,7 +21,7 @@
     height: 2.5rem;
     margin-bottom: 1.875rem;
     .form-title-name {
-      color: basic.$color-background-main;
+      color: basic.$color-primary-indigo;
       font-size: 1.875rem;
       font-weight: 700;
       line-height: normal;
@@ -32,15 +32,15 @@
     text-align: center;
     margin-bottom: 1.875rem;
     .new-user-link {
-      color: basic.$color-background-main;
+      color: basic.$color-primary-indigo;
       border: 0.125rem dotted transparent;
 
       &:hover {
         text-decoration: underline;
       }
       &:focus-visible {
-        border: 0.125rem dotted basic.$color-background-main;
-        outline: basic.$color-background-main;
+        border: 0.125rem dotted basic.$color-primary-indigo;
+        outline: basic.$color-primary-indigo;
       }
     }
   }
@@ -135,7 +135,7 @@
         border: solid 0.0625rem basic.$color-background-main;
       }
       &:focus {
-        border: solid 0.0625rem basic.$color-background-main;
+        border: solid 0.0625rem basic.$color-primary-indigo;
         outline: basic.$color-background-main;
       }
     }
@@ -147,7 +147,7 @@
       display: flex;
       justify-content: center;
       background: none;
-      color: basic.$color-background-main;
+      color: basic.$color-primary-indigo;
       text-decoration: none;
       width: fit-content;
       padding: 0.3125rem 0.9375rem;
@@ -156,8 +156,8 @@
       border: solid 0.0625rem transparent;
       transition: all 175ms ease-in-out;
       &:hover {
-        color: basic.$color-background-main;
-        background: basic.$color-background-main;
+        color: basic.$color-primary-indigo;
+        background: basic.$color-surface-container;
       }
       &:focus {
         color: basic.$color-background-main;
