@@ -40,7 +40,17 @@ body {
   }
 }
 
-
 .warn-txt {
   color: basic.$required;
+}
+
+button[type="submit"]:disabled {
+  border: 1px solid #cccccc !important;
+  background-color: #ccc !important;
+  color: #666 !important;
+  cursor: initial !important;
+}
+
+main {
+  min-height: calc(100vh - 177px);
 }
