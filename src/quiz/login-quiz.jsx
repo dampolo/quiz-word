@@ -1,14 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import "./login-quiz.scss";
 
 function LoginQuiz() {
   const initialValues = { email: "", password: "" };
-
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-
   const [formValues, setFormValues] = useState(initialValues);
+  const [formErrors, setFormErrors] = useState({});
+  const [isSubmit, setIsSubmit] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -18,6 +18,34 @@ function LoginQuiz() {
 
   const loginWithEmailAndPassword = (e) => {
     e.preventDefault();
+    setFormErrors(validate(formValues));
+    setIsSubmit(true);
+  };
+
+  useEffect(() => {
+    if (Object.keys(formErrors).length === 0 && isSubmit) {
+      console.log(formValues);
+    }
+  }, [formErrors]);
+
+  const validate = (values) => {
+    const errors = {};
+
+    const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+
+    const regexPassword =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%+\-/*?&])[A-Za-z\d@$!%+\-/*?&]{10,}$/;
+
+    if (!values.email || !regexEmail.test(values.email)) {
+      errors.email = "E-Mail ist unvollständig/inkorrekt.";
+    }
+
+    if (!values.password || !regexPassword.test(values.password)) {
+      errors.password =
+        "Mindestens 10 Zeichen erforderlich: ein Klein- u. ein Großbuchstabe, eine Zahl und ein Sonderzeichen.";
+    }
+
+    return errors;
   };
 
   return (
@@ -39,9 +67,7 @@ function LoginQuiz() {
 
       <form onSubmit={loginWithEmailAndPassword}>
         <div className="input-container">
-          <pre>{JSON.stringify(formValues, undefined)}</pre>
-
-          <label htmlFor="email">E-Mail-Adresse</label>
+          <label for="email">E-Mail-Adresse</label>
           <input
             className="input-field"
             type="email"
@@ -62,24 +88,11 @@ function LoginQuiz() {
             />
           </div>
 
-          <div className="warn-txt">
-            {/* <span>{errorResponse()}</span>
-
-                {userEmailInvalid && (
-                <>
-                    {userEmailRequired && (
-                    <small>E-Mail ist ein Pflichtfeld.</small>
-                    )}
-                    {userEmailEmailError && (
-                    <small>E-Mail ist unvollständig/inkorrekt.</small>
-                    )}
-                </>
-                )} */}
-          </div>
+          <div className="warn-txt">{formErrors.email}</div>
         </div>
 
         <div className="input-container">
-          <label htmlFor="password">Passwort</label>
+          <label for="password">Passwort</label>
           <input
             autoComplete="current-password"
             className="input-field"
@@ -116,26 +129,7 @@ function LoginQuiz() {
             />
           </div>
 
-          <div className="warn-txt warn-txt-hight">
-            {/* {passwordInvalid && (
-                <>
-                    {passwordRequired && (
-                    <small>Password ist ein Pflichtfeld.</small>
-                    )}
-
-                    {passwordMinLength && (
-                    <small id="password-error">
-                        Mindestens 8 Zeichen erforderlich: ein Klein- u. ein
-                        Großbuchstabe, eine Zahl und ein Sonderzeichen.
-                    </small>
-                    )}
-
-                    {passwordPattern && !passwordMinLength && (
-                    <small>Mindestanforderungen nicht erfüllt.</small>
-                    )}
-                </>
-                )} */}
-          </div>
+          <div className="warn-txt warn-txt-hight">{formErrors.password}</div>
         </div>
 
         {/* <Preloader

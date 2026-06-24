@@ -1,4 +1,4 @@
-@use './basic.scss';
+@use "./basic.scss";
 
 .main-content-customer {
   position: relative;
@@ -140,7 +140,7 @@
       }
     }
     input:-webkit-autofill {
-      background-color: basic.$color-background-main;
+      background-color: basic.$color-surface-container;
       box-shadow: 0 0 0px 62.5rem basic.$color-background-main inset;
     }
     .btn-password {
@@ -173,7 +173,7 @@
       position: relative;
       margin-bottom: 1.875rem;
       &::before {
-        content: '';
+        content: "";
         position: absolute;
         background-color: basic.$color-background-main;
         height: 0.125rem;
