@@ -135,14 +135,15 @@
         border: solid 0.0625rem basic.$color-background-main;
       }
       &:focus {
+        background-color: basic.$color-surface-container;
         border: solid 0.0625rem basic.$color-primary-indigo;
         outline: basic.$color-background-main;
       }
+      &:-webkit-autofill {
+        box-shadow: 0 0 0px 62.5rem basic.$color-surface-container inset;
+      }
     }
-    input:-webkit-autofill {
-      background-color: basic.$color-surface-container;
-      box-shadow: 0 0 0px 62.5rem basic.$color-background-main inset;
-    }
+
     .btn-password {
       display: flex;
       justify-content: center;

@@ -6,40 +6,37 @@ function ForgotPassword() {
   const initialValues = { email: "" };
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
+  const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+  const isEmailValid = regexEmail.test(formValues.email);
 
-  const recoveryForm = (e) => {
+
+  function recoveryForm(e) {
     e.preventDefault();
-
-    const errors = validate(formValues);
-    setFormErrors(errors);
+    setFormErrors(validateInput(formValues));
     setFormValues(initialValues)
-  };
+  }
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-
+  function handleChange(e) {
+    const { name, value } = e.target;  
     const updatedValues = {
       ...formValues,
       [name]: value,
     };
-
     setFormValues(updatedValues);
-    setFormErrors(validate(updatedValues));
-  };
+    setFormErrors(validateInput(updatedValues));    
+  }
 
-  const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
 
-  const validate = (values) => {
+  function validateInput(values) {
     const errors = {};
 
-    if (!values.email || !regexEmail.test(values.email)) {
+    if (!regexEmail.test(values.email)) {
       errors.email = "E-Mail ist unvollständig/inkorrekt.";
     }
 
     return errors;
   };
   
-  const isEmailValid = regexEmail.test(formValues.email);
 
   return (
     <section className="main-content-customer">
@@ -84,9 +81,9 @@ function ForgotPassword() {
         </p>
 
         <div className="btn-container">
-          <a className="back-button" routerLink="/customer/profile">
+          <Link className="back-button" to="/customer/profile">
             Abbrechen
-          </a>
+          </Link>
 
           <button
             className="main-quiz-button"

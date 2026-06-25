@@ -54,3 +54,9 @@ button[type="submit"]:disabled {
 main {
   min-height: calc(100vh - 177px);
 }
+
+.main-auth {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
