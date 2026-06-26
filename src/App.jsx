@@ -7,6 +7,7 @@ import Legal from "./components/legal";
 import PublicLayout from "./layouts/PublicLayout";
 import Website from "./website/website";
 import Login from "./quiz/login-quiz";
+import ResetPassword from "./quiz/reset-password";
 
 function App() {
   return (
@@ -20,6 +21,8 @@ function App() {
         <Route path="/login-quiz" element={<LoginQuiz />} />
         <Route path="/create-account" element={<CreateAccount />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
+
       </Route>
     </Routes>
   );
