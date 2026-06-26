@@ -8,7 +8,7 @@ function LoginQuiz() {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
-  const [isSubmit, setIsSubmit] = useState(false);
+  // const [isSubmit, setIsSubmit] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -19,14 +19,14 @@ function LoginQuiz() {
   const loginWithEmailAndPassword = (e) => {
     e.preventDefault();
     setFormErrors(validate(formValues));
-    setIsSubmit(true);
+    // setIsSubmit(true);
   };
 
-  useEffect(() => {
-    if (Object.keys(formErrors).length === 0 && isSubmit) {
-      console.log(formValues);
-    }
-  }, [formErrors]);
+  // useEffect(() => {
+  //   if (Object.keys(formErrors).length === 0 && isSubmit) {
+  //     console.log(formValues);
+  //   }
+  // }, [formErrors]);
 
   const validate = (values) => {
     const errors = {};
@@ -42,7 +42,7 @@ function LoginQuiz() {
 
     if (!values.password || !regexPassword.test(values.password)) {
       errors.password =
-        "Mindestens 10 Zeichen erforderlich: ein Klein- u. ein Großbuchstabe, eine Zahl und ein Sonderzeichen.";
+        "Dein Passwort ist nicht korrekt";
     }
 
     return errors;
