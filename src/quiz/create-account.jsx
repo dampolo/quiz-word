@@ -42,13 +42,14 @@ function CreateAccount() {
     }
   }
   function handleChange(e) {
-    const { name, value, type, checked } = e.target;
 
+    const { name, value, type, checked } = e.target;
+    
     const updatedValues = {
       ...formValues,
       [name]: type === "checkbox" ? checked : value,
     };
-
+    
     setFormValues(updatedValues);
   }
 
@@ -120,6 +121,7 @@ function CreateAccount() {
             className="input-field"
             type="email"
             placeholder="beispielname@email.com"
+            value={formValues.email}
             onChange={handleChange}
             onBlur={handleBlur}
           />
@@ -149,6 +151,8 @@ function CreateAccount() {
             type={isPasswordTopVisible ? "text" : "password"}
             className="input-field input-field-pwd-icon"
             placeholder="Passwort"
+            value={formValues.password1}
+
             onChange={handleChange}
             onBlur={handleBlur}
           />
@@ -192,6 +196,7 @@ function CreateAccount() {
             className="input-field"
             type={isPasswordBottomVisible ? "text" : "password"}
             placeholder="Wiederhole dein Passwort"
+            value={formValues.password2}
             onChange={handleChange}
             onBlur={handleBlur}
           />
