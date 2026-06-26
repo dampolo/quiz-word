@@ -105,7 +105,7 @@ function CreateAccount() {
 
       <p className="description">
         Hast du schon ein Konto?{" "}
-        <Link className="new-user-link" to="/kurse/login">
+        <Link className="new-user-link" to="/login">
           Anmelden
         </Link>
       </p>
