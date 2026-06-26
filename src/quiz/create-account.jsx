@@ -14,28 +14,43 @@ function CreateAccount() {
   const [isPasswordBottomVisible, togglePasswordVisibilityBottom] =
     useState(false);
   const [formErrors, setFormErrors] = useState({});
-  const [isFormValid, setFormValid] = useState(false);
   const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
   const regexPassword =
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%+\-/*?&])[A-Za-z\d@$!%+\-/*?&]{10,}$/;
 
+  const isFormValid =
+    regexEmail.test(formValues.email) &&
+    regexPassword.test(formValues.password1) &&
+    formValues.password1 === formValues.password2 &&
+    formValues.checked;
+
   function submit(e) {
     e.preventDefault();
-    setFormErrors(validateInput(formValues));
-    setFormValues(initialValues);
-    setFormValid(true);
+
+    const errors = validateInput(formValues, {
+      email: true,
+      password1: true,
+      password2: true,
+      checked: true,
+    });
+
+    setFormErrors(errors);
+
+    if (Object.keys(errors).length === 0) {
+      console.log("Form is valid!");
+      // send data to server
+    }
   }
-
   function handleChange(e) {
-  const { name, value, type, checked } = e.target;
+    const { name, value, type, checked } = e.target;
 
-  const updatedValues = {
-    ...formValues,
-    [name]: type === "checkbox" ? checked : value,
-  };
+    const updatedValues = {
+      ...formValues,
+      [name]: type === "checkbox" ? checked : value,
+    };
 
-  setFormValues(updatedValues);
-}
+    setFormValues(updatedValues);
+  }
 
   function handleBlur(e) {
     const { name, value, type, checked } = e.target;
@@ -105,6 +120,7 @@ function CreateAccount() {
             className="input-field"
             type="email"
             placeholder="beispielname@email.com"
+            onChange={handleChange}
             onBlur={handleBlur}
           />
 
@@ -133,6 +149,7 @@ function CreateAccount() {
             type={isPasswordTopVisible ? "text" : "password"}
             className="input-field input-field-pwd-icon"
             placeholder="Passwort"
+            onChange={handleChange}
             onBlur={handleBlur}
           />
 
@@ -175,6 +192,7 @@ function CreateAccount() {
             className="input-field"
             type={isPasswordBottomVisible ? "text" : "password"}
             placeholder="Wiederhole dein Passwort"
+            onChange={handleChange}
             onBlur={handleBlur}
           />
 
@@ -221,10 +239,10 @@ function CreateAccount() {
 
           <div className="checkbox-description">
             <label htmlFor="checkbox">
-              Ich stimme der
+              Ich stimme der{" "}
               <Link className="privacy" to="/legal">
                 Datenschutzerklärung
-              </Link>
+              </Link>{" "}
               zu.
             </label>
 
@@ -239,12 +257,7 @@ function CreateAccount() {
         /> */}
 
         <div className="btn-container">
-          <button
-            id="submit"
-            type="submit"
-            disabled={!isFormValid}
-            className="forward-btn"
-          >
+          <button type="submit" disabled={!isFormValid} className="main-quiz-button">
             Weiter
           </button>
         </div>

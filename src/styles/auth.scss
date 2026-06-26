@@ -49,6 +49,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 1rem;
     .input-container {
       position: relative;
       display: flex;
@@ -113,7 +114,7 @@
         text-align: left;
         .privacy {
           text-decoration: none;
-          color: basic.$color-background-main;
+          color: basic.$color-primary-indigo;
           cursor: pointer;
           &:hover {
             text-decoration: underline;
