@@ -12,6 +12,7 @@ import MyQuiz from "./layouts/MyQuiz";
 import Profile from "./quiz/my-quiz/profile";
 import AllWords from "./quiz/my-quiz/all-words";
 import Quizzes from "./quiz/my-quiz/quizzes";
+import ProtectedRoute from "./services/ProtectedRoute";
 
 function App() {
   return (
@@ -27,13 +28,14 @@ function App() {
         <Route path="/forgot-password" element={<ForgotPassword />} />
       </Route>
 
-      {/* Private */}
-
-      <Route path="/my-quiz" element={<MyQuiz />}>
-        <Route path="dashboard" element={<Dashboard />} />
-        <Route path="profile" element={<Profile />} />
-        <Route path="all-words" element={<AllWords />} />
-        <Route path="quizzes" element={<Quizzes />} />
+      {/* Protected */}
+      <Route element={<ProtectedRoute />}>
+        <Route path="/my-quiz" element={<MyQuiz />}>
+          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="profile" element={<Profile />} />
+          <Route path="all-words" element={<AllWords />} />
+          <Route path="quizzes" element={<Quizzes />} />
+        </Route>
       </Route>
     </Routes>
   );

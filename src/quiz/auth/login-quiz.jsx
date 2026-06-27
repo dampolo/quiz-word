@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import  { useAuth } from "../../services/useAuth";
 
 import "./login-quiz.scss";
 
@@ -8,25 +9,40 @@ function LoginQuiz() {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
-  // const [isSubmit, setIsSubmit] = useState(false);
-
+  const { login } = useAuth();
+  const navigate = useNavigate();
+  
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
     console.log(formValues);
   };
 
-  const loginWithEmailAndPassword = (e) => {
+  async function loginWithEmailAndPassword(e) {
     e.preventDefault();
-    setFormErrors(validate(formValues));
-    // setIsSubmit(true);
+
+    const errors = validate(formValues);
+    setFormErrors(errors);
+
+    if (Object.keys(errors).length > 0) {
+      return;
+    }
+
+    try {
+      const success = await login(formValues.email, formValues.password);
+
+      if (success) {
+        navigate("/my-quiz/dashboard");
+      }
+    } catch (error) {
+      console.log(error);
+      
+      setFormErrors({
+        api: "Invalid email or password",
+      });
+    }
   };
 
-  // useEffect(() => {
-  //   if (Object.keys(formErrors).length === 0 && isSubmit) {
-  //     console.log(formValues);
-  //   }
-  // }, [formErrors]);
 
   const validate = (values) => {
     const errors = {};
@@ -41,8 +57,7 @@ function LoginQuiz() {
     }
 
     if (!values.password || !regexPassword.test(values.password)) {
-      errors.password =
-        "Dein Passwort ist nicht korrekt";
+      errors.password = "Dein Passwort ist nicht korrekt";
     }
 
     return errors;
