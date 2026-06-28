@@ -1,11 +1,35 @@
+import { useNavigate } from "react-router-dom";
+import AuthContext from "../../services/AuthContext";
 import "./dialog-customer.scss";
+import { useContext } from "react";
 
 function DialogCustomer() {
+  const navigate = useNavigate();
+   const { logout } = useContext(AuthContext);
+
+
+  function openProfile(e) {
+    e.preventDefault();
+    e.stopPropagation();
+  }
+
+   async function logOut() {
+    try {
+      await logout();
+      navigate("/");
+      // toast.success("Du bist erfolgreich abgemeldet");
+    } catch (error) {
+      // toast.error("Logout fehlgeschlagen");
+      console.log(error);
+      
+    }
+  };
+
   return (
     <section className="profile">
       <ul>
         <li>
-          <button>
+          <button onClick={openProfile}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="30"
@@ -35,7 +59,7 @@ function DialogCustomer() {
           </button>
         </li>
         <li>
-          <a>
+          <a onClick={logOut}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="30"
