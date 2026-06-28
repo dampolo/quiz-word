@@ -1,0 +1,77 @@
+@use "./../../styles/basic.scss";
+@use "./../../styles/auth.scss";
+
+.profile {
+  position: absolute;
+  right: 1rem;
+  top: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: basic.$border-radius;
+  background: basic.$color-background-main;
+  height: 9rem;
+  width: 13rem;
+  .rectangle {
+    display: none;
+    position: absolute;
+    top: .625rem;
+    left: auto;
+    right: auto;
+  }
+  ul {
+    font-size: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.625rem;
+    font-size: 1.25rem;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    li {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      max-width: 9.375rem;
+      height: 2.1875rem;
+      border-radius: basic.$border-radius;
+      &:hover {
+        background: basic.$color-surface-container;
+        transform: scale(1.05);
+      }
+      &:hover a {
+        color: basic.$color-primary-indigo;
+      }
+      &:hover button {
+        color: basic.$color-primary-indigo;
+      }
+      button {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        color: basic.$color-body-text;
+        width: 100%;
+        height: 100%;
+        background: none;
+        &:focus-visible {
+          outline: none;
+        }
+      }
+      a {
+        display: flex;
+        align-items: center;
+        color: basic.$color-body-text;
+        width: 100%;
+        height: 100%;
+        text-decoration: none;
+        gap: 1rem;
+        &:focus-visible {
+          outline: none;
+        }
+      }
+    }
+  }
+}
