@@ -1,5 +1,155 @@
+import "./all-words.scss";
+
 function AllWords() {
-  return <h1>All words</h1>;
+  const words = [
+    {
+      id: 1,
+      rank: "001",
+      word: "Cenote",
+      translation: "Limestone sinkhole",
+      category: "Travel",
+      streak: 12,
+    },
+    {
+      id: 2,
+      rank: "002",
+      word: "Schadenfreude",
+      translation: "Joy at others' misfortune",
+      category: "Psychology",
+      streak: 0,
+    },
+    {
+      id: 3,
+      rank: "003",
+      word: "L'esprit de l'escalier",
+      translation: "Staircase wit",
+      category: "Phrases",
+      streak: 5,
+    },
+    {
+      id: 4,
+      rank: "004",
+      word: "Hygge",
+      translation: "Cozy contentment",
+      category: "Culture",
+      streak: 28,
+    },
+    {
+      id: 5,
+      rank: "005",
+      word: "Komorebi",
+      translation: "Sunlight filtering through trees",
+      category: "Nature",
+      streak: 17,
+    },
+    {
+      id: 6,
+      rank: "006",
+      word: "Saudade",
+      translation: "A deep nostalgic longing",
+      category: "Emotion",
+      streak: 21,
+    },
+    {
+      id: 7,
+      rank: "007",
+      word: "Fernweh",
+      translation: "Longing for distant places",
+      category: "Travel",
+      streak: 8,
+    },
+  ];
+
+  return (
+    <div className="vocabulary">
+      <div className="vocabulary__header">
+        <div>
+          <h1>Your Vocabulary</h1>
+          <p>
+            Organize and track your learning progress. Manage definitions,
+            categories, and review schedules for all your saved expressions.
+          </p>
+        </div>
+
+        <button className="add-btn">+ Add New Word</button>
+      </div>
+
+      <div className="word-list">
+        <div className="list-head">
+          <div>Rank</div>
+          <div>Word & Translation</div>
+          <div>Category</div>
+          <div>Streak</div>
+          <div>Actions</div>
+        </div>
+
+        {words.map((word) => (
+          <div className="list-row" key={word.id}>
+            <div className="rank">#{word.rank}</div>
+
+            <div className="word">
+              <h3>{word.word}</h3>
+              <span>»</span>
+              <p>{word.translation}</p>
+            </div>
+
+            <div>
+              <span className={`badge ${word.category.toLowerCase()}`}>
+                {word.category}
+              </span>
+            </div>
+
+            <div className="streak">
+              🔥
+              <strong>{word.streak}</strong>
+              <span>Days</span>
+            </div>
+
+            <div className="actions">✏️</div>
+          </div>
+        ))}
+
+        <div className="pagination">
+          <span>Showing 4 of 1,240 words</span>
+
+          <div className="pages">
+            <button>&lt;</button>
+            <button className="active">1</button>
+            <button>2</button>
+            <button>3</button>
+            <span>...</span>
+            <button>31</button>
+            <button>&gt;</button>
+          </div>
+        </div>
+      </div>
+
+      <div className="cards">
+        <div className="card goal">
+          <h3>Today's Goal</h3>
+          <p>Review 20 new words to keep your streak alive.</p>
+
+          <div className="progress">
+            <div className="progress-fill"></div>
+          </div>
+
+          <small>12 / 20 Words • 60%</small>
+        </div>
+
+        <div className="card mastery">
+          <h3>Mastery Level</h3>
+          <p>You've reached B2 fluency level in Vocabulary.</p>
+        </div>
+
+        <div className="card review">
+          <h3>Flashcard Review</h3>
+          <p>Ready to test your memory on recent additions?</p>
+
+          <button>Start Review Session</button>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default AllWords;

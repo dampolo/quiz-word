@@ -7,9 +7,7 @@ function PublicLayout() {
   return (
     <>
       <Header />
-      <main className="main-auth">
         <Outlet />
-      </main>
       <Footer />
     </>
   );

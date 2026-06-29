@@ -17,25 +17,24 @@ function ResetPassword() {
   const regexPassword =
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%+\-/*?&])[A-Za-z\d@$!%+\-/*?&]{10,}$/;
 
-  const isFormValid =
-    formValues.password1 === formValues.password2
+  const isFormValid = formValues.password1 === formValues.password2;
 
-    function handleBlur(e) {
-      const { name, value } = e.target;
+  function handleBlur(e) {
+    const { name, value } = e.target;
 
-      const updatedValues = {
-        ...formValues,
-        [name]: value,
-      };
-
-      const newTouched = {
-        ...touched,
-        [name]: true,
-      };
-
-      setTouched(newTouched);
-      setFormErrors(validateInput(updatedValues, newTouched));
+    const updatedValues = {
+      ...formValues,
+      [name]: value,
     };
+
+    const newTouched = {
+      ...touched,
+      [name]: true,
+    };
+
+    setTouched(newTouched);
+    setFormErrors(validateInput(updatedValues, newTouched));
+  }
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -61,115 +60,121 @@ function ResetPassword() {
   }
 
   return (
-    <section className="main-content-customer">
-      <Link className="arrow-back" to="/kurse/login">
-        {/* <Back /> */}
-      </Link>
+    <main>
+      <section className="main-content-customer">
+        <Link className="arrow-back" to="/kurse/login">
+          {/* <Back /> */}
+        </Link>
 
-      <div className="form-title">
-        <h1 className="form-title-name">Passwort zurücksetzen</h1>
-      </div>
+        <div className="form-title">
+          <h1 className="form-title-name">Passwort zurücksetzen</h1>
+        </div>
 
-      <form onSubmit={submit}>
-        <div className="input-container">
-          <label htmlFor="password1">Passwort</label>
+        <form onSubmit={submit}>
+          <div className="input-container">
+            <label htmlFor="password1">Passwort</label>
 
-          <input
-            name="password1"
-            id="password1"
-            className="input-field"
-            type={isPasswordTopVisible ? "text" : "password"}
-            placeholder="Neues Passwort"
-            value={formValues.password1}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            autoComplete="password1"
-          />
-
-          <button
-            type="button"
-            className="eye-button"
-            onClick={() => togglePasswordVisibilityTop((prev) => !prev)}
-          >
-            <img
-              width={24}
-              height={24}
-              className="pwd-eye"
-              src={
-                isPasswordTopVisible
-                  ? "./assets/eye.svg"
-                  : "./assets/eye-off.svg"
-              }
-              alt={isPasswordTopVisible ? "verstecken" : "zeigen"}
+            <input
+              name="password1"
+              id="password1"
+              className="input-field"
+              type={isPasswordTopVisible ? "text" : "password"}
+              placeholder="Neues Passwort"
+              value={formValues.password1}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              autoComplete="password1"
             />
-          </button>
 
-          <div className="input-icon">
-            <img
-              width={24}
-              height={24}
-              aria-hidden="true"
-              src="./assets/pwd-lock-icon-input-field.svg"
-              alt=""
-            />
+            <button
+              type="button"
+              className="eye-button"
+              onClick={() => togglePasswordVisibilityTop((prev) => !prev)}
+            >
+              <img
+                width={24}
+                height={24}
+                className="pwd-eye"
+                src={
+                  isPasswordTopVisible
+                    ? "./assets/eye.svg"
+                    : "./assets/eye-off.svg"
+                }
+                alt={isPasswordTopVisible ? "verstecken" : "zeigen"}
+              />
+            </button>
+
+            <div className="input-icon">
+              <img
+                width={24}
+                height={24}
+                aria-hidden="true"
+                src="./assets/pwd-lock-icon-input-field.svg"
+                alt=""
+              />
+            </div>
+
+            <div className="warn-txt">{formErrors.password1}</div>
           </div>
 
-          <div className="warn-txt">{formErrors.password1}</div>
-        </div>
+          <div className="input-container">
+            <label htmlFor="password2">Wiederhole dein Passwort</label>
 
-        <div className="input-container">
-          <label htmlFor="password2">Wiederhole dein Passwort</label>
-
-          <input
-            name="password2"
-            id="password2"
-            className="input-field"
-            type={isPasswordBottomVisible ? "text" : "password"}
-            placeholder="Wiederhole neues Passwort"
-            value={formValues.password2}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            autoComplete="password2"
-          />
-
-          <button
-            type="button"
-            className="eye-button"
-            onClick={() => togglePasswordVisibilityBottom((prev) => !prev)}
-          >
-            <img
-              width={24}
-              height={24}
-              className="pwd-eye"
-              src={
-                isPasswordBottomVisible
-                  ? "./assets/eye.svg"
-                  : "./assets/eye-off.svg"
-              }
-              alt={isPasswordBottomVisible ? "verstecken" : "zeigen"}
+            <input
+              name="password2"
+              id="password2"
+              className="input-field"
+              type={isPasswordBottomVisible ? "text" : "password"}
+              placeholder="Wiederhole neues Passwort"
+              value={formValues.password2}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              autoComplete="password2"
             />
-          </button>
 
-          <div className="input-icon">
-            <img
-              width={24}
-              height={24}
-              aria-hidden="true"
-              src="./assets/pwd-lock-icon-input-field.svg"
-              alt=""
-            />
+            <button
+              type="button"
+              className="eye-button"
+              onClick={() => togglePasswordVisibilityBottom((prev) => !prev)}
+            >
+              <img
+                width={24}
+                height={24}
+                className="pwd-eye"
+                src={
+                  isPasswordBottomVisible
+                    ? "./assets/eye.svg"
+                    : "./assets/eye-off.svg"
+                }
+                alt={isPasswordBottomVisible ? "verstecken" : "zeigen"}
+              />
+            </button>
+
+            <div className="input-icon">
+              <img
+                width={24}
+                height={24}
+                aria-hidden="true"
+                src="./assets/pwd-lock-icon-input-field.svg"
+                alt=""
+              />
+            </div>
           </div>
-        </div>
 
-        <div className="warn-txt">{formErrors.notMatch}</div>
+          <div className="warn-txt">{formErrors.notMatch}</div>
 
-        <div className="btn-container">
-          <button type="submit" className="main-quiz-button" disabled={!isFormValid}>
-            Passwort ändern
-          </button>
-        </div>
-      </form>
-    </section>
+          <div className="btn-container">
+            <button
+              type="submit"
+              className="main-quiz-button"
+              disabled={!isFormValid}
+            >
+              Passwort ändern
+            </button>
+          </div>
+        </form>
+      </section>
+    </main>
   );
 }
 

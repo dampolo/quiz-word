@@ -51,15 +51,6 @@ button[type="submit"]:disabled {
   cursor: initial !important;
 }
 
-main {
-  min-height: calc(100vh - 177px);
-}
-
-.main-auth {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 
 header-customer {
   display: flex;
@@ -102,11 +93,12 @@ main {
   flex-direction: column;
   margin: 0 0.0625rem 0.0625rem 0.0625rem;
   min-height: calc(100vh - 177px);
-  color: basic.$color-background-main;
-  padding-inline: 1rem;
-  background-color: basic.$color-surface-subtle;
-  gap: 1rem;
+  color: basic.$color-heading;
+  // padding-inline: 1rem;
+  background-color: basic.$color-surface-container;
+  // gap: 1rem;
 }
+
 
 .main-customer {
   padding-inline: 0;
@@ -118,6 +110,6 @@ main {
   display: flex;
   flex-direction: row;
   width: 100%;
-  background-color: basic.$color-surface-subtle;
+  background-color: basic.$color-background-main;
   overflow-x: hidden;
 }
