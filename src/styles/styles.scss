@@ -96,3 +96,28 @@ header-customer {
   pointer-events: auto;
   // overflow-y: scroll;
 }
+
+main {
+  display: flex;
+  flex-direction: column;
+  margin: 0 0.0625rem 0.0625rem 0.0625rem;
+  min-height: calc(100vh - 177px);
+  color: basic.$color-background-main;
+  padding-inline: 1rem;
+  background-color: basic.$color-surface-subtle;
+  gap: 1rem;
+}
+
+.main-customer {
+  padding-inline: 0;
+  gap: 0;
+  min-height: 100vh;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  background-color: basic.$color-surface-subtle;
+  overflow-x: hidden;
+}

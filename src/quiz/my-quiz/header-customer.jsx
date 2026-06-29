@@ -2,6 +2,8 @@ import { useState } from "react";
 import Logo from "../../components/logo";
 import DialogCustomer from "./dialog-customer";
 
+import './header-customer.scss';
+
 function HeaderCustomer() {
   const [isProfileVisible, setIsProfileVisible] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -19,7 +21,7 @@ function HeaderCustomer() {
   }
   return (
     <header-customer>
-      <a href="/">
+      <a href="/" className="logo" >
         <Logo />
       </a>
 
