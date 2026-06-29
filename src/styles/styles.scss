@@ -52,18 +52,6 @@ button[type="submit"]:disabled {
 }
 
 
-header-customer {
-  display: flex;
-  margin: 0.0625rem 0.0625rem 0 0.0625rem;
-  height: 4.5rem;
-  // border-right: 1px solid basic.$border-color;
-  // border-bottom: 1px solid basic.$border-color;
-  padding: 1rem;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 1rem;
-}
-
 .hide-container {
   display: flex;
   opacity: 0;

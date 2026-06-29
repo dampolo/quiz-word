@@ -1,3 +1,17 @@
+@use "./../../styles/basic.scss";
+
+.header-customer {
+  display: flex;
+  margin: 0.0625rem 0.0625rem 0 0.0625rem;
+  height: 4.5rem;
+  background-color: basic.$color-background-main;
+  width: 100%;
+  padding: 1rem;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
 .logo {
   margin-right: auto;
   // display: none;

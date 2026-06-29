@@ -20,7 +20,7 @@ function HeaderCustomer() {
     setIsMenuOpen((prev) => !prev);
   }
   return (
-    <header-customer>
+    <section className="header-customer">
       <a href="/" className="logo" >
         <Logo />
       </a>
@@ -63,7 +63,7 @@ function HeaderCustomer() {
           <span className="hamburger-inner"></span>
         </span>
       </button>
-    </header-customer>
+    </section>
   );
 }
 
