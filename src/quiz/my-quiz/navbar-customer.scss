@@ -23,7 +23,7 @@
       border-radius: basic.$border-radius;
       &:hover {
         transition: basic.$first-transition;
-        background: linear-gradient(180deg, #d6a65357, #8f59073f);
+        background: basic.$color-hover;
       }
       .nav-link-text {
         align-items: center;
