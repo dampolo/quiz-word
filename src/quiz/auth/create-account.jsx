@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/useAuth";
 
 function CreateAccount() {
   const initialValues = {
     email: "",
-    password1: "",
-    password2: "",
+    password: "",
+    repeated_password: "",
     checked: false,
   };
   const [touched, setTouched] = useState({});
@@ -17,30 +18,44 @@ function CreateAccount() {
   const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
   const regexPassword =
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%+\-/*?&])[A-Za-z\d@$!%+\-/*?&]{10,}$/;
+  const navigate = useNavigate();
+
+  const { createAccount } = useAuth();
 
   const isFormValid =
     regexEmail.test(formValues.email) &&
-    regexPassword.test(formValues.password1) &&
-    formValues.password1 === formValues.password2 &&
+    regexPassword.test(formValues.password) &&
+    formValues.password === formValues.repeated_password &&
     formValues.checked;
 
-  function submit(e) {
+  async function submit(e) {
     e.preventDefault();
 
     const errors = validateInput(formValues, {
       email: true,
-      password1: true,
-      password2: true,
+      password: true,
+      repeated_password: true,
       checked: true,
     });
 
     setFormErrors(errors);
 
-    if (Object.keys(errors).length === 0) {
-      console.log("Form is valid!");
-      // send data to server
+    if (Object.keys(errors).length > 0) {
+      return;
+    }
+
+    try {
+      await createAccount(formValues);
+      console.log("Account created!");
+      navigate("/my-quiz/login");
+    } catch (error) {
+      setFormErrors((prev) => ({
+        ...prev,
+        general: error.message || "Failed to create account.",
+      }));
     }
   }
+
   function handleChange(e) {
     const { name, value, type, checked } = e.target;
 
@@ -76,12 +91,12 @@ function CreateAccount() {
       errors.email = "E-Mail ist unvollständig/inkorrekt.";
     }
 
-    if (touched.password1 && !regexPassword.test(values.password1)) {
-      errors.password1 =
+    if (touched.password && !regexPassword.test(values.password)) {
+      errors.password =
         "Mindestens 10 Zeichen erforderlich: ein Klein- u. ein Großbuchstabe, eine Zahl und ein Sonderzeichen.";
     }
 
-    if (touched.password2 && values.password1 !== values.password2) {
+    if (touched.repeated_password && values.password !== values.repeated_password) {
       errors.notMatch = "Passwörter stimmen nicht überein.";
     }
 
@@ -142,16 +157,16 @@ function CreateAccount() {
           </div>
 
           <div className="input-container">
-            <label htmlFor="password1">Passwort</label>
+            <label htmlFor="password">Passwort</label>
 
             <input
-              id="password1"
-              name="password1"
+              id="password"
+              name="password"
               autoComplete="new-password"
               type={isPasswordTopVisible ? "text" : "password"}
               className="input-field input-field-pwd-icon"
               placeholder="Passwort"
-              value={formValues.password1}
+              value={formValues.password}
               onChange={handleChange}
               onBlur={handleBlur}
             />
@@ -184,20 +199,20 @@ function CreateAccount() {
               />
             </div>
 
-            <div className="warn-txt">{formErrors.password1}</div>
+            <div className="warn-txt">{formErrors.password}</div>
           </div>
 
           <div className="input-container">
-            <label htmlFor="password2">Wiederhole dein Passwort</label>
+            <label htmlFor="repeated_password">Wiederhole dein Passwort</label>
 
             <input
-              id="password2"
-              name="password2"
+              id="repeated_password"
+              name="repeated_password"
               autoComplete="new-password"
               className="input-field"
               type={isPasswordBottomVisible ? "text" : "password"}
               placeholder="Wiederhole dein Passwort"
-              value={formValues.password2}
+              value={formValues.repeated_password}
               onChange={handleChange}
               onBlur={handleBlur}
             />

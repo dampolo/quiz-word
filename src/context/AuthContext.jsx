@@ -6,7 +6,7 @@ const AuthContext = createContext();
 export default AuthContext;
 
 export function AuthProvider({ children }) {
-  const api = useApi()
+  const api = useApi();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -16,7 +16,7 @@ export function AuthProvider({ children }) {
         credentials: "include",
       });
 
-      console.log("Status:", response.status)
+      console.log("Status:", response.status);
 
       if (!response.ok) {
         throw new Error("Not authenticated");
@@ -51,6 +51,27 @@ export function AuthProvider({ children }) {
     return checkAuth();
   };
 
+  const createAccount = async (formData) => {
+    const response = await fetch(`${api}create-account/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
+
+    if (!response.ok) {
+      const error = await response.json().catch(() => null);
+      throw new Error(error?.message || "Account creation failed");
+    }
+
+    // If registration also logs the user in
+    return checkAuth();
+
+    // Otherwise:
+    // await login(formData.email, formData.password1);
+  };
+
   const logout = async () => {
     await fetch(`${api}logout/`, {
       method: "POST",
@@ -72,6 +93,7 @@ export function AuthProvider({ children }) {
         login,
         logout,
         checkAuth,
+        createAccount,
         isAuthenticated: !!user,
       }}
     >
