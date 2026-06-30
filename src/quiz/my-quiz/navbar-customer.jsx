@@ -18,8 +18,8 @@ function NavbarCustomer() {
           to="/my-quiz/dashboard"
           onClick={closeMenu}
         >
-          <img width={25} height={25} src="./assets/dashboard.svg" alt="" />
-          <span className="nav-link-text">Dashboard</span>
+          <img width={24} height={24} src="/assets/categories-icon.svg" alt="" />
+          <span className="nav-link-text">Categories</span>
         </Link>
       </li>
       <li>
@@ -27,7 +27,7 @@ function NavbarCustomer() {
           to="/my-quiz/all-words/"
           onClick={closeMenu}
         >
-          <img width={25} height={25} src="./assets/courses.svg" alt="" />
+          <img width={24} height={24} src="/assets/words.svg" alt="" />
           <span className="nav-link-text">All Words</span>
         </Link>
       </li>
@@ -37,7 +37,7 @@ function NavbarCustomer() {
           to="/my-quiz/quizzes/"
           onClick={closeMenu}
         >
-          <img width={25} height={25} src="./assets/bitbulb.svg" alt="" />
+          <img width={24} height={24} src="/assets/quiz-icon.svg" alt="" />
           <span className="nav-link-text">Quizzes</span>
         </Link>
       </li>

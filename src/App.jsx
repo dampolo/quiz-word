@@ -12,7 +12,7 @@ import MyQuiz from "./layouts/MyQuiz";
 import Profile from "./quiz/my-quiz/profile";
 import AllWords from "./quiz/my-quiz/all-words";
 import Quizzes from "./quiz/my-quiz/quizzes";
-import ProtectedRoute from "./services/ProtectedRoute";
+import ProtectedRoute from "./context/ProtectedRoute";
 
 function App() {
   return (
