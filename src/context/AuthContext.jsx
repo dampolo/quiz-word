@@ -1,5 +1,5 @@
-// AuthContext.jsx
 import { createContext, useEffect, useState } from "react";
+import useApi from "./ApiContext";
 
 const AuthContext = createContext();
 
@@ -8,12 +8,13 @@ export default AuthContext;
 const API_URL = "http://127.0.0.1:8000/api/";
 
 export function AuthProvider({ children }) {
+  const api = useApi()
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
   const checkAuth = async () => {
     try {
-      const response = await fetch(API_URL + "me/", {
+      const response = await fetch(`${api}me/`, {
         credentials: "include",
       });
 
@@ -36,7 +37,7 @@ export function AuthProvider({ children }) {
   };
 
   const login = async (email, password) => {
-    const response = await fetch(API_URL + "token/", {
+    const response = await fetch(`${api}token/`, {
       method: "POST",
       credentials: "include",
       headers: {
@@ -53,7 +54,7 @@ export function AuthProvider({ children }) {
   };
 
   const logout = async () => {
-    await fetch(API_URL + "logout/", {
+    await fetch(`${api}logout/`, {
       method: "POST",
       credentials: "include",
     });
