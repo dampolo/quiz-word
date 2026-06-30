@@ -1,64 +1,14 @@
 import "./all-words.scss";
+import useVocabulary from "../../context/useVocabulary";
 
 function AllWords() {
-  const words = [
-    {
-      id: 1,
-      rank: "001",
-      word: "Cenote",
-      translation: "Limestone sinkhole",
-      category: "Travel",
-      streak: 12,
-    },
-    {
-      id: 2,
-      rank: "002",
-      word: "Schadenfreude",
-      translation: "Joy at others' misfortune",
-      category: "Psychology",
-      streak: 0,
-    },
-    {
-      id: 3,
-      rank: "003",
-      word: "L'esprit de l'escalier",
-      translation: "Staircase wit",
-      category: "Phrases",
-      streak: 5,
-    },
-    {
-      id: 4,
-      rank: "004",
-      word: "Hygge",
-      translation: "Cozy contentment",
-      category: "Culture",
-      streak: 28,
-    },
-    {
-      id: 5,
-      rank: "005",
-      word: "Komorebi",
-      translation: "Sunlight filtering through trees",
-      category: "Nature",
-      streak: 17,
-    },
-    {
-      id: 6,
-      rank: "006",
-      word: "Saudade",
-      translation: "A deep nostalgic longing",
-      category: "Emotion",
-      streak: 21,
-    },
-    {
-      id: 7,
-      rank: "007",
-      word: "Fernweh",
-      translation: "Longing for distant places",
-      category: "Travel",
-      streak: 8,
-    },
-  ];
+  const { words, loading } = useVocabulary();
+
+  console.log(words);
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <div className="vocabulary">
@@ -85,17 +35,17 @@ function AllWords() {
 
         {words.map((word) => (
           <div className="list-row" key={word.id}>
-            <div className="rank">#{word.rank}</div>
+            <div className="rank">#{word.source_rank}</div>
 
             <div className="word">
-              <h3>{word.word}</h3>
+              <h3>{word.source_word}</h3>
               <span>»</span>
-              <p>{word.translation}</p>
+              <p>{word.target_word}</p>
             </div>
 
             <div>
-              <span className={`badge ${word.category.toLowerCase()}`}>
-                {word.category}
+              <span className={`badge ${word.category_name}`}>
+                {word.category_name}
               </span>
             </div>
 

@@ -13,6 +13,7 @@ import Profile from "./quiz/my-quiz/profile";
 import AllWords from "./quiz/my-quiz/all-words";
 import Quizzes from "./quiz/my-quiz/quizzes";
 import ProtectedRoute from "./context/ProtectedRoute";
+import { VocabularyProvider } from "./context/VocabularyContext";
 
 function App() {
   return (
@@ -33,7 +34,14 @@ function App() {
         <Route path="/my-quiz" element={<MyQuiz />}>
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="profile" element={<Profile />} />
-          <Route path="all-words" element={<AllWords />} />
+          <Route
+            path="all-words"
+            element={
+              <VocabularyProvider >
+                <AllWords />
+              </VocabularyProvider >
+            }
+          />
           <Route path="quizzes" element={<Quizzes />} />
         </Route>
       </Route>
