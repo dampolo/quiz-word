@@ -1,5 +1,6 @@
 import "./all-words.scss";
 import useVocabulary from "../../context/useVocabulary";
+import { Link } from "react-router-dom";
 
 function AllWords() {
   const { words, loading } = useVocabulary();
@@ -21,7 +22,7 @@ function AllWords() {
           </p>
         </div>
 
-        <button className="add-btn">+ Add New Word</button>
+        <Link className="add-btn" to="/my-quiz/add-new-word">+ Add New Word</Link>
       </div>
 
       <div className="word-list">

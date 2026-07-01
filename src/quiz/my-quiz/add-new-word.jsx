@@ -1,6 +1,7 @@
 import "./add-new-word.scss";
 import useVocabulary from "../../context/useVocabulary";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function AddNewWord() {
   const { categories, loading, createWord } = useVocabulary();
@@ -87,9 +88,9 @@ export default function AddNewWord() {
 
         <section className="word-grid">
           <WordPanel
-            badge="EN"
+            badge=""
             title="SOURCE WORD"
-            label="English Term"
+            label="Term"
             placeholder="e.g. Resilience"
             tipPlaceholder="Visualize a spring bouncing back"
             sentencePlaceholder="Her resilience after the setback was admirable."
@@ -101,9 +102,9 @@ export default function AddNewWord() {
           />
 
           <WordPanel
-            badge="ES"
+            badge=""
             title="TARGET WORD"
-            label="Spanish Translation"
+            label="Translation"
             placeholder="e.g. Resiliencia"
             tipPlaceholder="Sounds like 'silence' at the end"
             sentencePlaceholder="Su resiliencia tras el revés fue admirable."
@@ -130,11 +131,11 @@ export default function AddNewWord() {
         <hr />
 
         <div className="actions">
-          <button type="button" className="cancel-btn">
+          <Link to="/my-quiz/all-words" className="cancel-btn">
             Cancel
-          </button>
+          </Link>
           <button type="submit" className="save-btn">
-            ▣ Save Word
+            <img width={24} height={24} src="/assets/save-word-icon.svg" alt="" />Save Word
           </button>
         </div>
       </form>
