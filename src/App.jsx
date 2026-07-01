@@ -14,6 +14,10 @@ import AllWords from "./quiz/my-quiz/all-words";
 import Quizzes from "./quiz/my-quiz/quizzes";
 import ProtectedRoute from "./context/ProtectedRoute";
 import { VocabularyProvider } from "./context/VocabularyContext";
+import { Outlet } from "react-router-dom";
+import EditWord from "./quiz/my-quiz/edit-word";
+import AddNewWord from "./quiz/my-quiz/add-new-word";
+
 
 function App() {
   return (
@@ -34,14 +38,13 @@ function App() {
         <Route path="/my-quiz" element={<MyQuiz />}>
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="profile" element={<Profile />} />
-          <Route
-            path="all-words"
-            element={
-              <VocabularyProvider >
-                <AllWords />
-              </VocabularyProvider >
-            }
-          />
+
+          <Route element={<VocabularyProvider><Outlet /></VocabularyProvider>}>
+            <Route path="all-words" element={<AllWords />} />
+            <Route path="all-words/:id/edit-word" element={<EditWord />} />
+            <Route path="add-new-word" element={<AddNewWord />} />
+          </Route>
+          
           <Route path="quizzes" element={<Quizzes />} />
         </Route>
       </Route>
