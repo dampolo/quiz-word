@@ -9,6 +9,8 @@ export function VocabularyProvider({ children }) {
   const api = useApi();
 
   const [words, setWords] = useState([]);
+  const [categories, setCategories] = useState([]);
+
   const [loading, setLoading] = useState(false);
 
   async function getWords() {
@@ -31,8 +33,29 @@ export function VocabularyProvider({ children }) {
       setWords(data);
     } catch (error) {
       console.error(error);
-    } finally {
-      setLoading(false);
+    } 
+  }
+
+  async function getCategry() {
+    setLoading(true);
+
+    try {
+      const response = await fetch(`${api}categories/`, {
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to load catgories.");
+      }
+
+      const data = await response.json();
+      console.log("Response:", data);
+      setCategories(data);
+    } catch (error) {
+      console.error(error);
     }
   }
 
@@ -95,20 +118,37 @@ export function VocabularyProvider({ children }) {
     setWords((prev) => prev.filter((word) => word.id !== id));
   }
 
-  useEffect(() => {
-    getWords();
-  }, []);
+useEffect(() => {
+  async function loadData() {
+    setLoading(true);
+
+    try {
+      await Promise.all([
+        getWords(),
+        getCategry(),
+      ]);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  loadData();
+}, []);
 
   return (
     <VocabularyContext.Provider
       value={{
         words,
+        categories,
         loading,
         getWords,
         getWord,
         createWord,
         updateWord,
         deleteWord,
+        getCategry,
       }}
     >
       {children}

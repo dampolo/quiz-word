@@ -1,6 +1,14 @@
 import "./add-new-word.scss";
+import useVocabulary from "../../context/useVocabulary";
+
 
 export default function AddNewWord() {
+    const { categories, loading } = useVocabulary();
+
+      if (loading) {
+    return <p>Loading...</p>;
+  }
+
   return (
     <main className="add-word-page">
       <header className="page-header">
@@ -16,8 +24,11 @@ export default function AddNewWord() {
           <label>
             Category <span>*</span>
           </label>
-          <select required>
-            <option>Select a category</option>
+
+              <select required>
+          {categories.map((category) => (
+            <option  key={category.id} > {category.name}</option>
+        ))}
           </select>
         </div>
 
