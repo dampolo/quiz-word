@@ -47,17 +47,19 @@ export default function AddNewWord() {
   function handleChange(e) {
     const { name, value } = e.target;
     console.log(formData);
-    
+
     setFormData((prev) => ({
-        ...prev,
-        [name]: value,
+      ...prev,
+      [name]: value,
     }));
   }
 
   return (
     <main className="add-word-page">
+      <Link to="/my-quiz/all-words" className="back-btn">
+        ←
+      </Link>
       <header className="page-header">
-        <button className="back-btn">←</button>
         <div>
           <h1>Add New Word</h1>
           <p>Expand your vocabulary with context and mnemonics.</p>
@@ -135,7 +137,13 @@ export default function AddNewWord() {
             Cancel
           </Link>
           <button type="submit" className="save-btn">
-            <img width={24} height={24} src="/assets/save-word-icon.svg" alt="" />Save Word
+            <img
+              width={24}
+              height={24}
+              src="/assets/save-word-icon.svg"
+              alt=""
+            />
+            Save Word
           </button>
         </div>
       </form>

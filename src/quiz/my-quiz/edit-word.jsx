@@ -1,4 +1,4 @@
-import "./add-new-word.scss";
+import "./edit-word.scss";
 import useVocabulary from "../../context/useVocabulary";
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -58,11 +58,11 @@ export default function EditWord() {
 
   return (
     <main className="add-word-page">
+        <Link to="/my-quiz/all-words" className="back-btn">←</Link>
       <header className="page-header">
-        <button className="back-btn">←</button>
         <div>
           <h1>Edit Dein Word</h1>
-          <p>Expand your vocabulary with context and mnemonics.</p>
+          <p>You can edit and adjust your word</p>
         </div>
       </header>
 
