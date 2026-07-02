@@ -1,4 +1,4 @@
-import "./add-new-word.scss";
+// import "./add-new-word.scss";
 import useVocabulary from "../../context/useVocabulary";
 import { useState } from "react";
 import { Link } from "react-router-dom";
