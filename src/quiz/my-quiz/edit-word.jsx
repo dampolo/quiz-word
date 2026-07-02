@@ -195,7 +195,7 @@ export default function EditWord() {
             <img
               width={24}
               height={24}
-              src="/assets/save-word-icon.svg"
+              src="/assets/trash.svg"
               alt=""
             />
             Delete
