@@ -56,7 +56,7 @@ function AllWords() {
               <span>Days</span>
             </div>
 
-            <div className="actions">✏️</div>
+            <Link to={`/my-quiz/${word.id}/edit-word`} className="actions">✏️</Link>
           </div>
         ))}
 

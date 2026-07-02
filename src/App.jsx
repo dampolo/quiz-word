@@ -41,7 +41,7 @@ function App() {
 
           <Route element={<VocabularyProvider><Outlet /></VocabularyProvider>}>
             <Route path="all-words" element={<AllWords />} />
-            <Route path="all-words/:id/edit-word" element={<EditWord />} />
+            <Route path=":id/edit-word" element={<EditWord />} />
             <Route path="add-new-word" element={<AddNewWord />} />
           </Route>
           
