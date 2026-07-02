@@ -15,7 +15,7 @@ function NavbarCustomer() {
       </li>
       <li>
         <Link
-          to="/my-quiz/dashboard"
+          to="/my-quiz/vocabulary-categories"
           onClick={closeMenu}
         >
           <img width={24} height={24} src="/assets/categories-icon.svg" alt="" />
