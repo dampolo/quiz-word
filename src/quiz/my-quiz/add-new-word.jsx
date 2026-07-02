@@ -87,36 +87,79 @@ export default function AddNewWord() {
         </div>
 
         <hr />
+                    <section className="word-grid">
 
-        <section className="word-grid">
-          <WordPanel
-            badge=""
-            title="SOURCE WORD"
-            label="Term"
-            placeholder="e.g. Resilience"
-            tipPlaceholder="Visualize a spring bouncing back"
-            sentencePlaceholder="Her resilience after the setback was admirable."
-            wordName="source_word"
-            tipName="source_tip"
-            sentenceName="source_sentence"
-            values={formData}
-            onChange={handleChange}
-          />
+          {/* Source Word */}
+          <div className="word-panel">
+            <div className="panel-title">
+              <span></span>
+              <strong>SOURCE WORD</strong>
+            </div>
 
-          <WordPanel
-            badge=""
-            title="TARGET WORD"
-            label="Translation"
-            placeholder="e.g. Resiliencia"
-            tipPlaceholder="Sounds like 'silence' at the end"
-            sentencePlaceholder="Su resiliencia tras el revés fue admirable."
-            wordName="target_word"
-            tipName="target_tip"
-            sentenceName="target_sentence"
-            values={formData}
-            onChange={handleChange}
-            green
-          />
+            <label>
+              Term <span>*</span>
+            </label>
+            <input
+              name="source_word"
+              value={formData.source_word || ""}
+              onChange={handleChange}
+              placeholder="e.g. Resilience"
+              autocomplete="off"
+              required
+            />
+
+            <label>Mnemonic Tip (Optional)</label>
+            <input
+              name="source_tip"
+              value={formData.source_tip || ""}
+              onChange={handleChange}
+              placeholder="Visualize a spring bouncing back"
+            />
+
+            <label>Example Sentence (Optional)</label>
+            <textarea
+              name="source_sentence"
+              value={formData.source_sentence || ""}
+              onChange={handleChange}
+              placeholder="Her resilience after the setback was admirable."
+            />
+          </div>
+
+          {/* Target Word */}
+          <div className="word-panel green">
+            <div className="panel-title">
+              <span></span>
+              <strong>TARGET WORD</strong>
+            </div>
+
+            <label>
+              Translation <span>*</span>
+            </label>
+            <input
+              name="target_word"
+              value={formData.target_word || ""}
+              onChange={handleChange}
+              placeholder="e.g. Resiliencia"
+              autocomplete="off"
+              required
+            />
+
+            <label>Mnemonic Tip (Optional)</label>
+            <input
+              name="target_tip"
+              value={formData.target_tip || ""}
+              onChange={handleChange}
+              placeholder="Sounds like 'silence' at the end"
+            />
+
+            <label>Example Sentence (Optional)</label>
+            <textarea
+              name="target_sentence"
+              value={formData.target_sentence || ""}
+              onChange={handleChange}
+              placeholder="Su resiliencia tras el revés fue admirable."
+            />
+          </div>
         </section>
 
         <div className="pro-tip">

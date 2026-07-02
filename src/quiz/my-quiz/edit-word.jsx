@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
 export default function EditWord() {
-  const { getWord, updateWord, categories, loading } = useVocabulary();
+  const { getWord, updateWord, deleteWord, categories, loading } =
+    useVocabulary();
 
   const { id } = useParams();
   const navigate = useNavigate();
@@ -31,12 +32,22 @@ export default function EditWord() {
   }
 
   function handleChange(e) {
+    console.log(e.type, e.target.name, e.target.value);
     const { name, value } = e.target;
 
     setFormData((prev) => ({
       ...prev,
       [name]: value,
     }));
+  }
+
+  async function handleDelete() {
+    try {
+      await deleteWord(Number(id));
+      navigate("/my-quiz/all-words/");
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   useEffect(() => {
@@ -58,7 +69,9 @@ export default function EditWord() {
 
   return (
     <main className="add-word-page">
-        <Link to="/my-quiz/all-words" className="back-btn">←</Link>
+      <Link to="/my-quiz/all-words" className="back-btn">
+        ←
+      </Link>
       <header className="page-header">
         <div>
           <h1>Edit Dein Word</h1>
@@ -87,36 +100,81 @@ export default function EditWord() {
         </div>
 
         <hr />
-
         <section className="word-grid">
-          <WordPanel
-            badge=""
-            title="SOURCE WORD"
-            label="Term"
-            placeholder="e.g. Resilience"
-            tipPlaceholder="Visualize a spring bouncing back"
-            sentencePlaceholder="Her resilience after the setback was admirable."
-            wordName="source_word"
-            tipName="source_tip"
-            sentenceName="source_sentence"
-            values={formData}
-            onChange={handleChange}
-          />
 
-          <WordPanel
-            badge=""
-            title="TARGET WORD"
-            label="Translation"
-            placeholder="e.g. Resiliencia"
-            tipPlaceholder="Sounds like 'silence' at the end"
-            sentencePlaceholder="Su resiliencia tras el revés fue admirable."
-            wordName="target_word"
-            tipName="target_tip"
-            sentenceName="target_sentence"
-            values={formData}
-            onChange={handleChange}
-            green
-          />
+          {/* Source Word */}
+          <div className="word-panel">
+            <div className="panel-title">
+              <span></span>
+              <strong>SOURCE WORD</strong>
+            </div>
+
+            <label>
+              Term <span>*</span>
+            </label>
+            <input
+              name="source_word"
+              value={formData.source_word || ""}
+              onChange={handleChange}
+              placeholder="e.g. Resilience"
+              autocomplete="off"
+              required
+            />
+
+            <label>Mnemonic Tip (Optional)</label>
+            <input
+              name="source_tip"
+              value={formData.source_tip || ""}
+              onChange={handleChange}
+              placeholder="Visualize a spring bouncing back"
+            />
+
+            <label>Example Sentence (Optional)</label>
+            <textarea
+              name="source_sentence"
+              value={formData.source_sentence || ""}
+              onChange={handleChange}
+              placeholder="Her resilience after the setback was admirable."
+            />
+          </div>
+
+          {/* Target Word */}
+          <div className="word-panel green">
+            <div className="panel-title">
+              <span></span>
+              <strong>TARGET WORD</strong>
+            </div>
+
+            <label>
+              Translation <span>*</span>
+            </label>
+            <input
+              name="target_word"
+              value={formData.target_word || ""}
+              onChange={handleChange}
+              onInput={handleChange}
+              placeholder="e.g. Resiliencia"
+              autocomplete="off"
+              required
+            />
+
+            <label>Mnemonic Tip (Optional)</label>
+            <input
+              name="target_tip"
+              value={formData.target_tip || ""}
+              onChange={handleChange}
+              onInput={handleChange}
+              placeholder="Sounds like 'silence' at the end"
+            />
+
+            <label>Example Sentence (Optional)</label>
+            <textarea
+              name="target_sentence"
+              value={formData.target_sentence || ""}
+              onChange={handleChange}
+              placeholder="Su resiliencia tras el revés fue admirable."
+            />
+          </div>
         </section>
 
         <div className="pro-tip">
@@ -133,6 +191,16 @@ export default function EditWord() {
         <hr />
 
         <div className="actions">
+          <button type="button" onClick={handleDelete} className="save-btn">
+            <img
+              width={24}
+              height={24}
+              src="/assets/save-word-icon.svg"
+              alt=""
+            />
+            Delete
+          </button>
+
           <Link to="/my-quiz/all-words" className="cancel-btn">
             Cancel
           </Link>
@@ -148,56 +216,5 @@ export default function EditWord() {
         </div>
       </form>
     </main>
-  );
-}
-
-function WordPanel({
-  badge,
-  title,
-  label,
-  placeholder,
-  tipPlaceholder,
-  sentencePlaceholder,
-  green,
-  values,
-  onChange,
-  wordName,
-  tipName,
-  sentenceName,
-}) {
-  return (
-    <div className={`word-panel ${green ? "green" : ""}`}>
-      <div className="panel-title">
-        <span>{badge}</span>
-        <strong>{title}</strong>
-      </div>
-
-      <label>
-        {label} <span>*</span>
-      </label>
-      <input
-        name={wordName}
-        value={values[wordName]}
-        onChange={onChange}
-        placeholder={placeholder}
-        required
-      />
-
-      <label>Mnemonic Tip (Optional)</label>
-      <input
-        name={tipName}
-        value={values[tipName]}
-        onChange={onChange}
-        placeholder={tipPlaceholder}
-      />
-
-      <label>Example Sentence (Optional)</label>
-      <textarea
-        name={sentenceName}
-        value={values[sentenceName]}
-        onChange={onChange}
-        placeholder={sentencePlaceholder}
-      />
-    </div>
   );
 }
