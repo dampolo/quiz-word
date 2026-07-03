@@ -1,29 +1,17 @@
+import useVocabulary from "../../context/useVocabulary";
 import "./all-categories.scss";
 
-const categories = [
-  {
-    title: "Professional Relations",
-    words: "154 Words",
-  },
-  {
-    title: "Travel & Dining",
-    words: "82 Words",
-  },
-  {
-    title: "Advanced Science",
-    words: "210 Words",
-  },
-  {
-    title: "Idioms & Slang",
-    words: "125 Words",
-  },
-  {
-    title: "Arts & Literature",
-    words: "94 Words",
-  },
-];
-
 export default function VocabularyCategories() {
+
+    const { categories, loading } = useVocabulary();
+  
+    console.log(categories);
+  
+    if (loading) {
+      return <p>Loading...</p>;
+    }
+
+
   return (
     <main className="vocab-page">
       <header className="topbar">
@@ -36,7 +24,7 @@ export default function VocabularyCategories() {
 
       <section className="grid">
         {categories.map((cat) => (
-          <article className={`card ${cat.wide ? "wide" : ""}`} key={cat.title}>
+          <article className={`card ${cat.wide ? "wide" : ""}`} key={cat.id}>
             
             <div className="card-actions">
 
@@ -49,9 +37,7 @@ export default function VocabularyCategories() {
             
             </div>
 
-            {cat.tag && <span className="tag">{cat.tag}</span>}
-
-            <h3>{cat.title}</h3>
+            <h3>{cat.name}</h3>
 
           </article>
         ))}
