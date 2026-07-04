@@ -40,6 +40,26 @@ body {
   }
 }
 
+.main-quiz-button-cancel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 140px;
+  font-size: 16px;
+  font-weight: 600;
+  transition: 0.25s;
+  height: 50px;
+  background: transparent;
+  color: basic.$color-primary-indigo;
+  border-radius: basic.$border-radius;
+  border: 1px solid #dfe3ef ;
+  &:hover,
+  &:focus-visible {
+    background: rgba(basic.$color-primary-indigo, 0.06);
+    border: 1px solid basic.$color-primary-indigo ;
+  }
+}
+
 .warn-txt {
   color: basic.$required;
 }
@@ -50,7 +70,6 @@ button[type="submit"]:disabled {
   color: #666 !important;
   cursor: initial !important;
 }
-
 
 .hide-container {
   display: flex;
@@ -86,7 +105,6 @@ main {
   background-color: basic.$color-surface-container;
   // gap: 1rem;
 }
-
 
 .main-customer {
   padding-inline: 0;

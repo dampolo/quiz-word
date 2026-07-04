@@ -1,4 +1,5 @@
 import "./add-new-category.scss";
+import { Link } from "react-router-dom";
 
 function AddNewCategory() {
       return (
@@ -38,11 +39,11 @@ function AddNewCategory() {
         </div>
 
         <div className="form-actions">
-          <button type="button" className="cancel-btn">
+          <Link type="button" className="main-quiz-button-cancel" to="/my-quiz/all-categories">
             Cancel
-          </button>
+          </Link>
 
-          <button type="submit" className="save-btn">
+          <button type="submit" className="main-quiz-button save-btn">
             ▣ Save
           </button>
         </div>

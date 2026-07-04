@@ -1,4 +1,7 @@
-$vivid: #3f2bdc;
+@use "./../../styles/basic.scss";
+
+
+
 $text: #151633;
 $muted: #667085;
 $border: #dfe3ef;
@@ -26,8 +29,8 @@ $bg: #f7f8fd;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: rgba($vivid, 0.12);
-      color: $vivid;
+      background: rgba(basic.$color-primary-indigo, 0.12);
+      color: basic.$color-primary-indigo;
       border-radius: 12px;
       font-size: 24px;
       font-weight: bold;
@@ -75,8 +78,8 @@ $bg: #f7f8fd;
         }
 
         &:focus {
-          border-color: $vivid;
-        //   box-shadow: 0 0 0 3px rgba($vivid, .12);
+          border-color: basic.$color-primary-indigo;
+        //   box-shadow: 0 0 0 3px rgba($color-primary-indigo, .12);
         }
       }
 
@@ -125,7 +128,7 @@ $bg: #f7f8fd;
 
           &.active {
             box-shadow: 0 0 0 3px #fff,
-                        0 0 0 5px $vivid;
+                        0 0 0 5px basic.$color-primary-indigo;
           }
 
           &.purple {
@@ -155,36 +158,24 @@ $bg: #f7f8fd;
       display: flex;
       justify-content: flex-end;
       gap: 18px;
-
-      button {
+    
+    .cancel-btn {
         min-width: 140px;
-        height: 50px;
-        border-radius: 10px;
         font-size: 16px;
         font-weight: 600;
-        cursor: pointer;
         transition: .25s;
-      }
-
-      .cancel-btn {
-        border: none;
+        height: 50px;
         background: transparent;
-        color: $vivid;
+        color: basic.$color-primary-indigo;
 
         &:hover {
-          background: rgba($vivid, .06);
+          background: rgba(basic.$color-primary-indigo, .06);
         }
       }
 
       .save-btn {
-        border: none;
-        background: $vivid;
-        color: white;
-        box-shadow: 0 8px 18px rgba($vivid, .25);
-
-        &:hover {
-        //   background: darken($vivid, 6%);
-        }
+        margin: initial;
+        box-shadow: 0 8px 18px rgba(basic.$color-primary-indigo, .25);
       }
     }
   }
