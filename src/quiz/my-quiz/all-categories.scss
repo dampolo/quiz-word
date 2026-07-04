@@ -1,4 +1,6 @@
-$vivid: #3f2bdc;
+@use "./../../styles/basic.scss";
+
+
 $text: #151633;
 $muted: #667085;
 $border: #dfe3ef;
@@ -30,16 +32,12 @@ $bg: #f7f8fd;
       color: $muted;
     }
 
-    button {
+    .add-new-category-button {
       height: 48px;
       padding: 0 24px;
-      border: 0;
-      border-radius: 10px;
-      background: $vivid;
-      color: #fff;
       font-weight: 800;
-      cursor: pointer;
-      box-shadow: 0 10px 20px rgba($vivid, 0.25);
+      max-width: fit-content;
+      margin: initial;
     }
   }
 
@@ -213,7 +211,7 @@ $bg: #f7f8fd;
         }
 
         a {
-          color: $vivid;
+          color: basic.$color-primary-indigo;
           font-size: 13px;
           font-weight: 800;
         }
@@ -254,9 +252,9 @@ $bg: #f7f8fd;
 
     .streak {
       padding: 26px;
-      background: $vivid;
+      background: basic.$color-primary-indigo;
       color: #fff;
-      box-shadow: 0 14px 28px rgba($vivid, 0.3);
+      box-shadow: 0 14px 28px rgba(basic.$color-primary-indigo, 0.3);
 
       span {
         font-size: 13px;
@@ -278,7 +276,7 @@ $bg: #f7f8fd;
         border: 0;
         border-radius: 9px;
         background: #fff;
-        color: $vivid;
+        color: basic.$color-primary-indigo;
         font-weight: 900;
       }
     }

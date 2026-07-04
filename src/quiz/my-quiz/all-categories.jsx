@@ -1,5 +1,6 @@
 import useVocabulary from "../../context/useVocabulary";
 import "./all-categories.scss";
+import { Link } from "react-router-dom";
 
 export default function VocabularyCategories() {
 
@@ -19,7 +20,8 @@ export default function VocabularyCategories() {
           <h1>Vocabulary Categories</h1>
           <p>Organize your learning journey by topic and difficulty.</p>
         </div>
-        <button>+ Add New Category</button>
+
+        <Link className="main-quiz-button add-new-category-button" to="/my-quiz/add-new-category">+ Add New Category</Link>
       </header>
 
       <section className="grid">
@@ -42,11 +44,11 @@ export default function VocabularyCategories() {
           </article>
         ))}
 
-        <button className="add-card">
+        <Link className="add-card" to="/my-quiz/add-new-category">
           <span>⊕</span>
           <strong>Add New Category</strong>
           <small>Create a custom study list</small>
-        </button>
+        </Link>
       </section>
 
     </main>
