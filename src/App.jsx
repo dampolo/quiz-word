@@ -48,7 +48,7 @@ function App() {
             <Route path="add-new-word" element={<AddNewWord />} />
             <Route path="vocabulary-categories" element={<VocabularyCategories />} />
             <Route path="add-new-category" element={<AddNewCategory />} />
-            <Route path="edit-category" element={<EditCategory />} />
+            <Route path=":id/edit-category" element={<EditCategory />} />
 
           </Route>
           
