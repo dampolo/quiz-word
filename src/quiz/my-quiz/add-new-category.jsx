@@ -1,10 +1,11 @@
 import "./add-new-category.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useVocabulary from "../../context/useVocabulary";
 import { useState } from "react";
 
 function AddNewCategory() {
   const { createCategory } = useVocabulary();
+  const navigate = useNavigate()
 
   const [formData, setFormData] = useState({
     name: "",
@@ -22,10 +23,15 @@ function AddNewCategory() {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    console.log(formData.name);
-    await createCategory(formData);
+    try {
+      await createCategory(formData);
+      setFormData({ name: "" });
+      navigate("/my-quiz/vocabulary-categories/");
+    } catch (err) {
+      console.error(err);
+      
+    }
 
-    setFormData({ name: "" });
   }
 
   return (
@@ -76,13 +82,18 @@ function AddNewCategory() {
             Cancel
           </Link>
 
-          <button 
-            type="submit" 
+          <button
+            type="submit"
             className="main-quiz-button save-btn"
             disabled={formData.name.trim().length < 3}
-            >
-
-            ▣ Save
+          >
+            <img
+              width={24}
+              height={24}
+              src="/assets/save-word-icon.svg"
+              alt=""
+            />
+            Save
           </button>
         </div>
       </form>

@@ -14,7 +14,7 @@ export default function VocabularyCategories() {
 
 
   return (
-    <main className="vocab-page">
+    <section className="vocab-page">
       <header className="topbar">
         <div>
           <h1>Vocabulary Categories</h1>
@@ -51,7 +51,7 @@ export default function VocabularyCategories() {
         </Link>
       </section>
 
-    </main>
+    </section>
   );
 }
 

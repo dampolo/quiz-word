@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
 function EditCategory() {
-  const { getCategory, updateCategory } = useVocabulary();
+  const { getCategory, updateCategory, getCategories } = useVocabulary();
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -17,6 +17,7 @@ function EditCategory() {
     try {
       await updateCategory(Number(id), formData);
       navigate("/my-quiz/vocabulary-categories/");
+      getCategories()
     } catch (err) {
       console.error(err);
     }
@@ -98,7 +99,13 @@ function EditCategory() {
             className="main-quiz-button save-btn"
             disabled={formData.name.trim().length < 3}
           >
-            ▣ Save
+            <img
+              width={24}
+              height={24}
+              src="/assets/save-word-icon.svg"
+              alt=""
+            />
+            Save
           </button>
         </div>
       </form>

@@ -8,8 +8,8 @@ $bg: #f7f8fd;
 
 .vocab-page {
   display: flex;
+  flex-direction: column;
   justify-content: start;
-  min-height: 100vh;
   padding: 2rem;
   background: $bg;
   color: $text;
