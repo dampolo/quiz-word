@@ -113,7 +113,7 @@ main {
   display: flex;
   flex-direction: row;
   width: 100%;
-  height: calc(100vh - 244px);
+  min-height: calc(100vh - 244px);
   background-color: basic.$color-background-main;
   overflow-x: hidden;
 }
