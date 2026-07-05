@@ -22,7 +22,7 @@ function AllWords() {
           </p>
         </div>
 
-        <Link className="add-btn" to="/my-quiz/add-new-word">+ Add New Word</Link>
+        <Link className="main-quiz-button add-btn" to="/my-quiz/add-new-word">+ Add New Word</Link>
       </div>
 
       <div className="word-list">

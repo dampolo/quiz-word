@@ -24,7 +24,7 @@ export default function VocabularyCategories() {
         <Link className="main-quiz-button add-new-category-button" to="/my-quiz/add-new-category">+ Add New Category</Link>
       </header>
 
-      <section className="grid">
+      <section className="category">
         {categories.map((cat) => (
           <article className={`card ${cat.wide ? "wide" : ""}`} key={cat.id}>
             

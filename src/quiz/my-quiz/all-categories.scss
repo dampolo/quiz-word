@@ -10,6 +10,7 @@ $bg: #f7f8fd;
   display: flex;
   flex-direction: column;
   justify-content: start;
+  width: 100%;
   padding: 2rem;
   background: $bg;
   color: $text;
@@ -24,7 +25,7 @@ $bg: #f7f8fd;
 
     h1 {
       margin: 0;
-      font-size: 28px;
+      font-size: 2rem;
     }
 
     p {
@@ -79,9 +80,9 @@ $bg: #f7f8fd;
     }
   }
 
-  .grid {
+  .category {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, 300px);
     gap: 20px;
     margin-bottom: 32px;
 
