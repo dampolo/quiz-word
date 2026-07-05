@@ -90,6 +90,22 @@ export function VocabularyProvider({ children }) {
     return newWord;
   }
 
+  async function createCategory(categoryData) {
+    const response = await fetch(`${api}categories/`, {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(categoryData),
+    });
+
+    const newCategory = await response.json();
+    setWords((prev) => [...prev, newCategory]);
+
+    return newCategory;
+  }
+
   async function updateWord(id, wordData) {
     const response = await fetch(`${api}words/${id}/`, {
       method: "PUT",
@@ -149,6 +165,7 @@ useEffect(() => {
         updateWord,
         deleteWord,
         getCategry,
+        createCategory,
       }}
     >
       {children}

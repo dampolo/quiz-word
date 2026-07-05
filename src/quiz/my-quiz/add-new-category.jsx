@@ -1,8 +1,34 @@
 import "./add-new-category.scss";
 import { Link } from "react-router-dom";
+import useVocabulary from "../../context/useVocabulary";
+import { useState } from "react";
 
 function AddNewCategory() {
-      return (
+  const { createCategory } = useVocabulary();
+
+  const [formData, setFormData] = useState({
+    name: "",
+  });
+
+  function handleChange(e) {
+    const { name, value } = e.target;
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  }
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    console.log(formData.name);
+    await createCategory(formData);
+
+    setFormData({ name: "" });
+  }
+
+  return (
     <div className="add-category-card">
       <div className="form-header">
         <div className="header-icon">✚</div>
@@ -13,12 +39,15 @@ function AddNewCategory() {
         </div>
       </div>
 
-      <form className="category-form">
+      <form className="category-form" onSubmit={handleSubmit}>
         <label htmlFor="categoryName">Category Name</label>
 
         <div className="input-wrap">
           <input
             id="categoryName"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
             type="text"
             placeholder="e.g., Business Travel"
           />
@@ -39,11 +68,20 @@ function AddNewCategory() {
         </div>
 
         <div className="form-actions">
-          <Link type="button" className="main-quiz-button-cancel" to="/my-quiz/all-categories">
+          <Link
+            type="button"
+            className="main-quiz-button-cancel"
+            to="/my-quiz/vocabulary-categories"
+          >
             Cancel
           </Link>
 
-          <button type="submit" className="main-quiz-button save-btn">
+          <button 
+            type="submit" 
+            className="main-quiz-button save-btn"
+            disabled={formData.name.trim().length < 3}
+            >
+
             ▣ Save
           </button>
         </div>
@@ -51,4 +89,4 @@ function AddNewCategory() {
     </div>
   );
 }
-export default AddNewCategory
+export default AddNewCategory;
