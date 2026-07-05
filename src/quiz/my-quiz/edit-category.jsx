@@ -85,11 +85,19 @@ function EditCategory() {
         </div>
 
         <div className="form-actions">
-          <button type="button" className="cancel-btn">
+          <Link
+            type="button"
+            className="main-quiz-button-cancel"
+            to="/my-quiz/vocabulary-categories"
+          >
             Cancel
-          </button>
+          </Link>
 
-          <button type="submit" className="save-btn">
+          <button
+            type="submit"
+            className="main-quiz-button save-btn"
+            disabled={formData.name.trim().length < 3}
+          >
             ▣ Save
           </button>
         </div>
