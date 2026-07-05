@@ -1,25 +1,72 @@
 import "./edit-category.scss";
+import useVocabulary from "../../context/useVocabulary";
+import { useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 function EditCategory() {
-      return (
+  const { getCategory, updateCategory } = useVocabulary();
+  const { id } = useParams();
+  const navigate = useNavigate();
+
+  const [formData, setFormData] = useState({
+    name: "",
+  });
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    try {
+      await updateCategory(Number(id), formData);
+      navigate("/my-quiz/vocabulary-categories/");
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  function handleChange(e) {
+    const { name, value } = e.target;
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  }
+
+  useEffect(() => {
+    async function loadCategry() {
+      try {
+        const category = await getCategory(id);
+        setFormData(category);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    loadCategry();
+  }, [id]);
+
+  return (
     <div className="add-category-card">
       <div className="form-header">
         <div className="header-icon">✚</div>
 
         <div>
-          <h2>Add New Category</h2>
+          <h2>Edit Category</h2>
           <p>Organize your vocabulary by topics or themes.</p>
         </div>
       </div>
 
-      <form className="category-form">
+      <form className="category-form" onSubmit={handleSubmit}>
         <label htmlFor="categoryName">Category Name</label>
 
         <div className="input-wrap">
           <input
             id="categoryName"
             type="text"
-            placeholder="e.g., Business Travel"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            autoComplete="off"
+            required
           />
           <span className="input-icon">⌘</span>
         </div>

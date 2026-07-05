@@ -30,9 +30,9 @@ export default function VocabularyCategories() {
             
             <div className="card-actions">
 
-              <button>
+              <Link to={`/my-quiz/${cat.id}/edit-category`}>
                 <img src="/assets/edit.svg" alt="edit" />
-              </button>
+              </Link>
               <button>
                 <img src="/assets/trash.svg" alt="delete" />
               </button>
