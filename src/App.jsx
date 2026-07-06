@@ -14,6 +14,8 @@ import AllWords from "./quiz/my-quiz/all-words";
 import Quizzes from "./quiz/my-quiz/quizzes";
 import ProtectedRoute from "./context/ProtectedRoute";
 import { VocabularyProvider } from "./context/VocabularyContext";
+import { QuizzProvider } from "./context/QuizContext";
+
 import { Outlet } from "react-router-dom";
 import EditWord from "./quiz/my-quiz/edit-word";
 import AddNewWord from "./quiz/my-quiz/add-new-word";
@@ -50,9 +52,12 @@ function App() {
             <Route path="add-new-category" element={<AddNewCategory />} />
             <Route path=":id/edit-category" element={<EditCategory />} />
           <Route path="quizzes" element={<Quizzes />} />
-
           </Route>
           
+          <Route element={<QuizzProvider><Outlet /></QuizzProvider>}>
+            <Route path="quizzes" element={<Quizzes />} />
+          </Route>
+
         </Route>
       </Route>
     </Routes>
