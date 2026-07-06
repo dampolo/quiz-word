@@ -1,15 +1,24 @@
-import useVocabulary from "../../context/useVocabulary";
+import { useEffect, useState } from "react";
 import "./quizzes.scss";
 import { Link } from "react-router-dom";
+import useQuiz from "../../context/useQuiz";
 
 function Quizzes() {
-  const { categories, loading } = useVocabulary();
+  const { getQuizzes } = useQuiz();
+  const [quizzes, setQuizzes] = useState([]);
 
-  console.log(categories);
 
-  if (loading) {
-    return <p>Loading...</p>;
-  }
+  useEffect(() => {
+    async function loadQuizzes() {
+      const data = await getQuizzes();
+      setQuizzes(data);
+      console.log(data);
+      
+    }
+
+    loadQuizzes();
+  }, []);
+
 
   return (
     <section className="vocab-page">
@@ -33,7 +42,13 @@ function Quizzes() {
       {/* Quiz */}
       <div className="category">
         <article className="vocab-card">
-          <h3>Kitchen Vocabulary</h3>
+
+          {quizzes.map(() => (
+            <h3>quiz</h3>
+
+          ))
+
+          }
           <div className="vocab-card__footer">
             <div className="vocab-card__meta">
               <span>▦</span>

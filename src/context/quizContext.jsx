@@ -1,11 +1,11 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 import useApi from "./ApiContext";
 
 const QuizContext = createContext();
 
 export default QuizContext;
 
-export function QuizzProvider({ children }) {
+export function QuizProvider({ children }) {
   const api = useApi();
   const [loading, setLoading] = useState(false);
 
