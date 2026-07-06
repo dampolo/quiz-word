@@ -49,10 +49,10 @@ function App() {
             <Route path="vocabulary-categories" element={<VocabularyCategories />} />
             <Route path="add-new-category" element={<AddNewCategory />} />
             <Route path=":id/edit-category" element={<EditCategory />} />
+          <Route path="quizzes" element={<Quizzes />} />
 
           </Route>
           
-          <Route path="quizzes" element={<Quizzes />} />
         </Route>
       </Route>
     </Routes>
