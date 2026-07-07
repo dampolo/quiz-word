@@ -23,6 +23,7 @@ import AddNewCategory from "./quiz/my-quiz/add-new-category";
 import EditCategory from "./quiz/my-quiz/edit-category";
 import AddNewQuiz from "./quiz/my-quiz/quizzes/add-new-quiz";
 import Quizzes from "./quiz/my-quiz/quizzes/quizzes";
+import AllQuizWords from "./quiz/my-quiz/quizzes/all-quiz-words";
 
 
 function App() {
@@ -57,6 +58,8 @@ function App() {
           <Route element={<QuizProvider><Outlet /></QuizProvider>}>
             <Route path="quizzes" element={<Quizzes />} />
             <Route path="add-new-quiz" element={<AddNewQuiz />} />
+            <Route path=":id/all-quiz-words" element={<AllQuizWords />} />
+
 
           </Route>
 
