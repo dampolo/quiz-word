@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./quizzes.scss";
 import { Link } from "react-router-dom";
-import useQuiz from "../../context/useQuiz";
+import useQuiz from "../../../context/useQuiz";
 
 function Quizzes() {
   const { getQuizzes } = useQuiz();
@@ -30,7 +30,7 @@ function Quizzes() {
 
         <Link
           className="main-quiz-button add-new-category-button"
-          to="/my-quiz/add-new-category"
+          to="/my-quiz/add-new-quiz"
         >
           + Add New Quiz
         </Link>
@@ -45,7 +45,7 @@ function Quizzes() {
             <div className="vocab-card__footer">
               <div className="vocab-card__meta">
                 <span>▦</span>
-                <strong>45 Words</strong>
+                <strong>{quiz.words_count} Words</strong>
               </div>
 
               <div className="vocab-card__updated">
@@ -63,7 +63,7 @@ function Quizzes() {
         ))}
         {/* Quiz END */}
 
-        <Link className="add-card" to="/my-quiz/add-new-category">
+        <Link className="add-card" to="/my-quiz/add-new-quiz">
           <span>⊕</span>
           <strong>Create Custom Quiz</strong>
           <small>

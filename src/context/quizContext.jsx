@@ -32,11 +32,26 @@ export function QuizProvider({ children }) {
     }
   }
 
-    return (
+  async function createQuiz(quizData) {
+    const response = await fetch(`${api}quizzes/`, {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(quizData),
+    });
+
+    const newQuiz = await response.json();
+    return newQuiz;
+  }
+
+  return (
     <QuizContext.Provider
       value={{
         loading,
-        getQuizzes
+        createQuiz,
+        getQuizzes,
       }}
     >
       {children}

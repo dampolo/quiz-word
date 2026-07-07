@@ -1,4 +1,4 @@
-@use "./../../styles/basic.scss";
+@use "./../../../styles/basic.scss";
 
 $text: #151633;
 $muted: #667085;
@@ -40,36 +40,8 @@ $bg: #f7f8fd;
       margin: initial;
     }
   }
-
-  @media (max-width: 900px) {
-    .stats,
-    .grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    .bottom {
-      grid-template-columns: 1fr;
-    }
-
-    .card.wide {
-      grid-column: span 2;
-    }
-  }
-
-  @media (max-width: 600px) {
-    .topbar,
-    .activity-row {
-      flex-direction: column;
-      align-items: stretch;
-    }
-
-    .topbar button {
-      width: 100%;
-    }
-  }
 }
 
-/* VocabularyCard.scss */
 
 .vocab-page {
   display: flex;
@@ -163,7 +135,37 @@ $bg: #f7f8fd;
 
       small {
         color: $muted;
+        text-align: center;
       }
     }
+  }
+}
+
+/* VocabularyCard.scss */
+
+@media (max-width: 900px) {
+  .stats,
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .bottom {
+    grid-template-columns: 1fr;
+  }
+
+  .card.wide {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 600px) {
+  .topbar,
+  .activity-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .topbar button {
+    width: 100%;
   }
 }

@@ -11,7 +11,6 @@ import Dashboard from "./quiz/my-quiz/dashboard";
 import MyQuiz from "./layouts/MyQuiz";
 import Profile from "./quiz/my-quiz/profile";
 import AllWords from "./quiz/my-quiz/all-words";
-import Quizzes from "./quiz/my-quiz/quizzes";
 import ProtectedRoute from "./context/ProtectedRoute";
 import { VocabularyProvider } from "./context/VocabularyContext";
 import { QuizProvider } from "./context/QuizContext";
@@ -22,6 +21,8 @@ import AddNewWord from "./quiz/my-quiz/add-new-word";
 import VocabularyCategories from "./quiz/my-quiz/all-categories";
 import AddNewCategory from "./quiz/my-quiz/add-new-category";
 import EditCategory from "./quiz/my-quiz/edit-category";
+import AddNewQuiz from "./quiz/my-quiz/quizzes/add-new-quiz";
+import Quizzes from "./quiz/my-quiz/quizzes/quizzes";
 
 
 function App() {
@@ -55,6 +56,8 @@ function App() {
           
           <Route element={<QuizProvider><Outlet /></QuizProvider>}>
             <Route path="quizzes" element={<Quizzes />} />
+            <Route path="add-new-quiz" element={<AddNewQuiz />} />
+
           </Route>
 
         </Route>
