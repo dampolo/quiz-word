@@ -7,18 +7,15 @@ function Quizzes() {
   const { getQuizzes } = useQuiz();
   const [quizzes, setQuizzes] = useState([]);
 
-
   useEffect(() => {
     async function loadQuizzes() {
       const data = await getQuizzes();
       setQuizzes(data);
       console.log(data);
-      
     }
 
     loadQuizzes();
   }, []);
-
 
   return (
     <section className="vocab-page">
@@ -41,26 +38,29 @@ function Quizzes() {
 
       {/* Quiz */}
       <div className="category">
-        <article className="vocab-card">
+        {quizzes.map((quiz) => (
+          <article className="vocab-card" key={quiz.quiz_id}>
+            <h3>{quiz.quiz_name}</h3>
 
-          {quizzes.map(() => (
-            <h3>quiz</h3>
+            <div className="vocab-card__footer">
+              <div className="vocab-card__meta">
+                <span>▦</span>
+                <strong>45 Words</strong>
+              </div>
 
-          ))
-
-          }
-          <div className="vocab-card__footer">
-            <div className="vocab-card__meta">
-              <span>▦</span>
-              <strong>45 Words</strong>
+              <div className="vocab-card__updated">
+                <span>LAST UPDATED</span>
+                <strong>
+                  {new Date(quiz.updated_at).toLocaleDateString("de-DE", {
+                    day: "2-digit",
+                    month: "2-digit",
+                    year: "numeric",
+                  })}
+                </strong>
+              </div>
             </div>
-
-            <div className="vocab-card__updated">
-              <span>LAST UPDATED</span>
-              <strong>2 days ago</strong>
-            </div>
-          </div>
-        </article>
+          </article>
+        ))}
         {/* Quiz END */}
 
         <Link className="add-card" to="/my-quiz/add-new-category">
