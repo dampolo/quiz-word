@@ -3,6 +3,8 @@ import useQuiz from "../../../context/useQuiz";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
+import "./all-quiz-words.scss";
+
 function AllQuizWords() {
   const { getQuizWords, deleteQuiz, getAttemptQuizScore, getAttemptDetails } =
     useQuiz();
@@ -12,6 +14,41 @@ function AllQuizWords() {
   const [attempts, setAttempts] = useState([]);
 
   const [quiz, setQuiz] = useState(null);
+
+  const [details, setDetails] = useState(null);
+
+  const words = [
+    {
+      word: "Ephemeral",
+      answer: "Lasting for a short time",
+      correct: "Lasting for a short time",
+      correctAnswer: true,
+    },
+    {
+      word: "Sagacious",
+      answer: "Brave and daring",
+      correct: "Wise and insightful",
+      correctAnswer: false,
+    },
+    {
+      word: "Loquacious",
+      answer: "Very talkative",
+      correct: "Very talkative",
+      correctAnswer: true,
+    },
+    {
+      word: "Mellifluous",
+      answer: "Sweet or musical",
+      correct: "Sweet or musical",
+      correctAnswer: true,
+    },
+    {
+      word: "Ineffable",
+      answer: "Too great for words",
+      correct: "Too great for words",
+      correctAnswer: true,
+    },
+  ];
 
   async function handleDelete() {
     try {
@@ -116,7 +153,7 @@ function AllQuizWords() {
       {/* ATTEMPTS */}
       <div className="attempt-list">
         <div className="list-head-attempt">
-          <div>Rank</div>
+          <div>SCORE</div>
           <div>DIRECTION</div>
           <div>Actions</div>
         </div>
@@ -166,10 +203,55 @@ function AllQuizWords() {
           <button>Start Review Session</button>
         </div>
 
-        <button>
-          <img onClick={handleDelete} src="/assets/trash.svg" alt="delete" />
-        </button>
+      
       </div>
+        {/* DEATAILS */}
+        <div className="vocabulary-card">
+          <div className="card-header">
+            <h3>Vocabulary Breakdown</h3>
+            <span className="badge">{words.length} Words Total</span>
+          </div>
+
+          <div className="table">
+            {words.map((item) => (
+              <div
+                key={item.word}
+                className={`table-row ${!item.correctAnswer ? "wrong" : ""}`}
+              >
+                <div className="status">
+                  <span
+                    className={
+                      item.correctAnswer ? "icon success" : "icon error"
+                    }
+                  >
+                    {item.correctAnswer ? "✓" : "✕"}
+                  </span>
+                </div>
+
+                <div className="column">
+                  <span className="label">SOURCE WORD</span>
+                  <h4>{item.word}</h4>
+                </div>
+
+                <div className="column">
+                  <span className="label">YOUR ANSWER</span>
+                  <p className={!item.correctAnswer ? "incorrect" : ""}>
+                    {item.answer}
+                  </p>
+                </div>
+
+                <div className="column">
+                  <span className="label">CORRECT MEANING</span>
+                  <p className="correct">{item.correct}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        {/* DETAILS ENDE */}
+      {/* <button>
+        <img onClick={handleDelete} src="/assets/trash.svg" alt="delete" />
+      </button> */}
     </div>
   );
 }
