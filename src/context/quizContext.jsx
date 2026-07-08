@@ -79,6 +79,29 @@ export function QuizProvider({ children }) {
     }
   }
 
+  async function getAttemptQuizScore(id) {
+    setLoading(true);
+
+    try {
+      const response = await fetch(`${api}attempts/?quiz_id=${id}`, {
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to load words.");
+      }
+
+      const data = await response.json();
+
+      return data;
+    } finally {
+      setLoading(false);
+    }
+  }
+
   return (
     <QuizContext.Provider
       value={{
@@ -87,6 +110,7 @@ export function QuizProvider({ children }) {
         deleteQuiz,
         getQuizWords,
         getQuizzes,
+        getAttemptQuizScore,
       }}
     >
       {children}

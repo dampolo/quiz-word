@@ -163,8 +163,6 @@ export function VocabularyProvider({ children }) {
       method: "DELETE",
       credentials: "include",
     });
-
-    setWords((prev) => prev.filter((word) => word.id !== id));
   }
 
   useEffect(() => {

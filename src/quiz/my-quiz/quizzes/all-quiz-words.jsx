@@ -4,39 +4,44 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 function AllQuizWords() {
-  const { getQuizWords, deleteQuiz } = useQuiz();
+  const { getQuizWords, deleteQuiz, getAttemptQuizScore } = useQuiz();
   const { id } = useParams();
   const navigate = useNavigate();
 
+  const [attempts, setAttempts] = useState([]);
+
   const [quiz, setQuiz] = useState(null);
 
-async function handleDelete() {
-  debugger
-  try {
-    await deleteQuiz(id);
+  async function handleDelete() {
+    try {
+      await deleteQuiz(id);
       navigate("/my-quiz/quizzes/");
 
-    // Update your UI here
-
-  } catch (error) {
-    console.error(error);
-    // Show an error message
+      // Update your UI here
+    } catch (error) {
+      console.error(error);
+      // Show an error message
+    }
   }
-}
 
   useEffect(() => {
-    async function loadQuizWords() {
+    async function loadData() {
       try {
-        const data = await getQuizWords(id);
-        console.log(data);
+        const [quizData, attemptsData] = await Promise.all([
+          getQuizWords(id),
+          getAttemptQuizScore(id),
+        ]);
 
-        setQuiz(data);
+        setQuiz(quizData);
+        setAttempts(attemptsData);
+        console.log(attemptsData);
+        
       } catch (err) {
         console.error(err);
       }
     }
 
-    loadQuizWords();
+    loadData();
   }, [id]);
 
   // if (loading) {
