@@ -4,7 +4,8 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 function AllQuizWords() {
-  const { getQuizWords, deleteQuiz, getAttemptQuizScore } = useQuiz();
+  const { getQuizWords, deleteQuiz, getAttemptQuizScore, getAttemptDetails } =
+    useQuiz();
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -24,6 +25,17 @@ function AllQuizWords() {
     }
   }
 
+  async function handleAttemptDetails(id) {
+    try {
+      const data = await getAttemptDetails(id);
+      console.log(data);
+    } catch (err) {
+      console.log(err);
+    }
+
+    // do something with the id
+  }
+
   useEffect(() => {
     async function loadData() {
       try {
@@ -35,7 +47,6 @@ function AllQuizWords() {
         setQuiz(quizData);
         setAttempts(attemptsData);
         console.log(attemptsData);
-        
       } catch (err) {
         console.error(err);
       }
@@ -95,12 +106,11 @@ function AllQuizWords() {
               <span>Days</span>
             </div>
 
-            <Link to={`/my-quiz/${word.id}/edit-word`} className="actions">
+            <button to={`/my-quiz/${word.id}/edit-word`} className="actions">
               ✏️
-            </Link>
+            </button>
           </div>
         ))}
-
       </div>
 
       {/* ATTEMPTS */}
@@ -119,16 +129,18 @@ function AllQuizWords() {
               <span>{attempt.direction}</span>
             </div>
 
-            <Link to={`/my-quiz/${attempt.id}/edit-word`} className="actions">
+            {/* to={`/my-quiz/${word.id}/edit-word`} */}
+            <button
+              onClick={() => handleAttemptDetails(attempt.id)}
+              className="actions"
+            >
               ✏️
-            </Link>
+            </button>
           </div>
         ))}
-
       </div>
 
       {/* ATTEMPTS ENDE */}
-
 
       <div className="cards">
         <div className="card goal">
