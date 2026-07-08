@@ -22,7 +22,7 @@ function AllQuizWords() {
       }
   
       loadQuizWords();
-    }, [id, getQuizWords]);
+    }, [id]);
 
   // if (loading) {
   //   return <p>Loading...</p>;
@@ -32,7 +32,7 @@ function AllQuizWords() {
     <div className="vocabulary">
       <div className="vocabulary__header">
         <div>
-          <h1>Your Vocabulary{quiz?.quiz_name}</h1>
+          <h1>Quiz: {quiz?.quiz_name}</h1>
           <p>
             Organize and track your learning progress. Manage definitions,
             categories, and review schedules for all your saved expressions.

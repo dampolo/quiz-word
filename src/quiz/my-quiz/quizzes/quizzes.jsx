@@ -42,11 +42,12 @@ function Quizzes() {
           <article className="vocab-card" key={quiz.quiz_id}>
             <h3>{quiz.quiz_name}</h3>
 
+
             <div className="vocab-card__footer">
-              <div className="vocab-card__meta">
+              <Link to={`/my-quiz/${quiz.quiz_id}/all-quiz-words`} className="vocab-card__meta">
                 <span>▦</span>
                 <strong>{quiz.words_count} Words</strong>
-              </div>
+              </Link>
 
               <div className="vocab-card__updated">
                 <span>LAST UPDATED</span>

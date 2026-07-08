@@ -93,6 +93,10 @@ $bg: #f7f8fd;
         align-items: center;
         gap: 8px;
         font-size: 0.8rem;
+        text-decoration: underline;
+        &:hover {
+          color: basic.$color-primary-indigo;
+        }
 
         strong {
           font-weight: 700;

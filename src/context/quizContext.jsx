@@ -25,7 +25,6 @@ export function QuizProvider({ children }) {
       }
 
       const data = await response.json();
-      console.log("Response:", data);
       return data;
     } catch (error) {
       console.error(error);
