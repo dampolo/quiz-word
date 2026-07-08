@@ -1,28 +1,43 @@
 import "./../all-words.scss";
 import useQuiz from "../../../context/useQuiz";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 function AllQuizWords() {
-  const { getQuizWords } = useQuiz();
+  const { getQuizWords, deleteQuiz } = useQuiz();
   const { id } = useParams();
+  const navigate = useNavigate();
 
-   const [quiz, setQuiz] = useState(null);
+  const [quiz, setQuiz] = useState(null);
+
+async function handleDelete() {
+  debugger
+  try {
+    await deleteQuiz(id);
+      navigate("/my-quiz/quizzes/");
+
+    // Update your UI here
+
+  } catch (error) {
+    console.error(error);
+    // Show an error message
+  }
+}
 
   useEffect(() => {
-      async function loadQuizWords() {
-        try {
-          const data = await getQuizWords(id);
-          console.log(data);
-          
-          setQuiz(data);
-        } catch (err) {
-          console.error(err);
-        }
+    async function loadQuizWords() {
+      try {
+        const data = await getQuizWords(id);
+        console.log(data);
+
+        setQuiz(data);
+      } catch (err) {
+        console.error(err);
       }
-  
-      loadQuizWords();
-    }, [id]);
+    }
+
+    loadQuizWords();
+  }, [id]);
 
   // if (loading) {
   //   return <p>Loading...</p>;
@@ -39,7 +54,9 @@ function AllQuizWords() {
           </p>
         </div>
 
-        <Link className="main-quiz-button add-btn" to="/my-quiz/add-new-word">+ Add New Word</Link>
+        <Link className="main-quiz-button add-btn" to="/my-quiz/add-new-word">
+          + Add New Word
+        </Link>
       </div>
 
       <div className="word-list">
@@ -73,7 +90,9 @@ function AllQuizWords() {
               <span>Days</span>
             </div>
 
-            <Link to={`/my-quiz/${word.id}/edit-word`} className="actions">✏️</Link>
+            <Link to={`/my-quiz/${word.id}/edit-word`} className="actions">
+              ✏️
+            </Link>
           </div>
         ))}
 
@@ -115,6 +134,10 @@ function AllQuizWords() {
 
           <button>Start Review Session</button>
         </div>
+
+        <button>
+          <img onClick={handleDelete} src="/assets/trash.svg" alt="delete" />
+        </button>
       </div>
     </div>
   );

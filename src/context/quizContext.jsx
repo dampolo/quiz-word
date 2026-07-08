@@ -61,11 +61,21 @@ export function QuizProvider({ children }) {
       }
 
       const data = await response.json();
-      console.log(data);
-      
+
       return data;
     } finally {
       setLoading(false);
+    }
+  }
+
+  async function deleteQuiz(id) {
+    const response = await fetch(`${api}quizzes/${id}/`, {
+      method: "DELETE",
+      credentials: "include",
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to delete quiz");
     }
   }
 
@@ -74,6 +84,7 @@ export function QuizProvider({ children }) {
       value={{
         loading,
         createQuiz,
+        deleteQuiz,
         getQuizWords,
         getQuizzes,
       }}
