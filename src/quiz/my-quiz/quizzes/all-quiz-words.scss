@@ -1,6 +1,8 @@
 @use "./../../../styles/basic.scss";
 
 .vocabulary {
+  display: grid;
+  gap: 1rem;
   width: 100%;
   padding: 2rem;
   background: #fafbff;
@@ -40,6 +42,7 @@
   border: 1px solid #ececec;
 }
 
+
 .list-head,
 .list-row {
   display: grid;
@@ -53,6 +56,19 @@
   align-items: center;
 }
 
+.list-head-attempt,
+.list-row-attempt {
+  display: grid;
+  grid-template-columns:
+    90px
+    2.5fr
+    160px
+    140px;
+
+  align-items: center;
+}
+
+.list-head-attempt,
 .list-head {
   background: #f7f8fc;
   padding: 1rem;
@@ -62,6 +78,7 @@
   color: #888;
 }
 
+.list-row-attempt,
 .list-row {
   padding: 1.2rem 1rem;
   border-top: 1px solid #efefef;

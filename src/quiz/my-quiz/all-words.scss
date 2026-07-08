@@ -1,6 +1,8 @@
 @use "./../../styles/basic.scss";
 
 .vocabulary {
+  display: grid;
+  gap: 1rem;
   width: 100%;
   padding: 2rem;
   background: #fafbff;
@@ -33,11 +35,16 @@
   margin: initial;
 }
 
+.attempt-list,
 .word-list {
   background: white;
   border-radius: 16px;
   overflow: hidden;
   border: 1px solid #ececec;
+}
+
+.attempt-list {
+  width: fit-content;
 }
 
 .list-head,
@@ -53,6 +60,19 @@
   align-items: center;
 }
 
+.list-head-attempt,
+.list-row-attempt {
+  display: grid;
+  grid-template-columns:
+    90px
+    200px
+    160px;
+
+  align-items: center;
+  width: fit-content;
+}
+
+.list-head-attempt,
 .list-head {
   background: #f7f8fc;
   padding: 1rem;
@@ -62,6 +82,7 @@
   color: #888;
 }
 
+.list-row-attempt,
 .list-row {
   padding: 1.2rem 1rem;
   border-top: 1px solid #efefef;
@@ -142,7 +163,7 @@
 
 .actions {
   font-size: 1.2rem;
-  cursor: pointer;
+  margin: auto;
 }
 
 .pagination {

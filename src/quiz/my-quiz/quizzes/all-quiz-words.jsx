@@ -101,20 +101,34 @@ function AllQuizWords() {
           </div>
         ))}
 
-        <div className="pagination">
-          <span>Showing 4 of 1,240 words</span>
-
-          <div className="pages">
-            <button>&lt;</button>
-            <button className="active">1</button>
-            <button>2</button>
-            <button>3</button>
-            <span>...</span>
-            <button>31</button>
-            <button>&gt;</button>
-          </div>
-        </div>
       </div>
+
+      {/* ATTEMPTS */}
+      <div className="attempt-list">
+        <div className="list-head-attempt">
+          <div>Rank</div>
+          <div>DIRECTION</div>
+          <div>Actions</div>
+        </div>
+
+        {attempts.map((attempt) => (
+          <div className="list-row-attempt" key={attempt.id}>
+            <div className="rank">#{attempt.score}</div>
+
+            <div className="word">
+              <span>{attempt.direction}</span>
+            </div>
+
+            <Link to={`/my-quiz/${attempt.id}/edit-word`} className="actions">
+              ✏️
+            </Link>
+          </div>
+        ))}
+
+      </div>
+
+      {/* ATTEMPTS ENDE */}
+
 
       <div className="cards">
         <div className="card goal">
