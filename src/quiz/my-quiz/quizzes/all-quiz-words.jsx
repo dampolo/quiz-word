@@ -1,13 +1,17 @@
+import * as React from "react";
 import "./../all-words.scss";
 import useQuiz from "../../../context/useQuiz";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import "./all-quiz-words.scss";
+import useDialog from "../../../context/DialogContext/useDialgo";
 
 function AllQuizWords() {
   const { getQuizWords, deleteQuiz, getAttemptQuizScore, getAttemptDetails } =
     useQuiz();
+  const { openDialog } = useDialog();
+
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -17,16 +21,26 @@ function AllQuizWords() {
 
   const [details, setDetails] = useState([]);
 
-  async function handleDelete() {
+  async function deleteCurrentQuiz() {
     try {
       await deleteQuiz(id);
       navigate("/my-quiz/quizzes/");
-
-      // Update your UI here
     } catch (error) {
       console.error(error);
-      // Show an error message
     }
+  }
+
+  function handleDelete() {
+    openDialog({
+      title: "Delete quiz?",
+      description: "This action cannot be undone.",
+      confirmText: "Delete",
+      cancelText: "Cancel",
+      confirmButtonClass: "main-quiz-button",
+      cancelButtonClass: "main-quiz-button-cancel",
+
+      onConfirm: deleteCurrentQuiz,
+    });
   }
 
   async function handleAttemptDetails(id) {

@@ -14,7 +14,7 @@ import AllWords from "./quiz/my-quiz/all-words";
 import ProtectedRoute from "./context/ProtectedRoute";
 import { VocabularyProvider } from "./context/VocabularyContext";
 import { QuizProvider } from "./context/QuizContext";
-
+import { DialogProvider } from "./context/DialogContext/DialogContext";
 import { Outlet } from "react-router-dom";
 import EditWord from "./quiz/my-quiz/edit-word";
 import AddNewWord from "./quiz/my-quiz/add-new-word";
@@ -46,7 +46,12 @@ function App() {
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="profile" element={<Profile />} />
 
-          <Route element={<VocabularyProvider><Outlet /></VocabularyProvider>}>
+          <Route element={<VocabularyProvider>
+            <DialogProvider>
+            <Outlet />
+            </DialogProvider>
+            
+            </VocabularyProvider>}>
             <Route path="all-words" element={<AllWords />} />
             <Route path=":id/edit-word" element={<EditWord />} />
             <Route path="add-new-word" element={<AddNewWord />} />
@@ -55,12 +60,15 @@ function App() {
             <Route path=":id/edit-category" element={<EditCategory />} />
           </Route>
           
-          <Route element={<QuizProvider><Outlet /></QuizProvider>}>
+          <Route element={<QuizProvider>
+            <DialogProvider>
+            <Outlet />
+            </DialogProvider>
+            
+            </QuizProvider>}>
             <Route path="quizzes" element={<Quizzes />} />
             <Route path="add-new-quiz" element={<AddNewQuiz />} />
             <Route path=":id/all-quiz-words" element={<AllQuizWords />} />
-
-
           </Route>
 
         </Route>
