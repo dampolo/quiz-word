@@ -17,7 +17,6 @@ function AllQuizWords() {
 
   const [details, setDetails] = useState([]);
 
-
   async function handleDelete() {
     try {
       await deleteQuiz(id);
@@ -33,7 +32,7 @@ function AllQuizWords() {
   async function handleAttemptDetails(id) {
     try {
       const data = await getAttemptDetails(id);
-      setDetails(data.answers)
+      setDetails(data.answers);
       console.log(data);
       // setQuiz(data.)
     } catch (err) {
@@ -125,11 +124,12 @@ function AllQuizWords() {
         <div className="list-head-attempt">
           <div>SCORE</div>
           <div>DIRECTION</div>
+          <div>Datum</div>
           <div>Actions</div>
         </div>
-        
-          {attempts.map((attempt) => (
-            <div className="list-row-attempt" key={attempt.id}>
+
+        {attempts.map((attempt) => (
+          <div className="list-row-attempt" key={attempt.id}>
             <div className="rank">#{attempt.score}</div>
 
             <div className="word">
@@ -137,14 +137,21 @@ function AllQuizWords() {
             </div>
 
             {/* to={`/my-quiz/${word.id}/edit-word`} */}
+            <div>
+              {new Date(attempt.finished_at).toLocaleDateString("de-DE", {
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric",
+              })}
+            </div>
             <button
               onClick={() => handleAttemptDetails(attempt.id)}
               className="actions"
             >
-            🔍
+              🔍
             </button>
-            </div>
-          ))}
+          </div>
+        ))}
       </div>
 
       {/* ATTEMPTS ENDE */}
@@ -172,31 +179,26 @@ function AllQuizWords() {
 
           <button>Start Review Session</button>
         </div>
-
-      
       </div>
-        {/* DEATAILS */}
-        <div className="vocabulary-card">
-          <div className="card-header">
-            <h3>Vocabulary details</h3>
-            <span className="badge">{details.length} Words Total</span>
-          </div>
+      {/* DEATAILS */}
+      <div className="vocabulary-card">
+        <div className="card-header">
+          <h3>Vocabulary details</h3>
+          <span className="badge">{details.length} Words Total</span>
+        </div>
 
-          <div className="table">
-            {details.length === 0 ? (
+        <div className="table">
+          {details.length === 0 ? (
             <p>Click on 🔍 to see the details.</p>
-              ) :
-            
-            (details.map((item) => (
+          ) : (
+            details.map((item) => (
               <div
                 key={item.id}
                 className={`table-row ${!item.is_correct ? "wrong" : ""}`}
               >
                 <div className="status">
                   <span
-                    className={
-                      item.is_correct ? "icon success" : "icon error"
-                    }
+                    className={item.is_correct ? "icon success" : "icon error"}
                   >
                     {item.is_correct ? "✓" : "✕"}
                   </span>
@@ -220,10 +222,10 @@ function AllQuizWords() {
                 </div>
               </div>
             ))
-            )}
-          </div>
+          )}
         </div>
-        {/* DETAILS ENDE */}
+      </div>
+      {/* DETAILS ENDE */}
       <button>
         <img onClick={handleDelete} src="/assets/trash.svg" alt="delete" />
       </button>
