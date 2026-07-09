@@ -15,40 +15,8 @@ function AllQuizWords() {
 
   const [quiz, setQuiz] = useState(null);
 
-  const [details, setDetails] = useState(null);
+  const [details, setDetails] = useState([]);
 
-  const words = [
-    {
-      word: "Ephemeral",
-      answer: "Lasting for a short time",
-      correct: "Lasting for a short time",
-      correctAnswer: true,
-    },
-    {
-      word: "Sagacious",
-      answer: "Brave and daring",
-      correct: "Wise and insightful",
-      correctAnswer: false,
-    },
-    {
-      word: "Loquacious",
-      answer: "Very talkative",
-      correct: "Very talkative",
-      correctAnswer: true,
-    },
-    {
-      word: "Mellifluous",
-      answer: "Sweet or musical",
-      correct: "Sweet or musical",
-      correctAnswer: true,
-    },
-    {
-      word: "Ineffable",
-      answer: "Too great for words",
-      correct: "Too great for words",
-      correctAnswer: true,
-    },
-  ];
 
   async function handleDelete() {
     try {
@@ -65,7 +33,9 @@ function AllQuizWords() {
   async function handleAttemptDetails(id) {
     try {
       const data = await getAttemptDetails(id);
+      setDetails(data.answers)
       console.log(data);
+      // setQuiz(data.)
     } catch (err) {
       console.log(err);
     }
@@ -157,9 +127,9 @@ function AllQuizWords() {
           <div>DIRECTION</div>
           <div>Actions</div>
         </div>
-
-        {attempts.map((attempt) => (
-          <div className="list-row-attempt" key={attempt.id}>
+        
+          {attempts.map((attempt) => (
+            <div className="list-row-attempt" key={attempt.id}>
             <div className="rank">#{attempt.score}</div>
 
             <div className="word">
@@ -171,10 +141,10 @@ function AllQuizWords() {
               onClick={() => handleAttemptDetails(attempt.id)}
               className="actions"
             >
-              ✏️
+            🔍
             </button>
-          </div>
-        ))}
+            </div>
+          ))}
       </div>
 
       {/* ATTEMPTS ENDE */}
@@ -208,50 +178,55 @@ function AllQuizWords() {
         {/* DEATAILS */}
         <div className="vocabulary-card">
           <div className="card-header">
-            <h3>Vocabulary Breakdown</h3>
-            <span className="badge">{words.length} Words Total</span>
+            <h3>Vocabulary details</h3>
+            <span className="badge">{details.length} Words Total</span>
           </div>
 
           <div className="table">
-            {words.map((item) => (
+            {details.length === 0 ? (
+            <p>Click on 🔍 to see the details.</p>
+              ) :
+            
+            (details.map((item) => (
               <div
-                key={item.word}
-                className={`table-row ${!item.correctAnswer ? "wrong" : ""}`}
+                key={item.id}
+                className={`table-row ${!item.is_correct ? "wrong" : ""}`}
               >
                 <div className="status">
                   <span
                     className={
-                      item.correctAnswer ? "icon success" : "icon error"
+                      item.is_correct ? "icon success" : "icon error"
                     }
                   >
-                    {item.correctAnswer ? "✓" : "✕"}
+                    {item.is_correct ? "✓" : "✕"}
                   </span>
                 </div>
 
                 <div className="column">
                   <span className="label">SOURCE WORD</span>
-                  <h4>{item.word}</h4>
+                  <h4>{item.correct_answer}</h4>
                 </div>
 
                 <div className="column">
                   <span className="label">YOUR ANSWER</span>
-                  <p className={!item.correctAnswer ? "incorrect" : ""}>
-                    {item.answer}
+                  <p className={!item.is_correct ? "incorrect" : ""}>
+                    {item.user_answer}
                   </p>
                 </div>
 
                 <div className="column">
                   <span className="label">CORRECT MEANING</span>
-                  <p className="correct">{item.correct}</p>
+                  <p className="correct">{item.correct_answer}</p>
                 </div>
               </div>
-            ))}
+            ))
+            )}
           </div>
         </div>
         {/* DETAILS ENDE */}
-      {/* <button>
+      <button>
         <img onClick={handleDelete} src="/assets/trash.svg" alt="delete" />
-      </button> */}
+      </button>
     </div>
   );
 }
