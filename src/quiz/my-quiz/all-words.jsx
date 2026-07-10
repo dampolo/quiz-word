@@ -1,11 +1,41 @@
 import "./all-words.scss";
 import useVocabulary from "../../context/useVocabulary";
 import { Link } from "react-router-dom";
+import { useState } from "react"
+import FormDialog from "../../components/FormDialog/FormDialog";
 
 function AllWords() {
   const { words, loading } = useVocabulary();
+  const [selectedWordIds, setSelectedWordIds] = useState([]);
+   const [dialogOpen, setDialogOpen] = useState(false);
 
-  console.log(words);
+  function handleCheckboxChange(id, checked) {
+    setSelectedWordIds((prev) => {
+      if (checked) {
+        return [...prev, id];
+      }
+      return prev.filter((item) => item !== id);
+    });
+  }
+
+  function openDialog() {
+    setDialogOpen(true);
+  }
+
+  function handleCreateQuiz(quizName) {
+    const payload = {
+      name: quizName,
+      words: selectedWordIds,
+    };
+
+    console.log(payload);
+
+    // Example:
+    // await createQuiz(payload);
+
+    setDialogOpen(false);
+    setSelectedWordIds([]);
+  }
 
   if (loading) {
     return <p>Loading...</p>;
@@ -22,6 +52,8 @@ function AllWords() {
           </p>
         </div>
 
+        <button type="submit" onClick={openDialog} className="main-quiz-button create-quiz" disabled={selectedWordIds.length < 3}>+</button>
+
         <Link className="main-quiz-button add-btn" to="/my-quiz/add-new-word">
           + Add New Word
         </Link>
@@ -29,6 +61,7 @@ function AllWords() {
 
       <div className="word-list">
         <div className="list-head">
+          <div>+</div>
           <div>Rank</div>
           <div>Word & Translation</div>
           <div>Category</div>
@@ -38,6 +71,16 @@ function AllWords() {
 
         {words.map((word) => (
           <div className="list-row" key={word.id}>
+            <div>
+              <input
+                type="checkbox"
+                checked={selectedWordIds.includes(word.id)}
+                onChange={(e) =>
+                  handleCheckboxChange(word.id, e.target.checked)
+                }
+              />
+            </div>
+
             <div className="rank">#{word.source_rank}</div>
 
             <div className="word">
@@ -103,8 +146,16 @@ function AllWords() {
           <button>Start Review Session</button>
         </div>
       </div>
+      <FormDialog
+        open={dialogOpen}
+        selectedWordsCount={selectedWordIds.length}
+        onClose={() => setDialogOpen(false)}
+        onSubmit={handleCreateQuiz}
+      />
     </div>
   );
 }
 
 export default AllWords;
+
+

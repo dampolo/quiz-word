@@ -51,6 +51,7 @@
 .list-row {
   display: grid;
   grid-template-columns:
+    30px
     90px
     2.5fr
     160px
@@ -65,12 +66,12 @@
   display: grid;
   grid-template-columns:
     90px
-    200px
+    2.5fr
     160px
-    160px;
+    140px
+    80px;
 
   align-items: center;
-  width: fit-content;
 }
 
 .list-head-attempt,
