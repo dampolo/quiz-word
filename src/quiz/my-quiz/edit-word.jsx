@@ -3,6 +3,7 @@ import useVocabulary from "../../context/useVocabulary";
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import useDialog from "../../context/DialogContext/useDialgo";
+import BackButton from "../../components/BackButton/BackButton";
 
 export default function EditWord() {
   const { getWord, updateWord, deleteWord, categories, loading, getWords } =
@@ -88,9 +89,7 @@ export default function EditWord() {
 
   return (
     <main className="add-word-page">
-      <Link to="/my-quiz/all-words" className="back-btn">
-        ←
-      </Link>
+      <BackButton to="/my-quiz/all-words/"/>
       <header className="page-header">
         <div>
           <h1>Edit Dein Word</h1>
