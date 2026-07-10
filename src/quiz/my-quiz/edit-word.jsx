@@ -2,10 +2,13 @@ import "./edit-word.scss";
 import useVocabulary from "../../context/useVocabulary";
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import useDialog from "../../context/DialogContext/useDialgo";
 
 export default function EditWord() {
-  const { getWord, updateWord, deleteWord, categories, loading } =
+  const { getWord, updateWord, deleteWord, categories, loading, getWords } =
     useVocabulary();
+
+  const { openDialog } = useDialog();
 
   const { id } = useParams();
   const navigate = useNavigate();
@@ -26,6 +29,7 @@ export default function EditWord() {
     try {
       await updateWord(Number(id), formData);
       navigate("/my-quiz/all-words/");
+      getWords();
     } catch (err) {
       console.error(err);
     }
@@ -41,10 +45,25 @@ export default function EditWord() {
     }));
   }
 
-  async function handleDelete() {
+   function handleDelete() {
+    openDialog({
+      title: "Delete word?",
+      description: "This action cannot be undone.",
+      confirmText: "Delete",
+      cancelText: "Cancel",
+      confirmButtonClass: "main-quiz-button",
+      cancelButtonClass: "main-quiz-button-cancel",
+
+      onConfirm: deleteCurrentWord,
+    });
+  }
+
+
+  async function deleteCurrentWord() {
     try {
       await deleteWord(Number(id));
       navigate("/my-quiz/all-words/");
+      getWords();
     } catch (err) {
       console.error(err);
     }

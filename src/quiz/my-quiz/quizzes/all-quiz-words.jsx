@@ -36,9 +36,6 @@ function AllQuizWords() {
       description: "This action cannot be undone.",
       confirmText: "Delete",
       cancelText: "Cancel",
-      confirmButtonClass: "main-quiz-button",
-      cancelButtonClass: "main-quiz-button-cancel",
-
       onConfirm: deleteCurrentQuiz,
     });
   }

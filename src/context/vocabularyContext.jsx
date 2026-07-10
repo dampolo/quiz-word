@@ -31,6 +31,7 @@ export function VocabularyProvider({ children }) {
       const data = await response.json();
       console.log("Response:", data);
       setWords(data);
+      setLoading(false);
     } catch (error) {
       console.error(error);
     }
