@@ -1,6 +1,8 @@
 @use "./../../styles/basic.scss";
 
 .arrow-back {
+  display: flex;
+  justify-self: baseline;
   align-self: flex-start;
   background: none;
   border: 0.0625rem solid transparent;

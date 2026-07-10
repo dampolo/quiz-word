@@ -2,6 +2,7 @@ import "./../add-new-category.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import useQuiz from "../../../context/useQuiz";
+import BackButton from "../../../components/BackButton/BackButton";
 
 function AddNewQuiz() {
   const { createQuiz } = useQuiz();
@@ -36,6 +37,7 @@ function AddNewQuiz() {
 
   return (
     <div className="add-category-card">
+      <BackButton to="/my-quiz/quizzes/"/>
       <div className="form-header">
         <div className="header-icon">✚</div>
 

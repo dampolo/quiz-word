@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 
 import "./all-quiz-words.scss";
 import useDialog from "../../../context/DialogContext/useDialgo";
+import BackButton from "../../../components/BackButton/BackButton";
 
 function AllQuizWords() {
   const { getQuizWords, deleteQuiz, getAttemptQuizScore, getAttemptDetails } =
@@ -78,6 +79,8 @@ function AllQuizWords() {
 
   return (
     <div className="vocabulary">
+      <BackButton to="/my-quiz/quizzes/"/>
+
       <div className="vocabulary__header">
         <div>
           <h1>Quiz: {quiz?.quiz_name}</h1>

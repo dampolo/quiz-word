@@ -2,6 +2,7 @@
 import useVocabulary from "../../context/useVocabulary";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import BackButton from "../../components/BackButton/BackButton";
 
 export default function AddNewWord() {
   const { categories, loading, createWord } = useVocabulary();
@@ -56,9 +57,7 @@ export default function AddNewWord() {
 
   return (
     <main className="add-word-page">
-      <Link to="/my-quiz/all-words" className="back-btn">
-        ←
-      </Link>
+      <BackButton to="/my-quiz/all-words/"/>
       <header className="page-header">
         <div>
           <h1>Add New Word</h1>
