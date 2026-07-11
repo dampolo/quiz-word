@@ -1,13 +1,16 @@
 import "./all-words.scss";
 import useVocabulary from "../../context/useVocabulary";
 import { Link } from "react-router-dom";
-import { useState } from "react"
+import { useState } from "react";
 import FormDialog from "../../components/FormDialog/FormDialog";
+import useQuiz from "../../context/useQuiz";
 
 function AllWords() {
   const { words, loading } = useVocabulary();
   const [selectedWordIds, setSelectedWordIds] = useState([]);
-   const [dialogOpen, setDialogOpen] = useState(false);
+  const [dialogOpen, setDialogOpen] = useState(false);
+
+  const { createQuiz } = useQuiz();
 
   function handleCheckboxChange(id, checked) {
     setSelectedWordIds((prev) => {
@@ -22,21 +25,24 @@ function AllWords() {
     setDialogOpen(true);
   }
 
-  function handleCreateQuiz(quizName) {
+  async function handleCreateQuiz(quizName) {
     const payload = {
       quiz_name: quizName,
       words: selectedWordIds,
     };
 
-    console.log(payload);
+    try {
+      await createQuiz(payload);
 
-    // Example:
-    // await createQuiz(payload);
-
-    setDialogOpen(false);
-    setSelectedWordIds([]);
+      setDialogOpen(false);
+      setSelectedWordIds([]);
+    } catch (error) {
+      console.error("Failed to create quiz:", error);
+      // Optionally show an error message to the user
+    }
   }
 
+  
   if (loading) {
     return <p>Loading...</p>;
   }
@@ -52,7 +58,14 @@ function AllWords() {
           </p>
         </div>
 
-        <button type="submit" onClick={openDialog} className="main-quiz-button create-quiz" disabled={selectedWordIds.length < 3}>+</button>
+        <button
+          type="submit"
+          onClick={openDialog}
+          className="main-quiz-button create-quiz"
+          disabled={selectedWordIds.length < 3}
+        >
+          +
+        </button>
 
         <Link className="main-quiz-button add-btn" to="/my-quiz/add-new-word">
           + Add New Word
@@ -157,5 +170,3 @@ function AllWords() {
 }
 
 export default AllWords;
-
-
