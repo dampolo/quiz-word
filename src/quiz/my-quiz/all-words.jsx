@@ -24,7 +24,7 @@ function AllWords() {
 
   function handleCreateQuiz(quizName) {
     const payload = {
-      name: quizName,
+      quiz_name: quizName,
       words: selectedWordIds,
     };
 
