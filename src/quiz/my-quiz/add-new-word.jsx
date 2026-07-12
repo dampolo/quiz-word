@@ -1,15 +1,16 @@
 // import "./add-new-word.scss";
 import useVocabulary from "../../context/useVocabulary";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import BackButton from "../../components/BackButton/BackButton";
 
 export default function AddNewWord() {
-  const { categories, loading, createWord } = useVocabulary();
+  const { categories, loading, createWord, getCategories, languages } =
+    useVocabulary();
 
   const [formData, setFormData] = useState({
+    language_name: "",
     category: "",
-
     source_word: "",
     target_word: "",
 
@@ -20,10 +21,6 @@ export default function AddNewWord() {
     target_sentence: "",
   });
 
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-
   async function handleSubmit(e) {
     e.preventDefault();
 
@@ -32,6 +29,7 @@ export default function AddNewWord() {
 
       // Reset form
       setFormData({
+        language_name: "",
         category: "",
         source_word: "",
         target_word: "",
@@ -55,9 +53,19 @@ export default function AddNewWord() {
     }));
   }
 
+  useEffect(() => {
+    if (!formData.language_name) return;
+
+    getCategories(formData.language_name);
+  }, [formData.language_name]);
+
+  // if (loading) {
+  //   return <p>Loading...</p>;
+  // }
+
   return (
     <main className="add-word-page">
-      <BackButton to="/my-quiz/all-words/"/>
+      <BackButton to="/my-quiz/all-words/" />
       <header className="page-header">
         <div>
           <h1>Add New Word</h1>
@@ -68,26 +76,46 @@ export default function AddNewWord() {
       <form className="word-card" onSubmit={handleSubmit}>
         <div className="form-group category-group">
           <label>
-            Category <span>*</span>
+            Sprache <span>*</span>
           </label>
 
           <select
-            name="category"
-            value={formData.category}
+            name="language_name"
+            value={formData.language_name}
             onChange={handleChange}
             required
           >
-            {categories.map((category) => (
-              <option key={category.id} value={category.id}>
-                {category.name}
+            {languages.map((lang) => (
+              <option key={lang.id} value={lang.id}>
+                {lang.language_name}
               </option>
             ))}
           </select>
         </div>
 
-        <hr />
-                    <section className="word-grid">
+        {categories.length > 0 && (
+          <div className="form-group category-group">
+            <label>
+              Kategorie <span>*</span>
+            </label>
 
+            <select
+              name="category"
+              value={formData.category}
+              onChange={handleChange}
+              required
+            >
+              {categories.map((category) => (
+                <option key={category.id} value={category.id}>
+                  {category.name}
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
+
+        <hr />
+        <section className="word-grid">
           {/* Source Word */}
           <div className="word-panel">
             <div className="panel-title">

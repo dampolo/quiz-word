@@ -10,7 +10,7 @@ export function VocabularyProvider({ children }) {
 
   const [words, setWords] = useState([]);
   const [categories, setCategories] = useState([]);
-
+   const [languages, setLanguages] = useState([]);
   const [loading, setLoading] = useState(false);
 
   async function getWords() {
@@ -51,10 +51,26 @@ export function VocabularyProvider({ children }) {
     return await response.json();
   }
 
-  async function getCategories() {
+  async function getLanguages() {
+    const response = await fetch(`${api}languages/`, {
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to load languages.");
+    }
+      const data = await response.json();
+      console.log("Response:", data);
+      setLanguages(data);
+  }
+
+  async function getCategories(id) {
     setLoading(true);
     try {
-      const response = await fetch(`${api}categories/`, {
+      const response = await fetch(`${api}categories/?target_language=${id}`, {
         credentials: "include",
         headers: {
           "Content-Type": "application/json",
@@ -171,7 +187,7 @@ export function VocabularyProvider({ children }) {
       setLoading(true);
 
       try {
-        await Promise.all([getWords(), getCategories()]);
+        await Promise.all([getWords(), getLanguages()]);
       } catch (error) {
         console.error(error);
       } finally {
@@ -188,7 +204,9 @@ export function VocabularyProvider({ children }) {
         words,
         categories,
         loading,
+        languages,
         getWords,
+        getLanguages,
         getWord,
         createWord,
         updateWord,
