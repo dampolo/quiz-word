@@ -1,4 +1,5 @@
 import "./website.scss";
+import { Link } from "react-router-dom";
 
 function Website() {
   return (
@@ -20,14 +21,14 @@ function Website() {
             </p>
 
             <div className="hero__buttons">
-              <a href="#" className="hero__button hero__button--primary">
+              <Link to="/create-account" className="hero__button hero__button--primary">
                 Register
                 <span>→</span>
-              </a>
+              </Link>
 
-              <a href="#" className="hero__button hero__button--secondary">
+              <Link to="/login" className="hero__button hero__button--secondary">
                 Login
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -199,9 +200,9 @@ function Website() {
             barriers with QuizWord.
           </p>
 
-          <a href="#" className="journey__button">
+          <Link to="/create-account" className="journey__button">
             Create Free Account
-          </a>
+          </Link>
         </div>
       </section>
     </main>
