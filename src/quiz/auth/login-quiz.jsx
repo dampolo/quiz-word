@@ -32,7 +32,7 @@ function LoginQuiz() {
       const success = await login(formValues.email, formValues.password);
 
       if (success) {
-        navigate("/my-quiz/dashboard");
+        navigate("/my-quiz/all-words");
       }
     } catch (error) {
       console.log(error);
