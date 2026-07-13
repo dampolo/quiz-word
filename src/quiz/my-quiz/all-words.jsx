@@ -1,15 +1,15 @@
 import "./all-words.scss";
 import useVocabulary from "../../context/useVocabulary";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FormDialog from "../../components/FormDialog/FormDialog";
 import useQuiz from "../../context/useQuiz";
 
 function AllWords() {
-  const { words, loading, languages } = useVocabulary();
+  const { words, loading, languages, getFiltredWords } = useVocabulary();
   const [selectedWordIds, setSelectedWordIds] = useState([]);
   const [dialogOpen, setDialogOpen] = useState(false);
-
+  const [ language, setLanguage ] = useState("")
   const { createQuiz } = useQuiz();
 
   function handleCheckboxChange(id, checked) {
@@ -42,6 +42,10 @@ function AllWords() {
     }
   }
 
+   useEffect(() => {  
+      getFiltredWords(language);
+    }, [language]);
+
   if (loading) {
     return <p>Loading...</p>;
   }
@@ -57,27 +61,31 @@ function AllWords() {
           </p>
         </div>
 
+        <div className="create-buttons">
+
         <button
           type="submit"
           onClick={openDialog}
           className="main-quiz-button create-quiz"
           disabled={selectedWordIds.length < 3}
-        >
+          >
           +
         </button>
 
         <Link className="main-quiz-button add-btn" to="/my-quiz/add-new-word">
           + Add New Word
         </Link>
+          </div>
+
       </div>
 
       <ul className="languages-list">
         <li className="langauge-single">
-          <button className="langauge-button">?</button>
+          <button className="langauge-button" onClick={() => (setLanguage("Ohne"))} >Ohne</button>
         </li>
         {languages.map((lang) => (
-          <li className="langauge-single">
-            <button className="langauge-button" key={lang.id}>
+          <li className="langauge-single" key={lang.id}>
+            <button className="langauge-button" onClick={() => (setLanguage(lang.language_name))}>
               {lang.language_name}
               </button>
           </li>
@@ -93,8 +101,12 @@ function AllWords() {
           <div>Streak</div>
           <div>Actions</div>
         </div>
-
-        {words.map((word) => (
+        {
+          words.length === 0 ? (
+            <p className="no-words">Du hast hier keine Wörter.</p>
+          ) : (
+          
+          words.map((word) => (
           <div className="list-row" key={word.id}>
             <div>
               <input
@@ -127,11 +139,12 @@ function AllWords() {
             </div>
 
             <Link to={`/my-quiz/${word.id}/edit-word`} className="actions">
-              ✏️
+            ✏️
             </Link>
-          </div>
-        ))}
-
+            </div>
+          ))
+        )}
+          
         <div className="pagination">
           <span>Showing 4 of 1,240 words</span>
 

@@ -10,7 +10,7 @@ export function VocabularyProvider({ children }) {
 
   const [words, setWords] = useState([]);
   const [categories, setCategories] = useState([]);
-   const [languages, setLanguages] = useState([]);
+  const [languages, setLanguages] = useState([]);
   const [loading, setLoading] = useState(false);
 
   async function getWords() {
@@ -62,9 +62,9 @@ export function VocabularyProvider({ children }) {
     if (!response.ok) {
       throw new Error("Failed to load languages.");
     }
-      const data = await response.json();
-      console.log("Response:", data);
-      setLanguages(data);
+    const data = await response.json();
+    console.log("Response:", data);
+    setLanguages(data);
   }
 
   async function getCategories(id) {
@@ -103,6 +103,26 @@ export function VocabularyProvider({ children }) {
     }
 
     return await response.json();
+  }
+
+  async function getFiltredWords(id) {
+    try {
+      const response = await fetch(`${api}words/?category__target_language__language_name=${id}`, {
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (!response.ok) {
+        throw new Error("Failed to load words.");
+      }
+      const data = await response.json();
+      console.log("Response:", data);
+      setWords(data);
+      setLoading(false);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   async function createWord(wordData) {
@@ -208,6 +228,7 @@ export function VocabularyProvider({ children }) {
         getWords,
         getLanguages,
         getWord,
+        getFiltredWords,
         createWord,
         updateWord,
         updateCategory,

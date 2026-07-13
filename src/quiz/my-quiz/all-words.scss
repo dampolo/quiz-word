@@ -27,7 +27,20 @@
   }
 }
 
+.create-buttons {
+  display: flex;
+  gap: 1rem
+}
+
 .add-btn {
+  height: 48px;
+  padding: 0 24px;
+  font-weight: 800;
+  max-width: fit-content;
+  margin: initial;
+}
+
+.create-quiz {
   height: 48px;
   padding: 0 24px;
   font-weight: 800;
@@ -41,15 +54,21 @@
   gap: 16px;
   .langauge-single {
     background: #eef5ff;
+    height: fit-content;
     border-radius: basic.$border-radius;
     &:hover {
-      background: #bed2ff;;
+      background: #bed2ff;
     }
     .langauge-button {
-      padding:  0.5rem 1rem;
+      padding: 0.5rem 1rem;
       width: 100%;
     }
   }
+}
+
+.no-words {
+  padding: 1rem;
+  text-align: center;
 }
 
 .attempt-list,
