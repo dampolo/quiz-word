@@ -55,7 +55,6 @@ export default function AddNewWord() {
 
   useEffect(() => {
     if (!formData.language_name) return;
-
     getCategories(formData.language_name);
   }, [formData.language_name]);
 

@@ -6,8 +6,16 @@ import useDialog from "../../context/DialogContext/useDialgo";
 import BackButton from "../../components/BackButton/BackButton";
 
 export default function EditWord() {
-  const { getWord, updateWord, deleteWord, categories, loading, getWords } =
-    useVocabulary();
+  const {
+    getWord,
+    updateWord,
+    deleteWord,
+    categories,
+    getCategories,
+    loading,
+    getWords,
+    languages,
+  } = useVocabulary();
 
   const { openDialog } = useDialog();
 
@@ -15,6 +23,7 @@ export default function EditWord() {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
+    language_name: "",
     category: "",
     source_word: "",
     target_word: "",
@@ -46,7 +55,7 @@ export default function EditWord() {
     }));
   }
 
-   function handleDelete() {
+  function handleDelete() {
     openDialog({
       title: "Delete word?",
       description: "This action cannot be undone.",
@@ -58,7 +67,6 @@ export default function EditWord() {
       onConfirm: deleteCurrentWord,
     });
   }
-
 
   async function deleteCurrentWord() {
     try {
@@ -74,6 +82,8 @@ export default function EditWord() {
     async function loadWord() {
       try {
         const word = await getWord(id);
+        console.log(word);
+        
         setFormData(word);
       } catch (err) {
         console.error(err);
@@ -83,13 +93,18 @@ export default function EditWord() {
     loadWord();
   }, [id]);
 
+  useEffect(() => {
+    if (!formData.language_name) return;
+    getCategories(formData.language_id);
+  }, [formData.language_id]);
+
   if (loading) {
     return <p>Loading...</p>;
   }
 
   return (
     <main className="add-word-page">
-      <BackButton to="/my-quiz/all-words/"/>
+      <BackButton to="/my-quiz/all-words/" />
       <header className="page-header">
         <div>
           <h1>Edit Dein Word</h1>
@@ -100,26 +115,46 @@ export default function EditWord() {
       <form className="word-card" onSubmit={handleSubmit}>
         <div className="form-group category-group">
           <label>
-            Category <span>*</span>
+            Sprache <span>*</span>
           </label>
 
           <select
-            name="category"
-            value={formData.category}
+            name="language_id"
+            value={formData.language_id}
             onChange={handleChange}
             required
           >
-            {categories.map((category) => (
-              <option key={category.id} value={category.id}>
-                {category.name}
+            {languages.map((lang) => (
+              <option key={lang.id} value={lang.id}>
+                {lang.language_name}
               </option>
             ))}
           </select>
         </div>
 
+        {categories.length > 0 && (
+          <div className="form-group category-group">
+            <label>
+              Kategorie <span>*</span>
+            </label>
+
+            <select
+              name="category"
+              value={formData.category}
+              onChange={handleChange}
+              required
+            >
+              {categories.map((category) => (
+                <option key={category.id} value={category.id}>
+                  {category.name}
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
+
         <hr />
         <section className="word-grid">
-
           {/* Source Word */}
           <div className="word-panel">
             <div className="panel-title">
@@ -210,12 +245,7 @@ export default function EditWord() {
 
         <div className="actions">
           <button type="button" onClick={handleDelete} className="save-btn">
-            <img
-              width={24}
-              height={24}
-              src="/assets/trash.svg"
-              alt=""
-            />
+            <img width={24} height={24} src="/assets/trash.svg" alt="" />
             Delete
           </button>
 

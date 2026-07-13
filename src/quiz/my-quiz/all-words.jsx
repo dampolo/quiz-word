@@ -9,7 +9,7 @@ function AllWords() {
   const { words, loading, languages, getFiltredWords } = useVocabulary();
   const [selectedWordIds, setSelectedWordIds] = useState([]);
   const [dialogOpen, setDialogOpen] = useState(false);
-  const [ language, setLanguage ] = useState("")
+  const [language, setLanguage] = useState("");
   const { createQuiz } = useQuiz();
 
   function handleCheckboxChange(id, checked) {
@@ -42,9 +42,9 @@ function AllWords() {
     }
   }
 
-   useEffect(() => {  
-      getFiltredWords(language);
-    }, [language]);
+  useEffect(() => {
+    getFiltredWords(language);
+  }, [language]);
 
   if (loading) {
     return <p>Loading...</p>;
@@ -62,34 +62,49 @@ function AllWords() {
         </div>
 
         <div className="create-buttons">
-
-        <button
-          type="submit"
-          onClick={openDialog}
-          className="main-quiz-button create-quiz"
-          disabled={selectedWordIds.length < 3}
+          <button
+            type="submit"
+            onClick={openDialog}
+            className="main-quiz-button create-quiz"
+            disabled={selectedWordIds.length < 3}
           >
-          +
-        </button>
+            +
+          </button>
 
-        <Link className="main-quiz-button add-btn" to="/my-quiz/add-new-word">
-          + Add New Word
-        </Link>
-          </div>
-
+          <Link className="main-quiz-button add-btn" to="/my-quiz/add-new-word">
+            + Add New Word
+          </Link>
+        </div>
       </div>
 
       <ul className="languages-list">
-        <li className="langauge-single">
-          <button className="langauge-button" onClick={() => (setLanguage("Ohne"))} >Ohne</button>
-        </li>
-        {languages.map((lang) => (
-          <li className="langauge-single" key={lang.id}>
-            <button className="langauge-button" onClick={() => (setLanguage(lang.language_name))}>
-              {lang.language_name}
-              </button>
-          </li>
-        ))}
+        <>
+          {languages
+            .filter((lang) => lang.language_name === "Without")
+            .map((lang) => (
+              <li className="langauge-single" key={lang.id}>
+                <button
+                  className="langauge-button"
+                  onClick={() => setLanguage(lang.language_name)}
+                >
+                  Ohne
+                </button>
+              </li>
+            ))}
+
+          {languages
+            .filter((lang) => lang.language_name !== "Without")
+            .map((lang) => (
+              <li className="langauge-single" key={lang.id}>
+                <button
+                  className="langauge-button"
+                  onClick={() => setLanguage(lang.language_name)}
+                >
+                  {lang.language_name}
+                </button>
+              </li>
+            ))}
+        </>
       </ul>
 
       <div className="word-list">
@@ -101,50 +116,48 @@ function AllWords() {
           <div>Streak</div>
           <div>Actions</div>
         </div>
-        {
-          words.length === 0 ? (
-            <p className="no-words">Du hast hier keine Wörter.</p>
-          ) : (
-          
+        {words.length === 0 ? (
+          <p className="no-words">Du hast hier keine Wörter.</p>
+        ) : (
           words.map((word) => (
-          <div className="list-row" key={word.id}>
-            <div>
-              <input
-                type="checkbox"
-                checked={selectedWordIds.includes(word.id)}
-                onChange={(e) =>
-                  handleCheckboxChange(word.id, e.target.checked)
-                }
-              />
-            </div>
+            <div className="list-row" key={word.id}>
+              <div>
+                <input
+                  type="checkbox"
+                  checked={selectedWordIds.includes(word.id)}
+                  onChange={(e) =>
+                    handleCheckboxChange(word.id, e.target.checked)
+                  }
+                />
+              </div>
 
-            <div className="rank">#{word.source_rank}</div>
+              <div className="rank">#{word.source_rank}</div>
 
-            <div className="word">
-              <h3>{word.source_word}</h3>
-              <span>»</span>
-              <p>{word.target_word}</p>
-            </div>
+              <div className="word">
+                <h3>{word.source_word}</h3>
+                <span>»</span>
+                <p>{word.target_word}</p>
+              </div>
 
-            <div>
-              <span className={`badge ${word.category_name}`}>
-                {word.category_name}
-              </span>
-            </div>
+              <div>
+                <span className={`badge ${word.category_name}`}>
+                  {word.category_name}
+                </span>
+              </div>
 
-            <div className="streak">
-              🔥
-              <strong>{word.streak}</strong>
-              <span>Days</span>
-            </div>
+              <div className="streak">
+                🔥
+                <strong>{word.streak}</strong>
+                <span>Days</span>
+              </div>
 
-            <Link to={`/my-quiz/${word.id}/edit-word`} className="actions">
-            ✏️
-            </Link>
+              <Link to={`/my-quiz/${word.id}/edit-word`} className="actions">
+                ✏️
+              </Link>
             </div>
           ))
         )}
-          
+
         <div className="pagination">
           <span>Showing 4 of 1,240 words</span>
 
