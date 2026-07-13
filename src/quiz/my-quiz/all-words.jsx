@@ -6,7 +6,7 @@ import FormDialog from "../../components/FormDialog/FormDialog";
 import useQuiz from "../../context/useQuiz";
 
 function AllWords() {
-  const { words, loading } = useVocabulary();
+  const { words, loading, languages } = useVocabulary();
   const [selectedWordIds, setSelectedWordIds] = useState([]);
   const [dialogOpen, setDialogOpen] = useState(false);
 
@@ -42,7 +42,6 @@ function AllWords() {
     }
   }
 
-  
   if (loading) {
     return <p>Loading...</p>;
   }
@@ -71,6 +70,19 @@ function AllWords() {
           + Add New Word
         </Link>
       </div>
+
+      <ul className="languages-list">
+        <li className="langauge-single">
+          <button className="langauge-button">?</button>
+        </li>
+        {languages.map((lang) => (
+          <li className="langauge-single">
+            <button className="langauge-button" key={lang.id}>
+              {lang.language_name}
+              </button>
+          </li>
+        ))}
+      </ul>
 
       <div className="word-list">
         <div className="list-head">

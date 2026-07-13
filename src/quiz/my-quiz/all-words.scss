@@ -35,6 +35,23 @@
   margin: initial;
 }
 
+.languages-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  .langauge-single {
+    background: #eef5ff;
+    border-radius: basic.$border-radius;
+    &:hover {
+      background: #bed2ff;;
+    }
+    .langauge-button {
+      padding:  0.5rem 1rem;
+      width: 100%;
+    }
+  }
+}
+
 .attempt-list,
 .word-list {
   background: white;
