@@ -90,6 +90,26 @@ export function VocabularyProvider({ children }) {
     }
   }
 
+  async function getFiltredCategories(id) {
+    try {
+      const response = await fetch(`${api}categories/?target_language__language_name=${id}`, {
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (!response.ok) {
+        throw new Error("Failed to load words.");
+      }
+      const data = await response.json();
+      console.log("Categories:", data);
+      setCategories(data);
+      setLoading(false);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   async function getWord(id) {
     const response = await fetch(`${api}words/${id}/`, {
       credentials: "include",
@@ -229,6 +249,7 @@ export function VocabularyProvider({ children }) {
         getLanguages,
         getWord,
         getFiltredWords,
+        getFiltredCategories,
         createWord,
         updateWord,
         updateCategory,

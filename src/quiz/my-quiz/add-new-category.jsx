@@ -4,10 +4,11 @@ import useVocabulary from "../../context/useVocabulary";
 import { useState } from "react";
 
 function AddNewCategory() {
-  const { createCategory } = useVocabulary();
+  const { createCategory, languages } = useVocabulary();
   const navigate = useNavigate()
 
   const [formData, setFormData] = useState({
+    language_id: "",
     name: "",
   });
 
@@ -19,6 +20,7 @@ function AddNewCategory() {
       [name]: value,
     }));
   }
+
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -46,8 +48,25 @@ function AddNewCategory() {
       </div>
 
       <form className="category-form" onSubmit={handleSubmit}>
-        <label htmlFor="categoryName">Category Name</label>
+        <div className="form-group category-group">
+          <label>
+            Sprache <span>*</span>
+          </label>
 
+          <select
+            name="language_id"
+            value={formData.language_id}
+            onChange={handleChange}
+            required
+          >
+            {languages.map((lang) => (
+              <option key={lang.id} value={lang.id}>
+                {lang.language_name}
+              </option>
+            ))}
+          </select>
+        </div>
+        <label htmlFor="categoryName">Category Name</label>
         <div className="input-wrap">
           <input
             id="categoryName"
@@ -55,6 +74,7 @@ function AddNewCategory() {
             value={formData.name}
             onChange={handleChange}
             type="text"
+            autocomplete="off"
             placeholder="e.g., Business Travel"
           />
           <span className="input-icon">⌘</span>

@@ -1,12 +1,18 @@
+import { useEffect, useState } from "react";
 import useVocabulary from "../../context/useVocabulary";
 import "./all-categories.scss";
 import { Link } from "react-router-dom";
 
 export default function VocabularyCategories() {
-
-    const { categories, loading } = useVocabulary();
+    const { categories, languages, loading, getFiltredCategories } = useVocabulary();
+    const [language, setLanguage] = useState("");
+    
   
     console.log(categories);
+
+    useEffect(() => {
+        getFiltredCategories(language);
+      }, [language]);
   
     if (loading) {
       return <p>Loading...</p>;
@@ -24,6 +30,35 @@ export default function VocabularyCategories() {
         <Link className="main-quiz-button add-new-category-button" to="/my-quiz/add-new-category">+ Add New Category</Link>
       </header>
 
+          <ul className="languages-list">
+        <>
+          {languages
+            .filter((lang) => lang.language_name === "Without")
+            .map((lang) => (
+              <li className="langauge-single" key={lang.id}>
+                <button
+                  className="langauge-button"
+                  onClick={() => setLanguage(lang.language_name)}
+                >
+                  Ohne
+                </button>
+              </li>
+            ))}
+
+          {languages
+            .filter((lang) => lang.language_name !== "Without")
+            .map((lang) => (
+              <li className="langauge-single" key={lang.id}>
+                <button
+                  className="langauge-button"
+                  onClick={() => setLanguage(lang.language_name)}
+                >
+                  {lang.language_name}
+                </button>
+              </li>
+            ))}
+        </>
+      </ul>
       <section className="category">
         {categories.map((cat) => (
           <article className={`card ${cat.wide ? "wide" : ""}`} key={cat.id}>
