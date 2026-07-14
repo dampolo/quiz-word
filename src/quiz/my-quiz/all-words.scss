@@ -29,7 +29,7 @@
 
 .create-buttons {
   display: flex;
-  gap: 1rem
+  gap: 1rem;
 }
 
 .add-btn {
@@ -52,14 +52,17 @@
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
-  .langauge-single {
+  .language-single {
     background: #eef5ff;
     height: fit-content;
     border-radius: basic.$border-radius;
+    &.active {
+      background: #bed2ff;
+    }
     &:hover {
       background: #bed2ff;
     }
-    .langauge-button {
+    .language-button {
       padding: 0.5rem 1rem;
       width: 100%;
     }

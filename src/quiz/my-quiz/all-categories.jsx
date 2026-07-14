@@ -4,20 +4,20 @@ import "./all-categories.scss";
 import { Link } from "react-router-dom";
 
 export default function VocabularyCategories() {
-    const { categories, languages, loading, getFiltredCategories } = useVocabulary();
-    const [language, setLanguage] = useState("");
-    
-  
-    console.log(categories);
+  const { categories, languages, loading, getFiltredCategories } =
+    useVocabulary();
+  const [language, setLanguage] = useState("");
+  const [active, setActive] = useState("");
 
-    useEffect(() => {
-        getFiltredCategories(language);
-      }, [language]);
-  
-    if (loading) {
-      return <p>Loading...</p>;
-    }
+  console.log(categories);
 
+  useEffect(() => {
+    getFiltredCategories(language);
+  }, [language]);
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <section className="vocab-page">
@@ -27,18 +27,34 @@ export default function VocabularyCategories() {
           <p>Organize your learning journey by topic and difficulty.</p>
         </div>
 
-        <Link className="main-quiz-button add-new-category-button" to="/my-quiz/add-new-category">+ Add New Category</Link>
+        <Link
+          className="main-quiz-button add-new-category-button"
+          to="/my-quiz/add-new-category"
+        >
+          + Add New Category
+        </Link>
       </header>
 
-          <ul className="languages-list">
-        <>
+      <ul className="languages-list">
           {languages
             .filter((lang) => lang.language_name === "Without")
             .map((lang) => (
-              <li className="langauge-single" key={lang.id}>
+              <li
+                className={
+                  active === lang.language_name
+                    ? "language-single active"
+                    : "language-single"
+                }
+                key={lang.id}
+              >
                 <button
-                  className="langauge-button"
-                  onClick={() => setLanguage(lang.language_name)}
+                  className="language-button"
+                  onClick={() => {
+                    {
+                      setLanguage(lang.language_name);
+                      setActive(lang.language_name);
+                    }
+                  }}
                 >
                   Ohne
                 </button>
@@ -48,34 +64,42 @@ export default function VocabularyCategories() {
           {languages
             .filter((lang) => lang.language_name !== "Without")
             .map((lang) => (
-              <li className="langauge-single" key={lang.id}>
+              <li
+                className={
+                  active === lang.language_name
+                    ? "language-single active"
+                    : "language-single"
+                }
+                key={lang.id}
+              >
                 <button
-                  className="langauge-button"
-                  onClick={() => setLanguage(lang.language_name)}
+                  className="language-button"
+                  onClick={() => {
+                    {
+                      setLanguage(lang.language_name);
+                      setActive(lang.language_name);
+                    }
+                  }}
                 >
                   {lang.language_name}
                 </button>
               </li>
             ))}
-        </>
+      
       </ul>
       <section className="category">
         {categories.map((cat) => (
           <article className={`card ${cat.wide ? "wide" : ""}`} key={cat.id}>
-            
             <div className="card-actions">
-
               <Link to={`/my-quiz/${cat.id}/edit-category`}>
                 <img src="/assets/edit.svg" alt="edit" />
               </Link>
               <button>
                 <img src="/assets/trash.svg" alt="delete" />
               </button>
-            
             </div>
 
             <h3>{cat.name}</h3>
-
           </article>
         ))}
 
@@ -85,7 +109,6 @@ export default function VocabularyCategories() {
           <small>Create a custom study list</small>
         </Link>
       </section>
-
     </section>
   );
 }

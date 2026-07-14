@@ -10,8 +10,11 @@ function AllWords() {
   const [selectedWordIds, setSelectedWordIds] = useState([]);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [language, setLanguage] = useState("");
+  const [active, setActive] = useState("");
   const { createQuiz } = useQuiz();
 
+    console.log(active);
+    
   function handleCheckboxChange(id, checked) {
     setSelectedWordIds((prev) => {
       if (checked) {
@@ -82,10 +85,21 @@ function AllWords() {
           {languages
             .filter((lang) => lang.language_name === "Without")
             .map((lang) => (
-              <li className="langauge-single" key={lang.id}>
+              <li className={ active === lang.language_name
+                ? "language-single active"
+                : "language-single"
+              }
+                key={lang.id}
+              
+              >
                 <button
-                  className="langauge-button"
-                  onClick={() => setLanguage(lang.language_name)}
+                  className="language-button"
+                  onClick={() => {{
+                    setLanguage(lang.language_name); 
+                    setActive(lang.language_name);
+                  }}
+                    
+                  }
                 >
                   Ohne
                 </button>
@@ -95,10 +109,19 @@ function AllWords() {
           {languages
             .filter((lang) => lang.language_name !== "Without")
             .map((lang) => (
-              <li className="langauge-single" key={lang.id}>
+              <li className={ active === lang.language_name
+                ? "language-single active"
+                : "language-single" 
+              }
+              key={lang.id}
+              >
                 <button
-                  className="langauge-button"
-                  onClick={() => setLanguage(lang.language_name)}
+                  className="language-button"
+                  onClick={() => {
+                    setLanguage(lang.language_name); 
+                    setActive(lang.language_name);
+                  }
+                }
                 >
                   {lang.language_name}
                 </button>
