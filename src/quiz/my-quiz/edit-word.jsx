@@ -11,7 +11,7 @@ export default function EditWord() {
     updateWord,
     deleteWord,
     categories,
-    getCategories,
+    getFiltredCategories,
     loading,
     getWords,
     languages,
@@ -24,6 +24,7 @@ export default function EditWord() {
 
   const [formData, setFormData] = useState({
     language_name: "",
+    language_id: "",
     category: "",
     source_word: "",
     target_word: "",
@@ -95,8 +96,8 @@ export default function EditWord() {
 
   useEffect(() => {
     if (!formData.language_name) return;
-    getCategories(formData.language_id);
-  }, [formData.language_id]);
+    getFiltredCategories(formData.language_name);
+  }, [formData.language_name]);
 
   if (loading) {
     return <p>Loading...</p>;
@@ -119,13 +120,13 @@ export default function EditWord() {
           </label>
 
           <select
-            name="language_id"
-            value={formData.language_id}
+            name="language_name"
+            value={formData.language_name}
             onChange={handleChange}
             required
           >
             {languages.map((lang) => (
-              <option key={lang.id} value={lang.id}>
+              <option key={lang.id} value={lang.language_name}>
                 {lang.language_name}
               </option>
             ))}

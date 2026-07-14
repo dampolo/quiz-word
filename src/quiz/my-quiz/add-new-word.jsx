@@ -5,11 +5,12 @@ import { Link } from "react-router-dom";
 import BackButton from "../../components/BackButton/BackButton";
 
 export default function AddNewWord() {
-  const { categories, loading, createWord, getCategories, languages } =
+  const { categories, loading, createWord, getFiltredCategories, languages } =
     useVocabulary();
 
   const [formData, setFormData] = useState({
     language_name: "",
+    language_id: "",
     category: "",
     source_word: "",
     target_word: "",
@@ -55,7 +56,7 @@ export default function AddNewWord() {
 
   useEffect(() => {
     if (!formData.language_name) return;
-    getCategories(formData.language_name);
+    getFiltredCategories(formData.language_name);
   }, [formData.language_name]);
 
   // if (loading) {
@@ -85,7 +86,7 @@ export default function AddNewWord() {
             required
           >
             {languages.map((lang) => (
-              <option key={lang.id} value={lang.id}>
+              <option key={lang.id} value={lang.language_name}>
                 {lang.language_name}
               </option>
             ))}
