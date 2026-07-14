@@ -9,6 +9,7 @@ function EditCategory() {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
+    language_id: "",
     name: "",
   });
 
@@ -36,6 +37,8 @@ function EditCategory() {
     async function loadCategry() {
       try {
         const category = await getCategory(id);
+        console.log(category);
+        
         setFormData(category);
       } catch (err) {
         console.error(err);
