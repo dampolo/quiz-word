@@ -1,7 +1,7 @@
 function Logo() {
     return (
 
-        <img width="40" height="40" src="/assets/logo.jpg" alt="Logo"/>
+        <img width={80} height={80} src="/assets/logo.svg" alt="Logo"/>
 
     )
 }
