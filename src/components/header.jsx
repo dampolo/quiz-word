@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import "./header.scss";
 import { useState } from "react";
+import Logo from "./logo";
 
 function Header() {
   const [active, setActive] = useState("");
@@ -12,7 +13,7 @@ function Header() {
       <div className="navbar__container">
         {/* Logo */}
         <a href="#" className="navbar__logo">
-          QuizWord
+        <Logo />
         </a>
 
         {/* Navigation */}
