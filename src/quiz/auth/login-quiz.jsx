@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/useAuth";
+import PreLoader from "../../components/PreLoader/PreLoader";
 
 import "./login-quiz.scss";
 
@@ -9,7 +10,7 @@ function LoginQuiz() {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
-  const { login } = useAuth();
+  const { login, loading} = useAuth();
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -148,15 +149,17 @@ function LoginQuiz() {
 
             <div className="warn-txt warn-txt-hight">{formErrors.password}</div>
           </div>
+              
+                { loading ? (
+                  <PreLoader/>
+                ) : (
+                 <></>
+                )  
+              } 
 
-          {/* <Preloader
-            className={
-                mainStateService.showPreloader ? "show-preloader" : "hide-preloader"
-            }
-            /> */}
 
           <div className="btn-container">
-            <button className="main-quiz-button" type="submit">
+            <button className="main-quiz-button" type="submit" disabled={loading}>
               Anmelden
             </button>
           </div>

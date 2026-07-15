@@ -11,6 +11,8 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
   const checkAuth = async () => {
+      setLoading(true);
+
     try {
       const response = await fetch(`${api}me/`, {
         credentials: "include",
@@ -35,6 +37,8 @@ export function AuthProvider({ children }) {
   };
 
   const login = async (email, password) => {
+      setLoading(true);
+
     const response = await fetch(`${api}token/`, {
       method: "POST",
       credentials: "include",
@@ -47,6 +51,7 @@ export function AuthProvider({ children }) {
     if (!response.ok) {
       throw new Error("Login failed");
     }
+      setLoading(false);
 
     return checkAuth();
   };
