@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import useDialog from "../../context/DialogContext/useDialgo";
 import BackButton from "../../components/BackButton/BackButton";
+import { toast } from 'react-toastify';
 
 export default function EditWord() {
   const {
@@ -22,6 +23,7 @@ export default function EditWord() {
   const { id } = useParams();
   const navigate = useNavigate();
 
+
   const [formData, setFormData] = useState({
     language_name: "",
     language_id: "",
@@ -39,6 +41,7 @@ export default function EditWord() {
 
     try {
       await updateWord(Number(id), formData);
+      toast.success("Word updated successfully!");
       navigate("/my-quiz/all-words/");
       getWords();
     } catch (err) {

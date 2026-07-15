@@ -24,10 +24,12 @@ import EditCategory from "./quiz/my-quiz/edit-category";
 import AddNewQuiz from "./quiz/my-quiz/quizzes/add-new-quiz";
 import Quizzes from "./quiz/my-quiz/quizzes/quizzes";
 import AllQuizWords from "./quiz/my-quiz/quizzes/all-quiz-words";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
     // Auth
+    <>
     <Routes>
       <Route element={<PublicLayout />}>
         <Route path="/" element={<Website />} />
@@ -60,7 +62,9 @@ function App() {
             <Route path="all-words" element={<AllWords />} />
             <Route path=":id/edit-word" element={<EditWord />} />
             <Route path="add-new-word" element={<AddNewWord />} />
-            <Route path="vocabulary-categories"element={<VocabularyCategories />}
+            <Route
+              path="vocabulary-categories"
+              element={<VocabularyCategories />}
             />
             <Route path="add-new-category" element={<AddNewCategory />} />
             <Route path=":id/edit-category" element={<EditCategory />} />
@@ -70,10 +74,17 @@ function App() {
             <Route path="add-new-quiz" element={<AddNewQuiz />} />
             <Route path=":id/all-quiz-words" element={<AllQuizWords />} />
           </Route>
-          
         </Route>
       </Route>
     </Routes>
+          <ToastContainer
+            position="top-right"
+            autoClose={3000}
+            closeOnClick
+            pauseOnHover
+            theme="light"
+          />
+          </>
   );
 }
 
