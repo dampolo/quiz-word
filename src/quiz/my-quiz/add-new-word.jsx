@@ -64,7 +64,7 @@ export default function AddNewWord() {
   // }
 
   return (
-    <main className="add-word-page">
+    <section className="add-word-page">
       <BackButton to="/my-quiz/all-words/" />
       <header className="page-header">
         <div>
@@ -217,7 +217,7 @@ export default function AddNewWord() {
           </button>
         </div>
       </form>
-    </main>
+    </section>
   );
 }
 

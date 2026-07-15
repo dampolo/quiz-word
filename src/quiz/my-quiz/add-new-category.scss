@@ -52,8 +52,36 @@ $bg: #f7f8fd;
     display: flex;
     flex-direction: column;
 
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+
+      &.category-group {
+        max-width: 340px;
+      }
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      border: 1px solid #cbd5e1;
+      border-radius: 7px;
+      background: #f8f9ff;
+      padding: 15px;
+      font-size: 14px;
+      color: #334155;
+      outline: none;
+
+      &:focus {
+        border-color: #4338ca;
+      }
+    }
+
+
+
     label {
-      margin-bottom: 10px;
       font-weight: 600;
       color: $text;
     }

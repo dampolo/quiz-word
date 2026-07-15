@@ -2,6 +2,7 @@ import "./edit-category.scss";
 import useVocabulary from "../../context/useVocabulary";
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import BackButton from "../../components/BackButton/BackButton";
 
 function EditCategory() {
   const { getCategory, updateCategory, getCategories } = useVocabulary();
@@ -49,7 +50,8 @@ function EditCategory() {
   }, [id]);
 
   return (
-    <div className="add-category-card">
+    <section className="add-category-card">
+            <BackButton to="/my-quiz/vocabulary-categories/" />
       <div className="form-header">
         <div className="header-icon">✚</div>
 
@@ -112,7 +114,7 @@ function EditCategory() {
           </button>
         </div>
       </form>
-    </div>
+    </section>
   );
 }
 export default EditCategory;

@@ -2,6 +2,7 @@ import "./add-new-category.scss";
 import { Link, useNavigate } from "react-router-dom";
 import useVocabulary from "../../context/useVocabulary";
 import { useState } from "react";
+import BackButton from "../../components/BackButton/BackButton";
 
 function AddNewCategory() {
   const { createCategory, languages } = useVocabulary();
@@ -38,6 +39,8 @@ function AddNewCategory() {
 
   return (
     <div className="add-category-card">
+      <BackButton to="/my-quiz/vocabulary-categories/" />
+
       <div className="form-header">
         <div className="header-icon">✚</div>
 
