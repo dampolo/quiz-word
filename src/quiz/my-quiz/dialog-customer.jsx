@@ -3,27 +3,25 @@ import AuthContext from "../../context/AuthContext";
 import "./dialog-customer.scss";
 import { useContext } from "react";
 
-function DialogCustomer() {
+function DialogCustomer({setIsProfileVisible }) {
   const navigate = useNavigate();
-   const { logout } = useContext(AuthContext);
-
+  const { logout } = useContext(AuthContext);
 
   function openProfile(e) {
     e.preventDefault();
     e.stopPropagation();
+    setIsProfileVisible(false);
+    navigate("/my-quiz/profile/");
   }
 
-   async function logOut() {
+  async function logOut() {
     try {
       await logout();
       navigate("/");
-      // toast.success("Du bist erfolgreich abgemeldet");
     } catch (error) {
-      // toast.error("Logout fehlgeschlagen");
       console.log(error);
-      
     }
-  };
+  }
 
   return (
     <section className="profile">

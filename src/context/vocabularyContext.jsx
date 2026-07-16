@@ -227,7 +227,7 @@ export function VocabularyProvider({ children }) {
       setLoading(true);
 
       try {
-        await Promise.all([getWords(), getLanguages()]);
+        await Promise.all([getWords(), getLanguages(),]);
       } catch (error) {
         console.error(error);
       } finally {

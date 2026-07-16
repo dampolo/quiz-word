@@ -2,7 +2,7 @@ import { useState } from "react";
 import Logo from "../../components/logo";
 import DialogCustomer from "./dialog-customer";
 
-import './header-customer.scss';
+import "./header-customer.scss";
 
 function HeaderCustomer() {
   const [isProfileVisible, setIsProfileVisible] = useState(false);
@@ -19,9 +19,10 @@ function HeaderCustomer() {
   function openMenu() {
     setIsMenuOpen((prev) => !prev);
   }
+
   return (
     <section className="header-customer">
-      <a href="/" className="logo" >
+      <a href="/" className="logo">
         <Logo />
       </a>
 
@@ -47,7 +48,10 @@ function HeaderCustomer() {
         className={`hide-container ${isProfileVisible ? "show-container" : ""}`}
         onClick={closeDialog}
       >
-        <DialogCustomer />
+        <DialogCustomer
+          isProfileVisible={isProfileVisible}
+          setIsProfileVisible={setIsProfileVisible}
+        />
       </div>
 
       <button

@@ -1,0 +1,42 @@
+@use "./../../../styles/basic.scss";
+
+.profile-user {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+
+  &__card {
+    width: 100%;
+    max-width: 900px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+
+  &__row {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    align-items: start;
+    gap: 12px;
+    padding: 12px 0;
+
+    &:not(:last-child) {
+      border-bottom: 1px solid #f3f4f6;
+    }
+  }
+
+  &__label {
+    color: #6b7280;
+    font-size: 15px;
+    font-weight: 500;
+  }
+
+  &__value {
+    color: #111827;
+    font-size: 15px;
+    font-weight: 600;
+    word-break: break-word;
+  }
+}

@@ -9,7 +9,6 @@ import Website from "./website/website";
 import Login from "./quiz/auth/login-quiz";
 import Dashboard from "./quiz/my-quiz/dashboard";
 import MyQuiz from "./layouts/MyQuiz";
-import Profile from "./quiz/my-quiz/profile";
 import AllWords from "./quiz/my-quiz/all-words";
 import ProtectedRoute from "./context/ProtectedRoute";
 import { VocabularyProvider } from "./context/VocabularyContext";
@@ -25,6 +24,7 @@ import AddNewQuiz from "./quiz/my-quiz/quizzes/add-new-quiz";
 import Quizzes from "./quiz/my-quiz/quizzes/quizzes";
 import AllQuizWords from "./quiz/my-quiz/quizzes/all-quiz-words";
 import { ToastContainer } from "react-toastify";
+import Profile from "./quiz/my-quiz/Profile/profile";
 
 function App() {
   return (

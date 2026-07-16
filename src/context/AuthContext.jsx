@@ -9,9 +9,11 @@ export function AuthProvider({ children }) {
   const api = useApi();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [profile, setProfile] = useState(false);
 
   const checkAuth = async () => {
-      setLoading(true);
+    setLoading(true);
 
     try {
       const response = await fetch(`${api}me/`, {
@@ -36,8 +38,33 @@ export function AuthProvider({ children }) {
     }
   };
 
+  async function getProfile() {
+    try {
+      const response = await fetch(`${api}profile-customer/`, {
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to load words.");
+      }
+
+      const data = await response.json();
+      console.log("Response:", data);
+      setProfile(data);
+      debugger;
+      console.log("Profile:", data);
+
+      setLoading(false);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   const login = async (email, password) => {
-      setLoading(true);
+    setLoading(true);
 
     const response = await fetch(`${api}token/`, {
       method: "POST",
@@ -51,7 +78,7 @@ export function AuthProvider({ children }) {
     if (!response.ok) {
       throw new Error("Login failed");
     }
-      setLoading(false);
+    setLoading(false);
 
     return checkAuth();
   };
@@ -87,7 +114,15 @@ export function AuthProvider({ children }) {
   };
 
   useEffect(() => {
-    checkAuth();
+    const init = async () => {
+      const authenticated = await checkAuth();
+
+      if (authenticated) {
+        await getProfile();
+      }
+    };
+
+    init();
   }, []);
 
   return (
@@ -95,8 +130,12 @@ export function AuthProvider({ children }) {
       value={{
         user,
         loading,
+        profile,
+        isMenuOpen,
+        setIsMenuOpen,
         login,
         logout,
+        getProfile,
         checkAuth,
         createAccount,
         isAuthenticated: !!user,
