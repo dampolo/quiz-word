@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useAuth } from "../../../context/useAuth";
 import "./profile.scss";
 
@@ -18,6 +19,7 @@ function Profile() {
 
   return (
     <div className="profile-user">
+      <h1>Profile</h1>
       <div className="profile-user__card">
         <InfoRow
           label="Customer Number:"
@@ -101,6 +103,10 @@ function Profile() {
               : "-"
           }
         />
+      <Link to={`/my-quiz/edit-profile`}>
+        <img src="/assets/edit.svg" alt="edit" />
+        
+      </Link>
       </div>
     </div>
   );

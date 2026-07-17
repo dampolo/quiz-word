@@ -13,6 +13,32 @@ body {
   font-size: 16px;
 }
 
+.action-buttons {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 26px;
+      margin-top: 1rem;
+
+      .cancel-btn {
+        background: transparent;
+        border: 0;
+        color: #3421d6;
+      }
+
+      .save-btn {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        border: 0;
+        border-radius: 7px;
+        background: #3421d6;
+        color: #fff;
+        padding: 17px 32px;
+        box-shadow: 0 8px 18px rgba(52, 33, 214, 0.22);
+      }
+    }
+
 .main-quiz-button {
   display: flex;
   justify-content: center;

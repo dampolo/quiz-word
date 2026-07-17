@@ -25,6 +25,7 @@ import Quizzes from "./quiz/my-quiz/quizzes/quizzes";
 import AllQuizWords from "./quiz/my-quiz/quizzes/all-quiz-words";
 import { ToastContainer } from "react-toastify";
 import Profile from "./quiz/my-quiz/Profile/profile";
+import EditProfile from "./quiz/my-quiz/Profile/EditProfile/edit-profile";
 
 function App() {
   return (
@@ -46,6 +47,8 @@ function App() {
         <Route path="/my-quiz" element={<MyQuiz />}>
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="profile" element={<Profile />} />
+          <Route path="edit-profile" element={<EditProfile />} />
+
 
           <Route
             element={
