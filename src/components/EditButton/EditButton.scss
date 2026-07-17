@@ -1,0 +1,27 @@
+@use "./../../styles/basic.scss";
+
+.edit-button {
+  display: flex;
+  justify-self: baseline;
+  align-self: flex-start;
+  background: none;
+  border: 0.0625rem solid transparent;
+  border-radius: basic.$border-radius;
+  background: basic.$color-background-main;
+  transition: basic.$first-transition;
+
+  svg path {
+    fill: basic.$color-primary-indigo;
+  }
+
+  &:hover,
+  &:focus {
+    background: basic.$color-primary-indigo;
+    outline: none;
+  }
+
+  &:hover svg path,
+  &:focus svg path {
+    fill: #f7f8ff;
+  }
+}
