@@ -14,18 +14,24 @@ const InfoRow = ({
   readOnly = false,
 }) => (
   <div className="profile-user__row">
-    <label htmlFor={name} className="profile-user__label">{label}</label>
+    {readOnly ? (
+      <span className="profile-user__label">{label}</span>
+    ) : (
+      <label htmlFor={name} className="profile-user__label">
+        {label}
+      </label>
+    )}
 
     {readOnly ? (
       <span className="profile-user__value">{value || "-"}</span>
     ) : (
       <input
-        className="profile-user__input input-field"
         id={name}
-        type={type}
         name={name}
+        type={type}
         value={value ?? ""}
         onChange={onChange}
+        className="profile-user__input input-field"
       />
     )}
   </div>
