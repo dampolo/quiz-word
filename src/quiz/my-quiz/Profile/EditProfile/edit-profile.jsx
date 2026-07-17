@@ -20,7 +20,7 @@ const InfoRow = ({
       <span className="profile-user__value">{value || "-"}</span>
     ) : (
       <input
-        className="profile-user__input"
+        className="profile-user__input input-field"
         id={name}
         type={type}
         name={name}
