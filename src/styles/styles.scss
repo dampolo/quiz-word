@@ -79,6 +79,7 @@ body {
   color: basic.$color-primary-indigo;
   border-radius: basic.$border-radius;
   border: 1px solid #dfe3ef ;
+  outline: none;
   &:hover,
   &:focus-visible {
     background: rgba(basic.$color-primary-indigo, 0.06);

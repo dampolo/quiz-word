@@ -40,6 +40,22 @@
     font-weight: 600;
     word-break: break-word;
   }
+  &__textarea {
+    border: solid 0.0625rem basic.$color-background-main;
+    border-radius: basic.$border-radius;
+    padding: .5rem;
+     &:hover {
+          border: solid 0.0625rem basic.$color-background-main;
+        }
+        &:focus {
+          background-color: basic.$color-surface-container;
+          border: solid 0.0625rem basic.$color-primary-indigo;
+          outline: basic.$color-background-main;
+        }
+        &:-webkit-autofill {
+          box-shadow: 0 0 0px 62.5rem basic.$color-surface-container inset;
+        }
+  }
 
   .edit-button {
     margin-top: 2rem;
