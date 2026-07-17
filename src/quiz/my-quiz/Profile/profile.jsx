@@ -106,7 +106,7 @@ function Profile() {
               : "-"
           }
         />
-      <EditButton to="/my-quiz/edit-profile"/>
+      <EditButton to="/my-quiz/edit-profile" className="edit-button"/>
         
       </div>
     </div>

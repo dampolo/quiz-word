@@ -5,7 +5,7 @@
   justify-content: center;
   flex-direction: column;
   padding: 2rem;
-
+  
   &__card {
     width: 100%;
     max-width: 900px;
@@ -39,5 +39,9 @@
     font-size: 15px;
     font-weight: 600;
     word-break: break-word;
+  }
+
+  .edit-button {
+    margin-top: 2rem;
   }
 }
