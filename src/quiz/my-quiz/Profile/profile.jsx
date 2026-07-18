@@ -5,13 +5,22 @@ import EditButton from "../../../components/EditButton/EditButon"
 
 
 
-const InfoRow = ({ label, value }) => (
-  <div className="profile-user__row">
-    <span className="profile-user__label">{label}</span>
-    <span className="profile-user__value">{value || "-"}</span>
-  </div>
-);
+const InfoRow = ({ label, value }) => {
+  const renderValue = () => {
+    if (typeof value === "boolean") {
+      return value ? "✅" : "❌";
+    }
 
+    return value || "-";
+  };
+
+  return (
+    <div className="profile-user__row">
+      <span className="profile-user__label">{label}</span>
+      <span className="profile-user__value">{renderValue()}</span>
+    </div>
+  );
+};
 function Profile() {
   const { profile } = useAuth();
 
@@ -27,6 +36,11 @@ function Profile() {
         <InfoRow
           label="Customer Number:"
           value={profile.customer_number}
+        />
+
+        <InfoRow
+          label="User name:"
+          value={profile.username}
         />
 
         <InfoRow
@@ -56,7 +70,12 @@ function Profile() {
 
         <InfoRow
           label="Street:"
-          value={`${profile.street || ""} ${profile.street_number || ""}`}
+          value={profile.street}
+        />
+
+        <InfoRow
+          label="Street number:"
+          value={profile.street_number}
         />
 
         <InfoRow
@@ -70,25 +89,18 @@ function Profile() {
         />
 
         <InfoRow
-          label="Role:"
-          value={profile.role}
-        />
-
-        <InfoRow
           label="Subscription:"
-          value={profile.has_subscription ? "Active" : "Inactive"}
-        />
-
-        <InfoRow
-          label="Working Hours:"
-          value={profile.working_hours}
+          value={profile.has_subscription}
         />
 
         <InfoRow
           label="Description:"
           value={profile.description}
         />
-
+        <InfoRow
+          label="Active:"
+          value={profile.is_active}
+        />
         <InfoRow
           label="Created:"
           value={

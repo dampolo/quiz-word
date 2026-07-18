@@ -42,6 +42,7 @@ function EditProfile() {
 
   const [form, setForm] = useState({
     title: "",
+    username: "",
     first_name: "",
     last_name: "",
     email: "",
@@ -49,8 +50,8 @@ function EditProfile() {
     street: "",
     street_number: "",
     city: "",
+    is_active: "",
     postcode: "",
-    working_hours: "",
     description: "",
   });
 
@@ -58,15 +59,16 @@ function EditProfile() {
     if (profile) {
       setForm({
         title: profile.title || "",
+        user: profile.username,
         first_name: profile.first_name || "",
         last_name: profile.last_name || "",
         email: profile.email || "",
         phone: profile.phone || "",
         street: profile.street || "",
         street_number: profile.street_number || "",
+        is_active: profile.is_active,
         city: profile.city || "",
         postcode: profile.postcode || "",
-        working_hours: profile.working_hours || "",
         description: profile.description || "",
       });
     }
@@ -102,6 +104,12 @@ function EditProfile() {
         <InfoRow
           label="Customer Number:"
           value={profile.customer_number}
+          readOnly
+        />
+
+        <InfoRow
+          label="User name:"
+          value={profile.username}
           readOnly
         />
 
@@ -170,22 +178,9 @@ function EditProfile() {
         />
 
         <InfoRow
-          label="Role:"
-          value={profile.role}
-          readOnly
-        />
-
-        <InfoRow
           label="Subscription:"
           value={profile.has_subscription ? "Active" : "Inactive"}
           readOnly
-        />
-
-        <InfoRow
-          label="Working Hours:"
-          name="working_hours"
-          value={form.working_hours}
-          onChange={handleChange}
         />
 
         <div className="profile-user__row">
