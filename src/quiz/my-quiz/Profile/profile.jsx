@@ -97,10 +97,12 @@ function Profile() {
           label="Description:"
           value={profile.description}
         />
+        
         <InfoRow
           label="Active:"
           value={profile.is_active}
         />
+
         <InfoRow
           label="Created:"
           value={

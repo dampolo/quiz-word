@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
@@ -12,30 +11,49 @@ const InfoRow = ({
   type = "text",
   onChange,
   readOnly = false,
-}) => (
-  <div className="profile-user__row">
-    {readOnly ? (
-      <span className="profile-user__label">{label}</span>
-    ) : (
-      <label htmlFor={name} className="profile-user__label">
-        {label}
-      </label>
-    )}
+}) => {
+  const renderValue = () => {
+    if (typeof value === "boolean") {
+      return value ? "✅" : "❌";
+    }
 
-    {readOnly ? (
-      <span className="profile-user__value">{value || "-"}</span>
-    ) : (
-      <input
-        id={name}
-        name={name}
-        type={type}
-        value={value ?? ""}
-        onChange={onChange}
-        className="profile-user__input input-field"
-      />
-    )}
-  </div>
-);
+    return value || "-";
+  };
+
+  return (
+    <div className="profile-user__row">
+      {readOnly ? (
+        <span className="profile-user__label">{label}</span>
+      ) : (
+        <label htmlFor={name} className="profile-user__label">
+          {label}
+        </label>
+      )}
+
+      {readOnly ? (
+        <span className="profile-user__value">{renderValue()}</span>
+      ) : type === "checkbox" ? (
+        <input
+          id={name}
+          name={name}
+          type="checkbox"
+          checked={Boolean(value)}
+          onChange={onChange}
+          className="profile-user__checkbox"
+        />
+      ) : (
+        <input
+          id={name}
+          name={name}
+          type={type}
+          value={value ?? ""}
+          onChange={onChange}
+          className="profile-user__input input-field"
+        />
+      )}
+    </div>
+  );
+};
 
 function EditProfile() {
   const { profile } = useAuth();
@@ -50,9 +68,10 @@ function EditProfile() {
     street: "",
     street_number: "",
     city: "",
-    is_active: "",
     postcode: "",
+    has_subscription: "",
     description: "",
+    is_active: "",
   });
 
   useEffect(() => {
@@ -66,22 +85,23 @@ function EditProfile() {
         phone: profile.phone || "",
         street: profile.street || "",
         street_number: profile.street_number || "",
-        is_active: profile.is_active,
         city: profile.city || "",
         postcode: profile.postcode || "",
+        has_subscription: profile.has_subscription,
         description: profile.description || "",
+        is_active: profile.is_active,
       });
     }
   }, [profile]);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
+  function handleChange(e) {
+    const { name, value, type, checked } = e.target;
 
     setForm((prev) => ({
       ...prev,
-      [name]: value,
+      [name]: type === "checkbox" ? checked : value,
     }));
-  };
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -99,7 +119,7 @@ function EditProfile() {
   return (
     <div className="profile-user">
       <h1 className="title">Edit Profil</h1>
-      
+
       <form className="profile-user__card" onSubmit={handleSubmit}>
         <InfoRow
           label="Customer Number:"
@@ -107,11 +127,7 @@ function EditProfile() {
           readOnly
         />
 
-        <InfoRow
-          label="User name:"
-          value={profile.username}
-          readOnly
-        />
+        <InfoRow label="User name:" value={profile.username} readOnly />
 
         <InfoRow
           label="Title:"
@@ -178,9 +194,11 @@ function EditProfile() {
         />
 
         <InfoRow
-          label="Subscription:"
-          value={profile.has_subscription ? "Active" : "Inactive"}
-          readOnly
+          label="Subscription"
+          name="has_subscription"
+          type="checkbox"
+          value={form.has_subscription}
+          onChange={handleChange}
         />
 
         <div className="profile-user__row">
@@ -194,6 +212,14 @@ function EditProfile() {
             rows={4}
           />
         </div>
+
+        <InfoRow
+          label="Active"
+          name="is_active"
+          type="checkbox"
+          value={form.is_active}
+          readOnly
+        />
 
         <InfoRow
           label="Created:"
@@ -215,12 +241,12 @@ function EditProfile() {
           readOnly
         />
         <div className="action-buttons">
-            <Link to="/my-quiz/profile" className="main-quiz-button-cancel">
+          <Link to="/my-quiz/profile" className="main-quiz-button-cancel">
             Zurück
-            </Link>
-            <button type="submit" className="main-quiz-button">
+          </Link>
+          <button type="submit" className="main-quiz-button">
             Speichern
-            </button>
+          </button>
         </div>
       </form>
     </div>
