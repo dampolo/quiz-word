@@ -5,6 +5,7 @@ import "./edit-profile.scss";
 import { useAuth } from "../../../../context/useAuth";
 import BackButton from "../../../../components/BackButton/BackButton";
 import PreLoader from "../../../../components/PreLoader/PreLoader";
+import { toast } from 'react-toastify';
 
 function InfoRow({
   label,
@@ -130,9 +131,10 @@ function EditProfile() {
     try {
       setErrors({});
       await updateProfile(form);
-      console.log("Profile updated!");
+      toast.success("Dein Profil wurde aktualisiert!");
     } catch (error) {
       if (error.response?.data) {
+        toast.error("Verusche noch einmal!");
         setErrors(error.response.data);
       } else {
         console.error(error);

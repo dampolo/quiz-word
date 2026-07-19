@@ -15,9 +15,13 @@ export default function VocabularyCategories() {
     getFiltredCategories(language);
   }, [language]);
 
-  if (loading) {
-    return <p>Loading...</p>;
-  }
+    if (loading) {
+      return (
+        <div className="show-container ">
+        <PreLoader />
+        </div>
+      )
+    }
 
   return (
     <section className="vocab-page">
