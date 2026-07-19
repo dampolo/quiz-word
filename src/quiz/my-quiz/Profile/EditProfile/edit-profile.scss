@@ -1,25 +1,46 @@
 @use "./../../../../styles/basic.scss";
 @use "./../profile.scss";
 
-
 .input-field {
-        background-color: basic.$color-surface-container;
-        border: solid 0.0625rem basic.$color-background-main;
-        padding-inline: 1rem;
-        padding-block: 1.125rem;
-        width: 100%;
-        height: 3.07rem;
-        border-radius: basic.$border-radius;
-        transition: basic.$first-transition;
-        &:hover {
-          border: solid 0.0625rem basic.$color-background-main;
-        }
-        &:focus {
-          background-color: basic.$color-surface-container;
-          border: solid 0.0625rem basic.$color-primary-indigo;
-          outline: basic.$color-background-main;
-        }
-        &:-webkit-autofill {
-          box-shadow: 0 0 0px 62.5rem basic.$color-surface-container inset;
-        }
-      }
+  background-color: basic.$color-surface-container;
+  border: solid 0.0625rem basic.$color-background-main;
+  padding-inline: 1rem;
+  padding-block: 1.125rem;
+  width: 100%;
+  height: 3.07rem;
+  border-radius: basic.$border-radius;
+  transition: basic.$first-transition;
+  &:hover {
+    border: solid 0.0625rem basic.$color-background-main;
+  }
+  &:focus {
+    background-color: basic.$color-surface-container;
+    border: solid 0.0625rem basic.$color-primary-indigo;
+    outline: basic.$color-background-main;
+  }
+  &:-webkit-autofill {
+    box-shadow: 0 0 0px 62.5rem basic.$color-surface-container inset;
+  }
+}
+
+.input-select {
+  width: 100%;
+  border: 1px solid #cbd5e1;
+  border-radius: 7px;
+  background: #f8f9ff;
+  padding: 15px;
+  font-size: 14px;
+  color: #334155;
+  outline: none;
+  &:hover {
+    border: solid 0.0625rem basic.$color-background-main;
+  }
+  &:focus {
+    background-color: basic.$color-surface-container;
+    border: solid 0.0625rem basic.$color-primary-indigo;
+    outline: basic.$color-background-main;
+  }
+  &:-webkit-autofill {
+    box-shadow: 0 0 0px 62.5rem basic.$color-surface-container inset;
+  }
+}

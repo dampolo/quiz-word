@@ -4,14 +4,15 @@ import { Link } from "react-router-dom";
 import "./edit-profile.scss";
 import { useAuth } from "../../../../context/useAuth";
 
-const InfoRow = ({
+function InfoRow({
   label,
   value,
   name,
   type = "text",
+  options = [],
   onChange,
   readOnly = false,
-}) => {
+}) {
   const renderValue = () => {
     if (typeof value === "boolean") {
       return value ? "✅" : "❌";
@@ -41,6 +42,18 @@ const InfoRow = ({
           onChange={onChange}
           className="profile-user__checkbox"
         />
+      ) : type === "select" ? (
+        <select
+          id={name}
+          name={name}
+          value={value ?? ""}
+          onChange={onChange}
+          className="profile-user__input input-select"
+        >
+          <option value="Herr">Herr</option>
+          <option value="Frau">Frau</option>
+          <option value="Divers">Divers</option>
+        </select>
       ) : (
         <input
           id={name}
@@ -53,7 +66,7 @@ const InfoRow = ({
       )}
     </div>
   );
-};
+}
 
 function EditProfile() {
   const { profile } = useAuth();
@@ -132,6 +145,7 @@ function EditProfile() {
         <InfoRow
           label="Title:"
           name="title"
+          type="select"
           value={form.title}
           onChange={handleChange}
         />
@@ -155,6 +169,7 @@ function EditProfile() {
           name="email"
           type="email"
           value={form.email}
+          required
           onChange={handleChange}
         />
 
