@@ -3,13 +3,13 @@ import { Link } from "react-router-dom";
 
 import "./edit-profile.scss";
 import { useAuth } from "../../../../context/useAuth";
+import BackButton from "../../../../components/BackButton/BackButton";
 
 function InfoRow({
   label,
   value,
   name,
   type = "text",
-  options = [],
   onChange,
   readOnly = false,
 }) {
@@ -134,6 +134,7 @@ function EditProfile() {
       <h1 className="title">Edit Profil</h1>
 
       <form className="profile-user__card" onSubmit={handleSubmit}>
+      <BackButton to="/my-quiz/profile/" />
         <InfoRow
           label="Customer Number:"
           value={profile.customer_number}

@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../../../context/useAuth";
 import "./profile.scss";
 import EditButton from "../../../components/EditButton/EditButon"
+import BackButton from "../../../components/BackButton/BackButton"
 
 
 
@@ -33,6 +34,7 @@ function Profile() {
     <div className="profile-user">
       <h1>Profile</h1>
       <div className="profile-user__card">
+        <BackButton to="/my-quiz/all-words/" />
         <InfoRow
           label="Customer Number:"
           value={profile.customer_number}
