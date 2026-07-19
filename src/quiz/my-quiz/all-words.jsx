@@ -80,7 +80,7 @@ function AllWords() {
           </button>
 
           <Link className="main-quiz-button add-btn" to="/my-quiz/add-new-word">
-            + Add New Word
+            ➕ Add New Word
           </Link>
         </div>
       </div>

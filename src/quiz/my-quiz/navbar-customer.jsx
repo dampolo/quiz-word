@@ -8,12 +8,6 @@ function NavbarCustomer() {
   return (
     <ul  className="navbar-customer">
       <li>
-        <Link to="/" className="logo">
-          {/* <app-logo-text></app-logo-text> */}
-          {/* <app-logo></app-logo> */}
-        </Link>
-      </li>
-      <li>
         <Link
           to="/my-quiz/vocabulary-categories"
           onClick={closeMenu}
@@ -32,6 +26,16 @@ function NavbarCustomer() {
         </Link>
       </li>
 
+       <li className="add-new-word">
+        <Link
+          to="/my-quiz/add-new-word"
+          onClick={closeMenu}
+        >
+          <img width={24} height={24} src="/assets/add.svg" alt="" />
+          <span className="nav-link-text">new</span>
+        </Link>
+      </li>
+
       <li>
         <Link
           to="/my-quiz/quizzes/"
@@ -44,7 +48,7 @@ function NavbarCustomer() {
 
       <li>
         <Link to="einstellungen" onClick={closeMenu}>
-          <img width={25} height={25} src="./assets/settings.svg" alt="" />
+          <img width={25} height={25} src="/assets/trash.svg" alt="" />
           <span className="nav-link-text">Trash</span>
         </Link>
       </li>
