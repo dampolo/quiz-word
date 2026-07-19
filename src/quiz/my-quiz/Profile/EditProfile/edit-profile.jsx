@@ -13,6 +13,7 @@ function InfoRow({
   type = "text",
   onChange,
   readOnly = false,
+  error,
 }) {
   const renderValue = () => {
     if (typeof value === "boolean") {
@@ -23,56 +24,61 @@ function InfoRow({
   };
 
   return (
-    <div className="profile-user__row">
-      {readOnly ? (
-        <span className="profile-user__label">{label}</span>
-      ) : (
-        <label htmlFor={name} className="profile-user__label">
-          {label}
-        </label>
-      )}
+    <div className="profile-user__single">
+      <div className="profile-user__row">
+        {readOnly ? (
+          <span className="profile-user__label">{label}</span>
+        ) : (
+          <label htmlFor={name} className="profile-user__label">
+            {label}
+          </label>
+        )}
 
-      {readOnly ? (
-        <span className="profile-user__value">{renderValue()}</span>
-      ) : type === "checkbox" ? (
-        <input
-          id={name}
-          name={name}
-          type="checkbox"
-          checked={Boolean(value)}
-          onChange={onChange}
-          className="profile-user__checkbox"
-        />
-      ) : type === "select" ? (
-        <select
-          id={name}
-          name={name}
-          value={value ?? ""}
-          onChange={onChange}
-          className="profile-user__input input-select"
-        >
-          <option value="Herr">Herr</option>
-          <option value="Frau">Frau</option>
-          <option value="Divers">Divers</option>
-        </select>
-      ) : (
-        <input
-          id={name}
-          name={name}
-          type={type}
-          value={value ?? ""}
-          onChange={onChange}
-          className="profile-user__input input-field"
-        />
-      )}
-    </div>
+        {readOnly ? (
+          <span className="profile-user__value">{renderValue()}</span>
+        ) : type === "checkbox" ? (
+          <input
+            id={name}
+            name={name}
+            type="checkbox"
+            checked={Boolean(value)}
+            onChange={onChange}
+            className="profile-user__checkbox"
+          />
+        ) : type === "select" ? (
+          <select
+            id={name}
+            name={name}
+            value={value ?? ""}
+            onChange={onChange}
+            className="profile-user__input input-select"
+          >
+            <option value="Herr">Herr</option>
+            <option value="Frau">Frau</option>
+            <option value="Divers">Divers</option>
+          </select>
+        ) : (
+          <input
+            id={name}
+            name={name}
+            type={type}
+            value={value ?? ""}
+            onChange={onChange}
+            className="profile-user__input input-field"
+          />
+        )}
+      </div>
+       {error && <p className="warn-txt warn-profile">{error}</p>}
+     </div>
   );
 }
 
 function EditProfile() {
-  const { profile } = useAuth();
+  const { profile, updateProfile } = useAuth();
+  const [errors, setErrors] = useState({});
 
   const [form, setForm] = useState({
+    id: "",
     title: "",
     username: "",
     first_name: "",
@@ -91,6 +97,7 @@ function EditProfile() {
   useEffect(() => {
     if (profile) {
       setForm({
+        id: profile.id,
         title: profile.title || "",
         user: profile.username,
         first_name: profile.first_name || "",
@@ -117,13 +124,20 @@ function EditProfile() {
     }));
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
 
-    console.log(form);
-
-    // call your API here
-    // await updateProfile(form);
+    try {
+      setErrors({});
+      await updateProfile(form);
+      console.log("Profile updated!");
+    } catch (error) {
+      if (error.response?.data) {
+        setErrors(error.response.data);
+      } else {
+        console.error(error);
+      }
+    }
   }
 
   if (!profile) {
@@ -210,6 +224,7 @@ function EditProfile() {
           name="postcode"
           value={form.postcode}
           onChange={handleChange}
+          error={errors.postcode?.[0]}
         />
 
         <InfoRow

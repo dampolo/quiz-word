@@ -6,6 +6,15 @@
   flex-direction: column;
   padding: 2rem;
   
+  &__single {
+    display: flex;
+    flex-direction: column;
+    
+    &:not(:last-child) {
+      border-bottom: 1px solid #f3f4f6;
+    }
+  }
+
   &__card {
     width: 100%;
     max-width: 900px;
@@ -16,16 +25,13 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   }
 
+
   &__row {
     display: grid;
     grid-template-columns: 180px 1fr;
     align-items: start;
     gap: 12px;
     padding: 12px 0;
-
-    &:not(:last-child) {
-      border-bottom: 1px solid #f3f4f6;
-    }
   }
 
   &__label {
@@ -55,6 +61,12 @@
         &:-webkit-autofill {
           box-shadow: 0 0 0px 62.5rem basic.$color-surface-container inset;
         }
+  }
+
+  .warn-profile {
+    margin-bottom: 12px;
+    text-align: center;
+    margin-top: -10px
   }
 
   .edit-button {

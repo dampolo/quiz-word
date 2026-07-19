@@ -29,6 +29,8 @@ export function AuthProvider({ children }) {
       const user = await response.json();
 
       setUser(user);
+      console.log(user);
+
       return true;
     } catch {
       setUser(null);
@@ -52,7 +54,6 @@ export function AuthProvider({ children }) {
       }
 
       const data = await response.json();
-      console.log("Response:", data);
       setProfile(data);
       console.log("Profile:", data);
       setLoading(false);
@@ -102,6 +103,29 @@ export function AuthProvider({ children }) {
     // await login(formData.email, formData.password1);
   };
 
+  async function updateProfile(payload) {
+    const response = await fetch(`${api}profile-customer/`, {
+      method: "PATCH",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      const error = new Error("Profile update failed");
+      error.response = { data };
+      console.log(data);
+      throw error;
+    }
+    
+    setProfile(data);
+    return data;
+  }
+
   const logout = async () => {
     await fetch(`${api}logout/`, {
       method: "POST",
@@ -135,6 +159,7 @@ export function AuthProvider({ children }) {
         logout,
         getProfile,
         checkAuth,
+        updateProfile,
         createAccount,
         isAuthenticated: !!user,
       }}
