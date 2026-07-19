@@ -1,10 +1,9 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../../../context/useAuth";
 import "./profile.scss";
-import EditButton from "../../../components/EditButton/EditButon"
-import BackButton from "../../../components/BackButton/BackButton"
-
-
+import EditButton from "../../../components/EditButton/EditButon";
+import BackButton from "../../../components/BackButton/BackButton";
+import PreLoader from "../../../components/PreLoader/PreLoader";
 
 const InfoRow = ({ label, value }) => {
   const renderValue = () => {
@@ -26,84 +25,45 @@ function Profile() {
   const { profile } = useAuth();
 
   if (!profile) {
-    return <div>Loading...</div>;
+    return (
+      <div className="show-container ">
+        <PreLoader />
+      </div>
+    );
   }
-
 
   return (
     <div className="profile-user">
       <h1>Profile</h1>
       <div className="profile-user__card">
         <BackButton to="/my-quiz/all-words/" />
-        <InfoRow
-          label="Customer Number:"
-          value={profile.customer_number}
-        />
+        <InfoRow label="Customer Number:" value={profile.customer_number} />
 
-        <InfoRow
-          label="User name:"
-          value={profile.username}
-        />
+        <InfoRow label="User name:" value={profile.username} />
 
-        <InfoRow
-          label="Title:"
-          value={profile.title}
-        />
+        <InfoRow label="Title:" value={profile.title} />
 
-        <InfoRow
-          label="First Name:"
-          value={profile.first_name}
-        />
+        <InfoRow label="First Name:" value={profile.first_name} />
 
-        <InfoRow
-          label="Last Name:"
-          value={profile.last_name}
-        />
+        <InfoRow label="Last Name:" value={profile.last_name} />
 
-        <InfoRow
-          label="Email:"
-          value={profile.email}
-        />
+        <InfoRow label="Email:" value={profile.email} />
 
-        <InfoRow
-          label="Phone:"
-          value={profile.phone}
-        />
+        <InfoRow label="Phone:" value={profile.phone} />
 
-        <InfoRow
-          label="Street:"
-          value={profile.street}
-        />
+        <InfoRow label="Street:" value={profile.street} />
 
-        <InfoRow
-          label="Street number:"
-          value={profile.street_number}
-        />
+        <InfoRow label="Street number:" value={profile.street_number} />
 
-        <InfoRow
-          label="City:"
-          value={profile.city}
-        />
+        <InfoRow label="City:" value={profile.city} />
 
-        <InfoRow
-          label="Postal Code:"
-          value={profile.postcode}
-        />
+        <InfoRow label="Postal Code:" value={profile.postcode} />
 
-        <InfoRow
-          label="Subscription:"
-          value={profile.has_subscription}
-        />
+        <InfoRow label="Subscription:" value={profile.has_subscription} />
 
-        <InfoRow
-          label="Description:"
-          value={profile.description}
-        />
-        
-        <InfoRow
-          label="Active:"
-          value={profile.is_active}
-        />
+        <InfoRow label="Description:" value={profile.description} />
+
+        <InfoRow label="Active:" value={profile.is_active} />
 
         <InfoRow
           label="Created:"
@@ -122,8 +82,7 @@ function Profile() {
               : "-"
           }
         />
-      <EditButton to="/my-quiz/edit-profile" className="edit-button"/>
-        
+        <EditButton to="/my-quiz/edit-profile" className="edit-button" />
       </div>
     </div>
   );

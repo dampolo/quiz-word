@@ -5,6 +5,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import useDialog from "../../context/DialogContext/useDialgo";
 import BackButton from "../../components/BackButton/BackButton";
 import { toast } from 'react-toastify';
+import PreLoader from "../../components/PreLoader/PreLoader";
 
 export default function EditWord() {
   const {
@@ -103,7 +104,7 @@ export default function EditWord() {
   }, [formData.language_name]);
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <PreLoader />;
   }
 
   return (

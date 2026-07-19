@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import FormDialog from "../../components/FormDialog/FormDialog";
 import useQuiz from "../../context/useQuiz";
+import PreLoader from "../../components/PreLoader/PreLoader";
 
 function AllWords() {
   const { words, loading, languages, getFiltredWords } = useVocabulary();
@@ -13,8 +14,8 @@ function AllWords() {
   const [active, setActive] = useState("");
   const { createQuiz } = useQuiz();
 
-    console.log(active);
-    
+  console.log(active);
+
   function handleCheckboxChange(id, checked) {
     setSelectedWordIds((prev) => {
       if (checked) {
@@ -50,7 +51,11 @@ function AllWords() {
   }, [language]);
 
   if (loading) {
-    return <p>Loading...</p>;
+    return (
+      <div className="show-container ">
+      <PreLoader />
+      </div>
+    )
   }
 
   return (
@@ -85,21 +90,22 @@ function AllWords() {
           {languages
             .filter((lang) => lang.language_name === "Without")
             .map((lang) => (
-              <li className={ active === lang.language_name
-                ? "language-single active"
-                : "language-single"
-              }
+              <li
+                className={
+                  active === lang.language_name
+                    ? "language-single active"
+                    : "language-single"
+                }
                 key={lang.id}
-              
               >
                 <button
                   className="language-button"
-                  onClick={() => {{
-                    setLanguage(lang.language_name); 
-                    setActive(lang.language_name);
+                  onClick={() => {
+                    {
+                      setLanguage(lang.language_name);
+                      setActive(lang.language_name);
+                    }
                   }}
-                    
-                  }
                 >
                   Ohne
                 </button>
@@ -109,19 +115,20 @@ function AllWords() {
           {languages
             .filter((lang) => lang.language_name !== "Without")
             .map((lang) => (
-              <li className={ active === lang.language_name
-                ? "language-single active"
-                : "language-single" 
-              }
-              key={lang.id}
+              <li
+                className={
+                  active === lang.language_name
+                    ? "language-single active"
+                    : "language-single"
+                }
+                key={lang.id}
               >
                 <button
                   className="language-button"
                   onClick={() => {
-                    setLanguage(lang.language_name); 
+                    setLanguage(lang.language_name);
                     setActive(lang.language_name);
-                  }
-                }
+                  }}
                 >
                   {lang.language_name}
                 </button>
