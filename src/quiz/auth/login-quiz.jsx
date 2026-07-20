@@ -83,7 +83,7 @@ function LoginQuiz() {
 
         <form onSubmit={loginWithEmailAndPassword}>
           <div className="input-container">
-            <label for="email">E-Mail-Adresse</label>
+            <label htmlFor="email">E-Mail-Adresse</label>
             <input
               className="input-field"
               type="email"
@@ -108,7 +108,7 @@ function LoginQuiz() {
           </div>
 
           <div className="input-container">
-            <label for="password">Passwort</label>
+            <label htmlFor="password">Passwort</label>
             <input
               autoComplete="current-password"
               className="input-field"
