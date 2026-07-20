@@ -5,7 +5,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import BackButton from "../../components/BackButton/BackButton";
 
 function EditCategory() {
-  const { getCategory, updateCategory, getCategories } = useVocabulary();
+  const { getCategory, updateCategory, getCategories, languages } = useVocabulary();
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -62,6 +62,25 @@ function EditCategory() {
       </div>
 
       <form className="category-form" onSubmit={handleSubmit}>
+        <div className="form-group category-group">
+          <label>
+            Sprache <span>*</span>
+          </label>
+
+          <select
+            name="language_id"
+            value={formData.language_id}
+            onChange={handleChange}
+            required
+          >
+            {languages.map((lang) => (
+              <option key={lang.id} value={lang.id}>
+                {lang.language_name}
+              </option>
+            ))}
+          </select>
+        </div>
+        
         <label htmlFor="categoryName">Category Name</label>
 
         <div className="input-wrap">

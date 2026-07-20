@@ -28,7 +28,7 @@ function AddNewCategory() {
 
     try {
       await createCategory(formData);
-      setFormData({ name: "" });
+      setFormData({ language_id: "", name: "" });
       navigate("/my-quiz/vocabulary-categories/");
     } catch (err) {
       console.error(err);
