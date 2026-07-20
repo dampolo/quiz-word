@@ -5,7 +5,7 @@ import "./edit-profile.scss";
 import { useAuth } from "../../../../context/useAuth";
 import BackButton from "../../../../components/BackButton/BackButton";
 import PreLoader from "../../../../components/PreLoader/PreLoader";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 
 function InfoRow({
   label,
@@ -69,8 +69,8 @@ function InfoRow({
           />
         )}
       </div>
-       {error && <p className="warn-txt warn-profile">{error}</p>}
-     </div>
+      {error && <p className="warn-txt warn-profile">{error}</p>}
+    </div>
   );
 }
 
@@ -143,9 +143,11 @@ function EditProfile() {
   }
 
   if (!profile) {
-    <div className="show-container ">
-      <PreLoader />
-    </div>;
+    return (
+      <div className="show-container ">
+        <PreLoader />
+      </div>
+    );
   }
 
   return (
