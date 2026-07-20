@@ -3,6 +3,7 @@ import useVocabulary from "../../context/useVocabulary";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import BackButton from "../../components/BackButton/BackButton";
+import PreLoader from "../../components/PreLoader/PreLoader";
 
 export default function AddNewWord() {
   const { categories, loading, createWord, getFiltredCategories, languages } =
@@ -59,9 +60,13 @@ export default function AddNewWord() {
     getFiltredCategories(formData.language_name);
   }, [formData.language_name]);
 
-  // if (loading) {
-  //   return <p>Loading...</p>;
-  // }
+  if (loading) {
+    return (
+      <div className="show-container ">
+        <PreLoader />
+      </div>
+    );
+  }
 
   return (
     <section className="add-word-page">
@@ -135,7 +140,7 @@ export default function AddNewWord() {
               required
             />
 
-            <label htmlFor="source_tip" >Mnemonic Tip (Optional)</label>
+            <label htmlFor="source_tip">Mnemonic Tip (Optional)</label>
             <input
               name="source_tip"
               value={formData.source_tip || ""}
