@@ -13,7 +13,7 @@ function InfoRow({
   name,
   type = "text",
   onChange,
-  readOnly = false,
+  isReadOnly = false,
   error,
 }) {
   const renderValue = () => {
@@ -27,7 +27,7 @@ function InfoRow({
   return (
     <div className="profile-user__single">
       <div className="profile-user__row">
-        {readOnly ? (
+        {isReadOnly ? (
           <span className="profile-user__label">{label}</span>
         ) : (
           <label htmlFor={name} className="profile-user__label">
@@ -35,7 +35,7 @@ function InfoRow({
           </label>
         )}
 
-        {readOnly ? (
+        {isReadOnly ? (
           <span className="profile-user__value">{renderValue()}</span>
         ) : type === "checkbox" ? (
           <input
@@ -100,7 +100,7 @@ function EditProfile() {
       setForm({
         id: profile.id,
         title: profile.title || "",
-        user: profile.username,
+        username: profile.username,
         first_name: profile.first_name || "",
         last_name: profile.last_name || "",
         email: profile.email || "",
@@ -159,10 +159,14 @@ function EditProfile() {
         <InfoRow
           label="Customer Number:"
           value={profile.customer_number}
-          readOnly
+          isReadOnly
         />
 
-        <InfoRow label="User name:" value={profile.username} readOnly />
+        <InfoRow 
+          label="User name:" 
+          value={profile.username} 
+          isReadOnly 
+        />
 
         <InfoRow
           label="Title:"
@@ -256,7 +260,7 @@ function EditProfile() {
           name="is_active"
           type="checkbox"
           value={form.is_active}
-          readOnly
+          isReadOnly
         />
 
         <InfoRow
@@ -266,7 +270,7 @@ function EditProfile() {
               ? new Date(profile.created_at).toLocaleDateString()
               : "-"
           }
-          readOnly
+          isReadOnly
         />
 
         <InfoRow
@@ -276,7 +280,7 @@ function EditProfile() {
               ? new Date(profile.updated_at).toLocaleDateString()
               : "-"
           }
-          readOnly
+          isReadOnly
         />
         <div className="action-buttons">
           <Link to="/my-quiz/profile" className="main-quiz-button-cancel">
