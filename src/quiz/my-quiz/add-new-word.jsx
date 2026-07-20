@@ -75,7 +75,7 @@ export default function AddNewWord() {
 
       <form className="word-card" onSubmit={handleSubmit}>
         <div className="form-group category-group">
-          <label>
+          <label htmlFor="language_name">
             Sprache <span>*</span>
           </label>
 
@@ -123,7 +123,7 @@ export default function AddNewWord() {
               <strong>SOURCE WORD</strong>
             </div>
 
-            <label>
+            <label htmlFor="source_word">
               Term <span>*</span>
             </label>
             <input
@@ -135,7 +135,7 @@ export default function AddNewWord() {
               required
             />
 
-            <label>Mnemonic Tip (Optional)</label>
+            <label htmlFor="source_tip" >Mnemonic Tip (Optional)</label>
             <input
               name="source_tip"
               value={formData.source_tip || ""}
@@ -143,7 +143,7 @@ export default function AddNewWord() {
               placeholder="Visualize a spring bouncing back"
             />
 
-            <label>Example Sentence (Optional)</label>
+            <label htmlFor="source_sentence">Example Sentence (Optional)</label>
             <textarea
               name="source_sentence"
               value={formData.source_sentence || ""}
@@ -159,7 +159,7 @@ export default function AddNewWord() {
               <strong>TARGET WORD</strong>
             </div>
 
-            <label>
+            <label htmlFor="target_word">
               Translation <span>*</span>
             </label>
             <input
@@ -171,7 +171,7 @@ export default function AddNewWord() {
               required
             />
 
-            <label>Mnemonic Tip (Optional)</label>
+            <label htmlFor="target_tip">Mnemonic Tip (Optional)</label>
             <input
               name="target_tip"
               value={formData.target_tip || ""}
@@ -179,7 +179,7 @@ export default function AddNewWord() {
               placeholder="Sounds like 'silence' at the end"
             />
 
-            <label>Example Sentence (Optional)</label>
+            <label htmlFor="target_sentence">Example Sentence (Optional)</label>
             <textarea
               name="target_sentence"
               value={formData.target_sentence || ""}
