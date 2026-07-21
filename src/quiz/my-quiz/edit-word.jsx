@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import useDialog from "../../context/DialogContext/useDialgo";
 import BackButton from "../../components/BackButton/BackButton";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 import PreLoader from "../../components/PreLoader/PreLoader";
 
 export default function EditWord() {
@@ -24,7 +24,6 @@ export default function EditWord() {
   const { id } = useParams();
   const navigate = useNavigate();
 
-
   const [formData, setFormData] = useState({
     language_name: "",
     language_id: "",
@@ -40,6 +39,8 @@ export default function EditWord() {
   async function handleSubmit(e) {
     e.preventDefault();
 
+    console.log(formData);
+    
     try {
       await updateWord(Number(id), formData);
       toast.success("Word updated successfully!");
@@ -51,13 +52,26 @@ export default function EditWord() {
   }
 
   function handleChange(e) {
-    console.log(e.type, e.target.name, e.target.value);
     const { name, value } = e.target;
 
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    if (name === "language_id") {
+      const selected = languages.find((lang) => String(lang.id) === value);
+
+      setFormData((prev) => ({
+        ...prev,
+        language_id: value,
+        language_name: selected?.language_name || "",
+      }));
+    } else {
+      setFormData((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+
+    }
+
+    console.log("Update: ", formData);
+
   }
 
   function handleDelete() {
@@ -88,7 +102,7 @@ export default function EditWord() {
       try {
         const word = await getWord(id);
         console.log(word);
-        
+
         setFormData(word);
       } catch (err) {
         console.error(err);
@@ -104,7 +118,11 @@ export default function EditWord() {
   }, [formData.language_name]);
 
   if (loading) {
-    return <PreLoader />;
+    return (
+      <div className="show-container ">
+        <PreLoader />
+      </div>
+    );
   }
 
   return (
@@ -123,14 +141,18 @@ export default function EditWord() {
             Sprache <span>*</span>
           </label>
 
+          <option value="">Select Language</option>
+
           <select
-            name="language_name"
-            value={formData.language_name}
+            name="language_id"
+            value={formData.language_id ?? ""}
             onChange={handleChange}
             required
           >
+            <option value="">Wähle Sprache</option>
+
             {languages.map((lang) => (
-              <option key={lang.id} value={lang.language_name}>
+              <option key={lang.id} value={lang.id}>
                 {lang.language_name}
               </option>
             ))}
@@ -142,6 +164,8 @@ export default function EditWord() {
             <label>
               Kategorie <span>*</span>
             </label>
+
+            <option value="">Wähle Kategorie</option>
 
             <select
               name="category"
@@ -175,7 +199,7 @@ export default function EditWord() {
               value={formData.source_word || ""}
               onChange={handleChange}
               placeholder="e.g. Resilience"
-              autocomplete="off"
+              autoComplete="off"
               required
             />
 

@@ -29,8 +29,6 @@ export function AuthProvider({ children }) {
       const user = await response.json();
 
       setUser(user);
-      console.log(user);
-
       return true;
     } catch {
       setUser(null);
@@ -55,7 +53,6 @@ export function AuthProvider({ children }) {
 
       const data = await response.json();
       setProfile(data);
-      console.log("Profile:", data);
       setLoading(false);
     } catch (error) {
       console.error(error);

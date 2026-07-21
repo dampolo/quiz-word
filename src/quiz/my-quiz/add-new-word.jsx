@@ -31,7 +31,8 @@ export default function AddNewWord() {
 
       // Reset form
       setFormData({
-        language_name: "",
+        language: "",
+        language_id: "",
         category: "",
         source_word: "",
         target_word: "",
@@ -56,9 +57,9 @@ export default function AddNewWord() {
   }
 
   useEffect(() => {
-    if (!formData.language_name) return;
-    getFiltredCategories(formData.language_name);
-  }, [formData.language_name]);
+    if (!formData.language) return;
+    getFiltredCategories(formData.language);
+  }, [formData.language]);
 
   if (loading) {
     return (
@@ -84,6 +85,8 @@ export default function AddNewWord() {
             Sprache <span>*</span>
           </label>
 
+          <option value="">Wähle Sprache</option>
+
           <select
             name="language_name"
             value={formData.language_name}
@@ -103,6 +106,8 @@ export default function AddNewWord() {
             <label>
               Kategorie <span>*</span>
             </label>
+
+            <option value="">Wähle Kategorie</option>
 
             <select
               name="category"

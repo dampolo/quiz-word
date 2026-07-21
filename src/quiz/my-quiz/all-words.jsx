@@ -102,7 +102,9 @@ function AllWords() {
                   className="language-button"
                   onClick={() => {
                     {
-                      setLanguage(lang.language_name);
+                      setLanguage(lang.id);
+                      console.log(lang.id);
+                      
                       setActive(lang.language_name);
                     }
                   }}
@@ -126,7 +128,7 @@ function AllWords() {
                 <button
                   className="language-button"
                   onClick={() => {
-                    setLanguage(lang.language_name);
+                    setLanguage(lang.id);
                     setActive(lang.language_name);
                   }}
                 >
