@@ -238,6 +238,10 @@ export function VocabularyProvider({ children }) {
     loadData();
   }, []);
 
+  function clearCategories() {
+  setCategories([]);
+}
+
   return (
     <VocabularyContext.Provider
       value={{
@@ -246,6 +250,7 @@ export function VocabularyProvider({ children }) {
         loading,
         languages,
         getWords,
+        clearCategories,
         getLanguages,
         getWord,
         getFiltredWords,

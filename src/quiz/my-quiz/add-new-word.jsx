@@ -6,8 +6,14 @@ import BackButton from "../../components/BackButton/BackButton";
 import PreLoader from "../../components/PreLoader/PreLoader";
 
 export default function AddNewWord() {
-  const { categories, loading, createWord, getFiltredCategories, languages } =
-    useVocabulary();
+  const {
+    categories,
+    loading,
+    createWord,
+    getFiltredCategories,
+    clearCategories,
+    languages,
+  } = useVocabulary();
 
   const [formData, setFormData] = useState({
     language_id: "",
@@ -47,7 +53,22 @@ export default function AddNewWord() {
 
   function handleChange(e) {
     const { name, value } = e.target;
-    console.log(formData);
+
+    console.log("Data: ", formData);
+    
+    if (name === "language_id") {
+      setFormData((prev) => ({
+        ...prev,
+        language_id: value,
+        category: "", // reset category immediately
+      }));
+
+      if (!value) {
+        clearCategories();
+      }
+
+      return;
+    }
 
     setFormData((prev) => ({
       ...prev,
@@ -84,13 +105,12 @@ export default function AddNewWord() {
             Sprache <span>*</span>
           </label>
 
-
           <select
             name="language_id"
             value={formData.language_id}
             onChange={handleChange}
           >
-          <option value="">Wähle Sprache</option>
+            <option value="">Wähle Sprache</option>
             {languages.map((lang) => (
               <option key={lang.id} value={lang.id}>
                 {lang.language_name}
@@ -105,13 +125,13 @@ export default function AddNewWord() {
               Kategorie <span>*</span>
             </label>
 
-
             <select
               name="category"
               value={formData.category}
               onChange={handleChange}
+              required
             >
-            <option value="">Wähle Kategorie</option>
+              <option value="">Wähle Kategorie</option>
               {categories.map((category) => (
                 <option key={category.id} value={category.id}>
                   {category.name}
