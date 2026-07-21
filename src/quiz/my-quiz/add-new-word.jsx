@@ -10,7 +10,6 @@ export default function AddNewWord() {
     useVocabulary();
 
   const [formData, setFormData] = useState({
-    language_name: "",
     language_id: "",
     category: "",
     source_word: "",
@@ -57,9 +56,9 @@ export default function AddNewWord() {
   }
 
   useEffect(() => {
-    if (!formData.language) return;
-    getFiltredCategories(formData.language);
-  }, [formData.language]);
+    if (!formData.language_id) return;
+    getFiltredCategories(formData.language_id);
+  }, [formData.language_id]);
 
   if (loading) {
     return (
@@ -85,16 +84,15 @@ export default function AddNewWord() {
             Sprache <span>*</span>
           </label>
 
-          <option value="">Wähle Sprache</option>
 
           <select
-            name="language_name"
-            value={formData.language_name}
+            name="language_id"
+            value={formData.language_id}
             onChange={handleChange}
-            required
           >
+          <option value="">Wähle Sprache</option>
             {languages.map((lang) => (
-              <option key={lang.id} value={lang.language_name}>
+              <option key={lang.id} value={lang.id}>
                 {lang.language_name}
               </option>
             ))}
@@ -107,14 +105,13 @@ export default function AddNewWord() {
               Kategorie <span>*</span>
             </label>
 
-            <option value="">Wähle Kategorie</option>
 
             <select
               name="category"
               value={formData.category}
               onChange={handleChange}
-              required
             >
+            <option value="">Wähle Kategorie</option>
               {categories.map((category) => (
                 <option key={category.id} value={category.id}>
                   {category.name}

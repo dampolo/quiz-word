@@ -92,7 +92,7 @@ export function VocabularyProvider({ children }) {
 
   async function getFiltredCategories(id) {
     try {
-      const response = await fetch(`${api}categories/?target_language__language_name=${id}`, {
+      const response = await fetch(`${api}categories/?target_language=${id}`, {
         credentials: "include",
         headers: {
           "Content-Type": "application/json",
