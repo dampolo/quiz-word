@@ -1,9 +1,10 @@
 // import "./add-new-word.scss";
 import useVocabulary from "../../context/useVocabulary";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import BackButton from "../../components/BackButton/BackButton";
 import PreLoader from "../../components/PreLoader/PreLoader";
+import { toast } from "react-toastify";
 
 export default function AddNewWord() {
   const {
@@ -14,6 +15,8 @@ export default function AddNewWord() {
     clearCategories,
     languages,
   } = useVocabulary();
+
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     language_id: "",
@@ -33,6 +36,8 @@ export default function AddNewWord() {
 
     try {
       await createWord(formData);
+      toast.success("Word added successfully!");
+      navigate("/my-quiz/all-words/");
 
       // Reset form
       setFormData({
@@ -55,7 +60,7 @@ export default function AddNewWord() {
     const { name, value } = e.target;
 
     console.log("Data: ", formData);
-    
+
     if (name === "language_id") {
       setFormData((prev) => ({
         ...prev,
@@ -79,6 +84,10 @@ export default function AddNewWord() {
     if (!formData.language_id) return;
     getFiltredCategories(formData.language_id);
   }, [formData.language_id]);
+
+  useEffect(() => {
+    clearCategories();
+  }, []);
 
   if (loading) {
     return (

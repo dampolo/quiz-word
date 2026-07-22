@@ -25,7 +25,6 @@ export default function EditWord() {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    language_name: "",
     language_id: "",
     category: "",
     source_word: "",
@@ -40,11 +39,13 @@ export default function EditWord() {
     e.preventDefault();
 
     console.log(formData);
-    
+
     try {
       await updateWord(Number(id), formData);
       toast.success("Word updated successfully!");
       navigate("/my-quiz/all-words/");
+      console.log("Form Data: ", formData);
+
       getWords();
     } catch (err) {
       console.error(err);
@@ -54,24 +55,12 @@ export default function EditWord() {
   function handleChange(e) {
     const { name, value } = e.target;
 
-    if (name === "language_id") {
-      const selected = languages.find((lang) => String(lang.id) === value);
-
-      setFormData((prev) => ({
-        ...prev,
-        language_id: value,
-        language_name: selected?.language_name || "",
-      }));
-    } else {
-      setFormData((prev) => ({
-        ...prev,
-        [name]: value,
-      }));
-
-    }
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
 
     console.log("Update: ", formData);
-
   }
 
   function handleDelete() {
@@ -117,6 +106,15 @@ export default function EditWord() {
     getFiltredCategories(formData.language_id);
   }, [formData.language_id]);
 
+  useEffect(() => {
+    if (categories.length > 0) {
+      setFormData((prev) => ({
+        ...prev,
+        category: categories[0].id,
+      }));
+    }
+  }, [categories]);
+
   if (loading) {
     return (
       <div className="show-container ">
@@ -145,7 +143,7 @@ export default function EditWord() {
 
           <select
             name="language_id"
-            value={formData.language_id ?? ""}
+            value={formData.language_id}
             onChange={handleChange}
             required
           >
@@ -212,7 +210,7 @@ export default function EditWord() {
               placeholder="Visualize a spring bouncing back"
             />
 
-            <label htmlFor="source_sentence" >Example Sentence (Optional)</label>
+            <label htmlFor="source_sentence">Example Sentence (Optional)</label>
             <textarea
               name="source_sentence"
               value={formData.source_sentence || ""}
