@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-
 import "./navbar-customer.scss"
+import { NavLink } from "react-router-dom";
 import { useState } from "react";
 
 function NavbarCustomer() {
@@ -11,69 +11,49 @@ function NavbarCustomer() {
   return (
     <ul  className="navbar-customer">
       <li>
-        <Link
+        <NavLink
           to="/my-quiz/vocabulary-categories"
-          onClick={() => setActive("vocabulary-categories")}
-          className={
-                  active === "vocabulary-categories"
-                    ? "active"
-                    : ""
-                }
+          className={({ isActive }) => (isActive ? "active" : "")}
         >
           <img width={24} height={24} src="/assets/categories-icon.svg" alt="" />
           <span className="nav-link-text">Categories</span>
-        </Link>
+        </NavLink>
       </li>
       <li>
-        <Link
+        <NavLink
           to="/my-quiz/all-words/"
-          onClick={() => setActive("all-words")}
-          className={
-                  active === "all-words"
-                    ? "active"
-                    : ""
-                }
+          className={({ isActive }) => (isActive ? "active" : "")}
         >
           <img width={24} height={24} src="/assets/words.svg" alt="" />
           <span className="nav-link-text">All Words</span>
-        </Link>
+        </NavLink>
       </li>
 
        <li className="add-new-word">
-        <Link
+        <NavLink
           to="/my-quiz/add-new-word"
-          onClick={() => setActive("add-new-word")}
-          className={
-                  active === "add-new-word"
-                    ? "active"
-                    : ""
-                }
+          className={({ isActive }) => (isActive ? "active" : "")}
         >
           <img width={24} height={24} src="/assets/add.svg" alt="" />
           <span className="nav-link-text">new</span>
-        </Link>
+        </NavLink>
       </li>
 
       <li>
-        <Link
+        <NavLink
           to="/my-quiz/quizzes/"
-          onClick={() => setActive("quizzes")}
-          className={
-                  active === "quizzes"
-                    ? "active"
-                    : ""
-                }
+          className={({ isActive }) => (isActive ? "active" : "")}
         >
           <img width={24} height={24} src="/assets/quiz-icon.svg" alt="" />
           <span className="nav-link-text">Quizzes</span>
-        </Link>
+        </NavLink>
       </li>
 
       <li>
-        <Link to="einstellungen" onClick={closeMenu}>
+        <NavLink to="einstellungen" onClick={closeMenu}>
           <img width={25} height={25} src="/assets/trash.svg" alt="" />
           <span className="nav-link-text">Trash</span>
-        </Link>
+        </NavLink>
       </li>
     </ul>
   );
