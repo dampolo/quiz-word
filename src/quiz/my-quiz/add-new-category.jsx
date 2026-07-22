@@ -52,7 +52,7 @@ function AddNewCategory() {
 
       <form className="category-form" onSubmit={handleSubmit}>
         <div className="form-group category-group">
-          <label>
+          <label htmlFor="language_id">
             Sprache <span>*</span>
           </label>
 
