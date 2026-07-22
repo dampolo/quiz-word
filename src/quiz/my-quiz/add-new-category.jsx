@@ -3,10 +3,12 @@ import { Link, useNavigate } from "react-router-dom";
 import useVocabulary from "../../context/useVocabulary";
 import { useState } from "react";
 import BackButton from "../../components/BackButton/BackButton";
+import PreLoader from "../../components/PreLoader/PreLoader";
+import { toast } from "react-toastify";
 
 function AddNewCategory() {
-  const { createCategory, languages } = useVocabulary();
-  const navigate = useNavigate()
+  const { createCategory, languages, loading } = useVocabulary();
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     language_id: "",
@@ -22,19 +24,25 @@ function AddNewCategory() {
     }));
   }
 
-
   async function handleSubmit(e) {
     e.preventDefault();
 
     try {
       await createCategory(formData);
       setFormData({ language_id: "", name: "" });
+      toast.success("Category added successfully!");
       navigate("/my-quiz/vocabulary-categories/");
     } catch (err) {
       console.error(err);
-      
     }
+  }
 
+  if (loading) {
+    return (
+      <div className="show-container ">
+        <PreLoader />
+      </div>
+    );
   }
 
   return (

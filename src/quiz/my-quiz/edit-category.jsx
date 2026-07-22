@@ -3,9 +3,12 @@ import useVocabulary from "../../context/useVocabulary";
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import BackButton from "../../components/BackButton/BackButton";
+import PreLoader from "../../components/PreLoader/PreLoader";
+import { toast } from "react-toastify";
+
 
 function EditCategory() {
-  const { getCategory, updateCategory, getCategories, languages } = useVocabulary();
+  const { getCategory, updateCategory, getCategories, languages, loading } = useVocabulary();
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -18,6 +21,7 @@ function EditCategory() {
     e.preventDefault();
     try {
       await updateCategory(Number(id), formData);
+      toast.success("Category updated successfully!");
       navigate("/my-quiz/vocabulary-categories/");
       getCategories()
     } catch (err) {
@@ -48,6 +52,14 @@ function EditCategory() {
 
     loadCategry();
   }, [id]);
+
+  if (loading) {
+    return (
+      <div className="show-container ">
+        <PreLoader />
+      </div>
+    );
+  }
 
   return (
     <section className="add-category-card">
