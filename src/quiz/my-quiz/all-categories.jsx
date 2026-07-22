@@ -10,8 +10,6 @@ export default function VocabularyCategories() {
   const [language, setLanguage] = useState("");
   const [active, setActive] = useState("");
 
-  console.log(categories);
-
   useEffect(() => {
     getFiltredCategories(language);
   }, [language]);
@@ -56,7 +54,7 @@ export default function VocabularyCategories() {
                   className="language-button"
                   onClick={() => {
                     {
-                      setLanguage(lang.language_name);
+                      setLanguage(lang.id);
                       setActive(lang.language_name);
                     }
                   }}
@@ -81,7 +79,7 @@ export default function VocabularyCategories() {
                   className="language-button"
                   onClick={() => {
                     {
-                      setLanguage(lang.language_name);
+                      setLanguage(lang.id);
                       setActive(lang.language_name);
                     }
                   }}
