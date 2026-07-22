@@ -113,9 +113,9 @@ export default function EditWord() {
   }, [id]);
 
   useEffect(() => {
-    if (!formData.language_name) return;
-    getFiltredCategories(formData.language_name);
-  }, [formData.language_name]);
+    if (!formData.language_id) return;
+    getFiltredCategories(formData.language_id);
+  }, [formData.language_id]);
 
   if (loading) {
     return (
@@ -137,7 +137,7 @@ export default function EditWord() {
 
       <form className="word-card" onSubmit={handleSubmit}>
         <div className="form-group category-group">
-          <label>
+          <label htmlFor="language_id">
             Sprache <span>*</span>
           </label>
 
@@ -161,7 +161,7 @@ export default function EditWord() {
 
         {categories.length > 0 && (
           <div className="form-group category-group">
-            <label>
+            <label htmlFor="category">
               Kategorie <span>*</span>
             </label>
 
@@ -191,7 +191,7 @@ export default function EditWord() {
               <strong>SOURCE WORD</strong>
             </div>
 
-            <label>
+            <label htmlFor="source_word">
               Term <span>*</span>
             </label>
             <input
@@ -203,15 +203,16 @@ export default function EditWord() {
               required
             />
 
-            <label>Mnemonic Tip (Optional)</label>
+            <label htmlFor="source_tip">Mnemonic Tip (Optional)</label>
             <input
+              type="text"
               name="source_tip"
               value={formData.source_tip || ""}
               onChange={handleChange}
               placeholder="Visualize a spring bouncing back"
             />
 
-            <label>Example Sentence (Optional)</label>
+            <label htmlFor="source_sentence" >Example Sentence (Optional)</label>
             <textarea
               name="source_sentence"
               value={formData.source_sentence || ""}
@@ -227,7 +228,7 @@ export default function EditWord() {
               <strong>TARGET WORD</strong>
             </div>
 
-            <label>
+            <label htmlFor="target_word">
               Translation <span>*</span>
             </label>
             <input
@@ -240,7 +241,7 @@ export default function EditWord() {
               required
             />
 
-            <label>Mnemonic Tip (Optional)</label>
+            <label htmlFor="target_tip">Mnemonic Tip (Optional)</label>
             <input
               name="target_tip"
               value={formData.target_tip || ""}
@@ -249,7 +250,7 @@ export default function EditWord() {
               placeholder="Sounds like 'silence' at the end"
             />
 
-            <label>Example Sentence (Optional)</label>
+            <label htmlFor="target_sentence">Example Sentence (Optional)</label>
             <textarea
               name="target_sentence"
               value={formData.target_sentence || ""}

@@ -66,7 +66,6 @@ export default function AddNewWord() {
       if (!value) {
         clearCategories();
       }
-
       return;
     }
 
