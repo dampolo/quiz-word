@@ -166,7 +166,7 @@ export default function AddNewWord() {
               value={formData.source_word || ""}
               onChange={handleChange}
               placeholder="e.g. Resilience"
-              autocomplete="off"
+              autoComplete="off"
               required
             />
 
@@ -202,7 +202,7 @@ export default function AddNewWord() {
               value={formData.target_word || ""}
               onChange={handleChange}
               placeholder="e.g. Resiliencia"
-              autocomplete="off"
+              autoComplete="off"
               required
             />
 
