@@ -1,12 +1,10 @@
 import { Link } from "react-router-dom";
 import "./navbar-customer.scss"
 import { NavLink } from "react-router-dom";
-import { useState } from "react";
 
 function NavbarCustomer() {
   function closeMenu() {}
 
-  const [active, setActive] = useState("");
 
   return (
     <ul  className="navbar-customer">
