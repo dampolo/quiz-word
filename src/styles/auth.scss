@@ -26,7 +26,7 @@ main {
       margin-bottom: 1.875rem;
       .form-title-name {
         color: basic.$color-primary-indigo;
-        font-size: 1.875rem;
+        font-size: 1.8rem;
         font-weight: 700;
         line-height: normal;
         text-align: center;
@@ -38,6 +38,10 @@ main {
       .new-user-link {
         color: basic.$color-primary-indigo;
         border: 0.125rem dotted transparent;
+        display: inline-block;
+        &.confirmation {
+          margin-top: 1rem;
+        }
 
         &:hover {
           text-decoration: underline;
@@ -266,20 +270,23 @@ main .main-content-customer .btn-container .back-button {
 }
 
 @media (max-width: 31.25rem) {
-  .main-content-customer {
-    padding: 0.5rem;
-    margin: 0;
-  }
-  .main-content {
-    .btn-container {
-      gap: 0.875rem;
-      .login-btn,
-      .guest-btn {
-        padding: 0.625rem 0.3125rem;
-      }
+  main {
+    margin: 0.5rem;
+    .main-content-customer {
+      padding: 0.5rem;
+      margin: 0;
     }
-    .legal-imprint-container {
-      gap: 0;
+    .main-content {
+      .btn-container {
+        gap: 0.875rem;
+        .login-btn,
+        .guest-btn {
+          padding: 0.625rem 0.3125rem;
+        }
+      }
+      .legal-imprint-container {
+        gap: 0;
+      }
     }
   }
 }

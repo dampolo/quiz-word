@@ -19,7 +19,7 @@ function Confirmation() {
             E-Mail bestätigen!'
           </p>
 
-          <Link className="new-user-link" to="/login">Anmelden</Link>
+          <Link className="new-user-link confirmation" to="/login">Anmelden</Link>
         </div>
       </section>
     </main>
