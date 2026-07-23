@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./forgot-password.scss";
 import { Link } from "react-router-dom";
+import BackButton from "../../components/BackButton/BackButton";
 
 function ForgotPassword() {
   const initialValues = { email: "" };
@@ -38,9 +39,7 @@ function ForgotPassword() {
   return (
     <main>
       <section className="main-content-customer">
-        <Link className="arrow-back" to="/login" aria-label="Anmelden">
-          <app-back></app-back>
-        </Link>
+        <BackButton to="/login" />
 
         <div className="form-title">
           <h1 className="form-title-name">Passwort vergessen</h1>

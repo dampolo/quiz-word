@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/useAuth";
+import BackButton from "../../components/BackButton/BackButton";
 
 function CreateAccount() {
   const initialValues = {
@@ -110,9 +111,7 @@ function CreateAccount() {
   return (
     <main>
       <section className="main-content-customer">
-        <Link className="arrow-back" to="/login" aria-label="Anmelden">
-          {/* <Back /> */}
-        </Link>
+        <BackButton to="/login" />
 
         <div className="form-title">
           <h1 className="form-title-name">Konto erstellen</h1>

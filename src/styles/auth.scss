@@ -233,7 +233,9 @@ main {
       justify-content: center;
       width: 100%;
       gap: 1rem;
-      .back-button,
+      .back-button {
+        display: none;
+      }
       .forward-btn {
         display: flex;
         width: fit-content;
@@ -275,6 +277,16 @@ main .main-content-customer .btn-container .back-button {
     .main-content-customer {
       padding: 0.5rem;
       margin: 0;
+      form {
+        .input-field {
+          padding-left: 3rem;
+        }
+        .input-container {
+          .input-icon {
+            padding: 0 1rem;
+          }
+        }
+      }
     }
     .main-content {
       .btn-container {
