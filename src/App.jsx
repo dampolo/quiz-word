@@ -27,6 +27,7 @@ import { ToastContainer } from "react-toastify";
 import Profile from "./quiz/my-quiz/Profile/profile";
 import EditProfile from "./quiz/my-quiz/Profile/EditProfile/edit-profile";
 import Confirmation from "./components/Confirmation/confirmation";
+import ChooseLanguages from "./components/ChooseLanguage/ChooseLanguage";
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
         <Route path="/create-account" element={<CreateAccount />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/confirmation" element={<Confirmation />} />
+        <Route path="/choose-languages" element={<ChooseLanguages />} />        
 
       </Route>
 
@@ -51,7 +53,6 @@ function App() {
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="profile" element={<Profile />} />
           <Route path="edit-profile" element={<EditProfile />} />
-
 
           <Route
             element={
