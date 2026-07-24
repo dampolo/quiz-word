@@ -144,3 +144,17 @@ main {
   background-color: basic.$color-background-main;
   overflow-x: hidden;
 }
+
+
+.play-quiz {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 5;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(52, 33, 214, 0.22);
+}
