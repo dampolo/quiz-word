@@ -1,12 +1,12 @@
 import * as React from "react";
-import "./../all-words.scss";
-import useQuiz from "../../../context/useQuiz";
+import "./../../all-words.scss";
+import useQuiz from "../../../../context/useQuiz";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import "./all-quiz-words.scss";
-import useDialog from "../../../context/DialogContext/useDialgo";
-import BackButton from "../../../components/BackButton/BackButton";
+import useDialog from "../../../../context/DialogContext/useDialgo";
+import BackButton from "../../../../components/BackButton/BackButton";
 
 function AllQuizWords() {
   const { getQuizWords, deleteQuiz, getAttemptQuizScore, getAttemptDetails } =
@@ -79,7 +79,7 @@ function AllQuizWords() {
 
   return (
     <div className="vocabulary">
-      <BackButton to="/my-quiz/quizzes/"/>
+      <BackButton to="/my-quiz/all-quizzes/"/>
 
       <div className="vocabulary__header">
         <div>

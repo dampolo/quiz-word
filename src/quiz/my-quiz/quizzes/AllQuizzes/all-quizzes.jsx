@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import "./quizzes.scss";
+import "./all-quizzes.scss";
 import { Link } from "react-router-dom";
-import useQuiz from "../../../context/useQuiz";
+import useQuiz from "../../../../context/useQuiz";
 
 function Quizzes() {
   const { getQuizzes } = useQuiz();

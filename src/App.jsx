@@ -20,14 +20,15 @@ import AddNewWord from "./quiz/my-quiz/add-new-word";
 import VocabularyCategories from "./quiz/my-quiz/all-categories";
 import AddNewCategory from "./quiz/my-quiz/add-new-category";
 import EditCategory from "./quiz/my-quiz/edit-category";
-import AddNewQuiz from "./quiz/my-quiz/quizzes/add-new-quiz";
-import Quizzes from "./quiz/my-quiz/quizzes/quizzes";
-import AllQuizWords from "./quiz/my-quiz/quizzes/all-quiz-words";
+import AllQuizWords from "./quiz/my-quiz/quizzes/AllQuizWords/all-quiz-words";
 import { ToastContainer } from "react-toastify";
 import Profile from "./quiz/my-quiz/Profile/profile";
 import EditProfile from "./quiz/my-quiz/Profile/EditProfile/edit-profile";
 import Confirmation from "./components/Confirmation/confirmation";
 import ChooseLanguages from "./components/ChooseLanguage/ChooseLanguage";
+import AddNewQuiz from "./quiz/my-quiz/quizzes/AddNewQuiz/add-new-quiz";
+import AllQuizzes from "./quiz/my-quiz/quizzes/AllQuizzes/all-quizzes";
+
 
 function App() {
   return (
@@ -77,7 +78,7 @@ function App() {
             <Route path=":id/edit-category" element={<EditCategory />} />
 
             {/* Quizzes */}
-            <Route path="quizzes" element={<Quizzes />} />
+            <Route path="all-quizzes" element={<AllQuizzes/>} />
             <Route path="add-new-quiz" element={<AddNewQuiz />} />
             <Route path=":id/all-quiz-words" element={<AllQuizWords />} />
           </Route>
