@@ -29,7 +29,7 @@ export function VocabularyProvider({ children }) {
       }
 
       const data = await response.json();
-      console.log("Response:", data);
+      // console.log("Response:", data);
       setWords(data);
       setLoading(false);
     } catch (error) {
@@ -63,7 +63,7 @@ export function VocabularyProvider({ children }) {
       throw new Error("Failed to load languages.");
     }
     const data = await response.json();
-    console.log("Response:", data);
+    // console.log("Response:", data);
     setLanguages(data);
   }
 

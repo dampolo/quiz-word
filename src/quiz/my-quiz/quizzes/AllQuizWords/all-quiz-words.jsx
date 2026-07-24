@@ -9,17 +9,13 @@ import useDialog from "../../../../context/DialogContext/useDialgo";
 import BackButton from "../../../../components/BackButton/BackButton";
 
 function AllQuizWords() {
-  const { getQuizWords, deleteQuiz, getAttemptQuizScore, getAttemptDetails } =
+  const { getQuizWords, deleteQuiz, getAttemptQuizScore, getAttemptDetails, loading } =
     useQuiz();
   const { openDialog } = useDialog();
-
   const { id } = useParams();
   const navigate = useNavigate();
-
   const [attempts, setAttempts] = useState([]);
-
   const [quiz, setQuiz] = useState(null);
-
   const [details, setDetails] = useState([]);
 
   async function deleteCurrentQuiz() {
@@ -45,8 +41,7 @@ function AllQuizWords() {
     try {
       const data = await getAttemptDetails(id);
       setDetails(data.answers);
-      console.log(data);
-      // setQuiz(data.)
+      console.log(data.answers);
     } catch (err) {
       console.log(err);
     }
@@ -63,8 +58,9 @@ function AllQuizWords() {
         ]);
 
         setQuiz(quizData);
+        console.log("quizData: ", quizData.answers);
+        
         setAttempts(attemptsData);
-        console.log(attemptsData);
       } catch (err) {
         console.error(err);
       }
@@ -73,9 +69,9 @@ function AllQuizWords() {
     loadData();
   }, [id]);
 
-  // if (loading) {
-  //   return <p>Loading...</p>;
-  // }
+  if (loading) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <div className="vocabulary">
@@ -92,6 +88,10 @@ function AllQuizWords() {
 
         <Link className="main-quiz-button add-btn" to="/my-quiz/add-new-word">
           + Add New Word
+        </Link>
+
+        <Link className="main-quiz-button add-btn" to={`/my-quiz/${id}/play-quiz`}>
+          play
         </Link>
       </div>
 

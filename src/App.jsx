@@ -80,7 +80,7 @@ function App() {
               <Route path="all-quizzes" element={<AllQuizzes />} />
               <Route path="add-new-quiz" element={<AddNewQuiz />} />
               <Route path=":id/all-quiz-words" element={<AllQuizWords />} />
-              <Route path="play-quiz" element={<PlayQuiz />} />
+              <Route path=":id/play-quiz" element={<PlayQuiz />} />
             </Route>
           </Route>
         </Route>
