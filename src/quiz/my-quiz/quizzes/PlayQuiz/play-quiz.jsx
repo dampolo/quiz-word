@@ -40,7 +40,6 @@ function PlayQuiz() {
     ]);
 
     setCurrentQuestion(currentQuestion + 1)
-
     setFormData({
       target_word: ""
     })
