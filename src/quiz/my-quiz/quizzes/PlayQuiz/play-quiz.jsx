@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "./play-quiz.scss";
 import { useEffect, useState } from "react";
 import useQuiz from "../../../../context/useQuiz";
@@ -8,7 +8,7 @@ function PlayQuiz() {
   const { id } = useParams();
   const [quiz, setQuiz] = useState(null);
   const [currentQuestion, setCurrentQuestion] = useState(0)
-
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     target_word: "",
   })
@@ -43,6 +43,11 @@ function PlayQuiz() {
     setFormData({
       target_word: ""
     })
+    
+    if(quiz.answers.length === currentQuestion + 1 ) {
+      navigate("/my-quiz/all-quizzes/");
+    }
+    
   }
 
   useEffect(() => {
