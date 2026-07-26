@@ -45,6 +45,20 @@ export function QuizProvider({ children }) {
     return newQuiz;
   }
 
+  async function postQuizAnswers(answers, id) {
+    const response = await fetch(`${api}quiz-answers/${id}/sumbit/`, {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(answers),
+    });
+
+    const data = await response.json();
+    console.log(data);
+  }
+
   async function getQuizWords(id) {
     setLoading(true);
 
@@ -102,7 +116,7 @@ export function QuizProvider({ children }) {
     }
   }
 
-    async function getAttemptDetails(id) {
+  async function getAttemptDetails(id) {
     setLoading(true);
 
     try {
@@ -135,6 +149,7 @@ export function QuizProvider({ children }) {
         getQuizzes,
         getAttemptQuizScore,
         getAttemptDetails,
+        postQuizAnswers,
       }}
     >
       {children}

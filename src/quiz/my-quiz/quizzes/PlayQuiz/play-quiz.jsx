@@ -13,7 +13,7 @@ function PlayQuiz() {
     target_word: "",
   })
 
-  const [answers, setAnswers] = useState([])
+  const [answers, setAnswers, postQuizAnswers] = useState([])
 
   const payload = {
     direction: "FORWARD",
@@ -45,6 +45,7 @@ function PlayQuiz() {
     })
     
     if(quiz.answers.length === currentQuestion + 1 ) {
+      postQuizAnswers(id, payload)
       navigate("/my-quiz/all-quizzes/");
     }
     
