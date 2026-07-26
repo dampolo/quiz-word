@@ -46,7 +46,7 @@ export function QuizProvider({ children }) {
   }
 
   async function postQuizAnswers(id, payload) {
-    const response = await fetch(`${api}quiz-answers/${id}/sumbit/`, {
+    const response = await fetch(`${api}quiz-answers/${id}/submit/`, {
       method: "POST",
       credentials: "include",
       headers: {

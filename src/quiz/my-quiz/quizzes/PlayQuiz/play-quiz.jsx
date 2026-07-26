@@ -2,61 +2,69 @@ import { useNavigate, useParams } from "react-router-dom";
 import "./play-quiz.scss";
 import { useEffect, useState } from "react";
 import useQuiz from "../../../../context/useQuiz";
+import { Link } from "react-router-dom";
 
 function PlayQuiz() {
   const { getQuizWords, postQuizAnswers } = useQuiz();
   const { id } = useParams();
   const [quiz, setQuiz] = useState(null);
-  const [currentQuestion, setCurrentQuestion] = useState(0)
+  const [currentQuestion, setCurrentQuestion] = useState(0);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     target_word: "",
-  })
+  });
 
-  const [answers, setAnswers] = useState([])
-
-  const payload = {
-    direction: "FORWARD",
-    answers
-  }
+  const [answers, setAnswers] = useState([]);
 
   function handleAnswer(e) {
-    const { name, value,} = e.target;
-    
+    const { name, value } = e.target;
+
     setFormData((prev) => ({
       ...prev,
-      [name]: value
-    }))    
+      [name]: value,
+    }));
   }
 
-
-  function adjustCurrentQuestion() {
+  async function adjustCurrentQuestion() {
     setAnswers((prev) => [
-      ...prev, 
+      ...prev,
       {
         id: quiz.answers[currentQuestion].id,
-        target_word: formData.target_word
-      }
+        target_word: formData.target_word,
+      },
     ]);
 
-    setCurrentQuestion(currentQuestion + 1)
+    console.log(answers);
+    
+    setCurrentQuestion(currentQuestion + 1);
     setFormData({
-      target_word: ""
-    })
-    
-    if(quiz.answers.length === currentQuestion + 1 ) {
-      debugger
-      postQuizAnswers(id, payload)
-      navigate("/my-quiz/all-quizzes/");
+      target_word: "",
+    });
+
+    const isLastQuestion = currentQuestion === quiz.answers.length - 1;
+
+    if (isLastQuestion) {
+      const payload = {
+        direction: "FORWARD",
+        answers,
+      };
+
+      try {
+        await postQuizAnswers(id, payload);
+        navigate("/my-quiz/all-quizzes/");
+        
+      } catch (error) {
+         console.error("Quiz could not be submitted:", error);
+      }
+        return
     }
-    
   }
 
   useEffect(() => {
     async function loadData() {
       try {
         const quizData = await getQuizWords(id);
-        setQuiz(quizData);        
+        setQuiz(quizData);
       } catch (error) {
         console.error(error);
       }
@@ -67,22 +75,16 @@ function PlayQuiz() {
   return (
     <section className="play-quiz">
       <div className="quiz-card">
-        <button type="button" className="quiz-card__cancel">
+        <Link to className="quiz-card__cancel" to={`/my-quiz/${id}/all-quiz-words`}>
           <img width={40} height={40} src="/assets/xbox.svg" alt="" srcset="" />
-        </button>
+        </Link>
         <div className="quiz-card__header">
-
-            <h1 className="quiz-card__title">
-              {quiz?.answers?.[currentQuestion]?.source_word}
-              <button
-                type="button"
-                className="quiz-card__help"
-                aria-label="Help"
-              >
-                ?
-              </button>
-            </h1>
-
+          <h1 className="quiz-card__title">
+            {quiz?.answers?.[currentQuestion]?.source_word}
+            <button type="button" className="quiz-card__help" aria-label="Help">
+              ?
+            </button>
+          </h1>
         </div>
 
         <p className="quiz-card__subtitle">Übersetzte das Word</p>
@@ -102,11 +104,11 @@ function PlayQuiz() {
               className="quiz-card__input"
             />
           </div>
-            {quiz?.answers?.[currentQuestion]?.target_word}
-          <button 
-          type="button" 
-          className="main-quiz-button button"
-          onClick={adjustCurrentQuestion}
+          {quiz?.answers?.[currentQuestion]?.target_word}
+          <button
+            type="button"
+            className="main-quiz-button button"
+            onClick={adjustCurrentQuestion}
           >
             <span>Weiter</span>
           </button>
