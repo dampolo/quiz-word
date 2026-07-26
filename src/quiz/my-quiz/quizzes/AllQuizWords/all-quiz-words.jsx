@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import "./all-quiz-words.scss";
 import useDialog from "../../../../context/DialogContext/useDialgo";
 import BackButton from "../../../../components/BackButton/BackButton";
+import PreLoader from "../../../../components/PreLoader/PreLoader";
 
 function AllQuizWords() {
   const { getQuizWords, deleteQuiz, getAttemptQuizScore, getAttemptDetails, loading } =
@@ -70,7 +71,11 @@ function AllQuizWords() {
   }, [id]);
 
   if (loading) {
-    return <p>Loading...</p>;
+    return (
+      <div className="show-container">
+        <PreLoader/>
+      </div>
+    )
   }
 
   return (

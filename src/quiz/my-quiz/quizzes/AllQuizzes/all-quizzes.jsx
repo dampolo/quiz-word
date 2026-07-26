@@ -20,7 +20,7 @@ function Quizzes() {
 
   if (!quizzes) {
     return (
-      <div>
+      <div className="show-container">
         <PreLoader/>
       </div>
     )
