@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "./all-quizzes.scss";
 import { Link } from "react-router-dom";
 import useQuiz from "../../../../context/useQuiz";
+import PreLoader from "../../../../components/PreLoader/PreLoader";
 
 function Quizzes() {
   const { getQuizzes } = useQuiz();
@@ -16,6 +17,14 @@ function Quizzes() {
 
     loadQuizzes();
   }, []);
+
+  if (!quizzes) {
+    return (
+      <div>
+        <PreLoader/>
+      </div>
+    )
+  }
 
   return (
     <section className="vocab-page">
