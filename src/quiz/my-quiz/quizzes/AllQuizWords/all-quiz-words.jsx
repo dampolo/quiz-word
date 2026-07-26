@@ -147,7 +147,16 @@ function AllQuizWords() {
           <div>Actions</div>
         </div>
 
-        {attempts.map((attempt) => (
+
+        {
+          attempts.length === 0 ? (
+            <p>
+              Du hast bis jetzt keine Quize gemacht.
+            </p>
+          ) : (
+
+          
+          attempts.map((attempt) => (
           <div className="list-row-attempt" key={attempt.id}>
             <div className="rank">#{attempt.score}</div>
 
@@ -167,13 +176,16 @@ function AllQuizWords() {
               onClick={() => handleAttemptDetails(attempt.id)}
               className="actions"
             >
-              🔍
+            🔍
             </button>
-          </div>
-        ))}
+            </div>
+          ))
+        )
+      }
       </div>
 
       {/* ATTEMPTS ENDE */}
+
 
       <div className="cards">
         <div className="card goal">
@@ -207,7 +219,12 @@ function AllQuizWords() {
         </div>
 
         <div className="table">
-          {details.length === 0 ? (
+
+        { attempts.length === 0 ? (
+            <p>
+              Du hast bis jetzt keine Quize gemacht.
+            </p>
+          ) : (details.length === 0 ? (
             <p>Click on 🔍 to see the details.</p>
           ) : (
             details.map((item) => (
@@ -241,7 +258,8 @@ function AllQuizWords() {
                 </div>
               </div>
             ))
-          )}
+          ))
+        }
         </div>
       </div>
       {/* DETAILS ENDE */}

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import useQuiz from "../../../../context/useQuiz";
 
 function PlayQuiz() {
-  const { getQuizWords } = useQuiz();
+  const { getQuizWords, postQuizAnswers } = useQuiz();
   const { id } = useParams();
   const [quiz, setQuiz] = useState(null);
   const [currentQuestion, setCurrentQuestion] = useState(0)
@@ -13,7 +13,7 @@ function PlayQuiz() {
     target_word: "",
   })
 
-  const [answers, setAnswers, postQuizAnswers] = useState([])
+  const [answers, setAnswers] = useState([])
 
   const payload = {
     direction: "FORWARD",
@@ -45,6 +45,7 @@ function PlayQuiz() {
     })
     
     if(quiz.answers.length === currentQuestion + 1 ) {
+      debugger
       postQuizAnswers(id, payload)
       navigate("/my-quiz/all-quizzes/");
     }

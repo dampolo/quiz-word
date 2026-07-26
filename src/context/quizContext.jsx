@@ -45,18 +45,18 @@ export function QuizProvider({ children }) {
     return newQuiz;
   }
 
-  async function postQuizAnswers(answers, id) {
+  async function postQuizAnswers(id, payload) {
     const response = await fetch(`${api}quiz-answers/${id}/sumbit/`, {
       method: "POST",
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(answers),
+      body: JSON.stringify(payload),
     });
 
     const data = await response.json();
-    console.log(data);
+    console.log("Correction of you answers: ", data);
   }
 
   async function getQuizWords(id) {
