@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "./../PlayQuiz/play-quiz.scss";
 import { useEffect, useState } from "react";
 import useQuiz from "../../../../context/useQuiz";
@@ -9,12 +9,16 @@ function LearnQuiz() {
   const { id } = useParams();
   const { getQuizWords, } = useQuiz();
   const [currentQuestion, setCurrentQuestion] = useState(0);
-
+  const navigate = useNavigate();
 
 
  function adjustCurrentQuestion() {
+   const isLastWord = currentQuestion === quiz.answers.length - 1;
+   if(isLastWord) {
+     navigate(`/my-quiz/${id}/all-quiz-words`);
+    }
     setCurrentQuestion(currentQuestion + 1);
- }
+  }
 
   useEffect(() => {
     async function loadData() {
