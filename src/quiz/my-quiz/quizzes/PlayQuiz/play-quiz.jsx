@@ -11,8 +11,6 @@ function PlayQuiz() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const navigate = useNavigate();
 
-  const [quizResult, setQuizResult] = useState(null);
-
   const [formData, setFormData] = useState({
     target_word: "",
   });
@@ -49,7 +47,7 @@ function PlayQuiz() {
 
       try {
         const result = await postQuizAnswers(id, payload);
-        setQuizResult(result);
+        
         navigate(`/my-quiz/${id}/quiz-results`, {
            state: result,
         });

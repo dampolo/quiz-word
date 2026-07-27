@@ -6,12 +6,11 @@ function QuizResults() {
   
   const details = state?.results || [];
 
-    debugger
   return (
     <div className="vocabulary-card">
       <div className="card-header">
-        <h3>Vocabulary details</h3>
-        <span className="badge">{details.length} Words Total</span>
+        <h3>Deine Ergebnise</h3>
+        <span className="badge">{details.length} Wörter</span>
       </div>
 
       <div className="table">
