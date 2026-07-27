@@ -46,6 +46,7 @@ export function QuizProvider({ children }) {
   }
 
   async function postQuizAnswers(id, payload) {
+    debugger
     const response = await fetch(`${api}quiz-answers/${id}/submit/`, {
       method: "POST",
       credentials: "include",
@@ -56,7 +57,12 @@ export function QuizProvider({ children }) {
     });
 
     const data = await response.json();
-    console.log("Correction of you answers: ", data);
+
+    if (!response.ok) {
+      throw new Error(data.detail || "Quiz submission failed");
+    }
+
+    return data;
   }
 
   async function getQuizWords(id) {

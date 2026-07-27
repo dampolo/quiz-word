@@ -206,6 +206,8 @@ function AllQuizWords() {
           <button>Start Review Session</button>
         </div>
       </div>
+
+      
       {/* DEATAILS */}
       <div className="vocabulary-card">
         <div className="card-header">
@@ -258,6 +260,8 @@ function AllQuizWords() {
         </div>
       </div>
       {/* DETAILS ENDE */}
+
+
       <button>
         <img onClick={handleDelete} src="/assets/trash.svg" alt="delete" />
       </button>

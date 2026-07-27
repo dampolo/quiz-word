@@ -11,6 +11,8 @@ function PlayQuiz() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const navigate = useNavigate();
 
+  const [quizResult, setQuizResult] = useState(null);
+
   const [formData, setFormData] = useState({
     target_word: "",
   });
@@ -23,9 +25,9 @@ function PlayQuiz() {
     setFormData((prev) => ({
       ...prev,
       [name]: value,
+
     }));
   }
-
   async function adjustCurrentQuestion() {
     const updatedAnswers = [
       ...answers,
@@ -46,8 +48,11 @@ function PlayQuiz() {
       };
 
       try {
-        await postQuizAnswers(id, payload);
-        navigate(`/my-quiz/${id}/all-quiz-words`);
+        const result = await postQuizAnswers(id, payload);
+        setQuizResult(result);
+        navigate(`/my-quiz/${id}/quiz-results`, {
+           state: result,
+        });
       } catch (error) {
         console.error("Quiz could not be submitted:", error);
       }
