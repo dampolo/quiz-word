@@ -115,8 +115,9 @@ function PlayQuiz() {
           {quiz?.answers?.[currentQuestion]?.target_word}
           <button
             type="button"
-            className="main-quiz-button button"
+            className="main-quiz-button quiz-button"
             onClick={adjustCurrentQuestion}
+            disabled={formData.target_word.length <= 2}
           >
             <span>Weiter</span>
           </button>
