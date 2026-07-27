@@ -1,6 +1,6 @@
 @use "./../../../../styles/basic.scss";
 
-// 
+// Manche styles sind in der all-quizzes.scss
 
 .vocabulary-card {
   width: 100%;
@@ -58,6 +58,17 @@
   &.wrong {
     background: #fff7f7;
   }
+}
+
+.list-head-score,
+.list-row-score {
+  display: grid;
+  grid-template-columns:
+    90px
+    200px
+    160px
+    140px;
+  align-items: center;
 }
 
 .status {

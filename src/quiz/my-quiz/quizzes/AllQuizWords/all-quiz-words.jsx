@@ -137,7 +137,7 @@ function AllQuizWords() {
 
       {/* ATTEMPTS */}
       <div className="attempt-list">
-        <div className="list-head-attempt">
+        <div className="list-head-score">
           <div>SCORE</div>
           <div>DIRECTION</div>
           <div>Datum</div>
@@ -152,7 +152,7 @@ function AllQuizWords() {
           ) : (
 
           attempts.map((attempt) => (
-          <div className="list-row-attempt" key={attempt.id}>
+          <div className="list-row-score" key={attempt.id}>
             <div className="rank">#{attempt.score}</div>
 
             <div className="word">

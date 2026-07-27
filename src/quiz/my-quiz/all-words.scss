@@ -105,14 +105,14 @@
   display: grid;
   grid-template-columns:
     90px
-    2.5fr
+    3.5fr
     160px
     140px
     80px;
 
   align-items: center;
 }
-
+.list-head-score,
 .list-head-attempt,
 .list-head {
   background: #eef5ff;
@@ -123,6 +123,7 @@
   color: #888;
 }
 
+.list-row-score,
 .list-row-attempt,
 .list-row {
   padding: 1.2rem 1rem;
