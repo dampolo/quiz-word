@@ -293,18 +293,12 @@ export default function AddNewWord() {
 
         <hr />
 
-        <div className="actions">
-          <Link to="/my-quiz/all-words" className="cancel-btn">
+        <div className="action-buttons">
+          <Link to="/my-quiz/all-words" className="main-quiz-button-cancel cancel-btn">
             Cancel
           </Link>
-          <button type="submit" className="save-btn">
-            <img
-              width={24}
-              height={24}
-              src="/assets/save-word-icon.svg"
-              alt=""
-            />
-            Save Word
+          <button type="submit" className="main-quiz-button save-btn">
+            Speichern
           </button>
         </div>
       </form>

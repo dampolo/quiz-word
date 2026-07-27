@@ -259,20 +259,6 @@
       .word-grid {
         grid-template-columns: 1fr;
       }
-
-      .actions {
-        flex-direction: column-reverse;
-        align-items: stretch;
-        gap: 14px;
-
-        button {
-          width: 100%;
-        }
-
-        .save-btn {
-          padding: 16px;
-        }
-      }
     }
   }
 }
