@@ -164,7 +164,7 @@ export default function AddNewWord() {
                 <strong>SOURCE WORD</strong>
               </div>
 
-              <label htmlFor="source_word">
+              <label htmlFor="source_word" >
                 Term <span>*</span>
               </label>
               <input
@@ -176,7 +176,7 @@ export default function AddNewWord() {
                 required
               />
 
-              <label htmlFor="source_tip">Tip (Optional)</label>
+              <label htmlFor="source_tip" className={`${moreSource ? "" : "source_tip"}`}>Tip (Optional)</label>
               <input
                 name="source_tip"
                 value={formData.source_tip || ""}
@@ -238,7 +238,7 @@ export default function AddNewWord() {
                 autoComplete="off"
                 required
               />
-              <label htmlFor="target_tip">Tip (Optional)</label>
+              <label htmlFor="target_tip"  className={`${moreTarget ? "" : "target_tip"}`}>Tip (Optional)</label>
               <input
                 name="target_tip"
                 value={formData.target_tip || ""}

@@ -3,7 +3,6 @@
 .add-word-page {
   background: #f7f8ff;
   color: #172554;
-  min-height: 100vh;
   padding: 28px;
 
   .back-btn {
@@ -49,6 +48,11 @@
       border: 0;
       border-top: 1px solid #d8def0;
       margin: 28px 0;
+    }
+
+    .target_tip,
+    .source_tip {
+      margin-top: 2rem;
     }
 
     label {
@@ -164,7 +168,6 @@
         right: 0;
         z-index: 5;
         transform: translateY(11px);
-
       }
       .more-target-button,
       .more-source-button {
