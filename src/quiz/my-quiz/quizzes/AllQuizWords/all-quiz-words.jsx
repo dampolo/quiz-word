@@ -91,9 +91,13 @@ function AllQuizWords() {
         <Link className="main-quiz-button add-btn" to="/my-quiz/add-new-word">
           + Add New Word
         </Link>
-
+        
+        <Link className="main-quiz-button add-btn" to={`/my-quiz/${id}/learn-quiz`}>
+          Lernen
+        </Link>
+        
         <Link className="main-quiz-button add-btn" to={`/my-quiz/${id}/play-quiz`}>
-          play
+          Spiel
         </Link>
       </div>
 

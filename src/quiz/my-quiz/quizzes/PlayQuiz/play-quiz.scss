@@ -11,6 +11,11 @@
   border-radius: 28px;
   box-shadow: basic.$box-shadow;
   height: fit-content;
+  &.learn-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
   &__header {
     display: flex;
@@ -22,12 +27,11 @@
   &__title {
     display: flex;
     align-items: center;
+    color: basic.$color-primary-indigo;
     gap: 0.6rem;
-    margin: 0;
-
+    margin-bottom: 1rem;
     font-size: 3rem;
     font-weight: 700;
-    color: #17233c;
   }
 
   &__help {
@@ -79,24 +83,39 @@
   }
 
   &__form {
+    position: relative;
     display: flex;
     flex-direction: column;
+    align-items: center;
     .quiz-button {
       margin-top: 1rem;
     }
   }
 
   &__label {
+    position: absolute;
     display: block;
     margin-bottom: 0.75rem;
     font-weight: 600;
     color: #4d5063;
   }
 
+  &__line {
+    height: 1px;
+    background-color: black;
+    width: 200px;
+  }
+
   &__input-wrapper {
     position: relative;
   }
 
+  &__answer-wrapper {
+    width: fit-content;
+    transform: translateY(-13px);
+    background: #fff;
+    padding-inline: .3125rem;
+  }
   &__input {
     width: 100%;
     padding: 1.35rem 1.5rem;

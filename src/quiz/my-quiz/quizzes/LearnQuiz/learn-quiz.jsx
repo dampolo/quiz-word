@@ -1,0 +1,66 @@
+import { useParams } from "react-router-dom";
+import "./../PlayQuiz/play-quiz.scss";
+import { useEffect, useState } from "react";
+import useQuiz from "../../../../context/useQuiz";
+import { Link } from "react-router-dom";
+
+function LearnQuiz() {
+  const [quiz, setQuiz] = useState(null);
+  const { id } = useParams();
+  const { getQuizWords, } = useQuiz();
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+
+
+
+ function adjustCurrentQuestion() {
+    setCurrentQuestion(currentQuestion + 1);
+ }
+
+  useEffect(() => {
+    async function loadData() {
+      try {
+        const quizData = await getQuizWords(id);
+        setQuiz(quizData);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    loadData();
+  }, [id]);
+
+  return (
+    <section className="play-quiz">
+      <div className="quiz-card learn-card">
+        <Link
+          to
+          className="quiz-card__cancel"
+          to={`/my-quiz/${id}/all-quiz-words`}
+        >
+          <img width={40} height={40} src="/assets/xbox.svg" alt="Close" />
+        </Link>
+        <div className="quiz-card__header">
+          <h1 className="quiz-card__title">
+            {quiz?.answers?.[currentQuestion]?.source_word}
+          </h1>
+        </div>
+        <div className="quiz-card__form">
+          
+          <span className="quiz-card__line">
+          </span>
+
+            <span className="quiz-card__answer-wrapper">{quiz?.answers?.[currentQuestion]?.target_word}</span>
+
+          <button
+            type="button"
+            className="main-quiz-button quiz-button"
+            onClick={adjustCurrentQuestion}
+          >
+            <span>Weiter</span>
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export default LearnQuiz;
