@@ -57,10 +57,7 @@ function AllQuizWords() {
           getQuizWords(id),
           getAttemptQuizScore(id),
         ]);
-
-        setQuiz(quizData);
-        console.log("quizData: ", quizData.answers);
-        
+        setQuiz(quizData);        
         setAttempts(attemptsData);
       } catch (err) {
         console.error(err);
@@ -101,7 +98,7 @@ function AllQuizWords() {
       </div>
 
       <div className="word-list">
-        <div className="list-head-attempt">
+        <div className="list-head">
           <div>Rank</div>
           <div>Word & Translation</div>
           <div>Category</div>
@@ -110,7 +107,7 @@ function AllQuizWords() {
         </div>
 
         {quiz?.answers.map((word) => (
-          <div className="list-row-attempt" key={word.id}>
+          <div className="list-row" key={word.id}>
             <div className="rank">#{word.source_rank}</div>
 
             <div className="word">
@@ -147,7 +144,6 @@ function AllQuizWords() {
           <div>Actions</div>
         </div>
 
-
         {
           attempts.length === 0 ? (
             <p>
@@ -155,7 +151,6 @@ function AllQuizWords() {
             </p>
           ) : (
 
-          
           attempts.map((attempt) => (
           <div className="list-row-attempt" key={attempt.id}>
             <div className="rank">#{attempt.score}</div>

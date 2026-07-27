@@ -12,7 +12,6 @@ function Quizzes() {
     async function loadQuizzes() {
       const data = await getQuizzes();
       setQuizzes(data);
-      console.log(data);
     }
 
     loadQuizzes();
