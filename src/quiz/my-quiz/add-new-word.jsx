@@ -155,9 +155,9 @@ export default function AddNewWord() {
         <hr />
         <section className="word-grid">
           {/* Source Word */}
-          <div className={`word-parent ${moreSource ? "" : "add-more-option"}`}>
+          <div className={`word-parent ${moreSource ? "add-more-option" : ""}`}>
             <div
-              className={`word-panel ${moreSource ? "" : "add-more-option"}`}
+              className={`word-panel ${moreSource ? "add-more-option" : ""}`}
             >
               <div className="panel-title">
                 <span></span>
@@ -196,7 +196,7 @@ export default function AddNewWord() {
             </div>
 
             <div className="button-container">
-            {moreSource ? (
+            {!moreSource ? (
               <button
                 className="more-source-button"
                 type="button"
@@ -218,9 +218,9 @@ export default function AddNewWord() {
 
           {/* Target Word */}
 
-          <div className={`word-parent ${moreTarget ? "" : "add-more-option"}`}>
+          <div className={`word-parent ${moreTarget ? "add-more-option" : ""}`}>
             <div
-              className={`word-panel green ${moreTarget ? "" : "add-more-option"}`}
+              className={`word-panel green ${moreTarget ? "add-more-option" : ""}`}
             >
               <div className="panel-title">
                 <span></span>
@@ -259,7 +259,7 @@ export default function AddNewWord() {
             </div>
             <div className="button-container">
 
-            {moreTarget ? (
+            {!moreTarget ? (
               <button
                 className="more-target-button"
                 type="button"
