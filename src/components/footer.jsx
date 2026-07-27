@@ -1,5 +1,7 @@
 import "./footer.scss";
 
+import { Link } from "react-router-dom";
+
 function Footer() {
     const currentDate = new Date().getFullYear();
   return (
@@ -16,9 +18,9 @@ function Footer() {
 
         {/* Center Links */}
         <div className="footer__links">
-          <a href="#" className="footer__link">
-            Privacy Policy
-          </a>
+          <Link to="/imprint" className="footer__link" target="blank">
+            Impressum
+          </Link>
 
           <a href="#" className="footer__link">
             Terms of Service

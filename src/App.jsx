@@ -3,7 +3,6 @@ import LoginQuiz from "./quiz/auth/login-quiz";
 import CreateAccount from "./quiz/auth/create-account";
 import ForgotPassword from "./quiz/auth/forgot-password";
 import Privacy from "./components/privacy";
-import Legal from "./components/legal";
 import PublicLayout from "./layouts/PublicLayout";
 import Website from "./website/website";
 import Login from "./quiz/auth/login-quiz";
@@ -31,6 +30,7 @@ import AllQuizzes from "./quiz/my-quiz/quizzes/AllQuizzes/all-quizzes";
 import PlayQuiz from "./quiz/my-quiz/quizzes/PlayQuiz/play-quiz";
 import QuizResults from "./quiz/my-quiz/quizzes/QuizResults/quiz-results";
 import LearnQuiz from "./quiz/my-quiz/quizzes/LearnQuiz/learn-quiz";
+import Imprint from "./components/imprint";
 
 
 
@@ -42,8 +42,8 @@ function App() {
         <Route element={<PublicLayout />}>
           <Route path="/" element={<Website />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/impressum" element={<Privacy />} />
-          <Route path="/datenschutz" element={<Legal />} />
+          <Route path="/imprint" element={<Imprint />} />
+          {/* <Route path="/datenschutz" element={<Legal />} /> */}
           <Route path="/login-quiz" element={<LoginQuiz />} />
           <Route path="/create-account" element={<CreateAccount />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />

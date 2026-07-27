@@ -321,22 +321,15 @@ export default function EditWord() {
 
         <hr />
 
-        <div className="actions">
-          <button type="button" onClick={handleDelete} className="save-btn">
-            <img width={24} height={24} src="/assets/trash.svg" alt="" />
-            Delete
+        <div className="action-buttons">
+          <button type="button" onClick={handleDelete} className="delete-button">
+            <img width={24} height={24} src="/assets/trash.svg" alt="trash" />
           </button>
 
-          <Link to="/my-quiz/all-words" className="cancel-btn">
+          <Link to="/my-quiz/all-words" className="main-quiz-button-cancel">
             Cancel
           </Link>
           <button type="submit" className="save-btn">
-            <img
-              width={24}
-              height={24}
-              src="/assets/save-word-icon.svg"
-              alt=""
-            />
             Update Word
           </button>
         </div>

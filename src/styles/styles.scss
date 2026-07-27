@@ -20,9 +20,12 @@ body {
       gap: 26px;
       margin-top: 1rem;
 
+      .delete-button {
+        margin-right: auto;
+      }
       .cancel-btn {
         background: transparent;
-        color: #3421d6;
+        color: basic.$color-primary-indigo;
         margin: 0;
       }
 
