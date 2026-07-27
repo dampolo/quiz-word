@@ -10,6 +10,7 @@ function PlayQuiz() {
   const [quiz, setQuiz] = useState(null);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     target_word: "",
   });
@@ -26,38 +27,37 @@ function PlayQuiz() {
   }
 
   async function adjustCurrentQuestion() {
-    setAnswers((prev) => [
-      ...prev,
+    const updatedAnswers = [
+      ...answers,
       {
         id: quiz.answers[currentQuestion].id,
-        target_word: formData.target_word,
+        answer: formData.target_word,
       },
-    ]);
+    ];
 
-    console.log(answers);
-    
-    setCurrentQuestion(currentQuestion + 1);
-    setFormData({
-      target_word: "",
-    });
+    setAnswers(updatedAnswers);
 
     const isLastQuestion = currentQuestion === quiz.answers.length - 1;
 
     if (isLastQuestion) {
       const payload = {
         direction: "FORWARD",
-        answers,
+        answers: updatedAnswers,
       };
 
       try {
         await postQuizAnswers(id, payload);
-        navigate("/my-quiz/all-quizzes/");
-        
+        navigate(`/my-quiz/${id}/all-quiz-words`);
       } catch (error) {
-         console.error("Quiz could not be submitted:", error);
+        console.error("Quiz could not be submitted:", error);
       }
-        return
+      return;
     }
+
+    setCurrentQuestion(currentQuestion + 1);
+    setFormData({
+      target_word: "",
+    });
   }
 
   useEffect(() => {
@@ -75,8 +75,12 @@ function PlayQuiz() {
   return (
     <section className="play-quiz">
       <div className="quiz-card">
-        <Link to className="quiz-card__cancel" to={`/my-quiz/${id}/all-quiz-words`}>
-          <img width={40} height={40} src="/assets/xbox.svg" alt="" srcset="" />
+        <Link
+          to
+          className="quiz-card__cancel"
+          to={`/my-quiz/${id}/all-quiz-words`}
+        >
+          <img width={40} height={40} src="/assets/xbox.svg" alt="Close"/>
         </Link>
         <div className="quiz-card__header">
           <h1 className="quiz-card__title">
@@ -102,6 +106,7 @@ function PlayQuiz() {
               type="text"
               placeholder="Type your answer here..."
               className="quiz-card__input"
+              autoComplete="off"
             />
           </div>
           {quiz?.answers?.[currentQuestion]?.target_word}
