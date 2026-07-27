@@ -73,15 +73,6 @@ function Profile() {
               : "-"
           }
         />
-
-        <InfoRow
-          label="Updated:"
-          value={
-            profile.updated_at
-              ? new Date(profile.updated_at).toLocaleDateString()
-              : "-"
-          }
-        />
         <EditButton to="/my-quiz/edit-profile" className="edit-button" />
       </div>
     </div>
