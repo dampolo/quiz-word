@@ -18,6 +18,9 @@ export default function AddNewWord() {
 
   const navigate = useNavigate();
 
+  const [moreSource, setMoreSource] = useState(false);
+  const [moreTarget, setMoreTarget] = useState(false);
+
   const [formData, setFormData] = useState({
     language_id: "",
     category: "",
@@ -152,75 +155,128 @@ export default function AddNewWord() {
         <hr />
         <section className="word-grid">
           {/* Source Word */}
-          <div className="word-panel">
-            <div className="panel-title">
-              <span></span>
-              <strong>SOURCE WORD</strong>
+          <div className={`word-parent ${moreSource ? "" : "add-more-option"}`}>
+            <div
+              className={`word-panel ${moreSource ? "" : "add-more-option"}`}
+            >
+              <div className="panel-title">
+                <span></span>
+                <strong>SOURCE WORD</strong>
+              </div>
+
+              <label htmlFor="source_word">
+                Term <span>*</span>
+              </label>
+              <input
+                name="source_word"
+                value={formData.source_word || ""}
+                onChange={handleChange}
+                placeholder="e.g. Resilience"
+                autoComplete="off"
+                required
+              />
+
+              <label htmlFor="source_tip">Tip (Optional)</label>
+              <input
+                name="source_tip"
+                value={formData.source_tip || ""}
+                onChange={handleChange}
+                placeholder="Visualize a spring bouncing back"
+              />
+
+              <label htmlFor="source_sentence">
+                Example Sentence (Optional)
+              </label>
+              <textarea
+                name="source_sentence"
+                value={formData.source_sentence || ""}
+                onChange={handleChange}
+                placeholder="Her resilience after the setback was admirable."
+              />
             </div>
 
-            <label htmlFor="source_word">
-              Term <span>*</span>
-            </label>
-            <input
-              name="source_word"
-              value={formData.source_word || ""}
-              onChange={handleChange}
-              placeholder="e.g. Resilience"
-              autoComplete="off"
-              required
-            />
-
-            <label htmlFor="source_tip">Mnemonic Tip (Optional)</label>
-            <input
-              name="source_tip"
-              value={formData.source_tip || ""}
-              onChange={handleChange}
-              placeholder="Visualize a spring bouncing back"
-            />
-
-            <label htmlFor="source_sentence">Example Sentence (Optional)</label>
-            <textarea
-              name="source_sentence"
-              value={formData.source_sentence || ""}
-              onChange={handleChange}
-              placeholder="Her resilience after the setback was admirable."
-            />
+            <div className="button-container">
+            {moreSource ? (
+              <button
+                className="more-source-button"
+                type="button"
+                onClick={() => setMoreSource((prev) => !prev)}
+              >
+                mehr
+              </button>
+            ) : (
+              <button
+                className="more-source-button"
+                type="button"
+                onClick={() => setMoreSource((prev) => !prev)}
+              >
+                weniger
+              </button>
+            )}
+            </div>
           </div>
 
           {/* Target Word */}
-          <div className="word-panel green">
-            <div className="panel-title">
-              <span></span>
-              <strong>TARGET WORD</strong>
+
+          <div className={`word-parent ${moreTarget ? "" : "add-more-option"}`}>
+            <div
+              className={`word-panel green ${moreTarget ? "" : "add-more-option"}`}
+            >
+              <div className="panel-title">
+                <span></span>
+                <strong>TARGET WORD</strong>
+              </div>
+
+              <label htmlFor="target_word">
+                Translation <span>*</span>
+              </label>
+              <input
+                name="target_word"
+                value={formData.target_word || ""}
+                onChange={handleChange}
+                placeholder="e.g. Resiliencia"
+                autoComplete="off"
+                required
+              />
+              <label htmlFor="target_tip">Tip (Optional)</label>
+              <input
+                name="target_tip"
+                value={formData.target_tip || ""}
+                onChange={handleChange}
+                placeholder="Sounds like 'silence' at the end"
+                autoComplete="off"
+              />
+
+              <label htmlFor="target_sentence">
+                Example Sentence (Optional)
+              </label>
+              <textarea
+                name="target_sentence"
+                value={formData.target_sentence || ""}
+                onChange={handleChange}
+                placeholder="Su resiliencia tras el revés fue admirable."
+              />
             </div>
+            <div className="button-container">
 
-            <label htmlFor="target_word">
-              Translation <span>*</span>
-            </label>
-            <input
-              name="target_word"
-              value={formData.target_word || ""}
-              onChange={handleChange}
-              placeholder="e.g. Resiliencia"
-              autoComplete="off"
-              required
-            />
-
-            <label htmlFor="target_tip">Mnemonic Tip (Optional)</label>
-            <input
-              name="target_tip"
-              value={formData.target_tip || ""}
-              onChange={handleChange}
-              placeholder="Sounds like 'silence' at the end"
-            />
-
-            <label htmlFor="target_sentence">Example Sentence (Optional)</label>
-            <textarea
-              name="target_sentence"
-              value={formData.target_sentence || ""}
-              onChange={handleChange}
-              placeholder="Su resiliencia tras el revés fue admirable."
-            />
+            {moreTarget ? (
+              <button
+                className="more-target-button"
+                type="button"
+                onClick={() => setMoreTarget((prev) => !prev)}
+              >
+                mehr
+              </button>
+            ) : (
+              <button
+                className="more-target-button"
+                type="button"
+                onClick={() => setMoreTarget((prev) => !prev)}
+              >
+                weniger
+              </button>
+            )}
+            </div>
           </div>
         </section>
 

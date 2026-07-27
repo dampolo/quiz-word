@@ -1,3 +1,5 @@
+@use "./../../styles/basic.scss";
+
 .add-word-page {
   background: #f7f8ff;
   color: #172554;
@@ -96,107 +98,141 @@
       grid-template-columns: repeat(2, 1fr);
       gap: 28px;
 
-      .word-panel {
-        border: 1px dashed #cfd7ed;
-        border-radius: 10px;
-        background: #fbfcff;
-        padding: 24px;
-        display: flex;
-        flex-direction: column;
-        gap: 14px;
+      .word-parent {
+        position: relative;
+        height: 200px;
+        .word-panel {
+          border: 1px dashed #cfd7ed;
+          border-radius: 10px;
+          background: #fbfcff;
+          padding: 24px;
+          display: flex;
+          flex-direction: column;
+          gap: 14px;
+          height: 200px;
 
-        &.green {
-          background: #f3fffb;
-          border-color: #bfe8d5;
+          overflow: hidden;
+          &.green {
+            background: #f3fffb;
+            border-color: #bfe8d5;
+
+            .panel-title {
+              span {
+                background: #10b981;
+              }
+
+              strong {
+                color: #047857;
+              }
+            }
+          }
 
           .panel-title {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            margin-bottom: 6px;
+
             span {
-              background: #10b981;
+              width: 24px;
+              height: 24px;
+              border-radius: 50%;
+              background: #4f46e5;
+              color: #fff;
+              display: grid;
+              place-items: center;
+              font-size: 10px;
+              font-weight: 800;
             }
 
             strong {
-              color: #047857;
+              font-size: 13px;
+              letter-spacing: 0.08em;
             }
           }
         }
-
-        .panel-title {
-          display: flex;
-          align-items: center;
-          gap: 9px;
-          margin-bottom: 6px;
-
-          span {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            background: #4f46e5;
-            color: #fff;
-            display: grid;
-            place-items: center;
-            font-size: 10px;
-            font-weight: 800;
-          }
-
-          strong {
-            font-size: 13px;
-            letter-spacing: 0.08em;
-          }
+        .add-more-option {
+          height: 500px;
         }
       }
-    }
-
-    .pro-tip {
-      margin-top: 28px;
-      display: flex;
-      gap: 14px;
-      padding: 20px 24px;
-      border: 1px solid #dfe3f5;
-      border-radius: 9px;
-      background: #f4f5ff;
-
-      strong {
-        display: block;
-        color: #3421d6;
-        font-size: 13px;
-        margin-bottom: 4px;
-      }
-
-      p {
-        margin: 0;
-        font-size: 13px;
-        color: #172554;
-      }
-    }
-
-    .actions {
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      gap: 26px;
-
-      button {
-        font-family: inherit;
-        font-weight: 700;
-        cursor: pointer;
-      }
-
-      .cancel-btn {
-        background: transparent;
-        border: 0;
-        color: #3421d6;
-      }
-
-      .save-btn {
+      .button-container {
         display: flex;
+        justify-content: center;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 5;
+        transform: translateY(11px);
+
+      }
+      .more-target-button,
+      .more-source-button {
+        padding-inline: 1rem;
+        background: #fff;
+        border-radius: basic.$border-radius;
+        border: solid 1px basic.$color-border;
+        transition: basic.$first-transition;
+        &:hover {
+          color: basic.$color-hover;
+        }
+      }
+      .add-more-option {
+        height: 500px;
+      }
+
+      .pro-tip {
+        margin-top: 28px;
+        display: flex;
+        gap: 14px;
+        padding: 20px 24px;
+        border: 1px solid #dfe3f5;
+        border-radius: 9px;
+        background: #f4f5ff;
+
+        strong {
+          display: block;
+          color: #3421d6;
+          font-size: 13px;
+          margin-bottom: 4px;
+        }
+
+        p {
+          margin: 0;
+          font-size: 13px;
+          color: #172554;
+        }
+      }
+
+      .actions {
+        display: flex;
+        justify-content: flex-end;
         align-items: center;
-        gap: 16px;
-        border: 0;
-        border-radius: 7px;
-        background: #3421d6;
-        color: #fff;
-        padding: 17px 32px;
-        box-shadow: 0 8px 18px rgba(52, 33, 214, 0.22);
+        gap: 26px;
+
+        button {
+          font-family: inherit;
+          font-weight: 700;
+          cursor: pointer;
+        }
+
+        .cancel-btn {
+          background: transparent;
+          border: 0;
+          color: #3421d6;
+        }
+
+        .save-btn {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+          border: 0;
+          border-radius: 7px;
+          background: #3421d6;
+          color: #fff;
+          padding: 17px 32px;
+          box-shadow: 0 8px 18px rgba(52, 33, 214, 0.22);
+        }
       }
     }
   }
