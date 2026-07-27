@@ -98,7 +98,7 @@ function AllQuizWords() {
       </div>
 
       <div className="word-list">
-        <div className="list-head">
+        <div className="list-head-attempt">
           <div>Rank</div>
           <div>Word & Translation</div>
           <div>Category</div>
@@ -107,7 +107,7 @@ function AllQuizWords() {
         </div>
 
         {quiz?.answers.map((word) => (
-          <div className="list-row" key={word.id}>
+          <div className="list-row-attempt" key={word.id}>
             <div className="rank">#{word.source_rank}</div>
 
             <div className="word">
