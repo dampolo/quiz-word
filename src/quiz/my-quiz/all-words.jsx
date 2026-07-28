@@ -139,8 +139,8 @@ function AllWords() {
 
       <div className="word-list">
         <div className="list-head">
-          <div>+</div>
-          <div>Rank</div>
+          <div className="check">+</div>
+          <div className="rank">Rank</div>
           <div className="word">Word & Translation</div>
           <div className="category">Category</div>
           <div className="streak">Streak</div>

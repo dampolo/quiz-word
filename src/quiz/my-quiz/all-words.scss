@@ -109,7 +109,7 @@
   grid-template-columns:
     30px
     90px
-    2.5fr
+    1fr
     160px
     140px
     80px;
@@ -152,6 +152,7 @@
 }
 
 .rank {
+  text-align: center;
   color: #4b38f5;
   font-weight: 700;
 }
@@ -318,7 +319,7 @@
       30px
       60px
       2fr
-      1fr;
+      75px;
     align-items: center;
   }
 
@@ -334,5 +335,9 @@
   .vocabulary__header {
     flex-direction: column;
     gap: 1rem;
+  }
+
+  .vocabulary {
+    padding: 1rem;
   }
 }
