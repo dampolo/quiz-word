@@ -1,7 +1,8 @@
 @use "./../../styles/basic.scss";
 
 .vocabulary {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 1rem;
   width: 100%;
   padding: 2rem;
@@ -74,15 +75,21 @@
   text-align: center;
 }
 
-.attempt-list,
 .word-list {
+  display: flex;
+  flex-direction: column;
   background: white;
   border-radius: 16px;
   overflow: hidden;
   border: 1px solid #ececec;
+  height: 100%;
 }
 
 .attempt-list {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid #ececec;
   width: fit-content;
 }
 
@@ -213,6 +220,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
+  margin-top: auto;
 
   .pages {
     display: flex;
