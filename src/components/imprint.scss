@@ -1,0 +1,44 @@
+@use "./../styles/basic.scss";
+
+
+.imprint {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  max-width: 100%;
+  width: 95%;
+  min-height: calc(100vh - 177px);
+  border-radius: basic.$border-radius;
+  background-color: basic.$color-surface-container;
+  margin-inline: 1rem;
+}
+
+.imprint-title {
+  margin-bottom: 1.25rem;
+  font-size: 1.5rem;
+}
+
+.legacy-description p,
+.imprint-description p {
+  margin-bottom: 1rem;
+}
+
+.legacy-description h2,
+.imprint-description h2 {
+  font-size: 1.3rem;
+}
+
+.legacy-description h3,
+.imprint-description h3 {
+  font-size: 1.1rem;
+}
+
+.imprint-description p:nth-child(1),
+.imprint-description p:nth-child(2) {
+  font-weight: 700;
+}
+
+.imprint-description p a[target="_blank"] {
+  word-break: break-all;
+}
