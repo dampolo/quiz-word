@@ -94,6 +94,7 @@ body {
   color: basic.$required;
 }
 
+.btn-next:disabled,
 .quiz-button:disabled,
 button[type="submit"]:disabled {
   border: 1px solid #cccccc !important;

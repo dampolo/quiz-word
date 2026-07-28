@@ -12,12 +12,13 @@ export function VocabularyProvider({ children }) {
   const [categories, setCategories] = useState([]);
   const [languages, setLanguages] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [nextPage, setNextPage] = useState(null);
 
-  async function getWords() {
+  async function getWords(page = 1) {
     setLoading(true);
 
     try {
-      const response = await fetch(`${api}words/`, {
+      const response = await fetch(`${api}words/?page=${page}`, {
         credentials: "include",
         headers: {
           "Content-Type": "application/json",
@@ -29,8 +30,8 @@ export function VocabularyProvider({ children }) {
       }
 
       const data = await response.json();
-      // console.log("Response:", data);
-      setWords(data);
+    setWords(data.results);
+    setNextPage(data.next);
       setLoading(false);
     } catch (error) {
       console.error(error);
@@ -127,7 +128,7 @@ export function VocabularyProvider({ children }) {
 
   async function getFiltredWords(id) {
     try {
-      const response = await fetch(`${api}words/?category__target_language=${id}`, {
+      const response = await fetch(`${api}words/?category__target_language=${id}&page=1`, {
         credentials: "include",
         headers: {
           "Content-Type": "application/json",
@@ -137,8 +138,8 @@ export function VocabularyProvider({ children }) {
         throw new Error("Failed to load words.");
       }
       const data = await response.json();
-      console.log("Response:", data);
-      setWords(data);
+      console.log("Response:", data.results);
+      setWords(data.results);
       setLoading(false);
     } catch (error) {
       console.error(error);
@@ -156,7 +157,7 @@ export function VocabularyProvider({ children }) {
     });
 
     const newWord = await response.json();
-    setWords((prev) => [...prev, newWord]);
+    // setWords((prev) => [...prev, newWord]);
 
     return newWord;
   }
@@ -172,7 +173,7 @@ export function VocabularyProvider({ children }) {
     });
 
     const newCategory = await response.json();
-    setWords((prev) => [...prev, newCategory]);
+    // setWords((prev) => [...prev, newCategory]);
 
     return newCategory;
   }
@@ -189,9 +190,9 @@ export function VocabularyProvider({ children }) {
 
     const updatedWord = await response.json();
 
-    setWords((prev) =>
-      prev.map((word) => (word.id === id ? updatedWord : word)),
-    );
+    // setWords((prev) =>
+    //   prev.map((word) => (word.id === id ? updatedWord : word)),
+    // );
 
     return updatedWord;
   }
@@ -208,9 +209,9 @@ export function VocabularyProvider({ children }) {
 
     const updatedCategory = await response.json();
 
-    setWords((prev) =>
-      prev.map((word) => (word.id === id ? updatedCategory : word)),
-    );
+    // setWords((prev) =>
+    //   prev.map((word) => (word.id === id ? updatedCategory : word)),
+    // );
 
     return updatedCategory;
   }
@@ -249,6 +250,7 @@ export function VocabularyProvider({ children }) {
         categories,
         loading,
         languages,
+        nextPage,
         getWords,
         clearCategories,
         getLanguages,

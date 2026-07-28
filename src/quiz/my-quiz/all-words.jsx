@@ -7,12 +7,15 @@ import useQuiz from "../../context/useQuiz";
 import PreLoader from "../../components/PreLoader/PreLoader";
 
 function AllWords() {
-  const { words, loading, languages, getFiltredWords } = useVocabulary();
+  const { words, loading, languages, getFiltredWords, nextPage, getWords } =
+    useVocabulary();
   const [selectedWordIds, setSelectedWordIds] = useState([]);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [language, setLanguage] = useState("");
   const [active, setActive] = useState("");
   const { createQuiz } = useQuiz();
+
+  const [currentPage, setCurrentPage] = useState(1);
 
   console.log(active);
 
@@ -50,12 +53,16 @@ function AllWords() {
     getFiltredWords(language);
   }, [language]);
 
+  useEffect(() => {
+    getWords(currentPage);
+  }, [currentPage]);
+
   if (loading) {
     return (
       <div className="show-container ">
-      <PreLoader />
+        <PreLoader />
       </div>
-    )
+    );
   }
 
   return (
@@ -102,7 +109,7 @@ function AllWords() {
                   className="language-button"
                   onClick={() => {
                     {
-                      setLanguage(lang.id);                      
+                      setLanguage(lang.id);
                       setActive(lang.language_name);
                     }
                   }}
@@ -192,13 +199,21 @@ function AllWords() {
           <span>Showing 4 of 1,240 words</span>
 
           <div className="pages">
-            <button>&lt;</button>
-            <button className="active">1</button>
-            <button>2</button>
-            <button>3</button>
-            <span>...</span>
-            <button>31</button>
-            <button>&gt;</button>
+            <button
+              className="btn-next"
+              disabled={currentPage === 1}
+              onClick={() => setCurrentPage((prev) => prev - 1)}
+            >
+              fr
+            </button>
+              {currentPage}
+            <button
+              className="btn-next"
+              disabled={!nextPage}
+              onClick={() => setCurrentPage((prev) => prev + 1)}
+            >
+              Weiter
+            </button>
           </div>
         </div>
       </div>
