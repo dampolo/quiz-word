@@ -32,7 +32,7 @@ import LearnQuiz from "./quiz/my-quiz/quizzes/LearnQuiz/learn-quiz";
 import Imprint from "./components/imprint";
 import PrivacyPolicy from "./components/privacy-policy";
 import Price from "./website/price";
-
+import HelpDesk from "./website/help-desk";
 
 
 function App() {
@@ -46,6 +46,7 @@ function App() {
           <Route path="/imprint" element={<Imprint />} />
           <Route path="/price" element={<Price />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/help-desk" element={<HelpDesk />} />
           <Route path="/login-quiz" element={<LoginQuiz />} />
           <Route path="/create-account" element={<CreateAccount />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />

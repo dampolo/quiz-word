@@ -26,9 +26,9 @@ function Footer() {
             Datenschutzerklärung
           </a>
 
-          <a href="#" className="footer__link">
+          <Link to="/help-desk" className="footer__link">
             Help Center
-          </a>
+          </Link>
 
           <a href="#" className="footer__link">
             Contact Us
