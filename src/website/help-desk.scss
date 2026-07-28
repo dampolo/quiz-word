@@ -1,2 +1,94 @@
 @use "./../styles/basic";
 @use "./../styles/styles";
+
+
+.help-desk {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.help-desk-main {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.arrow-back {
+    margin: 1rem 0 0 1rem;
+}
+.help-desk-list-content {
+    max-width: 62.5rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-block: .625rem;
+}
+
+details {
+  position: relative;
+  padding: 10px;
+  interpolate-size: allow-keywords;
+  max-width: 1000px;
+  width: 100%;
+}
+
+summary {
+  position: relative;
+  text-align: start;
+  background: #c1bce9;
+  border-radius: basic.$border-radius;
+  font-size: 1.1rem;
+  padding: 0.5rem;
+  font-weight: 500;
+  scale: 1;
+  cursor: pointer;
+  transition: basic.$first-transition;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 3rem;
+}
+
+summary::after {
+  content: url("/assets/plus.svg");
+  position: absolute;
+  right: 1rem;
+}
+
+details[open] summary::after {
+  content: url("/assets/minus.svg");
+}
+
+summary::marker {
+  content: "";
+}
+
+/* For Safari */
+details::-webkit-details-marker {
+  display: none;
+}
+
+summary:hover {
+  scale: 1.02;
+}
+
+details {
+  position: relative;
+  padding: 10px;
+  interpolate-size: allow-keywords;
+  max-width: 1000px;
+  width: 100%;
+}
+
+details::details-content {
+  transition:
+    block-size 1s,
+    content-visibility 1s allow-discrete;
+  overflow: hidden;
+  block-size: 0;
+}
+
+details[open]::details-content {
+  block-size: auto;
+}
