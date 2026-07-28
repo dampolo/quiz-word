@@ -31,8 +31,8 @@ export function VocabularyProvider({ children }) {
       }
 
       const data = await response.json();
-      
-      setWords(data.results);      
+
+      setWords(data.results);
       setNextPage(data.next);
       setPreviousPage(data.previous);
       setLoading(false);
@@ -129,10 +129,10 @@ export function VocabularyProvider({ children }) {
     return await response.json();
   }
 
-  async function getFiltredWords(id) {
+  async function getFiltredWords(id, page = 1) {
     try {
       const response = await fetch(
-        `${api}words/?category__target_language=${id}&page=1`,
+        `${api}words/?category__target_language=${id}&page=${page}`,
         {
           credentials: "include",
           headers: {
@@ -146,6 +146,8 @@ export function VocabularyProvider({ children }) {
       const data = await response.json();
       console.log("Response:", data.results);
       setWords(data.results);
+      setNextPage(data.next);
+      setPreviousPage(data.previous);
       setLoading(false);
     } catch (error) {
       console.error(error);

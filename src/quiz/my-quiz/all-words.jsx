@@ -7,8 +7,15 @@ import useQuiz from "../../context/useQuiz";
 import PreLoader from "../../components/PreLoader/PreLoader";
 
 function AllWords() {
-  const { words, loading, languages, getFiltredWords, nextPage, previousPage, getWords } =
-    useVocabulary();
+  const {
+    words,
+    loading,
+    languages,
+    getFiltredWords,
+    nextPage,
+    previousPage,
+    getWords,
+  } = useVocabulary();
   const [selectedWordIds, setSelectedWordIds] = useState([]);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [language, setLanguage] = useState("");
@@ -49,13 +56,18 @@ function AllWords() {
     }
   }
 
-  useEffect(() => {
-    getFiltredWords(language);
-  }, [language]);
+  function handleLanguageChange(languageId) {
+  setLanguage(languageId);
+  setCurrentPage(1);
+}
 
   useEffect(() => {
-    getWords(currentPage);
-  }, [currentPage]);
+    if (language) {
+      getFiltredWords(language, currentPage);
+    } else {
+      getWords(currentPage);
+    }
+  }, [language, currentPage]);
 
   if (loading) {
     return (
@@ -109,7 +121,7 @@ function AllWords() {
                   className="language-button"
                   onClick={() => {
                     {
-                      setLanguage(lang.id);
+                      handleLanguageChange(lang.id);
                       setActive(lang.language_name);
                     }
                   }}
@@ -133,7 +145,7 @@ function AllWords() {
                 <button
                   className="language-button"
                   onClick={() => {
-                    setLanguage(lang.id);
+                    handleLanguageChange(lang.id);
                     setActive(lang.language_name);
                   }}
                 >
@@ -200,14 +212,14 @@ function AllWords() {
 
           <div className="pages">
             <button
-            type="button"
+              type="button"
               className="main-quiz-button btn-pagination"
               disabled={previousPage === null}
               onClick={() => setCurrentPage((prev) => prev - 1)}
             >
               &lt;
             </button>
-              {currentPage}
+            {currentPage}
             <button
               className="main-quiz-button btn-pagination"
               disabled={nextPage === null}
