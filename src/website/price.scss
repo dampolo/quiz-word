@@ -1,3 +1,13 @@
 @use "./../styles/basic";
 @use "./../styles/styles";
 
+.main-price {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.price {
+    text-align: center;
+    margin-top: 2rem;
+}
