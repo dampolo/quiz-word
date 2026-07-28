@@ -271,17 +271,7 @@ function EditProfile() {
               : "-"
           }
           isReadOnly
-        />
-
-        <InfoRow
-          label="Updated:"
-          value={
-            profile.updated_at
-              ? new Date(profile.updated_at).toLocaleDateString()
-              : "-"
-          }
-          isReadOnly
-        />
+        />      
         <div className="action-buttons">
           <Link to="/my-quiz/profile" className="main-quiz-button-cancel">
             Zurück
