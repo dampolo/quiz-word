@@ -31,10 +31,8 @@ export function VocabularyProvider({ children }) {
       }
 
       const data = await response.json();
-      setWords(data.results);
-      setWords(data.results);
-      console.log(data);
       
+      setWords(data.results);      
       setNextPage(data.next);
       setPreviousPage(data.previous);
       setLoading(false);
