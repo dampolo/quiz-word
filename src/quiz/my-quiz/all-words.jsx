@@ -7,7 +7,7 @@ import useQuiz from "../../context/useQuiz";
 import PreLoader from "../../components/PreLoader/PreLoader";
 
 function AllWords() {
-  const { words, loading, languages, getFiltredWords, nextPage, getWords } =
+  const { words, loading, languages, getFiltredWords, nextPage, previousPage, getWords } =
     useVocabulary();
   const [selectedWordIds, setSelectedWordIds] = useState([]);
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -200,19 +200,20 @@ function AllWords() {
 
           <div className="pages">
             <button
-              className="btn-next"
-              disabled={currentPage === 1}
+            type="button"
+              className="main-quiz-button btn-pagination"
+              disabled={previousPage === null}
               onClick={() => setCurrentPage((prev) => prev - 1)}
             >
-              fr
+              &lt;
             </button>
               {currentPage}
             <button
-              className="btn-next"
-              disabled={!nextPage}
+              className="main-quiz-button btn-pagination"
+              disabled={nextPage === null}
               onClick={() => setCurrentPage((prev) => prev + 1)}
             >
-              Weiter
+              &gt;
             </button>
           </div>
         </div>

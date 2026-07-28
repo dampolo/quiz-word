@@ -13,6 +13,7 @@ export function VocabularyProvider({ children }) {
   const [languages, setLanguages] = useState([]);
   const [loading, setLoading] = useState(false);
   const [nextPage, setNextPage] = useState(null);
+  const [previousPage, setPreviousPage] = useState(null);
 
   async function getWords(page = 1) {
     setLoading(true);
@@ -30,8 +31,12 @@ export function VocabularyProvider({ children }) {
       }
 
       const data = await response.json();
-    setWords(data.results);
-    setNextPage(data.next);
+      setWords(data.results);
+      setWords(data.results);
+      console.log(data);
+      
+      setNextPage(data.next);
+      setPreviousPage(data.previous);
       setLoading(false);
     } catch (error) {
       console.error(error);
@@ -128,12 +133,15 @@ export function VocabularyProvider({ children }) {
 
   async function getFiltredWords(id) {
     try {
-      const response = await fetch(`${api}words/?category__target_language=${id}&page=1`, {
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
+      const response = await fetch(
+        `${api}words/?category__target_language=${id}&page=1`,
+        {
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
         },
-      });
+      );
       if (!response.ok) {
         throw new Error("Failed to load words.");
       }
@@ -228,7 +236,7 @@ export function VocabularyProvider({ children }) {
       setLoading(true);
 
       try {
-        await Promise.all([getWords(), getLanguages(),]);
+        await Promise.all([getWords(), getLanguages()]);
       } catch (error) {
         console.error(error);
       } finally {
@@ -240,8 +248,8 @@ export function VocabularyProvider({ children }) {
   }, []);
 
   function clearCategories() {
-  setCategories([]);
-}
+    setCategories([]);
+  }
 
   return (
     <VocabularyContext.Provider
@@ -251,6 +259,7 @@ export function VocabularyProvider({ children }) {
         loading,
         languages,
         nextPage,
+        previousPage,
         getWords,
         clearCategories,
         getLanguages,

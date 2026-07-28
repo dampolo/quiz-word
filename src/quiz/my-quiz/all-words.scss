@@ -236,20 +236,10 @@
     display: flex;
     gap: 0.5rem;
     align-items: center;
-
-    button {
-      width: 34px;
-      height: 34px;
-      border-radius: 8px;
-      border: none;
-      background: transparent;
-      cursor: pointer;
-
-      &.active {
-        background: #4b38f5;
-        color: white;
-      }
-    }
+  }
+  .btn-pagination {
+    padding: unset;
+    padding-inline: 0.5rem;
   }
 }
 
