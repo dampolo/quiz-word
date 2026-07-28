@@ -12,9 +12,9 @@ function Header() {
     <header className="navbar">
       <div className="navbar__container">
         {/* Logo */}
-        <a href="#" className="navbar__logo">
+        <Link href="#" className="navbar__logo">
         <Logo />
-        </a>
+        </Link>
 
         {/* Navigation */}
         <nav className="navbar__menu">
@@ -31,7 +31,7 @@ function Header() {
       </a>
 
       <a
-        href="#features"
+        href="/#features"
         className={
           active === "features"
             ? "navbar__link navbar__link--active"
@@ -53,9 +53,9 @@ function Header() {
       >
         Success Stories
       </a>
-          <a href="#" className="navbar__link">
-            Pricing
-          </a>
+          <Link to="/price" className="navbar__link">
+            Preise
+          </Link>
         </nav>
 
         {/* <Actions */}

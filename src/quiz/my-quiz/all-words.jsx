@@ -21,7 +21,6 @@ function AllWords() {
   const [language, setLanguage] = useState("");
   const [active, setActive] = useState("");
   const { createQuiz } = useQuiz();
-
   const [currentPage, setCurrentPage] = useState(1);
 
   console.log(active);
@@ -214,7 +213,7 @@ function AllWords() {
             <button
               type="button"
               className="main-quiz-button btn-pagination"
-              disabled={previousPage === null}
+              disabled={!previousPage}
               onClick={() => setCurrentPage((prev) => prev - 1)}
             >
               &lt;
@@ -222,7 +221,7 @@ function AllWords() {
             {currentPage}
             <button
               className="main-quiz-button btn-pagination"
-              disabled={nextPage === null}
+              disabled={!nextPage}
               onClick={() => setCurrentPage((prev) => prev + 1)}
             >
               &gt;

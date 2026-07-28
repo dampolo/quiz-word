@@ -31,6 +31,7 @@ import QuizResults from "./quiz/my-quiz/quizzes/QuizResults/quiz-results";
 import LearnQuiz from "./quiz/my-quiz/quizzes/LearnQuiz/learn-quiz";
 import Imprint from "./components/imprint";
 import PrivacyPolicy from "./components/privacy-policy";
+import Price from "./website/price";
 
 
 
@@ -43,6 +44,7 @@ function App() {
           <Route path="/" element={<Website />} />
           <Route path="/login" element={<Login />} />
           <Route path="/imprint" element={<Imprint />} />
+          <Route path="/price" element={<Price />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/login-quiz" element={<LoginQuiz />} />
           <Route path="/create-account" element={<CreateAccount />} />
