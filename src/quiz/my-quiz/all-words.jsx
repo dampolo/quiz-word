@@ -141,10 +141,10 @@ function AllWords() {
         <div className="list-head">
           <div>+</div>
           <div>Rank</div>
-          <div>Word & Translation</div>
-          <div>Category</div>
-          <div>Streak</div>
-          <div>Actions</div>
+          <div className="word">Word & Translation</div>
+          <div className="category">Category</div>
+          <div className="streak">Streak</div>
+          <div className="actions">Actions</div>
         </div>
         {words.length === 0 ? (
           <p className="no-words">Du hast hier keine Wörter.</p>
@@ -169,7 +169,7 @@ function AllWords() {
                 <p>{word.target_word}</p>
               </div>
 
-              <div>
+              <div className="category">
                 <span className={`badge ${word.category_name}`}>
                   {word.category_name}
                 </span>

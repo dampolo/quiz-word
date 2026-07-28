@@ -101,7 +101,7 @@ function AllQuizWords() {
         </Link>
       </div>
 
-      <div className="word-list">
+      <div className="word-list-attempt">
         <div className="list-head-attempt">
           <div>Rank</div>
           <div>Word & Translation</div>
