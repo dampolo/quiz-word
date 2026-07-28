@@ -1,10 +1,9 @@
 @use "./../styles/basic.scss";
 
-
+.privacy-policy,
 .imprint {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
   align-items: center;
   max-width: 100%;
   width: 95%;
@@ -14,31 +13,37 @@
   margin-inline: 1rem;
 }
 
+.privacy-policy .arrow-back,
+.imprint .arrow-back {
+  margin-top: 1rem;
+}
+
+.privacy-policy-title,
 .imprint-title {
   margin-bottom: 1.25rem;
   font-size: 1.5rem;
 }
 
-.legacy-description p,
+.privacy-policy-description p,
 .imprint-description p {
   margin-bottom: 1rem;
 }
 
-.legacy-description h2,
+.privacy-policy-description h2,
 .imprint-description h2 {
   font-size: 1.3rem;
 }
 
-.legacy-description h3,
+.privacy-policy-description h3,
 .imprint-description h3 {
   font-size: 1.1rem;
 }
 
-.imprint-description p:nth-child(1),
+.privacy-policy-description p:nth-child(1),
 .imprint-description p:nth-child(2) {
   font-weight: 700;
 }
 
-.imprint-description p a[target="_blank"] {
+.privacy-policy-description p a[target="_blank"] {
   word-break: break-all;
 }

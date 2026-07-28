@@ -22,8 +22,8 @@ function Footer() {
             Impressum
           </Link>
 
-          <a href="#" className="footer__link">
-            Terms of Service
+          <a href="/privacy-policy" className="footer__link" target="blank">
+            Datenschutzerklärung
           </a>
 
           <a href="#" className="footer__link">
