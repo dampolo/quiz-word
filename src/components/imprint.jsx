@@ -5,7 +5,7 @@ function Imprint() {
   return (
     <main>
       <section className="imprint">
-        <BackButton />
+        <BackButton to="/" />
 
         <article className="imprint-description">
           <h1 className="imprint-title">Impressum</h1>
