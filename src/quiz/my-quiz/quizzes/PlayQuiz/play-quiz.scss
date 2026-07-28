@@ -108,13 +108,14 @@
 
   &__input-wrapper {
     position: relative;
+    display: flex;
   }
 
   &__answer-wrapper {
     width: fit-content;
     transform: translateY(-13px);
     background: #fff;
-    padding-inline: .3125rem;
+    padding-inline: 0.3125rem;
   }
   &__input {
     width: 100%;
@@ -138,6 +139,28 @@
       border-color: #4b2bd6;
       box-shadow: 0 0 0 4px rgba(75, 43, 214, 0.12);
     }
+  }
+}
+.hide-hint {
+  display: none;
+}
+
+.show-hint {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.39);
+  top: 50%;
+  left: 30%;
+  right: 30%;
+  bottom: 50%;
+  border-radius: basic.$border-radius;
+  .hint-text {
+    background-color: rgba(0, 0, 0, 0.39);
+    border-radius: basic.$border-radius;
+    padding-inline: 1rem;
   }
 }
 

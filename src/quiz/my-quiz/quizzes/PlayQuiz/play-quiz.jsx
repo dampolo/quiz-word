@@ -11,6 +11,8 @@ function PlayQuiz() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const navigate = useNavigate();
 
+  const [hint, setHint] = useState(false)
+
   const [formData, setFormData] = useState({
     target_word: "",
   });
@@ -23,10 +25,10 @@ function PlayQuiz() {
     setFormData((prev) => ({
       ...prev,
       [name]: value,
-
     }));
   }
   async function adjustCurrentQuestion() {
+    setHint(false)
     const updatedAnswers = [
       ...answers,
       {
@@ -47,9 +49,9 @@ function PlayQuiz() {
 
       try {
         const result = await postQuizAnswers(id, payload);
-        
+
         navigate(`/my-quiz/${id}/quiz-results`, {
-           state: result,
+          state: result,
         });
       } catch (error) {
         console.error("Quiz could not be submitted:", error);
@@ -83,19 +85,29 @@ function PlayQuiz() {
           className="quiz-card__cancel"
           to={`/my-quiz/${id}/all-quiz-words`}
         >
-          <img width={40} height={40} src="/assets/xbox.svg" alt="Close"/>
+          <img width={40} height={40} src="/assets/xbox.svg" alt="Close" />
         </Link>
         <div className="quiz-card__header">
           <h1 className="quiz-card__title">
             {quiz?.answers?.[currentQuestion]?.source_word}
-            <button type="button" className="quiz-card__help" aria-label="Help">
-              ?
-            </button>
           </h1>
         </div>
 
-        <p className="quiz-card__subtitle">Übersetzte das Word</p>
+        <p className="quiz-card__subtitle">Übersetzte das Word:</p>
+        <div className={`hide-hint ${hint ? "show-hint" : ""}`}>
+          {quiz?.answers?.[currentQuestion]?.target_tip === "" ? (
+          <p className="hint-text">
+            Du hast kein Tipp hinterlegt.
+          </p>
 
+          ) : (
+            <p className="hint-text">
+              {quiz?.answers?.[currentQuestion]?.target_tip}
+            </p>
+          )
+          }
+
+          </div>
         <form className="quiz-card__form">
           <label htmlFor="translation" className="quiz-card__label">
             Your Translation
@@ -111,8 +123,10 @@ function PlayQuiz() {
               className="quiz-card__input"
               autoComplete="off"
             />
+            <button type="button" className="quiz-card__help" aria-label="Help" onClick={() => setHint((prev) => !prev)} title="Klick um hinweis zu sehen" >
+              ?
+            </button>
           </div>
-          {quiz?.answers?.[currentQuestion]?.target_word}
           <button
             type="button"
             className="main-quiz-button quiz-button"
