@@ -154,6 +154,26 @@
               letter-spacing: 0.08em;
             }
           }
+
+          .source_word-contianer {
+            display: flex;
+            gap: .5rem;
+            .source_word-input {
+              display: flex;
+              flex-direction: column;
+              gap: 14px;
+              flex: 1;
+            }
+            .source_word-lang {
+              display: flex;
+              flex-direction: column;
+              gap: 14px;
+              width: 80px;
+              select {
+                padding-inline: 7px;
+              }
+            }
+          }
         }
         .add-more-option {
           height: 500px;

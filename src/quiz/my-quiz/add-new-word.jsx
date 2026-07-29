@@ -16,6 +16,17 @@ export default function AddNewWord() {
     languages,
   } = useVocabulary();
 
+  const languages_flaga = [
+    { id: 1, name: "Spanish", flag: "🇪🇸" },
+    { id: 2, name: "German", flag: "🇩🇪" },
+    { id: 3, name: "English", flag: "🇬🇧" },
+    { id: 4, name: "Polish", flag: "🇵🇱" },
+    { id: 5, name: "Portuguese", flag: "🇵🇹" },
+    { id: 6, name: "French", flag: "🇫🇷" },
+  ];
+
+  const [selectedLanguage, setSelectedLanguage] = useState("");
+
   const navigate = useNavigate();
 
   const [moreSource, setMoreSource] = useState(false);
@@ -164,19 +175,48 @@ export default function AddNewWord() {
                 <strong>SOURCE WORD</strong>
               </div>
 
-              <label htmlFor="source_word" >
-                Term <span>*</span>
-              </label>
-              <input
-                name="source_word"
-                value={formData.source_word || ""}
-                onChange={handleChange}
-                placeholder="e.g. Resilience"
-                autoComplete="off"
-                required
-              />
+              {/* source word container */}
+              <div className="source_word-contianer">
+                <div className="source_word-input">
+                  <label htmlFor="source_word">
+                    Term <span>*</span>
+                  </label>
+                  <input
+                    name="source_word"
+                    value={formData.source_word || ""}
+                    onChange={handleChange}
+                    placeholder="e.g. Resilience"
+                    autoComplete="off"
+                    required
+                  />
+                </div>
+                <div className="source_word-lang">
+                  <label htmlFor="language">Lang:</label>
 
-              <label htmlFor="source_tip" className={`${moreSource ? "" : "source_tip"}`}>Tip (Optional)</label>
+                  <select
+                    id="language"
+                    name="language"
+                    value={selectedLanguage}
+                    onChange={(e) => setSelectedLanguage(e.target.value)}
+                  >
+                    <option value="">wählen</option>
+
+                    {languages_flaga.map((language) => (
+                      <option key={language.id} value={language.id}>
+                        {language.flag}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+              {/* source word container ende */}
+
+              <label
+                htmlFor="source_tip"
+                className={`${moreSource ? "" : "source_tip"}`}
+              >
+                Tip (Optional)
+              </label>
               <input
                 name="source_tip"
                 value={formData.source_tip || ""}
@@ -196,23 +236,23 @@ export default function AddNewWord() {
             </div>
 
             <div className="button-container">
-            {!moreSource ? (
-              <button
-                className="more-source-button"
-                type="button"
-                onClick={() => setMoreSource((prev) => !prev)}
-              >
-                mehr
-              </button>
-            ) : (
-              <button
-                className="more-source-button"
-                type="button"
-                onClick={() => setMoreSource((prev) => !prev)}
-              >
-                weniger
-              </button>
-            )}
+              {!moreSource ? (
+                <button
+                  className="more-source-button"
+                  type="button"
+                  onClick={() => setMoreSource((prev) => !prev)}
+                >
+                  mehr
+                </button>
+              ) : (
+                <button
+                  className="more-source-button"
+                  type="button"
+                  onClick={() => setMoreSource((prev) => !prev)}
+                >
+                  weniger
+                </button>
+              )}
             </div>
           </div>
 
@@ -238,7 +278,12 @@ export default function AddNewWord() {
                 autoComplete="off"
                 required
               />
-              <label htmlFor="target_tip"  className={`${moreTarget ? "" : "target_tip"}`}>Tip (Optional)</label>
+              <label
+                htmlFor="target_tip"
+                className={`${moreTarget ? "" : "target_tip"}`}
+              >
+                Tip (Optional)
+              </label>
               <input
                 name="target_tip"
                 value={formData.target_tip || ""}
@@ -258,24 +303,23 @@ export default function AddNewWord() {
               />
             </div>
             <div className="button-container">
-
-            {!moreTarget ? (
-              <button
-                className="more-target-button"
-                type="button"
-                onClick={() => setMoreTarget((prev) => !prev)}
-              >
-                mehr
-              </button>
-            ) : (
-              <button
-                className="more-target-button"
-                type="button"
-                onClick={() => setMoreTarget((prev) => !prev)}
-              >
-                weniger
-              </button>
-            )}
+              {!moreTarget ? (
+                <button
+                  className="more-target-button"
+                  type="button"
+                  onClick={() => setMoreTarget((prev) => !prev)}
+                >
+                  mehr
+                </button>
+              ) : (
+                <button
+                  className="more-target-button"
+                  type="button"
+                  onClick={() => setMoreTarget((prev) => !prev)}
+                >
+                  weniger
+                </button>
+              )}
             </div>
           </div>
         </section>
@@ -294,7 +338,10 @@ export default function AddNewWord() {
         <hr />
 
         <div className="action-buttons">
-          <Link to="/my-quiz/all-words" className="main-quiz-button-cancel cancel-btn">
+          <Link
+            to="/my-quiz/all-words"
+            className="main-quiz-button-cancel cancel-btn"
+          >
             Cancel
           </Link>
           <button type="submit" className="main-quiz-button save-btn">
