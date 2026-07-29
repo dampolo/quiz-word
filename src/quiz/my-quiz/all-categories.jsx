@@ -102,7 +102,7 @@ export default function VocabularyCategories() {
               </button>
             </div>
 
-            <h3>{cat.name}</h3>
+            <h3>{cat.category_name}</h3>
           </article>
         ))}
 
