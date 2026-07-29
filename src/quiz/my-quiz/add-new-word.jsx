@@ -190,6 +190,7 @@ export default function AddNewWord() {
                     required
                   />
                 </div>
+
                 <div className="source_word-lang">
                   <label htmlFor="language">Lang:</label>
 
@@ -266,18 +267,40 @@ export default function AddNewWord() {
                 <span></span>
                 <strong>TARGET WORD</strong>
               </div>
+              <div className="target_word-contianer">
+                <div className="target_word-input">
+                  <label htmlFor="target_word">
+                    Translation <span>*</span>
+                  </label>
+                  <input
+                    name="target_word"
+                    value={formData.target_word || ""}
+                    onChange={handleChange}
+                    placeholder="e.g. Resiliencia"
+                    autoComplete="off"
+                    required
+                  />
+                </div>
 
-              <label htmlFor="target_word">
-                Translation <span>*</span>
-              </label>
-              <input
-                name="target_word"
-                value={formData.target_word || ""}
-                onChange={handleChange}
-                placeholder="e.g. Resiliencia"
-                autoComplete="off"
-                required
-              />
+                <div className="target_word-lang">
+                  <label htmlFor="language">Lang:</label>
+
+                  <select
+                    id="language"
+                    name="language"
+                    value={selectedLanguage}
+                    onChange={(e) => setSelectedLanguage(e.target.value)}
+                  >
+                    <option value="">wählen</option>
+
+                    {languages_flaga.map((language) => (
+                      <option key={language.id} value={language.id}>
+                        {language.flag}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
               <label
                 htmlFor="target_tip"
                 className={`${moreTarget ? "" : "target_tip"}`}

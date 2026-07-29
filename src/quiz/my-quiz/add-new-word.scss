@@ -154,17 +154,20 @@
               letter-spacing: 0.08em;
             }
           }
-
-          .source_word-contianer {
+          .source_word-contianer,
+          .target_word-contianer {
             display: flex;
             gap: .5rem;
-            .source_word-input {
+
+            .source_word-input,
+            .target_word-input {
               display: flex;
               flex-direction: column;
               gap: 14px;
               flex: 1;
             }
-            .source_word-lang {
+            .source_word-lang,
+            .target_word-lang {
               display: flex;
               flex-direction: column;
               gap: 14px;
