@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/useAuth";
 import BackButton from "../../components/BackButton/BackButton";
+import PreLoader from "../../components/PreLoader/PreLoader";
 
 function CreateAccount() {
   const initialValues = {
@@ -21,7 +22,7 @@ function CreateAccount() {
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%+\-/*?&])[A-Za-z\d@$!%+\-/*?&]{10,}$/;
   const navigate = useNavigate();
 
-  const { createAccount } = useAuth();
+  const { createAccount, loading } = useAuth();
 
   const isFormValid =
     regexEmail.test(formValues.email) &&
@@ -48,7 +49,7 @@ function CreateAccount() {
     try {
       await createAccount(formValues);
       console.log("Account created!");
-      navigate("/my-quiz/login");
+      navigate("/confirmation");
     } catch (error) {
       setFormErrors((prev) => ({
         ...prev,
@@ -272,14 +273,17 @@ function CreateAccount() {
             </div>
           </div>
 
-          {/* <Preloader
-          className={showPreloader ? "show-preloader" : "hide-preloader"}
-        /> */}
+          { loading ? (
+                  <PreLoader/>
+                ) : (
+                 <></>
+                )  
+              } 
 
           <div className="btn-container">
             <button
               type="submit"
-              disabled={!isFormValid}
+              disabled={!isFormValid || loading}
               className="main-quiz-button"
             >
               Weiter
