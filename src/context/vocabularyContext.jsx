@@ -11,6 +11,8 @@ export function VocabularyProvider({ children }) {
   const [words, setWords] = useState([]);
   const [categories, setCategories] = useState([]);
   const [languages, setLanguages] = useState([]);
+  const [nativeLanguage, setNativeLanguage] = useState([]);
+
   const [loading, setLoading] = useState(false);
   const [nextPage, setNextPage] = useState(null);
   const [previousPage, setPreviousPage] = useState(null);
@@ -55,8 +57,8 @@ export function VocabularyProvider({ children }) {
     return await response.json();
   }
 
-  async function getLanguages() {
-    const response = await fetch(`${api}languages/`, {
+  async function getUserLanguages() {
+    const response = await fetch(`${api}user-languages/`, {
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
@@ -67,8 +69,9 @@ export function VocabularyProvider({ children }) {
       throw new Error("Failed to load languages.");
     }
     const data = await response.json();
-    // console.log("Response:", data);
-    setLanguages(data);
+    console.log("Response:", data);
+    setLanguages(data.learning_languages);
+    setNativeLanguage(data.native_language);
   }
 
   async function getCategories(id) {
@@ -236,7 +239,7 @@ export function VocabularyProvider({ children }) {
       setLoading(true);
 
       try {
-        await Promise.all([getWords(), getLanguages()]);
+        await Promise.all([getWords(), getUserLanguages()]);
       } catch (error) {
         console.error(error);
       } finally {
@@ -258,11 +261,12 @@ export function VocabularyProvider({ children }) {
         categories,
         loading,
         languages,
+        nativeLanguage,
         nextPage,
         previousPage,
         getWords,
         clearCategories,
-        getLanguages,
+        getUserLanguages,
         getWord,
         getFiltredWords,
         getFiltredCategories,

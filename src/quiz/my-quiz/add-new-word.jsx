@@ -14,6 +14,7 @@ export default function AddNewWord() {
     getFiltredCategories,
     clearCategories,
     languages,
+    nativeLanguage,
   } = useVocabulary();
 
   const languages_flaga = [
@@ -55,8 +56,7 @@ export default function AddNewWord() {
 
       // Reset form
       setFormData({
-        language: "",
-        language_id: "",
+        target_language: "",
         category: "",
         source_word: "",
         target_word: "",
@@ -194,19 +194,14 @@ export default function AddNewWord() {
                 <div className="source_word-lang">
                   <label htmlFor="language">Lang:</label>
 
-                  <select
-                    id="language"
-                    name="language"
-                    value={selectedLanguage}
-                    onChange={(e) => setSelectedLanguage(e.target.value)}
-                  >
-                    <option value="">wählen</option>
+                  <select value={nativeLanguage?.id || ""} disabled>
+                    <option value="">Wähle Sprache</option>
 
-                    {languages_flaga.map((language) => (
-                      <option key={language.id} value={language.id}>
-                        {language.flag}
+                    {nativeLanguage && (
+                      <option value={nativeLanguage.id}>
+                        {nativeLanguage.language_name}
                       </option>
-                    ))}
+                    )}
                   </select>
                 </div>
               </div>
@@ -286,16 +281,15 @@ export default function AddNewWord() {
                   <label htmlFor="language">Lang:</label>
 
                   <select
-                    id="language"
-                    name="language"
-                    value={selectedLanguage}
-                    onChange={(e) => setSelectedLanguage(e.target.value)}
+                    name="target_language"
+                    value={formData.target_language}
+                    onChange={handleChange}
+                    required
                   >
-                    <option value="">wählen</option>
-
-                    {languages_flaga.map((language) => (
-                      <option key={language.id} value={language.id}>
-                        {language.flag}
+                    <option value="">Wähle</option>
+                    {languages.map((lang) => (
+                      <option key={lang.id} value={lang.id}>
+                        {lang.language_name}
                       </option>
                     ))}
                   </select>
