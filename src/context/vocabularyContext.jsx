@@ -17,11 +17,11 @@ export function VocabularyProvider({ children }) {
   const [nextPage, setNextPage] = useState(null);
   const [previousPage, setPreviousPage] = useState(null);
 
-  async function getWords(page = 1) {
+  async function getConcepts(page = 1) {
     setLoading(true);
 
     try {
-      const response = await fetch(`${api}words/?page=${page}`, {
+      const response = await fetch(`${api}concepts/?page=${page}`, {
         credentials: "include",
         headers: {
           "Content-Type": "application/json",
@@ -34,6 +34,8 @@ export function VocabularyProvider({ children }) {
 
       const data = await response.json();
 
+      console.log(data.results);
+      
       setWords(data.results);
       setNextPage(data.next);
       setPreviousPage(data.previous);
@@ -132,10 +134,10 @@ export function VocabularyProvider({ children }) {
     return await response.json();
   }
 
-  async function getFiltredWords(id, page = 1) {
+  async function getFiltredConcepts(id, page = 1) {
     try {
       const response = await fetch(
-        `${api}words/?category__target_language=${id}&page=${page}`,
+        `${api}concepts/?language=${id}&page=${page}`,
         {
           credentials: "include",
           headers: {
@@ -147,7 +149,9 @@ export function VocabularyProvider({ children }) {
         throw new Error("Failed to load words.");
       }
       const data = await response.json();
+
       console.log("Response:", data.results);
+      
       setWords(data.results);
       setNextPage(data.next);
       setPreviousPage(data.previous);
@@ -239,7 +243,7 @@ export function VocabularyProvider({ children }) {
       setLoading(true);
 
       try {
-        await Promise.all([getWords(), getUserLanguages()]);
+        await Promise.all([getConcepts(), getUserLanguages()]);
       } catch (error) {
         console.error(error);
       } finally {
@@ -264,11 +268,11 @@ export function VocabularyProvider({ children }) {
         nativeLanguage,
         nextPage,
         previousPage,
-        getWords,
+        getConcepts,
         clearCategories,
         getUserLanguages,
         getWord,
-        getFiltredWords,
+        getFiltredConcepts,
         getFiltredCategories,
         createWord,
         updateWord,

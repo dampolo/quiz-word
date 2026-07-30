@@ -11,10 +11,10 @@ function AllWords() {
     words,
     loading,
     languages,
-    getFiltredWords,
+    getFiltredConcepts,
     nextPage,
     previousPage,
-    getWords,
+    getConcepts,
   } = useVocabulary();
   const [selectedWordIds, setSelectedWordIds] = useState([]);
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -62,9 +62,9 @@ function AllWords() {
 
   useEffect(() => {
     if (language) {
-      getFiltredWords(language, currentPage);
+      getFiltredConcepts(language, currentPage);
     } else {
-      getWords(currentPage);
+      getConcepts(currentPage);
     }
   }, [language, currentPage]);
 
@@ -104,34 +104,7 @@ function AllWords() {
       </div>
 
       <ul className="languages-list">
-        <>
           {languages
-            .filter((lang) => lang.language_name === "Without")
-            .map((lang) => (
-              <li
-                className={
-                  active === lang.language_name
-                    ? "language-single active"
-                    : "language-single"
-                }
-                key={lang.id}
-              >
-                <button
-                  className="language-button"
-                  onClick={() => {
-                    {
-                      handleLanguageChange(lang.id);
-                      setActive(lang.language_name);
-                    }
-                  }}
-                >
-                  Ohne
-                </button>
-              </li>
-            ))}
-
-          {languages
-            .filter((lang) => lang.language_name !== "Without")
             .map((lang) => (
               <li
                 className={
@@ -152,7 +125,6 @@ function AllWords() {
                 </button>
               </li>
             ))}
-        </>
       </ul>
 
       <div className="word-list">
@@ -182,14 +154,14 @@ function AllWords() {
               <div className="rank">#{word.target_rank}</div>
 
               <div className="word">
-                <h3>{word.source_word}</h3>
+                <h3>{word.translations[0].word}</h3>
                 <span>»</span>
-                <p>{word.target_word}</p>
+                <p>{word.translations[1].word}</p>
               </div>
 
               <div className="category">
                 <span className={`badge ${word.category_name}`}>
-                  {word.category_name}
+                  {word.translations[0].category_name}
                 </span>
               </div>
 
