@@ -30,24 +30,26 @@
 
 .create-buttons {
   display: flex;
+  flex-direction: row;
   gap: 1rem;
+  .create-quiz {
+    height: 48px;
+    padding: 0 24px;
+    font-weight: 800;
+    max-width: fit-content;
+    margin: initial;
+  }
+
+  .add-btn {
+    height: 48px;
+    padding: 0 24px;
+    font-weight: 800;
+    max-width: fit-content;
+    margin: initial;
+  }
 }
 
-.add-btn {
-  height: 48px;
-  padding: 0 24px;
-  font-weight: 800;
-  max-width: fit-content;
-  margin: initial;
-}
 
-.create-quiz {
-  height: 48px;
-  padding: 0 24px;
-  font-weight: 800;
-  max-width: fit-content;
-  margin: initial;
-}
 
 .languages-list {
   display: flex;

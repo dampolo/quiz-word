@@ -94,11 +94,11 @@ function AllWords() {
             className="main-quiz-button create-quiz"
             disabled={selectedWordIds.length < 3}
           >
-            +
+            + Quiz
           </button>
 
           <Link className="main-quiz-button add-btn" to="/my-quiz/add-new-word">
-            ➕ Add New Word
+            + Wort
           </Link>
         </div>
       </div>

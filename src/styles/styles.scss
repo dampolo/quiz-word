@@ -14,33 +14,34 @@ body {
 }
 
 .action-buttons {
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      gap: 26px;
-      margin-top: 1rem;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 26px;
+  margin-top: 1rem;
 
-      .delete-button {
-        margin-right: auto;
-      }
-      .cancel-btn {
-        background: transparent;
-        color: basic.$color-primary-indigo;
-        margin: 0;
-      }
+  .delete-button {
+    margin-right: auto;
+  }
 
-      .save-btn {
-        display: flex;
-        align-items: center;
-        gap: 16px;
-        border-radius: 7px;
-        background: #3421d6;
-        color: #fff;
-        margin: 0;
-        padding: 17px 32px;
-        box-shadow: 0 8px 18px rgba(52, 33, 214, 0.22);
-      }
-    }
+  .cancel-btn {
+    background: transparent;
+    color: basic.$color-primary-indigo;
+    margin: 0;
+  }
+  
+  .save-btn {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border-radius: 7px;
+    background: #3421d6;
+    color: #fff;
+    margin: 0;
+    padding: 17px 32px;
+    box-shadow: 0 8px 18px rgba(52, 33, 214, 0.22);
+  }
+}
 
 .main-quiz-button {
   display: flex;
@@ -81,12 +82,12 @@ body {
   background: transparent;
   color: basic.$color-primary-indigo;
   border-radius: basic.$border-radius;
-  border: 1px solid #dfe3ef ;
+  border: 1px solid #dfe3ef;
   outline: none;
   &:hover,
   &:focus-visible {
     background: rgba(basic.$color-primary-indigo, 0.06);
-    border: 1px solid basic.$color-primary-indigo ;
+    border: 1px solid basic.$color-primary-indigo;
   }
 }
 
@@ -148,7 +149,6 @@ main {
   background-color: basic.$color-background-main;
   overflow-x: hidden;
 }
-
 
 .play-quiz {
   position: absolute;
