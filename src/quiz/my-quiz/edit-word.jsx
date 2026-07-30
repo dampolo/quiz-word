@@ -83,10 +83,10 @@ export default function EditWord() {
 
   function handleDelete() {
     openDialog({
-      title: "Delete word?",
-      description: "This action cannot be undone.",
-      confirmText: "Delete",
-      cancelText: "Cancel",
+      title: "Löschen?",
+      description: "Bist du sicher?.",
+      confirmText: "Löschen",
+      cancelText: "Abbrechen",
       confirmButtonClass: "main-quiz-button",
       cancelButtonClass: "main-quiz-button-cancel",
 
