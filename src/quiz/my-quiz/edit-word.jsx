@@ -107,6 +107,7 @@ export default function EditWord() {
   useEffect(() => {
     async function loadConcept() {
       try {
+        debugger
         const word = await getConcept(id, languageId);
         console.log(word);
 
