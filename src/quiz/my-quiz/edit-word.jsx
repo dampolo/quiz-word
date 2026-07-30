@@ -1,7 +1,12 @@
 import "./edit-word.scss";
 import useVocabulary from "../../context/useVocabulary";
 import { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import {
+  Link,
+  useNavigate,
+  useParams,
+  useSearchParams,
+} from "react-router-dom";
 import useDialog from "../../context/DialogContext/useDialgo";
 import BackButton from "../../components/BackButton/BackButton";
 import { toast } from "react-toastify";
@@ -17,11 +22,15 @@ export default function EditWord() {
     loading,
     getWords,
     languages,
+    nativeLanguage,
   } = useVocabulary();
 
   const { openDialog } = useDialog();
 
   const { id } = useParams();
+  const [searchParams] = useSearchParams();
+  const languageId = searchParams.get("language");
+
   const navigate = useNavigate();
 
   const [moreSource, setMoreSource] = useState(false);
@@ -98,7 +107,7 @@ export default function EditWord() {
   useEffect(() => {
     async function loadConcept() {
       try {
-        const word = await getConcept(id);
+        const word = await getConcept(id, languageId);
         console.log(word);
 
         setFormData(word);
@@ -119,10 +128,17 @@ export default function EditWord() {
     if (categories.length > 0) {
       setFormData((prev) => ({
         ...prev,
-        category: categories[0].id,
+        translations: prev.translations.map((translation, index) =>
+          index === 0
+            ? {
+                ...translation,
+                language: nativeLanguage.id,
+              }
+            : translation,
+        ),
       }));
     }
-  }, [categories]);
+  }, [categories, nativeLanguage]);
 
   if (loading) {
     return (
@@ -200,18 +216,35 @@ export default function EditWord() {
                 <span></span>
                 <strong>SOURCE WORD</strong>
               </div>
+              <div className="source_word-contianer">
+                <div className="source_word-input">
+                  <label htmlFor="source_word">
+                    Term <span>*</span>
+                  </label>
+                  <input
+                    name="word"
+                    value={formData.translations[0].word}
+                    onChange={(e) => handleChange(0, e)}
+                    placeholder="e.g. Resilience"
+                    autoComplete="off"
+                    required
+                  />
+                </div>
 
-              <label htmlFor="source_word">
-                Term <span>*</span>
-              </label>
-              <input
-                name="word"
-                value={formData.translations[0].word}
-                onChange={(e) => handleChange(0, e)}
-                placeholder="e.g. Resilience"
-                autoComplete="off"
-                required
-              />
+                <div className="source_word-lang">
+                  <label htmlFor="language">Lang:</label>
+
+                  <select value={nativeLanguage?.id || ""} disabled>
+                    <option value="">Wähle Sprache</option>
+
+                    {nativeLanguage && (
+                      <option value={nativeLanguage.id}>
+                        {nativeLanguage.language_name}
+                      </option>
+                    )}
+                  </select>
+                </div>
+              </div>
 
               <label
                 htmlFor="source_tip"
@@ -266,19 +299,39 @@ export default function EditWord() {
                 <span></span>
                 <strong>TARGET WORD</strong>
               </div>
+              <div className="target_word-contianer">
+                <div className="target_word-input">
+                  <label htmlFor="target_word">
+                    Translation <span>*</span>
+                  </label>
+                  <input
+                    type="text"
+                    name="word"
+                    value={formData.translations[1].word || ""}
+                    onChange={(e) => handleChange(1, e)}
+                    placeholder="e.g. Resiliencia"
+                    autocomplete="off"
+                    required
+                  />
+                </div>
+                <div className="target_word-lang">
+                  <label htmlFor="language">Lang:</label>
 
-              <label htmlFor="target_word">
-                Translation <span>*</span>
-              </label>
-              <input
-                type="text"
-                name="word"
-                value={formData.translations[1].word || ""}
-                onChange={(e) => handleChange(1, e)}
-                placeholder="e.g. Resiliencia"
-                autocomplete="off"
-                required
-              />
+                  <select
+                    name="language"
+                    value={formData.translations[1]?.language}
+                    onChange={(e) => handleChange(1, e)}
+                    required
+                  >
+                    <option value="">Wähle</option>
+                    {languages.map((lang) => (
+                      <option key={lang.id} value={lang.id}>
+                        {lang.language_name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
 
               <label
                 htmlFor="target_tip"

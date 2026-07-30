@@ -171,7 +171,7 @@ function AllWords() {
                 <span>Days</span>
               </div>
 
-              <Link to={`/my-quiz/${word.id}/edit-word`} className="actions">
+              <Link to={`/my-quiz/${word.id}/edit-word?language=${word.translations[1].language}`} className="actions">
                 ✏️
               </Link>
             </div>

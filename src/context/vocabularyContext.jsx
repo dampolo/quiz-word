@@ -119,8 +119,8 @@ export function VocabularyProvider({ children }) {
     }
   }
 
-  async function getConcept(id) {
-    const response = await fetch(`${api}concepts/${id}/`, {
+  async function getConcept(id, languageId) {
+    const response = await fetch(`${api}concepts/${id}/?language=${languageId}`, {
       credentials: "include",
       headers: {
         "Content-Type": "application/json",

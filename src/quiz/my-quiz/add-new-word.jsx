@@ -25,7 +25,7 @@ export default function AddNewWord() {
   const [formData, setFormData] = useState({
     translations: [
       {
-        language: nativeLanguage?.id,
+        language: "",
         word: "",
         tip: "",
         sentence: "",
@@ -45,7 +45,7 @@ export default function AddNewWord() {
     try {
       await createConcept(formData);
       toast.success("Word added successfully!");
-      // navigate("/my-quiz/all-words/");
+      navigate("/my-quiz/all-words/");
 
       // Reset form
       setFormData({
