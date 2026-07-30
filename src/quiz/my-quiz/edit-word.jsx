@@ -30,6 +30,7 @@ export default function EditWord() {
   const { id } = useParams();
   const [searchParams] = useSearchParams();
   const languageId = searchParams.get("language");
+  const targetWord = searchParams.get("target-word");
 
   const navigate = useNavigate();
 
@@ -96,7 +97,7 @@ export default function EditWord() {
 
   async function deleteCurrentWord() {
     try {
-      await deleteWord(Number(id));
+      await deleteWord(Number(targetWord));
       navigate("/my-quiz/all-words/");
       getWords();
     } catch (err) {
@@ -107,7 +108,6 @@ export default function EditWord() {
   useEffect(() => {
     async function loadConcept() {
       try {
-        debugger
         const word = await getConcept(id, languageId);
         console.log(word);
 
