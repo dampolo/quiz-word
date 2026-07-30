@@ -119,8 +119,8 @@ export function VocabularyProvider({ children }) {
     }
   }
 
-  async function getWord(id) {
-    const response = await fetch(`${api}words/${id}/`, {
+  async function getConcept(id) {
+    const response = await fetch(`${api}concepts/${id}/`, {
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
@@ -161,14 +161,14 @@ export function VocabularyProvider({ children }) {
     }
   }
 
-  async function createWord(wordData) {
-    const response = await fetch(`${api}words/`, {
+  async function createConcept(conceptData) {
+    const response = await fetch(`${api}concepts/`, {
       method: "POST",
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(wordData),
+      body: JSON.stringify(conceptData),
     });
 
     const newWord = await response.json();
@@ -271,10 +271,10 @@ export function VocabularyProvider({ children }) {
         getConcepts,
         clearCategories,
         getUserLanguages,
-        getWord,
+        getConcept,
         getFiltredConcepts,
         getFiltredCategories,
-        createWord,
+        createConcept,
         updateWord,
         updateCategory,
         deleteWord,

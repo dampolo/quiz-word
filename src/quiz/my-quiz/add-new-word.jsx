@@ -10,23 +10,12 @@ export default function AddNewWord() {
   const {
     categories,
     loading,
-    createWord,
+    createConcept,
     getFiltredCategories,
     clearCategories,
     languages,
     nativeLanguage,
   } = useVocabulary();
-
-  const languages_flaga = [
-    { id: 1, name: "Spanish", flag: "🇪🇸" },
-    { id: 2, name: "German", flag: "🇩🇪" },
-    { id: 3, name: "English", flag: "🇬🇧" },
-    { id: 4, name: "Polish", flag: "🇵🇱" },
-    { id: 5, name: "Portuguese", flag: "🇵🇹" },
-    { id: 6, name: "French", flag: "🇫🇷" },
-  ];
-
-  const [selectedLanguage, setSelectedLanguage] = useState("");
 
   const navigate = useNavigate();
 
@@ -34,64 +23,73 @@ export default function AddNewWord() {
   const [moreTarget, setMoreTarget] = useState(false);
 
   const [formData, setFormData] = useState({
-    language_id: "",
-    category: "",
-    source_word: "",
-    target_word: "",
-
-    source_tip: "",
-    target_tip: "",
-
-    source_sentence: "",
-    target_sentence: "",
+    translations: [
+      {
+        language: nativeLanguage?.id,
+        word: "",
+        tip: "",
+        sentence: "",
+      },
+      {
+        language: "",
+        word: "",
+        tip: "",
+        sentence: "",
+      },
+    ],
   });
 
   async function handleSubmit(e) {
     e.preventDefault();
-
+    debugger;
     try {
-      await createWord(formData);
+      await createConcept(formData);
       toast.success("Word added successfully!");
-      navigate("/my-quiz/all-words/");
+      // navigate("/my-quiz/all-words/");
 
       // Reset form
       setFormData({
-        target_language: "",
-        category: "",
-        source_word: "",
-        target_word: "",
-        source_tip: "",
-        target_tip: "",
-        source_sentence: "",
-        target_sentence: "",
+        translations: [
+          {
+            language: "",
+            word: "",
+            tip: "",
+            sentence: "",
+          },
+          {
+            language: "",
+            word: "",
+            tip: "",
+            sentence: "",
+          },
+        ],
       });
     } catch (err) {
       console.error(err);
     }
   }
 
-  function handleChange(e) {
+  function handleChange(index, e) {
     const { name, value } = e.target;
 
-    console.log("Data: ", formData);
-
-    if (name === "language_id") {
-      setFormData((prev) => ({
-        ...prev,
-        language_id: value,
-        category: "", // reset category immediately
-      }));
-
-      if (!value) {
-        clearCategories();
-      }
-      return;
-    }
+    console.log("Data1: ", formData.translations[0]);
+    console.log("Data2: ", formData.translations[1]);
 
     setFormData((prev) => ({
       ...prev,
-      [name]: value,
+      translations: prev.translations.map((translation, i) =>
+        i === index
+          ? {
+              ...translation,
+              [name]: value,
+            }
+          : translation,
+      ),
     }));
+
+    if (name === "language" && !value) {
+      clearCategories();
+    }
   }
 
   useEffect(() => {
@@ -102,6 +100,22 @@ export default function AddNewWord() {
   useEffect(() => {
     clearCategories();
   }, []);
+
+  useEffect(() => {
+    if (!nativeLanguage) return;
+
+    setFormData((prev) => ({
+      ...prev,
+      translations: prev.translations.map((translation, index) =>
+        index === 0
+          ? {
+              ...translation,
+              language: nativeLanguage.id,
+            }
+          : translation,
+      ),
+    }));
+  }, [nativeLanguage]);
 
   if (loading) {
     return (
@@ -122,7 +136,7 @@ export default function AddNewWord() {
       </header>
 
       <form className="word-card" onSubmit={handleSubmit}>
-        <div className="form-group category-group">
+        {/* <div className="form-group category-group">
           <label htmlFor="language_name">
             Sprache <span>*</span>
           </label>
@@ -139,7 +153,7 @@ export default function AddNewWord() {
               </option>
             ))}
           </select>
-        </div>
+        </div> */}
 
         {categories.length > 0 && (
           <div className="form-group category-group">
@@ -182,9 +196,9 @@ export default function AddNewWord() {
                     Term <span>*</span>
                   </label>
                   <input
-                    name="source_word"
-                    value={formData.source_word || ""}
-                    onChange={handleChange}
+                    name="word"
+                    value={formData.translations[0].word}
+                    onChange={(e) => handleChange(0, e)}
                     placeholder="e.g. Resilience"
                     autoComplete="off"
                     required
@@ -214,9 +228,10 @@ export default function AddNewWord() {
                 Tip (Optional)
               </label>
               <input
-                name="source_tip"
-                value={formData.source_tip || ""}
-                onChange={handleChange}
+                type="text"
+                name="tip"
+                value={formData.translations[0].tip}
+                onChange={(e) => handleChange(0, e)}
                 placeholder="Visualize a spring bouncing back"
               />
 
@@ -224,9 +239,9 @@ export default function AddNewWord() {
                 Example Sentence (Optional)
               </label>
               <textarea
-                name="source_sentence"
-                value={formData.source_sentence || ""}
-                onChange={handleChange}
+                name="sentence"
+                value={formData.translations[0].sentence}
+                onChange={(e) => handleChange(0, e)}
                 placeholder="Her resilience after the setback was admirable."
               />
             </div>
@@ -268,9 +283,9 @@ export default function AddNewWord() {
                     Translation <span>*</span>
                   </label>
                   <input
-                    name="target_word"
-                    value={formData.target_word || ""}
-                    onChange={handleChange}
+                    name="word"
+                    value={formData.translations[1].word || ""}
+                    onChange={(e) => handleChange(1, e)}
                     placeholder="e.g. Resiliencia"
                     autoComplete="off"
                     required
@@ -281,9 +296,9 @@ export default function AddNewWord() {
                   <label htmlFor="language">Lang:</label>
 
                   <select
-                    name="target_language"
-                    value={formData.target_language}
-                    onChange={handleChange}
+                    name="language"
+                    value={formData.translations[1]?.language}
+                    onChange={(e) => handleChange(1, e)}
                     required
                   >
                     <option value="">Wähle</option>
@@ -302,9 +317,10 @@ export default function AddNewWord() {
                 Tip (Optional)
               </label>
               <input
-                name="target_tip"
-                value={formData.target_tip || ""}
-                onChange={handleChange}
+                type="text"
+                name="tip"
+                value={formData.translations[1].tip}
+                onChange={(e) => handleChange(1, e)}
                 placeholder="Sounds like 'silence' at the end"
                 autoComplete="off"
               />
@@ -313,9 +329,9 @@ export default function AddNewWord() {
                 Example Sentence (Optional)
               </label>
               <textarea
-                name="target_sentence"
-                value={formData.target_sentence || ""}
-                onChange={handleChange}
+                name="sentence"
+                value={formData.translations[1].sentence}
+                onChange={(e) => handleChange(1, e)}
                 placeholder="Su resiliencia tras el revés fue admirable."
               />
             </div>

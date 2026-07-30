@@ -9,7 +9,7 @@ import PreLoader from "../../components/PreLoader/PreLoader";
 
 export default function EditWord() {
   const {
-    getWord,
+    getConcept,
     updateWord,
     deleteWord,
     categories,
@@ -28,14 +28,22 @@ export default function EditWord() {
   const [moreTarget, setMoreTarget] = useState(false);
 
   const [formData, setFormData] = useState({
-    language_id: "",
-    category: "",
-    source_word: "",
-    target_word: "",
-    source_tip: "",
-    target_tip: "",
-    source_sentence: "",
-    target_sentence: "",
+    translations: [
+      {
+        id: 1,
+        word: "",
+        tip: "",
+        sentence: "",
+        category_id: "",
+      },
+      {
+        id: "",
+        word: "",
+        tip: "",
+        sentence: "",
+        category_id: "",
+      },
+    ],
   });
 
   async function handleSubmit(e) {
@@ -88,9 +96,9 @@ export default function EditWord() {
   }
 
   useEffect(() => {
-    async function loadWord() {
+    async function loadConcept() {
       try {
-        const word = await getWord(id);
+        const word = await getConcept(id);
         console.log(word);
 
         setFormData(word);
@@ -99,7 +107,7 @@ export default function EditWord() {
       }
     }
 
-    loadWord();
+    loadConcept();
   }, [id]);
 
   useEffect(() => {
@@ -197,20 +205,25 @@ export default function EditWord() {
                 Term <span>*</span>
               </label>
               <input
-                name="source_word"
-                value={formData.source_word || ""}
-                onChange={handleChange}
+                name="word"
+                value={formData.translations[0].word}
+                onChange={(e) => handleChange(0, e)}
                 placeholder="e.g. Resilience"
                 autoComplete="off"
                 required
               />
 
-              <label htmlFor="source_tip" className={`${moreSource ? "" : "source_tip"}`} >Tip (Optional)</label>
+              <label
+                htmlFor="source_tip"
+                className={`${moreSource ? "" : "source_tip"}`}
+              >
+                Tip (Optional)
+              </label>
               <input
                 type="text"
-                name="source_tip"
-                value={formData.source_tip || ""}
-                onChange={handleChange}
+                name="tip"
+                value={formData.translations[0].tip}
+                onChange={(e) => handleChange(0, e)}
                 placeholder="Visualize a spring bouncing back"
               />
 
@@ -218,9 +231,9 @@ export default function EditWord() {
                 Example Sentence (Optional)
               </label>
               <textarea
-                name="source_sentence"
-                value={formData.source_sentence || ""}
-                onChange={handleChange}
+                name="sentence"
+                value={formData.translations[0].sentence}
+                onChange={(e) => handleChange(0, e)}
                 placeholder="Her resilience after the setback was admirable."
               />
             </div>
@@ -258,31 +271,37 @@ export default function EditWord() {
                 Translation <span>*</span>
               </label>
               <input
-                name="target_word"
-                value={formData.target_word || ""}
-                onChange={handleChange}
-                onInput={handleChange}
+                type="text"
+                name="word"
+                value={formData.translations[1].word || ""}
+                onChange={(e) => handleChange(1, e)}
                 placeholder="e.g. Resiliencia"
                 autocomplete="off"
                 required
               />
 
-              <label htmlFor="target_tip" className={`${moreTarget ? "" : "target_tip"}`} >Tip (Optional)</label>
+              <label
+                htmlFor="target_tip"
+                className={`${moreTarget ? "" : "target_tip"}`}
+              >
+                Tip (Optional)
+              </label>
               <input
-                name="target_tip"
-                value={formData.target_tip || ""}
-                onChange={handleChange}
-                onInput={handleChange}
+                type="text"
+                name="tip"
+                value={formData.translations[1].tip}
+                onChange={(e) => handleChange(1, e)}
                 placeholder="Sounds like 'silence' at the end"
+                autoComplete="off"
               />
 
               <label htmlFor="target_sentence">
                 Example Sentence (Optional)
               </label>
               <textarea
-                name="target_sentence"
-                value={formData.target_sentence || ""}
-                onChange={handleChange}
+                name="sentence"
+                value={formData.translations[1].sentence}
+                onChange={(e) => handleChange(1, e)}
                 placeholder="Su resiliencia tras el revés fue admirable."
               />
             </div>
@@ -322,7 +341,11 @@ export default function EditWord() {
         <hr />
 
         <div className="action-buttons">
-          <button type="button" onClick={handleDelete} className="delete-button">
+          <button
+            type="button"
+            onClick={handleDelete}
+            className="delete-button"
+          >
             <img width={24} height={24} src="/assets/trash.svg" alt="trash" />
           </button>
 
