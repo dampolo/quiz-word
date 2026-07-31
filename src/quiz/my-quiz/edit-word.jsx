@@ -2,7 +2,6 @@ import "./edit-word.scss";
 import useVocabulary from "../../context/useVocabulary";
 import { useEffect, useState } from "react";
 import {
-  data,
   Link,
   useNavigate,
   useParams,
@@ -62,13 +61,12 @@ export default function EditWord() {
     console.log(formData);
 
     try {
-      debugger
       await updateWord(Number(id), formData);
       toast.success("Word updated successfully!");
       navigate("/my-quiz/all-words/");
       console.log("Form Data: ", formData);
 
-      // getConcept();
+      getConcept();
     } catch (err) {
       console.error(err);
     }
@@ -143,8 +141,6 @@ export default function EditWord() {
     async function loadConcept() {
       try {
         const data = await getConcept(id, languageId);
-        console.log(data);
-
         getFiltredCategories(languageId);
 
         setFormData({

@@ -194,9 +194,8 @@ export function VocabularyProvider({ children }) {
   }
 
   async function updateWord(id, wordData) {
-    debugger
     const response = await fetch(`${api}concepts/${id}/`, {
-      method: "PUT",
+      method: "PATCH",
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
