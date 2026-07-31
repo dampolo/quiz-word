@@ -41,7 +41,7 @@ export default function AddNewWord() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    debugger;
+    // debugger;
     try {
       await createConcept(formData);
       toast.success("Word added successfully!");
@@ -49,6 +49,7 @@ export default function AddNewWord() {
 
       // Reset form
       setFormData({
+        category: "",
         translations: [
           {
             language: "",
@@ -69,11 +70,45 @@ export default function AddNewWord() {
     }
   }
 
+  console.log("formData: ", formData);
+  console.log("Data1: ", formData.translations[0]);
+  console.log("Data2: ", formData.translations[1]);
+
   function handleChange(index, e) {
     const { name, value } = e.target;
 
-    console.log("Data1: ", formData.translations[0]);
-    console.log("Data2: ", formData.translations[1]);
+    if (name === "language") {
+      setFormData((prev) => ({
+        ...prev,
+        category: "", // reset selected category
+        translations: prev.translations.map((translation, i) =>
+          i === index
+            ? {
+                ...translation,
+                language: value,
+              }
+            : translation,
+        ),
+      }));
+
+      if (index === 1) {
+        if (value) {
+          getFiltredCategories(value);
+        } else {
+          clearCategories();
+        }
+      }
+
+      return;
+    }
+
+    if (name === "category") {
+      setFormData((prev) => ({
+        ...prev,
+        category: value,
+      }));
+      return;
+    }
 
     setFormData((prev) => ({
       ...prev,
@@ -86,10 +121,6 @@ export default function AddNewWord() {
           : translation,
       ),
     }));
-
-    if (name === "language" && !value) {
-      clearCategories();
-    }
   }
 
   useEffect(() => {
@@ -158,19 +189,18 @@ export default function AddNewWord() {
         {categories.length > 0 && (
           <div className="form-group category-group">
             <label>
-              Kategorie <span>*</span>
+              Kategorie <span></span>
             </label>
 
             <select
               name="category"
               value={formData.category}
-              onChange={handleChange}
-              required
+              onChange={(e) => handleChange(1, e)}
             >
               <option value="">Wähle Kategorie</option>
               {categories.map((category) => (
                 <option key={category.id} value={category.id}>
-                  {category.name}
+                  {category.category_name}
                 </option>
               ))}
             </select>
