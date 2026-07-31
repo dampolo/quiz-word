@@ -2,6 +2,7 @@ import "./edit-word.scss";
 import useVocabulary from "../../context/useVocabulary";
 import { useEffect, useState } from "react";
 import {
+  data,
   Link,
   useNavigate,
   useParams,
@@ -20,7 +21,6 @@ export default function EditWord() {
     categories,
     getFiltredCategories,
     loading,
-    getWords,
     languages,
     nativeLanguage,
   } = useVocabulary();
@@ -40,7 +40,7 @@ export default function EditWord() {
   const [formData, setFormData] = useState({
     translations: [
       {
-        id: 1,
+        id: "",
         word: "",
         tip: "",
         sentence: "",
@@ -62,24 +62,59 @@ export default function EditWord() {
     console.log(formData);
 
     try {
+      debugger
       await updateWord(Number(id), formData);
       toast.success("Word updated successfully!");
       navigate("/my-quiz/all-words/");
       console.log("Form Data: ", formData);
 
-      getWords();
+      // getConcept();
     } catch (err) {
       console.error(err);
     }
   }
 
-  function handleChange(e) {
+  function handleChange(index, e) {
     const { name, value } = e.target;
+
+    if (name === "language") {
+      setFormData((prev) => ({
+        ...prev,
+        category: "", // reset selected category
+        translations: prev.translations.map((translation, i) =>
+          i === index
+            ? {
+                ...translation,
+                language: value,
+              }
+            : translation,
+        ),
+      }));
+
+      return;
+    }
+
+    if (name === "category") {
+      setFormData((prev) => ({
+        ...prev,
+        category: value,
+      }));
+      return;
+    }
 
     setFormData((prev) => ({
       ...prev,
-      [name]: value,
+      translations: prev.translations.map((translation, i) =>
+        i === index
+          ? {
+              ...translation,
+              [name]: value,
+            }
+          : translation,
+      ),
     }));
+
+    console.log(formData);
   }
 
   function handleDelete() {
@@ -99,7 +134,6 @@ export default function EditWord() {
     try {
       await deleteWord(Number(targetWord));
       navigate("/my-quiz/all-words/");
-      getWords();
     } catch (err) {
       console.error(err);
     }
@@ -108,10 +142,21 @@ export default function EditWord() {
   useEffect(() => {
     async function loadConcept() {
       try {
-        const word = await getConcept(id, languageId);
-        console.log(word);
+        const data = await getConcept(id, languageId);
+        console.log(data);
 
-        setFormData(word);
+        getFiltredCategories(languageId);
+
+        setFormData({
+          translations: data.translations.map((translation) => ({
+            id: translation.id,
+            language: translation.language,
+            word: translation.word,
+            tip: translation.tip,
+            sentence: translation.sentence,
+            category_id: translation.category_id,
+          })),
+        });
       } catch (err) {
         console.error(err);
       }
@@ -121,9 +166,10 @@ export default function EditWord() {
   }, [id]);
 
   useEffect(() => {
-    if (!formData.language_id) return;
-    getFiltredCategories(formData.language_id);
-  }, [formData.language_id]);
+    if (formData.translations[1].language) {
+      getFiltredCategories(formData.translations[1].language);
+    }
+  }, [formData.translations[1].language]);
 
   useEffect(() => {
     if (categories.length > 0) {
@@ -133,13 +179,14 @@ export default function EditWord() {
           index === 0
             ? {
                 ...translation,
+                category_id: prev.category,
                 language: nativeLanguage.id,
               }
             : translation,
         ),
       }));
     }
-  }, [categories, nativeLanguage]);
+  }, [nativeLanguage]);
 
   if (loading) {
     return (
@@ -160,46 +207,21 @@ export default function EditWord() {
       </header>
 
       <form className="word-card" onSubmit={handleSubmit}>
-        <div className="form-group category-group">
-          <label htmlFor="language_id">
-            Sprache <span>*</span>
-          </label>
-
-          <option value="">Select Language</option>
-
-          <select
-            name="language_id"
-            value={formData.language_id}
-            onChange={handleChange}
-            required
-          >
-            <option value="">Wähle Sprache</option>
-
-            {languages.map((lang) => (
-              <option key={lang.id} value={lang.id}>
-                {lang.language_name}
-              </option>
-            ))}
-          </select>
-        </div>
-
         {categories.length > 0 && (
           <div className="form-group category-group">
             <label htmlFor="category">
-              Kategorie <span>*</span>
+              Kategorie <span></span>
             </label>
 
-            <option value="">Wähle Kategorie</option>
-
             <select
-              name="category"
-              value={formData.category}
-              onChange={handleChange}
-              required
+              name="category_id"
+              value={formData.translations[1].category_id}
+              onChange={(e) => handleChange(1, e)}
             >
+              <option value="">Wähle Kategorie</option>
               {categories.map((category) => (
                 <option key={category.id} value={category.id}>
-                  {category.name}
+                  {category.category_name}
                 </option>
               ))}
             </select>

@@ -23,6 +23,7 @@ export default function AddNewWord() {
   const [moreTarget, setMoreTarget] = useState(false);
 
   const [formData, setFormData] = useState({
+    category: "",
     translations: [
       {
         language: "",

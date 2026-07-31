@@ -12,12 +12,13 @@ function AddNewCategory() {
 
   const [formData, setFormData] = useState({
     language_id: "",
-    name: "",
+    category_name: "",
   });
 
   function handleChange(e) {
     const { name, value } = e.target;
-
+    console.log(formData);
+    
     setFormData((prev) => ({
       ...prev,
       [name]: value,
@@ -81,8 +82,8 @@ function AddNewCategory() {
         <div className="input-wrap">
           <input
             id="categoryName"
-            name="name"
-            value={formData.name}
+            name="category_name"
+            value={formData.category_name}
             onChange={handleChange}
             type="text"
             autocomplete="off"
@@ -116,7 +117,7 @@ function AddNewCategory() {
           <button
             type="submit"
             className="main-quiz-button save-btn"
-            disabled={formData.name.trim().length < 3}
+            disabled={formData.category_name.trim().length < 3}
           >
             <img
               width={24}

@@ -194,7 +194,8 @@ export function VocabularyProvider({ children }) {
   }
 
   async function updateWord(id, wordData) {
-    const response = await fetch(`${api}words/${id}/`, {
+    debugger
+    const response = await fetch(`${api}concepts/${id}/`, {
       method: "PUT",
       credentials: "include",
       headers: {

@@ -161,7 +161,7 @@ function AllWords() {
 
               <div className="category">
                 <span className={`badge ${word.category_name}`}>
-                  {word.translations[0].category_name}
+                  {word.translations[1].category_name}
                 </span>
               </div>
 
