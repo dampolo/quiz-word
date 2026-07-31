@@ -81,23 +81,16 @@ export default function AddNewWord() {
     if (name === "language") {
       setFormData((prev) => ({
         ...prev,
-        category: "", // reset selected category
+        category: "",
         translations: prev.translations.map((translation, i) =>
-          i === index
-            ? {
-                ...translation,
-                language: value,
-              }
-            : translation,
+          i === index ? { ...translation, language: value } : translation,
         ),
       }));
 
-      if (index === 1) {
-        if (value) {
-          getFiltredCategories(value);
-        } else {
-          clearCategories();
-        }
+      clearCategories();
+
+      if (index === 1 && value) {
+        getFiltredCategories(value);
       }
 
       return;
@@ -113,6 +106,7 @@ export default function AddNewWord() {
 
     setFormData((prev) => ({
       ...prev,
+      category: "",
       translations: prev.translations.map((translation, i) =>
         i === index
           ? {

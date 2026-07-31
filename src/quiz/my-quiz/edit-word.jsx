@@ -44,6 +44,7 @@ export default function EditWord() {
         tip: "",
         sentence: "",
         category_id: "",
+        language: "",
       },
       {
         id: "",
@@ -51,6 +52,8 @@ export default function EditWord() {
         tip: "",
         sentence: "",
         category_id: "",
+        language: "",
+
       },
     ],
   });
@@ -59,14 +62,14 @@ export default function EditWord() {
     e.preventDefault();
 
     console.log(formData);
-
+    debugger
     try {
       await updateWord(Number(id), formData);
       toast.success("Word updated successfully!");
       navigate("/my-quiz/all-words/");
       console.log("Form Data: ", formData);
 
-      getConcept();
+      // getConcept();
     } catch (err) {
       console.error(err);
     }
@@ -146,11 +149,11 @@ export default function EditWord() {
         setFormData({
           translations: data.translations.map((translation) => ({
             id: translation.id,
-            language: translation.language,
             word: translation.word,
             tip: translation.tip,
             sentence: translation.sentence,
             category_id: translation.category_id,
+            language: translation.language,
           })),
         });
       } catch (err) {
