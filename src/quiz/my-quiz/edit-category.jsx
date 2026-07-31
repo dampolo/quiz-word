@@ -14,7 +14,7 @@ function EditCategory() {
 
   const [formData, setFormData] = useState({
     language_id: "",
-    name: "",
+    category_name: "",
   });
 
   async function handleSubmit(e) {
@@ -99,8 +99,8 @@ function EditCategory() {
           <input
             id="categoryName"
             type="text"
-            name="name"
-            value={formData.name}
+            name="category_name"
+            value={formData.category_name}
             onChange={handleChange}
             autoComplete="off"
             required
@@ -133,7 +133,7 @@ function EditCategory() {
           <button
             type="submit"
             className="main-quiz-button save-btn"
-            disabled={formData.name.trim().length < 3}
+            disabled={formData.category_name.trim().length < 3}
           >
             <img
               width={24}
