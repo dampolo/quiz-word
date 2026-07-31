@@ -35,7 +35,7 @@ export function VocabularyProvider({ children }) {
       const data = await response.json();
 
       console.log(data.results);
-      
+
       setWords(data.results);
       setNextPage(data.next);
       setPreviousPage(data.previous);
@@ -120,12 +120,15 @@ export function VocabularyProvider({ children }) {
   }
 
   async function getConcept(id, languageId) {
-    const response = await fetch(`${api}concepts/${id}/?language=${languageId}`, {
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
+    const response = await fetch(
+      `${api}concepts/${id}/?language=${languageId}`,
+      {
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
       },
-    });
+    );
 
     if (!response.ok) {
       throw new Error("Word not found.");
@@ -151,7 +154,7 @@ export function VocabularyProvider({ children }) {
       const data = await response.json();
 
       console.log("Response:", data.results);
-      
+
       setWords(data.results);
       setNextPage(data.next);
       setPreviousPage(data.previous);
@@ -203,13 +206,13 @@ export function VocabularyProvider({ children }) {
       body: JSON.stringify(wordData),
     });
 
-    const updatedWord = await response.json();
+    const data = await response.json();
 
-    // setWords((prev) =>
-    //   prev.map((word) => (word.id === id ? updatedWord : word)),
-    // );
+    if (!response.ok) {
+      throw data;
+    }
 
-    return updatedWord;
+    return data;
   }
 
   async function updateCategory(id, categoryData) {

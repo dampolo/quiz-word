@@ -22,6 +22,7 @@ export default function EditWord() {
     loading,
     languages,
     nativeLanguage,
+    clearCategories,
   } = useVocabulary();
 
   const { openDialog } = useDialog();
@@ -53,25 +54,26 @@ export default function EditWord() {
         sentence: "",
         category_id: "",
         language: "",
-
       },
     ],
   });
 
   async function handleSubmit(e) {
     e.preventDefault();
-
     console.log(formData);
-    debugger
     try {
       await updateWord(Number(id), formData);
+
       toast.success("Word updated successfully!");
       navigate("/my-quiz/all-words/");
-      console.log("Form Data: ", formData);
-
-      // getConcept();
     } catch (err) {
       console.error(err);
+
+      const message =
+        err.language ||
+        "Failed to update the word.";
+
+      toast.error(message);
     }
   }
 
@@ -81,16 +83,18 @@ export default function EditWord() {
     if (name === "language") {
       setFormData((prev) => ({
         ...prev,
-        category: "", // reset selected category
         translations: prev.translations.map((translation, i) =>
           i === index
             ? {
                 ...translation,
                 language: value,
+                category_id: "",
               }
             : translation,
         ),
       }));
+
+      clearCategories();
 
       return;
     }
@@ -209,13 +213,14 @@ export default function EditWord() {
         {categories.length > 0 && (
           <div className="form-group category-group">
             <label htmlFor="category">
-              Kategorie <span></span>
+              Kategorie <span>*</span>
             </label>
 
             <select
               name="category_id"
               value={formData.translations[1].category_id}
               onChange={(e) => handleChange(1, e)}
+              required
             >
               <option value="">Wähle Kategorie</option>
               {categories.map((category) => (
