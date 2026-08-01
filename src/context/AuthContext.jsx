@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import useApi from "./ApiContext";
+import { data, useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
 
@@ -11,6 +12,7 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [profile, setProfile] = useState(false);
+  const navigate = useNavigate();
 
   const checkAuth = async () => {
     setLoading(true);
@@ -27,7 +29,12 @@ export function AuthProvider({ children }) {
       }
 
       const user = await response.json();
-
+      
+      console.log(user);
+      
+      if (!user.languages_active) {
+        navigate("/my-quiz/choose-languages/")
+      }
       setUser(user);
       return true;
     } catch {

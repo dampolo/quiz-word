@@ -34,7 +34,6 @@ import PrivacyPolicy from "./components/privacy-policy";
 import Price from "./website/price";
 import HelpDesk from "./website/help-desk";
 
-
 function App() {
   return (
     // Auth
@@ -51,7 +50,6 @@ function App() {
           <Route path="/create-account" element={<CreateAccount />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/confirmation" element={<Confirmation />} />
-          <Route path="/choose-languages" element={<ChooseLanguages />} />
         </Route>
 
         {/* Protected */}
@@ -76,7 +74,10 @@ function App() {
               <Route path="all-words" element={<AllWords />} />
               <Route path=":id/edit-word" element={<EditWord />} />
               <Route path="add-new-word" element={<AddNewWord />} />
-              <Route path="vocabulary-categories" element={<VocabularyCategories />}/>
+              <Route
+                path="vocabulary-categories"
+                element={<VocabularyCategories />}
+              />
               <Route path="add-new-category" element={<AddNewCategory />} />
               <Route path=":id/edit-category" element={<EditCategory />} />
               {/* Quizzes */}
@@ -86,6 +87,7 @@ function App() {
               <Route path=":id/play-quiz" element={<PlayQuiz />} />
               <Route path=":id/learn-quiz" element={<LearnQuiz />} />
               <Route path=":id/quiz-results" element={<QuizResults />} />
+              <Route path="choose-languages" element={<ChooseLanguages />} />
             </Route>
           </Route>
         </Route>
