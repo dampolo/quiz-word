@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import FormDialog from "../../components/FormDialog/FormDialog";
 import useQuiz from "../../context/useQuiz";
 import PreLoader from "../../components/PreLoader/PreLoader";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 function AllWords() {
   const {
@@ -16,10 +17,13 @@ function AllWords() {
     previousPage,
     getConcepts,
   } = useVocabulary();
+  const navigate = useNavigate();
+  const [ searchParams ] = useSearchParams()
+
   const [selectedWordIds, setSelectedWordIds] = useState([]);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [language, setLanguage] = useState("");
-  const [active, setActive] = useState("");
+  const [active, setActive] = useState(null);
   const { createQuiz } = useQuiz();
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -58,8 +62,18 @@ function AllWords() {
   function handleLanguageChange(languageId) {
   setLanguage(languageId);
   setCurrentPage(1);
+  navigate(`/my-quiz/all-words?language=${languageId}`);
 }
 
+  useEffect(() => {
+    const language = searchParams.get("language")
+    if (language) {
+      setActive(Number(language))
+      handleLanguageChange(Number(language))
+    }
+  }, [])
+
+  
   useEffect(() => {
     if (language) {
       getFiltredConcepts(language, currentPage);
@@ -108,7 +122,7 @@ function AllWords() {
             .map((lang) => (
               <li
                 className={
-                  active === lang.language_name
+                  active === lang.id
                     ? "language-single active"
                     : "language-single"
                 }
@@ -118,7 +132,7 @@ function AllWords() {
                   className="language-button"
                   onClick={() => {
                     handleLanguageChange(lang.id);
-                    setActive(lang.language_name);
+                    setActive(lang.id);
                   }}
                 >
                   {lang.language_name}

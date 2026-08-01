@@ -26,7 +26,7 @@ export default function EditWord() {
   } = useVocabulary();
 
   const { openDialog } = useDialog();
-
+   
   const { id } = useParams();
   const [searchParams] = useSearchParams();
   const languageId = searchParams.get("language");
@@ -201,7 +201,7 @@ export default function EditWord() {
 
   return (
     <main className="add-word-page">
-      <BackButton to="/my-quiz/all-words/" />
+      <BackButton to={`/my-quiz/all-words?language=${languageId}`} />
       <header className="page-header">
         <div>
           <h1>Edit Dein Word</h1>

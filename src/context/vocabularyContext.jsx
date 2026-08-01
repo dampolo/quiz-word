@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import useApi from "./ApiContext";
+import { useNavigate } from "react-router-dom";
 
 const VocabularyContext = createContext();
 
@@ -7,7 +8,7 @@ export default VocabularyContext;
 
 export function VocabularyProvider({ children }) {
   const api = useApi();
-
+  const navigate = useNavigate();
   const [words, setWords] = useState([]);
   const [categories, setCategories] = useState([]);
   const [languages, setLanguages] = useState([]);
@@ -74,6 +75,7 @@ export function VocabularyProvider({ children }) {
     console.log("Response:", data);
     setLanguages(data.learning_languages);
     setNativeLanguage(data.native_language);
+    navigate(`/my-quiz/all-words?language=${data.native_language.id}`);
   }
 
   async function getCategories(id) {
