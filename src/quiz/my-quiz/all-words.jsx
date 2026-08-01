@@ -60,7 +60,6 @@ function AllWords() {
   }
 
   function selectLanguage(languageId) {
-    debugger
     setSearchParams({ language: languageId });
   }
 
