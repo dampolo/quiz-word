@@ -75,7 +75,7 @@ export function VocabularyProvider({ children }) {
     console.log("Response:", data);
     setLanguages(data.learning_languages);
     setNativeLanguage(data.native_language);
-    navigate(`/my-quiz/all-words?language=${data.native_language.id}`);
+    navigate(`/my-quiz/all-words?language=${data.learning_languages[0].id}`);
   }
 
   async function getCategories(id) {

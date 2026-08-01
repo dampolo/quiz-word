@@ -17,15 +17,15 @@ function AllWords() {
     previousPage,
     getConcepts,
   } = useVocabulary();
-  const navigate = useNavigate();
-  const [ searchParams ] = useSearchParams()
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const [selectedWordIds, setSelectedWordIds] = useState([]);
   const [dialogOpen, setDialogOpen] = useState(false);
-  const [language, setLanguage] = useState("");
-  const [active, setActive] = useState(null);
   const { createQuiz } = useQuiz();
   const [currentPage, setCurrentPage] = useState(1);
+
+  const language = searchParams.get("language");
+  const active = language ? Number(language) : null;
 
   console.log(active);
 
@@ -59,21 +59,12 @@ function AllWords() {
     }
   }
 
-  function handleLanguageChange(languageId) {
-  setLanguage(languageId);
-  setCurrentPage(1);
-  navigate(`/my-quiz/all-words?language=${languageId}`);
-}
+  function selectLanguage(languageId) {
+    debugger
+    setSearchParams({ language: languageId });
+  }
 
-  useEffect(() => {
-    const language = searchParams.get("language")
-    if (language) {
-      setActive(Number(language))
-      handleLanguageChange(Number(language))
-    }
-  }, [])
 
-  
   useEffect(() => {
     if (language) {
       getFiltredConcepts(language, currentPage);
@@ -118,27 +109,21 @@ function AllWords() {
       </div>
 
       <ul className="languages-list">
-          {languages
-            .map((lang) => (
-              <li
-                className={
-                  active === lang.id
-                    ? "language-single active"
-                    : "language-single"
-                }
-                key={lang.id}
-              >
-                <button
-                  className="language-button"
-                  onClick={() => {
-                    handleLanguageChange(lang.id);
-                    setActive(lang.id);
-                  }}
-                >
-                  {lang.language_name}
-                </button>
-              </li>
-            ))}
+        {languages.map((lang) => (
+          <li
+            className={
+              active === lang.id ? "language-single active" : "language-single"
+            }
+            key={lang.id}
+          >
+            <button
+              className="language-button"
+              onClick={() => selectLanguage(lang.id)}
+            >
+              {lang.language_name}
+            </button>
+          </li>
+        ))}
       </ul>
 
       <div className="word-list">
@@ -185,7 +170,10 @@ function AllWords() {
                 <span>Days</span>
               </div>
 
-              <Link to={`/my-quiz/${word.id}/edit-word?target-word=${word.translations[1].id}&language=${word.translations[1].language}`} className="actions">
+              <Link
+                to={`/my-quiz/${word.id}/edit-word?target-word=${word.translations[1].id}&language=${word.translations[1].language}`}
+                className="actions"
+              >
                 ✏️
               </Link>
             </div>
