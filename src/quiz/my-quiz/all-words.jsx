@@ -11,7 +11,7 @@ function AllWords() {
   const {
     words,
     loading,
-    languages,
+    userLanguages,
     getFiltredConcepts,
     nextPage,
     previousPage,
@@ -108,7 +108,7 @@ function AllWords() {
       </div>
 
       <ul className="languages-list">
-        {languages.map((lang) => (
+        {userLanguages.map((lang) => (
           <li
             className={
               active === lang.id ? "language-single active" : "language-single"

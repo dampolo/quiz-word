@@ -11,7 +11,9 @@ export function VocabularyProvider({ children }) {
   const navigate = useNavigate();
   const [words, setWords] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [userlanguages, setUserLanguages] = useState([]);
   const [languages, setLanguages] = useState([]);
+
   const [nativeLanguage, setNativeLanguage] = useState([]);
 
   const [loading, setLoading] = useState(false);
@@ -61,6 +63,20 @@ export function VocabularyProvider({ children }) {
 
   async function getUserLanguages() {
     const response = await fetch(`${api}user-languages/`, {
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to load languages.");
+    }
+    return await response.json();
+  }
+
+  async function getLanguages() {
+    const response = await fetch(`${api}languages/`, {
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
@@ -243,16 +259,25 @@ export function VocabularyProvider({ children }) {
       setLoading(true);
 
       try {
-        const data = await getUserLanguages();
-        console.log("DATA: ", data);
-        
-        if (!data.languages_active) {
+        const [userData, languages] = await Promise.all([
+          getUserLanguages(),
+          getLanguages(),
+        ]);
+
+        console.log("DATA: ", userData);
+
+        console.log("languages: ", languages);
+        console.log("native_language: ", userData.native_language);
+        console.log("learning_languages: ", userData.learning_languages);
+
+        if (!userData.languages_active) {
           navigate("choose-languages");
           return;
         }
 
-        setNativeLanguage(data.native_language);
-        setLanguages(data.learning_languages);
+        setLanguages(languages);
+        setNativeLanguage(userData.native_language);
+        setUserLanguages(userData.learning_languages);
 
         await getConcepts();
       } catch (error) {
@@ -276,6 +301,7 @@ export function VocabularyProvider({ children }) {
         categories,
         loading,
         languages,
+        userlanguages,
         nativeLanguage,
         nextPage,
         previousPage,

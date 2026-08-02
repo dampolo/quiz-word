@@ -5,14 +5,14 @@ import { Link } from "react-router-dom";
 import  PreLoader  from "../../components/PreLoader/PreLoader" 
 
 export default function VocabularyCategories() {
-  const { categories, languages, loading, getFiltredCategories } =
+  const { categories, userLanguages, loading, getFiltredCategories } =
     useVocabulary();
   const [language, setLanguage] = useState("");
   const [active, setActive] = useState("");
 
   useEffect(() => {
     getFiltredCategories(language);
-  }, [language]);
+  }, [userLanguages]);
 
     if (loading) {
       return (
@@ -39,7 +39,7 @@ export default function VocabularyCategories() {
       </header>
 
       <ul className="languages-list">
-          {languages
+          {userLanguages
             .filter((lang) => lang.language_name === "Without")
             .map((lang) => (
               <li
@@ -64,7 +64,7 @@ export default function VocabularyCategories() {
               </li>
             ))}
 
-          {languages
+          {userLanguages
             .filter((lang) => lang.language_name !== "Without")
             .map((lang) => (
               <li
