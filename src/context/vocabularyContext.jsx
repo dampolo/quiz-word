@@ -89,6 +89,22 @@ export function VocabularyProvider({ children }) {
     return await response.json();
   }
 
+  async function postLanguages(payload) {
+    const response = await fetch(`${api}user-languages/`, {
+      method: "PATCH",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to load languages.");
+    }
+    return await response.json();
+  }
+
   async function getCategories(id) {
     setLoading(true);
     try {
@@ -307,6 +323,7 @@ export function VocabularyProvider({ children }) {
         nativeLanguage,
         nextPage,
         previousPage,
+        postLanguages,
         getConcepts,
         clearCategories,
         getUserLanguages,

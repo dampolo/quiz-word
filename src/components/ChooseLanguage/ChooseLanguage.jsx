@@ -4,33 +4,35 @@ import BackButton from "../BackButton/BackButton";
 import "./ChooseLanguages.scss";
 import useVocabulary from "../../context/useVocabulary";
 
-
 function ChooseLanguages() {
-  const {languages} = useVocabulary()
+  const { languages, postLanguages } = useVocabulary();
 
   const [nativeLanguage, setNativeLanguage] = useState("");
   const [learningLanguages, setLearningLanguages] = useState([]);
 
   function handleCheckboxChange(id) {
-    if (id === nativeLanguage) return;
     setLearningLanguages((prev) =>
-      prev.includes(id)
-        ? prev.filter((item) => item !== id)
-        : [...prev, id],
+      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id],
     );
   }
-
   function handleNativeLanguageChange(e) {
-    const language = Number(e.target.value)
-    setLearningLanguages([])
-    setNativeLanguage(language)
+    const language = Number(e.target.value);
+    setNativeLanguage(language);
+    setLearningLanguages((prev) => prev.filter((item) => item !== language));
+  }
 
-    setLearningLanguages((prev) => prev.includes(language) ? prev : [...prev, language])
-
-}
-
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
+    const payload = {
+      native_language_id: nativeLanguage,
+      learning_languages_id: learningLanguages,
+    };
+
+    try {
+      await postLanguages(payload);
+    } catch (err) {
+      console.error(err);
+    }
 
     console.log({
       nativeLanguage,
@@ -71,6 +73,7 @@ function ChooseLanguages() {
                   type="checkbox"
                   value={language.id}
                   checked={learningLanguages.includes(language.id)}
+                  disabled={language.id === nativeLanguage}
                   onChange={() => handleCheckboxChange(language.id)}
                 />
                 {language.language_name}
