@@ -20,7 +20,6 @@ export function VocabularyProvider({ children }) {
 
   async function getConcepts(page = 1) {
     setLoading(true);
-
     try {
       const response = await fetch(`${api}concepts/?page=${page}`, {
         credentials: "include",
@@ -71,11 +70,7 @@ export function VocabularyProvider({ children }) {
     if (!response.ok) {
       throw new Error("Failed to load languages.");
     }
-    const data = await response.json();
-    console.log("Response:", data);
-    setLanguages(data.learning_languages);
-    setNativeLanguage(data.native_language);
-    navigate(`/my-quiz/all-words?language=${data.learning_languages[0].id}`);
+    return await response.json();
   }
 
   async function getCategories(id) {
@@ -248,7 +243,18 @@ export function VocabularyProvider({ children }) {
       setLoading(true);
 
       try {
-        await Promise.all([getConcepts(), getUserLanguages()]);
+        const data = await getUserLanguages();
+        console.log("DATA: ", data);
+        
+        if (!data.languages_active) {
+          navigate("choose-languages");
+          return;
+        }
+
+        setNativeLanguage(data.native_language);
+        setLanguages(data.learning_languages);
+
+        await getConcepts();
       } catch (error) {
         console.error(error);
       } finally {
