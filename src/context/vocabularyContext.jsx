@@ -11,7 +11,7 @@ export function VocabularyProvider({ children }) {
   const navigate = useNavigate();
   const [words, setWords] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [userlanguages, setUserLanguages] = useState([]);
+  const [userLanguages, setUserLanguages] = useState([]);
   const [languages, setLanguages] = useState([]);
 
   const [nativeLanguage, setNativeLanguage] = useState([]);
@@ -271,8 +271,10 @@ export function VocabularyProvider({ children }) {
         console.log("learning_languages: ", userData.learning_languages);
 
         if (!userData.languages_active) {
-          navigate("choose-languages");
-          return;
+          navigate("/my-quiz/choose-languages");
+        }
+        else {
+          navigate(`/my-quiz/all-words?language=${userData.learning_languages[0].id}`)
         }
 
         setLanguages(languages);
@@ -301,7 +303,7 @@ export function VocabularyProvider({ children }) {
         categories,
         loading,
         languages,
-        userlanguages,
+        userLanguages,
         nativeLanguage,
         nextPage,
         previousPage,

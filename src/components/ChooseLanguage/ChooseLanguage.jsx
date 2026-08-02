@@ -1,33 +1,27 @@
-import { Link } from "react-router-dom";
+import { Form, Link } from "react-router-dom";
 import { useState } from "react";
 import BackButton from "../BackButton/BackButton";
 import "./ChooseLanguages.scss";
+import useVocabulary from "../../context/useVocabulary";
 
-const languages = [
-  "English",
-  "German",
-  "French",
-  "Spanish",
-  "Italian",
-  "Portuguese",
-];
 
 function ChooseLanguages() {
+  const {languages} = useVocabulary()
+
   const [nativeLanguage, setNativeLanguage] = useState("");
   const [learningLanguages, setLearningLanguages] = useState([]);
 
-  function handleCheckboxChange(language) {
-    if (language === nativeLanguage) return;
-
+  function handleCheckboxChange(id) {
+    if (id === nativeLanguage) return;
     setLearningLanguages((prev) =>
-      prev.includes(language)
-        ? prev.filter((item) => item !== language)
-        : [...prev, language],
+      prev.includes(id)
+        ? prev.filter((item) => item !== id)
+        : [...prev, id],
     );
   }
 
   function handleNativeLanguageChange(e) {
-    const language = e.target.value
+    const language = Number(e.target.value)
     setLearningLanguages([])
     setNativeLanguage(language)
 
@@ -53,15 +47,15 @@ function ChooseLanguages() {
             <p className="description languages">Wähle deine Muttersprache:</p>
 
             {languages.map((language) => (
-              <label key={language} className="radio-option">
+              <label key={language.id} className="radio-option">
                 <input
                   type="radio"
                   name="nativeLanguage"
-                  value={language}
-                  checked={nativeLanguage === language}
+                  value={language.id}
+                  checked={nativeLanguage === language.id}
                   onChange={handleNativeLanguageChange}
                 />
-                {language}
+                {language.language_name}
               </label>
             ))}
           </div>
@@ -72,14 +66,14 @@ function ChooseLanguages() {
             </p>
 
             {languages.map((language) => (
-              <label key={language} className="checkbox-option">
+              <label key={language.id} className="checkbox-option">
                 <input
                   type="checkbox"
-                  value={language}
-                  checked={learningLanguages.includes(language)}
-                  onChange={() => handleCheckboxChange(language)}
+                  value={language.id}
+                  checked={learningLanguages.includes(language.id)}
+                  onChange={() => handleCheckboxChange(language.id)}
                 />
-                {language}
+                {language.language_name}
               </label>
             ))}
           </div>

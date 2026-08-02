@@ -30,8 +30,6 @@ export function AuthProvider({ children }) {
 
       const user = await response.json();
       
-      console.log(user);
-      
       if (!user.languages_active) {
         navigate("/my-quiz/choose-languages/")
       }
