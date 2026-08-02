@@ -1,2 +1,10 @@
 @use "./../../styles/basic.scss";
 @use "./../../styles/auth.scss";
+
+.radio-option,
+.checkbox-option {
+    display: inline-flex;
+    width: 6rem;
+    gap: 1rem;
+}
+

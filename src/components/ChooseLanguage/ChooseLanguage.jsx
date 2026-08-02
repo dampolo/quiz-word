@@ -46,10 +46,11 @@ function ChooseLanguages() {
 
   return (
     <main>
-      <section className="main-content-customer">
+      <section className="main-content-customer choose-languages">
         <form onSubmit={handleSubmit}>
+          <h1 className="form-title">Wähle deine Sprachen</h1>
           <div className="input-container">
-            <p className="description languages">Choose your first language:</p>
+            <p className="description languages">Wähle deine Muttersprache:</p>
 
             {languages.map((language) => (
               <label key={language} className="radio-option">
@@ -67,7 +68,7 @@ function ChooseLanguages() {
 
           <div className="input-container">
             <p className="description">
-              Choose languages which you want to learn:
+              Wähle Sprache die du lernen möchtest :
             </p>
 
             {languages.map((language) => (
