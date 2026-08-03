@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 
 
 function EditCategory() {
-  const { getCategory, updateCategory, getCategories, languages, loading } = useVocabulary();
+  const { getCategory, updateCategory, languages, loading } = useVocabulary();
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -21,9 +21,8 @@ function EditCategory() {
     e.preventDefault();
     try {
       await updateCategory(Number(id), formData);
-      toast.success("Category updated successfully!");
-      navigate("/my-quiz/vocabulary-categories/");
-      getCategories()
+      toast.success(`Category updated "${formData.category_name}" successfully!`);
+      navigate(`/my-quiz/vocabulary-categories/?language=${formData.language_id}`);
     } catch (err) {
       console.error(err);
     }

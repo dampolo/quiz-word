@@ -1,18 +1,25 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import useVocabulary from "../../context/useVocabulary";
 import "./all-categories.scss";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import  PreLoader  from "../../components/PreLoader/PreLoader" 
 
 export default function VocabularyCategories() {
   const { categories, userLanguages, loading, getFiltredCategories } =
     useVocabulary();
-  const [language, setLanguage] = useState("");
-  const [active, setActive] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const language = searchParams.get("language");
+  const active = language ? Number(language) : null;
 
   useEffect(() => {
     getFiltredCategories(language);
-  }, [userLanguages]);
+  }, [language]);
+
+
+  function selectLanguage(languageId) {
+    setSearchParams({ language: languageId });
+  }
+
 
     if (loading) {
       return (
@@ -52,12 +59,7 @@ export default function VocabularyCategories() {
               >
                 <button
                   className="language-button"
-                  onClick={() => {
-                    {
-                      setLanguage(lang.id);
-                      setActive(lang.language_name);
-                    }
-                  }}
+                  onClick={() => selectLanguage(lang.id)}
                 >
                   Ohne
                 </button>
@@ -69,7 +71,7 @@ export default function VocabularyCategories() {
             .map((lang) => (
               <li
                 className={
-                  active === lang.language_name
+                  active === lang.id
                     ? "language-single active"
                     : "language-single"
                 }
@@ -77,12 +79,7 @@ export default function VocabularyCategories() {
               >
                 <button
                   className="language-button"
-                  onClick={() => {
-                    {
-                      setLanguage(lang.id);
-                      setActive(lang.language_name);
-                    }
-                  }}
+                  onClick={() => selectLanguage(lang.id)}
                 >
                   {lang.language_name}
                 </button>
