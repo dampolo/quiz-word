@@ -12,7 +12,13 @@ export default function VocabularyCategories() {
   const active = language ? Number(language) : null;
 
   useEffect(() => {
-    getFiltredCategories(language);
+    if(language !== null) {
+      getFiltredCategories(language);
+
+    } else {
+      getFiltredCategories(userLanguages[0].id);
+      
+    }
   }, [language]);
 
 
