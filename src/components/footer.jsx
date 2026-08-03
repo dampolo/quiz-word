@@ -27,7 +27,7 @@ function Footer() {
           </a>
 
           <Link to="/help-desk" className="footer__link">
-            Help Center
+            FAQ
           </Link>
 
           <a href="#" className="footer__link">
