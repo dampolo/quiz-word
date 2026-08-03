@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../../../context/useAuth";
+import  useVocabulary  from "../../../context/useVocabulary";
 import "./profile.scss";
 import EditButton from "../../../components/EditButton/EditButon";
 import BackButton from "../../../components/BackButton/BackButton";
 import PreLoader from "../../../components/PreLoader/PreLoader";
+import { useEffect } from "react";
 
 const InfoRow = ({ label, value }) => {
   const renderValue = () => {
@@ -21,8 +23,11 @@ const InfoRow = ({ label, value }) => {
     </div>
   );
 };
+
+
 function Profile() {
   const { profile } = useAuth();
+  const { userLanguages, nativeLanguage } = useVocabulary();
 
   if (!profile) {
     return (
@@ -34,7 +39,7 @@ function Profile() {
 
   return (
     <div className="profile-user">
-      <h1>Profile</h1>
+      <h1 className="title">Profile</h1>
       <div className="profile-user__card">
         <BackButton to="/my-quiz/all-words/" />
         <InfoRow label="Customer Number:" value={profile.customer_number} />
@@ -74,6 +79,29 @@ function Profile() {
           }
         />
         <EditButton to="/my-quiz/edit-profile" className="edit-button" />
+      </div>
+      <h2>Edit Deine Sprachen</h2>
+      <div className="profile-user__card">
+        
+        <div className="profile-user__row">
+          <span className="profile-user__label">Deine Muttersprache</span>
+          <span className="profile-user__value">{nativeLanguage.language_name}</span>
+        </div>
+
+        <div className="profile-user__row">
+        
+          <span className="profile-user__label">Deine Lernsprachen</span>
+          <ul>
+
+          {
+            userLanguages.map((lang) => (
+              <li className="profile-user__value" key={lang.id}>{lang.language_name}</li>
+            ))
+          }
+          </ul>
+        
+        </div>
+         <EditButton to="/my-quiz/choose-languages" className="edit-button" />
       </div>
     </div>
   );

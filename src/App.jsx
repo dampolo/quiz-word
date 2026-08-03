@@ -56,8 +56,6 @@ function App() {
         <Route element={<ProtectedRoute />}>
           <Route path="/my-quiz" element={<MyQuiz />}>
             <Route path="dashboard" element={<Dashboard />} />
-            <Route path="profile" element={<Profile />} />
-            <Route path="edit-profile" element={<EditProfile />} />
 
             <Route
               element={
@@ -70,24 +68,27 @@ function App() {
                 </VocabularyProvider>
               }
             >
-              {/* Vocabulary */}
-              <Route path="all-words" element={<AllWords />} />
-              <Route path=":id/edit-word" element={<EditWord />} />
-              <Route path="add-new-word" element={<AddNewWord />} />
-              <Route
-                path="vocabulary-categories"
-                element={<VocabularyCategories />}
-              />
-              <Route path="add-new-category" element={<AddNewCategory />} />
-              <Route path=":id/edit-category" element={<EditCategory />} />
-              {/* Quizzes */}
-              <Route path="all-quizzes" element={<AllQuizzes />} />
-              <Route path="add-new-quiz" element={<AddNewQuiz />} />
-              <Route path=":id/all-quiz-words" element={<AllQuizWords />} />
-              <Route path=":id/play-quiz" element={<PlayQuiz />} />
-              <Route path=":id/learn-quiz" element={<LearnQuiz />} />
-              <Route path=":id/quiz-results" element={<QuizResults />} />
-              <Route path="choose-languages" element={<ChooseLanguages />} />
+                {/* Profile */}
+                <Route path="profile" element={<Profile />} />
+                <Route path="edit-profile" element={<EditProfile />} />
+                {/* Vocabulary */}
+                <Route path="all-words" element={<AllWords />} />
+                <Route path=":id/edit-word" element={<EditWord />} />
+                <Route path="add-new-word" element={<AddNewWord />} />
+                <Route
+                  path="vocabulary-categories"
+                  element={<VocabularyCategories />}
+                />
+                <Route path="add-new-category" element={<AddNewCategory />} />
+                <Route path=":id/edit-category" element={<EditCategory />} />
+                {/* Quizzes */}
+                <Route path="all-quizzes" element={<AllQuizzes />} />
+                <Route path="add-new-quiz" element={<AddNewQuiz />} />
+                <Route path=":id/all-quiz-words" element={<AllQuizWords />} />
+                <Route path=":id/play-quiz" element={<PlayQuiz />} />
+                <Route path=":id/learn-quiz" element={<LearnQuiz />} />
+                <Route path=":id/quiz-results" element={<QuizResults />} />
+                <Route path="choose-languages" element={<ChooseLanguages />} />
             </Route>
           </Route>
         </Route>
