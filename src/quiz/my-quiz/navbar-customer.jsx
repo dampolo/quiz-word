@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import "./navbar-customer.scss"
 import { NavLink } from "react-router-dom";
 
-function NavbarCustomer() {
+function NavbarCustomer({ firstLanguage }) {
   function closeMenu() {}
 
 
@@ -10,7 +10,7 @@ function NavbarCustomer() {
     <ul  className="navbar-customer">
       <li>
         <NavLink
-          to="/my-quiz/vocabulary-categories"
+          to={`/my-quiz/vocabulary-categories?language=${firstLanguage}`}
           className={({ isActive }) => (isActive ? "active" : "")}
         >
           <img width={24} height={24} src="/assets/categories-icon.svg" alt="" />
@@ -19,7 +19,7 @@ function NavbarCustomer() {
       </li>
       <li>
         <NavLink
-          to="/my-quiz/all-words/"
+          to={`/my-quiz/all-words?language=${firstLanguage}`}
           className={({ isActive }) => (isActive ? "active" : "")}
         >
           <img width={24} height={24} src="/assets/words.svg" alt="" />

@@ -57,7 +57,7 @@ export default function VocabularyCategories() {
             .map((lang) => (
               <li
                 className={
-                  active === lang.language_name
+                  active === lang.id
                     ? "language-single active"
                     : "language-single"
                 }

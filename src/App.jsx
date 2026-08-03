@@ -55,9 +55,6 @@ function App() {
 
         {/* Protected */}
         <Route element={<ProtectedRoute />}>
-          <Route path="/my-quiz" element={<MyQuiz />}>
-            <Route path="dashboard" element={<Dashboard />} />
-
             <Route
               element={
                 <VocabularyProvider>
@@ -69,6 +66,7 @@ function App() {
                 </VocabularyProvider>
               }
             >
+                <Route path="/my-quiz" element={<MyQuiz />}>
                 {/* Profile */}
                 <Route path="profile" element={<Profile />} />
                 <Route path="edit-profile" element={<EditProfile />} />
