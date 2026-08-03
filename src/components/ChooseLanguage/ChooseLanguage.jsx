@@ -5,7 +5,7 @@ import "./ChooseLanguages.scss";
 import useVocabulary from "../../context/useVocabulary";
 
 function ChooseLanguages() {
-  const { languages, userLanguages, postLanguages } = useVocabulary();
+  const { languages, postLanguages } = useVocabulary();
   const navigate = useNavigate();
   const [nativeLanguage, setNativeLanguage] = useState("");
   const [learningLanguages, setLearningLanguages] = useState([]);
