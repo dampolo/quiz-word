@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import "./BackButton.scss"
 
-function BackButton({ to }) {
+function BackButton({ to, className }) {
   return (
-    <Link to={to} className="arrow-back">
+    <Link to={to} className={`arrow-back ${className}`}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="40"

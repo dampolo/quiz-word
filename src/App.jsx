@@ -33,6 +33,7 @@ import Imprint from "./components/imprint";
 import PrivacyPolicy from "./components/privacy-policy";
 import Price from "./website/price";
 import HelpDesk from "./website/help-desk";
+import EditLanguages from "./components/ChooseLanguage/EditLanguages";
 
 function App() {
   return (
@@ -89,6 +90,8 @@ function App() {
                 <Route path=":id/learn-quiz" element={<LearnQuiz />} />
                 <Route path=":id/quiz-results" element={<QuizResults />} />
                 <Route path="choose-languages" element={<ChooseLanguages />} />
+                <Route path="edit-languages" element={<EditLanguages />} />
+
             </Route>
           </Route>
         </Route>

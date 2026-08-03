@@ -1,19 +1,44 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import "./ChooseLanguages.scss";
 import useVocabulary from "../../context/useVocabulary";
 import LanguageForm from "./LanguageForm";
+import BackButton from "../BackButton/BackButton";
 
-function ChooseLanguages() {
-  const { languages, postLanguages } = useVocabulary();
+function EditLanguages() {
+  const {
+    languages,
+    getUserLanguages,
+    postLanguages,
+  } = useVocabulary();
+
   const navigate = useNavigate();
 
   const [nativeLanguage, setNativeLanguage] = useState("");
   const [learningLanguages, setLearningLanguages] = useState([]);
 
+  useEffect(() => {
+    async function loadLanguages() {
+      try {
+        const data = await getUserLanguages();
+
+        setNativeLanguage(data.native_language.id);
+
+        setLearningLanguages(
+          data.learning_languages.map((language) => language.id)
+        );
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    loadLanguages();
+  }, []);
+
   function handleNativeLanguageChange(id) {
     setNativeLanguage(id);
+
     setLearningLanguages((prev) =>
       prev.filter((lang) => lang !== id)
     );
@@ -34,7 +59,6 @@ function ChooseLanguages() {
       native_language_id: nativeLanguage,
       learning_languages_id: learningLanguages,
     };
-
     try {
       await postLanguages(payload);
 
@@ -47,8 +71,10 @@ function ChooseLanguages() {
   }
 
   return (
-    <main>
+    <>
       <section className="main-content-customer choose-languages">
+        <BackButton className="arrow-profile" to="/my-quiz/all-words/" />
+
         <LanguageForm
           languages={languages}
           nativeLanguage={nativeLanguage}
@@ -56,11 +82,11 @@ function ChooseLanguages() {
           onNativeChange={handleNativeLanguageChange}
           onLearningChange={handleCheckboxChange}
           onSubmit={handleSubmit}
-          buttonText="Bestätigen"
+          buttonText="Speichern"
         />
       </section>
-    </main>
+    </>
   );
 }
 
-export default ChooseLanguages;
+export default EditLanguages;
