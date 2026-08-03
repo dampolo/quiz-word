@@ -80,17 +80,17 @@ function Profile() {
         />
         <EditButton to="/my-quiz/edit-profile" className="edit-button" />
       </div>
-      <h2>Edit Deine Sprachen</h2>
+      <h2>Deine Sprachen</h2>
       <div className="profile-user__card">
         
         <div className="profile-user__row">
-          <span className="profile-user__label">Deine Muttersprache</span>
+          <span className="profile-user__label">Deine Muttersprache:</span>
           <span className="profile-user__value">{nativeLanguage.language_name}</span>
         </div>
 
         <div className="profile-user__row">
         
-          <span className="profile-user__label">Deine Lernsprachen</span>
+          <span className="profile-user__label">Deine Lernsprachen:</span>
           <ul>
 
           {
