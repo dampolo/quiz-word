@@ -1,12 +1,12 @@
-import { Form, Link } from "react-router-dom";
+import { Form, Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import BackButton from "../BackButton/BackButton";
 import "./ChooseLanguages.scss";
 import useVocabulary from "../../context/useVocabulary";
 
 function ChooseLanguages() {
-  const { languages, postLanguages } = useVocabulary();
-
+  const { languages, userLanguages, postLanguages } = useVocabulary();
+  const navigate = useNavigate();
   const [nativeLanguage, setNativeLanguage] = useState("");
   const [learningLanguages, setLearningLanguages] = useState([]);
 
@@ -30,14 +30,10 @@ function ChooseLanguages() {
 
     try {
       await postLanguages(payload);
+      navigate(`/my-quiz/all-words?language=${payload.learning_languages_id[0]}`)
     } catch (err) {
       console.error(err);
     }
-
-    console.log({
-      nativeLanguage,
-      learningLanguages,
-    });
   }
 
   return (
