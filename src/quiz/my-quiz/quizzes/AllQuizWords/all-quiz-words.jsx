@@ -59,8 +59,10 @@ function AllQuizWords() {
     async function loadData() {
       try {
         const [quizData, attemptsData] = await Promise.all([
+
           getQuizWords(id),
           getAttemptQuizScore(id),
+        
         ]);
         setQuiz(quizData);
 
@@ -102,7 +104,8 @@ function AllQuizWords() {
 
         <Link
           className="main-quiz-button add-btn"
-          to={`/my-quiz/${id}/learn-quiz`}
+          
+          to={`/my-quiz/${id}/learn-quiz?language=${quiz?.target_language}`}
         >
           Lernen
         </Link>
