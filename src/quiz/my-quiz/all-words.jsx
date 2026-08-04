@@ -53,14 +53,13 @@ function AllWords() {
       setSelectedWordIds([]);
     } catch (error) {
       console.error("Failed to create quiz:", error);
-      // Optionally show an error message to the user
     }
   }
 
   function selectLanguage(languageId) {
+    setSelectedWordIds([]);
     setSearchParams({ language: languageId });
   }
-
 
   useEffect(() => {
     if (language) {
