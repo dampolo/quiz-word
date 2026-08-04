@@ -10,8 +10,13 @@ import BackButton from "../../../../components/BackButton/BackButton";
 import PreLoader from "../../../../components/PreLoader/PreLoader";
 
 function AllQuizWords() {
-  const { getQuizWords, deleteQuiz, getAttemptQuizScore, getAttemptDetails, loading } =
-    useQuiz();
+  const {
+    getQuizWords,
+    deleteQuiz,
+    getAttemptQuizScore,
+    getAttemptDetails,
+    loading,
+  } = useQuiz();
   const { openDialog } = useDialog();
   const { id } = useParams();
   const navigate = useNavigate();
@@ -57,9 +62,10 @@ function AllQuizWords() {
           getQuizWords(id),
           getAttemptQuizScore(id),
         ]);
-        setQuiz(quizData);      
-        console.log(quizData);
-          
+        setQuiz(quizData);
+
+        console.log("quizData: ", quizData);
+
         setAttempts(attemptsData);
       } catch (err) {
         console.error(err);
@@ -72,14 +78,14 @@ function AllQuizWords() {
   if (loading) {
     return (
       <div className="show-container">
-        <PreLoader/>
+        <PreLoader />
       </div>
-    )
+    );
   }
 
   return (
     <div className="vocabulary">
-      <BackButton to="/my-quiz/all-quizzes/"/>
+      <BackButton to="/my-quiz/all-quizzes/" />
 
       <div className="vocabulary__header">
         <div>
@@ -93,12 +99,18 @@ function AllQuizWords() {
         <Link className="main-quiz-button add-btn" to="/my-quiz/add-new-word">
           + Add New Word
         </Link>
-        
-        <Link className="main-quiz-button add-btn" to={`/my-quiz/${id}/learn-quiz`}>
+
+        <Link
+          className="main-quiz-button add-btn"
+          to={`/my-quiz/${id}/learn-quiz`}
+        >
           Lernen
         </Link>
-        
-        <Link className="main-quiz-button add-btn" to={`/my-quiz/${id}/play-quiz`}>
+
+        <Link
+          className="main-quiz-button add-btn"
+          to={`/my-quiz/${id}/play-quiz`}
+        >
           Spiel
         </Link>
       </div>
@@ -112,29 +124,31 @@ function AllQuizWords() {
           <div>Actions</div>
         </div>
 
-        {quiz?.answers.map((word) => (
-          <div className="list-row-attempt" key={word.id}>
-            <div className="rank">#{word.source_rank}</div>
+        {quiz?.concepts.map((concept) => (
+          <div className="list-row-attempt" key={concept.id}>
+            <div className="rank">#{concept.translations[1].rank}</div>
 
             <div className="word">
-              <h3>{word.source_word}</h3>
+              <h3>{concept.translations[0].word}</h3>
               <span>»</span>
-              <p>{word.target_word}</p>
+              <p>{concept.translations[1].word}</p>
             </div>
 
             <div>
-              <span className={`badge ${word.category_name}`}>
-                {word.category_name}
+              <span
+                className={`badge ${concept.translations[1].category_name}`}
+              >
+                {concept.translations[1].category_name}
               </span>
             </div>
 
             <div className="streak">
               🔥
-              <strong>{word.streak}</strong>
+              <strong>{concept.translations[1].streak}</strong>
               <span>Days</span>
             </div>
 
-            <button to={`/my-quiz/${word.id}/edit-word`} className="actions">
+            <button to={`/my-quiz/${concept.id}/edit-word`} className="actions">
               ✏️
             </button>
           </div>
@@ -150,43 +164,37 @@ function AllQuizWords() {
           <div>Actions</div>
         </div>
 
-        {
-          attempts.length === 0 ? (
-            <p>
-              Du hast bis jetzt keine Quize gemacht.
-            </p>
-          ) : (
-
+        {attempts.length === 0 ? (
+          <p>Du hast bis jetzt keine Quize gemacht.</p>
+        ) : (
           attempts.map((attempt) => (
-          <div className="list-row-score" key={attempt.id}>
-            <div className="rank">#{attempt.score}</div>
+            <div className="list-row-score" key={attempt.id}>
+              <div className="rank">#{attempt.score}</div>
 
-            <div className="word">
-              <span>{attempt.direction}</span>
-            </div>
+              <div className="word">
+                <span>{attempt.direction}</span>
+              </div>
 
-            {/* to={`/my-quiz/${word.id}/edit-word`} */}
-            <div>
-              {new Date(attempt.finished_at).toLocaleDateString("de-DE", {
-                day: "2-digit",
-                month: "2-digit",
-                year: "numeric",
-              })}
-            </div>
-            <button
-              onClick={() => handleAttemptDetails(attempt.id)}
-              className="actions"
-            >
-            🔍
-            </button>
+              {/* to={`/my-quiz/${word.id}/edit-word`} */}
+              <div>
+                {new Date(attempt.finished_at).toLocaleDateString("de-DE", {
+                  day: "2-digit",
+                  month: "2-digit",
+                  year: "numeric",
+                })}
+              </div>
+              <button
+                onClick={() => handleAttemptDetails(attempt.id)}
+                className="actions"
+              >
+                🔍
+              </button>
             </div>
           ))
-        )
-      }
+        )}
       </div>
 
       {/* ATTEMPTS ENDE */}
-
 
       <div className="cards">
         <div className="card goal">
@@ -213,7 +221,6 @@ function AllQuizWords() {
         </div>
       </div>
 
-      
       {/* DEATAILS */}
       <div className="vocabulary-card">
         <div className="card-header">
@@ -222,12 +229,9 @@ function AllQuizWords() {
         </div>
 
         <div className="table">
-
-        { attempts.length === 0 ? (
-            <p>
-              Du hast bis jetzt keine Quize gemacht.
-            </p>
-          ) : (details.length === 0 ? (
+          {attempts.length === 0 ? (
+            <p>Du hast bis jetzt keine Quize gemacht.</p>
+          ) : details.length === 0 ? (
             <p>Click on 🔍 to see the details.</p>
           ) : (
             details.map((item) => (
@@ -261,12 +265,10 @@ function AllQuizWords() {
                 </div>
               </div>
             ))
-          ))
-        }
+          )}
         </div>
       </div>
       {/* DETAILS ENDE */}
-
 
       <button>
         <img onClick={handleDelete} src="/assets/trash.svg" alt="delete" />
