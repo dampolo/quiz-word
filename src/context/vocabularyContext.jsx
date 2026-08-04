@@ -36,9 +36,6 @@ export function VocabularyProvider({ children }) {
       }
 
       const data = await response.json();
-
-      console.log(data.results);
-
       setWords(data.results);
       setNextPage(data.next);
       setPreviousPage(data.previous);
@@ -183,7 +180,6 @@ export function VocabularyProvider({ children }) {
       }
       const data = await response.json();
 
-      console.log("Response:", data.results);
 
       setWords(data.results);
       setNextPage(data.next);

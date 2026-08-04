@@ -66,6 +66,7 @@ function App() {
                 </VocabularyProvider>
               }
             >
+                {/* Mmy Quiz */}
                 <Route path="/my-quiz" element={<MyQuiz />}>
                 {/* Profile */}
                 <Route path="profile" element={<Profile />} />

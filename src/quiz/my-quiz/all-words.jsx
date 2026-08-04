@@ -27,8 +27,6 @@ function AllWords() {
   const language = searchParams.get("language");
   const active = language ? Number(language) : null;
 
-  console.log(active);
-
   function handleCheckboxChange(id, checked) {
     setSelectedWordIds((prev) => {
       if (checked) {

@@ -57,7 +57,9 @@ function AllQuizWords() {
           getQuizWords(id),
           getAttemptQuizScore(id),
         ]);
-        setQuiz(quizData);        
+        setQuiz(quizData);      
+        console.log(quizData);
+          
         setAttempts(attemptsData);
       } catch (err) {
         console.error(err);

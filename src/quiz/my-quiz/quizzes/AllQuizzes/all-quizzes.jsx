@@ -12,6 +12,8 @@ function Quizzes() {
     async function loadQuizzes() {
       const data = await getQuizzes();
       setQuizzes(data);
+      console.log(data);
+      
     }
 
     loadQuizzes();
@@ -54,7 +56,7 @@ function Quizzes() {
             <div className="vocab-card__footer">
               <Link to={`/my-quiz/${quiz.quiz_id}/all-quiz-words`} className="vocab-card__meta">
                 <span>▦</span>
-                <strong>{quiz.words_count} Words</strong>
+                <strong>{quiz.concepts_count} Words</strong>
               </Link>
 
               <div className="vocab-card__updated">
