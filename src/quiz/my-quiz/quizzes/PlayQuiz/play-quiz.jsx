@@ -14,12 +14,13 @@ function PlayQuiz() {
   const [hint, setHint] = useState(false)
 
   const [formData, setFormData] = useState({
-    target_word: "",
+    answer: "",
   });
 
   const [answers, setAnswers] = useState([]);
 
   function handleAnswer(e) {
+    
     const { name, value } = e.target;
 
     setFormData((prev) => ({
@@ -32,14 +33,14 @@ function PlayQuiz() {
     const updatedAnswers = [
       ...answers,
       {
-        id: quiz.answers[currentQuestion].id,
-        answer: formData.target_word,
+        id: quiz[currentQuestion].id,
+        answer: formData.answer,
       },
     ];
 
     setAnswers(updatedAnswers);
 
-    const isLastQuestion = currentQuestion === quiz.answers.length - 1;
+    const isLastQuestion = currentQuestion === quiz.length - 1;
 
     if (isLastQuestion) {
       const payload = {
@@ -61,7 +62,7 @@ function PlayQuiz() {
 
     setCurrentQuestion(currentQuestion + 1);
     setFormData({
-      target_word: "",
+      answer: "",
     });
   }
 
@@ -69,7 +70,7 @@ function PlayQuiz() {
     async function loadData() {
       try {
         const quizData = await getQuizWords(id);
-        setQuiz(quizData);
+        setQuiz(quizData.concepts);
       } catch (error) {
         console.error(error);
       }
@@ -89,20 +90,20 @@ function PlayQuiz() {
         </Link>
         <div className="quiz-card__header">
           <h1 className="quiz-card__title">
-            {quiz?.answers?.[currentQuestion]?.source_word}
+            {quiz?.[currentQuestion].translations[0].word}
           </h1>
         </div>
 
         <p className="quiz-card__subtitle">Übersetzte das Word:</p>
         <div className={`hide-hint ${hint ? "show-hint" : ""}`}>
-          {quiz?.answers?.[currentQuestion]?.target_tip === "" ? (
+          {quiz?.[currentQuestion].translations[0].tip === "" ? (
           <p className="hint-text">
             Du hast kein Tipp hinterlegt.
           </p>
 
           ) : (
             <p className="hint-text">
-              {quiz?.answers?.[currentQuestion]?.target_tip}
+              {quiz?.[currentQuestion].translations[0].tip}
             </p>
           )
           }
@@ -115,8 +116,8 @@ function PlayQuiz() {
 
           <div className="quiz-card__input-wrapper">
             <input
-              name="target_word"
-              value={formData.target_word}
+              name="answer"
+              value={formData.answer}
               onChange={handleAnswer}
               type="text"
               placeholder="Type your answer here..."
@@ -131,7 +132,7 @@ function PlayQuiz() {
             type="button"
             className="main-quiz-button quiz-button"
             onClick={adjustCurrentQuestion}
-            disabled={formData.target_word.length <= 2}
+            disabled={formData.answer.length <= 2}
           >
             <span>Weiter</span>
           </button>

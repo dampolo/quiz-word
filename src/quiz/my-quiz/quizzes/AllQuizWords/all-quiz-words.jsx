@@ -112,7 +112,7 @@ function AllQuizWords() {
 
         <Link
           className="main-quiz-button add-btn"
-          to={`/my-quiz/${id}/play-quiz`}
+          to={`/my-quiz/${id}/play-quiz?language=${quiz?.target_language}`}
         >
           Spiel
         </Link>
