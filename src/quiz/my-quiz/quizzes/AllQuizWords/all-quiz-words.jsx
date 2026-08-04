@@ -27,7 +27,7 @@ function AllQuizWords() {
   async function deleteCurrentQuiz() {
     try {
       await deleteQuiz(id);
-      navigate("/my-quiz/quizzes/");
+      navigate("/my-quiz/all-quizzes/");
     } catch (error) {
       console.error(error);
     }
@@ -35,10 +35,10 @@ function AllQuizWords() {
 
   function handleDelete() {
     openDialog({
-      title: "Delete quiz?",
-      description: "This action cannot be undone.",
-      confirmText: "Delete",
-      cancelText: "Cancel",
+      title: "Quiz löschen?",
+      description: "Diese Aktion kann nicht rückgängig gemacht werden.",
+      confirmText: "Löschen",
+      cancelText: "Abbrechen",
       onConfirm: deleteCurrentQuiz,
     });
   }
@@ -51,8 +51,6 @@ function AllQuizWords() {
     } catch (err) {
       console.log(err);
     }
-
-    // do something with the id
   }
 
   useEffect(() => {
