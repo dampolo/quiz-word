@@ -6,6 +6,7 @@ import FormDialog from "../../components/FormDialog/FormDialog";
 import useQuiz from "../../context/useQuiz";
 import PreLoader from "../../components/PreLoader/PreLoader";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function AllWords() {
   const {
@@ -26,6 +27,7 @@ function AllWords() {
 
   const language = searchParams.get("language");
   const active = language ? Number(language) : null;
+  const navigate = useNavigate();
 
   function handleCheckboxChange(id, checked) {
     setSelectedWordIds((prev) => {
@@ -43,14 +45,16 @@ function AllWords() {
   async function handleCreateQuiz(quizName) {
     const payload = {
       quiz_name: quizName,
-      words: selectedWordIds,
+      concepts: selectedWordIds,
+      target_language: language
     };
 
     try {
       await createQuiz(payload);
-
+      toast.success(`Quiz "${quizName}" wurde erstellt!`);
       setDialogOpen(false);
       setSelectedWordIds([]);
+      navigate(`/my-quiz/all-words/?language=${language}`)
     } catch (error) {
       console.error("Failed to create quiz:", error);
     }
