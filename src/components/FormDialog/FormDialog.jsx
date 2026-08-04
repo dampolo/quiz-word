@@ -51,11 +51,11 @@ function FormDialog({ open, onClose, onSubmit, selectedWordsCount }) {
         transition: Transition,
       }}
     >
-      <DialogTitle>Create quiz</DialogTitle>
+      <DialogTitle>Erstelle dein Quiz</DialogTitle>
 
       <DialogContent>
         <DialogContentText>
-          You selected {selectedWordsCount} words. Enter a name for your quiz.
+          Du hast {selectedWordsCount} Wörter gewählt. Gib einen Namen für dein Quiz ein.
         </DialogContentText>
 
         <form id="create-quiz-form" onSubmit={handleSubmit}>
@@ -65,7 +65,7 @@ function FormDialog({ open, onClose, onSubmit, selectedWordsCount }) {
             fullWidth
             margin="dense"
             name="quizName"
-            label="Quiz name"
+            label="Quizname"
             value={quizName}
             onChange={(event) => setQuizName(event.target.value)}
             variant="standard"
