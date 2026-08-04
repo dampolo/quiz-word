@@ -13,7 +13,7 @@ function LearnQuiz() {
 
 
  function adjustCurrentQuestion() {
-   const isLastWord = currentQuestion === quiz.answers.length - 1;
+   const isLastWord = currentQuestion === quiz.length - 1;
    if(isLastWord) {
      navigate(`/my-quiz/${id}/all-quiz-words`);
     }
@@ -24,7 +24,11 @@ function LearnQuiz() {
     async function loadData() {
       try {
         const quizData = await getQuizWords(id);
-        setQuiz(quizData);
+        setQuiz(quizData.concepts);
+
+        console.log("quizData.concepts: ", quizData.concepts[0].translations[0]);
+        console.log("quizData.concepts: ", quizData.concepts[0].translations[1]);
+        
       } catch (error) {
         console.error(error);
       }
@@ -44,7 +48,8 @@ function LearnQuiz() {
         </Link>
         <div className="quiz-card__header">
           <h1 className="quiz-card__title">
-            {quiz?.answers?.[currentQuestion]?.source_word}
+            
+            {quiz?.[currentQuestion].translations[0].word}
           </h1>
         </div>
         <div className="quiz-card__form">
@@ -52,7 +57,9 @@ function LearnQuiz() {
           <span className="quiz-card__line">
           </span>
 
-            <span className="quiz-card__answer-wrapper">{quiz?.answers?.[currentQuestion]?.target_word}</span>
+            <span className="quiz-card__answer-wrapper">
+              {quiz?.[currentQuestion].translations[1].word}
+              </span>
 
           <button
             type="button"
