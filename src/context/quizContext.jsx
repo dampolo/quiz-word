@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import useApi from "./ApiContext";
 
 const QuizContext = createContext();
@@ -8,6 +8,7 @@ export default QuizContext;
 export function QuizProvider({ children }) {
   const api = useApi();
   const [loading, setLoading] = useState(false);
+  const [quizzes, setQuizzes] = useState([]);
 
   async function getQuizzes() {
     setLoading(true);
@@ -21,11 +22,34 @@ export function QuizProvider({ children }) {
       });
 
       if (!response.ok) {
-        throw new Error("Failed to load words.");
+        throw new Error("Failed to load quizzes.");
       }
 
       const data = await response.json();
-      return data;
+      setQuizzes(data);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function getFiltredQuizzes(id) {
+    try {
+      const response = await fetch(`${api}quizzes/?target_language=${id}`, {
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (!response.ok) {
+        throw new Error("Failed to load words.");
+      }
+      const data = await response.json();
+      console.log("Quizzes:", data);
+      setQuizzes(data);
+
+      setLoading(false);
     } catch (error) {
       console.error(error);
     }
@@ -46,7 +70,6 @@ export function QuizProvider({ children }) {
   }
 
   async function postQuizAnswers(id, payload) {
-    debugger
     const response = await fetch(`${api}quiz-answers/${id}/submit/`, {
       method: "POST",
       credentials: "include",
@@ -149,10 +172,12 @@ export function QuizProvider({ children }) {
     <QuizContext.Provider
       value={{
         loading,
+        quizzes,
         createQuiz,
         deleteQuiz,
         getQuizWords,
         getQuizzes,
+        getFiltredQuizzes,
         getAttemptQuizScore,
         getAttemptDetails,
         postQuizAnswers,

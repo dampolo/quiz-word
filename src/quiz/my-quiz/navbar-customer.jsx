@@ -50,7 +50,7 @@ function NavbarCustomer() {
 
       <li>
         <NavLink
-          to="/my-quiz/all-quizzes/"
+          to={`/my-quiz/all-quizzes?language=${firstLanguage}`}
           className={({ isActive }) => (isActive ? "active" : "")}
         >
           <img width={24} height={24} src="/assets/quiz-icon.svg" alt="" />

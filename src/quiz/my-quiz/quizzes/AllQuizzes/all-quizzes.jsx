@@ -1,28 +1,39 @@
 import { useEffect, useState } from "react";
 import "./all-quizzes.scss";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams, useNavigate } from "react-router-dom";
 import useQuiz from "../../../../context/useQuiz";
 import PreLoader from "../../../../components/PreLoader/PreLoader";
+import useVocabulary from "../../../../context/useVocabulary";
 
 function Quizzes() {
-  const { getQuizzes } = useQuiz();
-  const [quizzes, setQuizzes] = useState([]);
+  const { getFiltredQuizzes, quizzes, getQuizzes } = useQuiz();
+  const { userLanguages } = useVocabulary();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const language = searchParams.get("language");
+  const active = language ? Number(language) : null;
+
+  function selectLanguage(languageId) {
+    if (languageId === null) {
+      setSearchParams({});
+    } else {
+      setSearchParams({ language: languageId });
+    }
+  }
 
   useEffect(() => {
-    async function loadQuizzes() {
-      const data = await getQuizzes();
-      setQuizzes(data);      
+    if (language) {
+      getFiltredQuizzes(language);
+    } else {
+      getQuizzes();
     }
-
-    loadQuizzes();
-  }, []);
+  }, [language]);
 
   if (!quizzes) {
     return (
       <div className="show-container">
-        <PreLoader/>
+        <PreLoader />
       </div>
-    )
+    );
   }
 
   return (
@@ -44,15 +55,48 @@ function Quizzes() {
         </Link>
       </header>
 
+      <ul className="languages-list">
+        <li
+          className={
+            active === null ? "language-single active" : "language-single"
+          }
+        >
+          <button
+            className="language-button"
+            onClick={() => selectLanguage(null)}
+          >
+            Alle
+          </button>
+        </li>
+
+        {userLanguages.map((lang) => (
+          <li
+            key={lang.id}
+            className={
+              active === lang.id ? "language-single active" : "language-single"
+            }
+          >
+            <button
+              className="language-button"
+              onClick={() => selectLanguage(lang.id)}
+            >
+              {lang.language_name}
+            </button>
+          </li>
+        ))}
+      </ul>
+
       {/* Quiz */}
       <div className="category">
         {quizzes.map((quiz) => (
           <article className="vocab-card" key={quiz.quiz_id}>
             <h3>{quiz.quiz_name}</h3>
 
-
             <div className="vocab-card__footer">
-              <Link to={`/my-quiz/${quiz.quiz_id}/all-quiz-words`} className="vocab-card__meta">
+              <Link
+                to={`/my-quiz/${quiz.quiz_id}/all-quiz-words`}
+                className="vocab-card__meta"
+              >
                 <span>▦</span>
                 <strong>{quiz.concepts_count} Words</strong>
               </Link>
