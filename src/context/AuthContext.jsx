@@ -12,6 +12,8 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [profile, setProfile] = useState(false);
+  const [confirmationMessage, setConfirmationMessage] = useState("");
+
   const navigate = useNavigate();
 
   const checkAuth = async () => {
@@ -29,9 +31,9 @@ export function AuthProvider({ children }) {
       }
 
       const user = await response.json();
-      
+
       if (!user.languages_active) {
-        navigate("/my-quiz/choose-languages/")
+        navigate("/my-quiz/choose-languages/");
       }
       setUser(user);
       return true;
@@ -123,7 +125,7 @@ export function AuthProvider({ children }) {
       console.log(data);
       throw error;
     }
-    
+
     setProfile(data);
     return data;
   }
@@ -136,6 +138,29 @@ export function AuthProvider({ children }) {
 
     setUser(null);
   };
+
+  async function verifyEmail(uidb64, token) {
+    try {
+      const response = await fetch(`${api}verify-email/${uidb64}/${token}`, {
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Email verification failed.");
+      }
+
+      const data = await response.json();
+      console.log("verifyEmail: ", verifyEmail);
+      
+      return data;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  }
 
   useEffect(() => {
     const init = async () => {
@@ -156,7 +181,10 @@ export function AuthProvider({ children }) {
         loading,
         profile,
         isMenuOpen,
+        confirmationMessage,
+        setConfirmationMessage,
         setIsMenuOpen,
+        verifyEmail,
         login,
         logout,
         getProfile,

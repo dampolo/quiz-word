@@ -22,7 +22,7 @@ function CreateAccount() {
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%+\-/*?&])[A-Za-z\d@$!%+\-/*?&]{10,}$/;
   const navigate = useNavigate();
 
-  const { createAccount, loading } = useAuth();
+  const { createAccount, loading, setConfirmationMessage } = useAuth();
 
   const isFormValid =
     regexEmail.test(formValues.email) &&
@@ -49,6 +49,7 @@ function CreateAccount() {
     try {
       await createAccount(formValues);
       console.log("Account created!");
+      setConfirmationMessage("Du bist erfolgreich registriert. Um dich anzumelden, musst du dein E-Mail bestätigen!");
       navigate("/confirmation");
     } catch (error) {
       setFormErrors((prev) => ({

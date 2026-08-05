@@ -51,6 +51,8 @@ function App() {
           <Route path="/create-account" element={<CreateAccount />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/confirmation" element={<Confirmation />} />
+          <Route path="/verify-email/:uidb64/:token" element={<Confirmation />} />
+
         </Route>
 
         {/* Protected */}
