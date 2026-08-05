@@ -10,8 +10,9 @@ function Confirmation() {
   const { uidb64, token } = useParams();
 
   useEffect(() => {
-    async function verify() {
-      try {
+    if(uidb64 && token) {
+      async function verify() {
+        try {
         await verifyEmail(uidb64, token);
         setConfirmationMessage(
           "Dein E-Mail wurde erfolgreich bestätigt."
@@ -20,7 +21,8 @@ function Confirmation() {
         console.error(error);
       }
     }
-      verify();
+    verify();
+  }
   }, [uidb64, token]);
 
   return (

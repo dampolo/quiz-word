@@ -109,7 +109,7 @@ function AllWords() {
       </div>
 
       <ul className="languages-list">
-        {userLanguages.map((lang) => (
+        {userLanguages?.map((lang) => (
           <li
             className={
               active === lang.id ? "language-single active" : "language-single"

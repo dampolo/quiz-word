@@ -1,22 +1,31 @@
-import { Link } from "react-router-dom";
-import "./navbar-customer.scss";
 import { NavLink } from "react-router-dom";
+import "./navbar-customer.scss";
 import useVocabulary from "../../context/useVocabulary";
 
 function NavbarCustomer() {
+  const { userLanguages = [] } = useVocabulary();
 
-  function closeMenu() {
-    
-  }
-
-  const { userLanguages } = useVocabulary();
   const firstLanguage = userLanguages[0]?.id;
+
+  const categoriesUrl = firstLanguage
+    ? `/my-quiz/vocabulary-categories?language=${firstLanguage}`
+    : "/my-quiz/vocabulary-categories";
+
+  const allWordsUrl = firstLanguage
+    ? `/my-quiz/all-words?language=${firstLanguage}`
+    : "/my-quiz/all-words";
+
+  const quizzesUrl = firstLanguage
+    ? `/my-quiz/all-quizzes?language=${firstLanguage}`
+    : "/my-quiz/all-quizzes";
+
+  function closeMenu() {}
 
   return (
     <ul className="navbar-customer">
       <li>
         <NavLink
-          to={`/my-quiz/vocabulary-categories?language=${firstLanguage}`}
+          to={categoriesUrl}
           className={({ isActive }) => (isActive ? "active" : "")}
         >
           <img
@@ -28,9 +37,10 @@ function NavbarCustomer() {
           <span className="nav-link-text">Categories</span>
         </NavLink>
       </li>
+
       <li>
         <NavLink
-          to={`/my-quiz/all-words?language=${firstLanguage}`}
+          to={allWordsUrl}
           className={({ isActive }) => (isActive ? "active" : "")}
         >
           <img width={24} height={24} src="/assets/words.svg" alt="" />
@@ -44,13 +54,13 @@ function NavbarCustomer() {
           className={({ isActive }) => (isActive ? "active" : "")}
         >
           <img width={24} height={24} src="/assets/add.svg" alt="" />
-          <span className="nav-link-text">new</span>
+          <span className="nav-link-text">New</span>
         </NavLink>
       </li>
 
       <li>
         <NavLink
-          to={`/my-quiz/all-quizzes?language=${firstLanguage}`}
+          to={quizzesUrl}
           className={({ isActive }) => (isActive ? "active" : "")}
         >
           <img width={24} height={24} src="/assets/quiz-icon.svg" alt="" />
@@ -59,7 +69,7 @@ function NavbarCustomer() {
       </li>
 
       <li>
-        <NavLink to="einstellungen" onClick={closeMenu}>
+        <NavLink to="/my-quiz/einstellungen" onClick={closeMenu}>
           <img width={25} height={25} src="/assets/trash.svg" alt="" />
           <span className="nav-link-text">Trash</span>
         </NavLink>
