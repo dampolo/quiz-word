@@ -1,19 +1,38 @@
 import { useState } from "react";
 import "./forgot-password.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import BackButton from "../../components/BackButton/BackButton";
+import { useAuth } from "../../context/useAuth";
+import PreLoader from "../../components/PreLoader/PreLoader";
 
 function ForgotPassword() {
+  const { forgotPassword, setConfirmationMessage, loading } = useAuth();
+
   const initialValues = { email: "" };
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
   const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
-  const isEmailValid = regexEmail.test(formValues.email);
+  const isFormValid = regexEmail.test(formValues.email);
+  const navigate = useNavigate();
 
-  function recoveryForm(e) {
+  async function recoveryForm(e) {
     e.preventDefault();
-    setFormErrors(validateInput(formValues));
-    setFormValues(initialValues);
+
+    const errors = validateInput(formValues);
+
+    setFormErrors(errors);
+    if (Object.keys(errors).length > 0) {
+      return;
+    }
+
+    try {
+      await forgotPassword(formValues);
+      setConfirmationMessage("Du kannst jetzt dein E-Mail prüfen.");
+      navigate("/confirmation");
+      setFormValues(initialValues);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   function handleChange(e) {
@@ -77,6 +96,9 @@ function ForgotPassword() {
             über die Du dein Passwort ändern kannst.
           </p>
 
+          {loading ? <PreLoader /> : <></>}
+
+          
           <div className="btn-container">
             <Link className="back-button" to="/customer/profile">
               Abbrechen
@@ -85,7 +107,7 @@ function ForgotPassword() {
             <button
               className="main-quiz-button"
               type="submit"
-              disabled={!isEmailValid}
+              disabled={!isFormValid || loading}
             >
               E-Mail senden
             </button>
@@ -95,5 +117,6 @@ function ForgotPassword() {
     </main>
   );
 }
+
 
 export default ForgotPassword;

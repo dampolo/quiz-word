@@ -87,6 +87,8 @@ export function AuthProvider({ children }) {
   };
 
   const createAccount = async (formData) => {
+    setLoading(true);
+
     const response = await fetch(`${api}create-account/`, {
       method: "POST",
       headers: {
@@ -100,11 +102,9 @@ export function AuthProvider({ children }) {
       throw new Error(error?.message || "Account creation failed");
     }
 
-    // If registration also logs the user in
+    setLoading(false);
     return checkAuth();
 
-    // Otherwise:
-    // await login(formData.email, formData.password1);
   };
 
   async function updateProfile(payload) {
@@ -140,6 +140,7 @@ export function AuthProvider({ children }) {
   };
 
   async function verifyEmail(uidb64, token) {
+    setLoading(true);
     try {
       const response = await fetch(`${api}verify-email/${uidb64}/${token}`, {
         credentials: "include",
@@ -154,12 +155,39 @@ export function AuthProvider({ children }) {
 
       const data = await response.json();
       console.log("verifyEmail: ", verifyEmail);
-      
+
       return data;
     } catch (error) {
       console.error(error);
       throw error;
     }
+
+  }
+
+  async function forgotPassword(payload) {
+    setLoading(true);
+    const response = await fetch(`${api}forgot-password/`, {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      const error = new Error("Changed password failed");
+      error.response = { data };
+      console.log(data);
+      throw error;
+    }
+    
+    setLoading(false);
+    console.log("forgotPassword: ", data);
+    
+    return data;
   }
 
   useEffect(() => {
@@ -182,6 +210,7 @@ export function AuthProvider({ children }) {
         profile,
         isMenuOpen,
         confirmationMessage,
+        forgotPassword,
         setConfirmationMessage,
         setIsMenuOpen,
         verifyEmail,

@@ -49,7 +49,9 @@ function CreateAccount() {
     try {
       await createAccount(formValues);
       console.log("Account created!");
-      setConfirmationMessage("Du bist erfolgreich registriert. Um dich anzumelden, musst du dein E-Mail bestätigen!");
+      setConfirmationMessage(
+        "Du bist erfolgreich registriert. Um dich anzumelden, musst du dein E-Mail bestätigen!",
+      );
       navigate("/confirmation");
     } catch (error) {
       setFormErrors((prev) => ({
@@ -99,7 +101,10 @@ function CreateAccount() {
         "Mindestens 10 Zeichen erforderlich: ein Klein- u. ein Großbuchstabe, eine Zahl und ein Sonderzeichen.";
     }
 
-    if (touched.repeated_password && values.password !== values.repeated_password) {
+    if (
+      touched.repeated_password &&
+      values.password !== values.repeated_password
+    ) {
       errors.notMatch = "Passwörter stimmen nicht überein.";
     }
 
@@ -274,12 +279,7 @@ function CreateAccount() {
             </div>
           </div>
 
-          { loading ? (
-                  <PreLoader/>
-                ) : (
-                 <></>
-                )  
-              } 
+          {loading ? <PreLoader /> : <></>}
 
           <div className="btn-container">
             <button
