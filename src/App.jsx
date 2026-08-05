@@ -34,6 +34,7 @@ import PrivacyPolicy from "./components/privacy-policy";
 import Price from "./website/price";
 import HelpDesk from "./website/help-desk";
 import EditLanguages from "./components/ChooseLanguage/EditLanguages";
+import ResetPassword from "./quiz/auth/reset-password";
 
 function App() {
   return (
@@ -52,6 +53,7 @@ function App() {
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/confirmation" element={<Confirmation />} />
           <Route path="/verify-email/:uidb64/:token" element={<Confirmation />} />
+          <Route path="/reset-password/:uid/:token" element={<ResetPassword />} />
 
         </Route>
 

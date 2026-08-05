@@ -190,6 +190,32 @@ export function AuthProvider({ children }) {
     return data;
   }
 
+  async function resetPassword(password, uid, token) {
+    setLoading(true);
+    const response = await fetch(`${api}reset-password/`, {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(password, uid, token),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      const error = new Error("Changed password failed");
+      error.response = { data };
+      console.log(data);
+      throw error;
+    }
+    
+    setLoading(false);
+    console.log("resetPassword: ", data);
+    
+    return data;
+  }
+
   useEffect(() => {
     const init = async () => {
       const authenticated = await checkAuth();
@@ -210,6 +236,7 @@ export function AuthProvider({ children }) {
         profile,
         isMenuOpen,
         confirmationMessage,
+        resetPassword,
         forgotPassword,
         setConfirmationMessage,
         setIsMenuOpen,

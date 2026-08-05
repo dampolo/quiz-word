@@ -1,9 +1,13 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 import "./login-quiz.scss";
+import { useAuth } from "../../context/useAuth";
 
 function ResetPassword() {
+
+    const { resetPassword, setConfirmationMessage } = useAuth();
+
   const initialValues = {
     password1: "",
     password2: "",
@@ -18,6 +22,9 @@ function ResetPassword() {
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%+\-/*?&])[A-Za-z\d@$!%+\-/*?&]{10,}$/;
 
   const isFormValid = formValues.password1 === formValues.password2;
+  const navigate = useNavigate();
+
+    const { uid, token } = useParams();
 
   function handleBlur(e) {
     const { name, value } = e.target;
@@ -42,7 +49,21 @@ function ResetPassword() {
     console.log(formValues);
   }
 
-  function submit() {}
+  async function submit(e) {
+    e.preventDefault();
+
+    try {
+      debugger
+      await resetPassword(formValues.password1, uid, token);
+      setConfirmationMessage("Dein Password wurde erfolgreich geändert");
+      navigate("/confirmation");
+      setFormValues(initialValues);
+    } catch (error) {
+      console.error(error);
+    }
+    
+
+  }
 
   function validateInput(values, touched) {
     const errors = {};
