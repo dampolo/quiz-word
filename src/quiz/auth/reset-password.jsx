@@ -3,10 +3,11 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 
 import "./login-quiz.scss";
 import { useAuth } from "../../context/useAuth";
+import { toast } from "react-toastify";
 
 function ResetPassword() {
 
-    const { resetPassword, setConfirmationMessage } = useAuth();
+    const { resetPassword, setConfirmationMessage, loading } = useAuth();
 
   const initialValues = {
     password1: "",
@@ -21,8 +22,13 @@ function ResetPassword() {
   const regexPassword =
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%+\-/*?&])[A-Za-z\d@$!%+\-/*?&]{10,}$/;
 
-  const isFormValid = formValues.password1 === formValues.password2;
-  const navigate = useNavigate();
+  const isFormValid = 
+  formValues.password1 && 
+  formValues.password2 && 
+  regexPassword.test(formValues.password1) &&
+  regexPassword.test(formValues.password2);
+  
+    const navigate = useNavigate();
 
     const { uid, token } = useParams();
 
@@ -53,12 +59,12 @@ function ResetPassword() {
     e.preventDefault();
 
     try {
-      debugger
       await resetPassword(formValues.password1, uid, token);
-      setConfirmationMessage("Dein Password wurde erfolgreich geändert");
+      setConfirmationMessage("Dein Password wurde erfolgreich geändert.");
       navigate("/confirmation");
       setFormValues(initialValues);
     } catch (error) {
+      toast.error
       console.error(error);
     }
     
@@ -118,8 +124,8 @@ function ResetPassword() {
                 className="pwd-eye"
                 src={
                   isPasswordTopVisible
-                    ? "./assets/eye.svg"
-                    : "./assets/eye-off.svg"
+                    ? "/assets/eye.svg"
+                    : "/assets/eye-off.svg"
                 }
                 alt={isPasswordTopVisible ? "verstecken" : "zeigen"}
               />
@@ -130,7 +136,7 @@ function ResetPassword() {
                 width={24}
                 height={24}
                 aria-hidden="true"
-                src="./assets/pwd-lock-icon-input-field.svg"
+                src="/assets/pwd-lock-icon-input-field.svg"
                 alt=""
               />
             </div>
@@ -164,8 +170,8 @@ function ResetPassword() {
                 className="pwd-eye"
                 src={
                   isPasswordBottomVisible
-                    ? "./assets/eye.svg"
-                    : "./assets/eye-off.svg"
+                    ? "/assets/eye.svg"
+                    : "/assets/eye-off.svg"
                 }
                 alt={isPasswordBottomVisible ? "verstecken" : "zeigen"}
               />
@@ -176,7 +182,7 @@ function ResetPassword() {
                 width={24}
                 height={24}
                 aria-hidden="true"
-                src="./assets/pwd-lock-icon-input-field.svg"
+                src="/assets/pwd-lock-icon-input-field.svg"
                 alt=""
               />
             </div>
@@ -188,7 +194,7 @@ function ResetPassword() {
             <button
               type="submit"
               className="main-quiz-button"
-              disabled={!isFormValid}
+              disabled={!isFormValid || loading}
             >
               Passwort ändern
             </button>
