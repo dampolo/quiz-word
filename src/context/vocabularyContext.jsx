@@ -7,8 +7,6 @@ const VocabularyContext = createContext();
 export default VocabularyContext;
 
 export function VocabularyProvider({ children }) {
-  const [concepts, setConcepts] = useState([]);
-
   const api = useApi();
   const navigate = useNavigate();
   const [words, setWords] = useState([]);
@@ -314,8 +312,6 @@ export function VocabularyProvider({ children }) {
   return (
     <VocabularyContext.Provider
       value={{
-        concepts, 
-        setConcepts,
         words,
         categories,
         loading,
