@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import useApi from "./ApiContext";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const VocabularyContext = createContext();
 
@@ -13,7 +13,6 @@ export function VocabularyProvider({ children }) {
   const [categories, setCategories] = useState([]);
   const [userLanguages, setUserLanguages] = useState([]);
   const [languages, setLanguages] = useState([]);
-  const [searchParams, setSearchParams] = useSearchParams();
 
   const [nativeLanguage, setNativeLanguage] = useState([]);
 

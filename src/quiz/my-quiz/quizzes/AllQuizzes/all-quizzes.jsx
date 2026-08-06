@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import "./all-quizzes.scss";
-import { Link, useSearchParams, useNavigate } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import useQuiz from "../../../../context/useQuiz";
 import PreLoader from "../../../../components/PreLoader/PreLoader";
 import useVocabulary from "../../../../context/useVocabulary";
