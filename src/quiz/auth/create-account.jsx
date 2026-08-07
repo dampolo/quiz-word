@@ -56,7 +56,6 @@ function CreateAccount() {
       );
       navigate("/confirmation");
     } catch (err) {
-      debugger
       const message =
         err.response?.email?.[0] ||
         err.response?.password?.[0] ||
