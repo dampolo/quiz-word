@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/useAuth";
 import BackButton from "../../components/BackButton/BackButton";
 import PreLoader from "../../components/PreLoader/PreLoader";
+import { toast } from "react-toastify";
 
 function CreateAccount() {
   const initialValues = {
@@ -22,7 +23,8 @@ function CreateAccount() {
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%+\-/*?&])[A-Za-z\d@$!%+\-/*?&]{10,}$/;
   const navigate = useNavigate();
 
-  const { createAccount, loading, setConfirmationMessage } = useAuth();
+  const { createAccount, loading, setConfirmationMessage } =
+    useAuth();
 
   const isFormValid =
     regexEmail.test(formValues.email) &&
@@ -53,11 +55,15 @@ function CreateAccount() {
         "Du bist erfolgreich registriert. Um dich anzumelden, musst du dein E-Mail bestätigen!",
       );
       navigate("/confirmation");
-    } catch (error) {
-      setFormErrors((prev) => ({
-        ...prev,
-        general: error.message || "Failed to create account.",
-      }));
+    } catch (err) {
+      debugger
+      const message =
+        err.response?.email?.[0] ||
+        err.response?.password?.[0] ||
+        err.response?.detail ||
+        "Account creation failed";
+
+      toast.error(message);
     }
   }
 

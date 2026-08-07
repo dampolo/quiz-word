@@ -86,26 +86,31 @@ export function AuthProvider({ children }) {
     return checkAuth();
   };
 
-  const createAccount = async (formData) => {
+  async function createAccount(formData) {
     setLoading(true);
 
-    const response = await fetch(`${api}create-account/`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    });
+    try {
+      const response = await fetch(`${api}create-account/`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
 
-    if (!response.ok) {
-      const error = await response.json().catch(() => null);
-      throw new Error(error?.message || "Account creation failed");
+      const data = await response.json();
+
+      if (!response.ok) {
+        const error = new Error("Account creation failed");
+        error.response = data;
+        throw error;
+      }
+
+      return checkAuth();
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
-    return checkAuth();
-
-  };
+  }
 
   async function updateProfile(payload) {
     const response = await fetch(`${api}profile-customer/`, {
@@ -161,7 +166,6 @@ export function AuthProvider({ children }) {
       console.error(error);
       throw error;
     }
-
   }
 
   async function forgotPassword(payload) {
@@ -183,10 +187,10 @@ export function AuthProvider({ children }) {
       console.log(data);
       throw error;
     }
-    
+
     setLoading(false);
     console.log("forgotPassword: ", data);
-    
+
     return data;
   }
 
@@ -198,7 +202,7 @@ export function AuthProvider({ children }) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({password, uid, token}),
+      body: JSON.stringify({ password, uid, token }),
     });
 
     const data = await response.json();
@@ -209,10 +213,10 @@ export function AuthProvider({ children }) {
       console.log(data);
       throw error;
     }
-    
+
     setLoading(false);
     console.log("resetPassword: ", data);
-    
+
     return data;
   }
 
