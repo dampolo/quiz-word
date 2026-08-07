@@ -32,9 +32,9 @@ export function AuthProvider({ children }) {
 
       const user = await response.json();
 
-      if (!user.languages_active) {
-        navigate("/my-quiz/choose-languages/");
-      }
+      // if (!user.languages_active) {
+      //   navigate("/my-quiz/choose-languages/");
+      // }
       setUser(user);
       return true;
     } catch {
